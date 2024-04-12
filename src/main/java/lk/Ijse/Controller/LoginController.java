@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lk.Ijse.Db.DbConnection;
@@ -19,8 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginController {
-    @FXML
-    private CheckBox btnTick;
+
     @FXML
     private Button btnLogin;
 
@@ -28,11 +26,12 @@ public class LoginController {
     private TextField txtPassword;
 
     @FXML
-    private TextField txtUserID;
+    private TextField txtUserId;
 
     @FXML
     void btnLoginOnAction(ActionEvent event) {
-        String userID = txtUserID.getText();
+
+        String userID = txtUserId.getText();
         String password = txtPassword.getText();
         try {
             checkCredential(userID, password);
@@ -43,15 +42,14 @@ public class LoginController {
         }
     }
 
-    private void checkCredential(String userID, String password) throws SQLException, IOException {
-
-        String sql = "SELECT   Register_id, Register_Password FROM Register WHERE User_ID = ?  ";
+    private void checkCredential(String userId, String password) throws SQLException, IOException {
+        String sql = "SELECT   Register_id, Register_Password FROM Register WHERE Register_id = ?  ";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, userID);
+        pstm.setObject(1, userId);
 
-        ResultSet  resultSet = pstm.executeQuery();
+        ResultSet resultSet = pstm.executeQuery();
         if (resultSet.next()) {
             String dbpw = resultSet.getString("Register_Password");
             if (password.equals(dbpw)) {
@@ -65,7 +63,7 @@ public class LoginController {
     }
 
     private void navigateToDashBoard() throws IOException {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/View/Register_form.fxml"));
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/View/DashBoard_from.fxml"));
 
         Scene scene = new Scene(rootNode);
         Stage stage = new Stage();
@@ -75,8 +73,7 @@ public class LoginController {
 
         stage.show();
     }
-    @FXML
-    void btnTickOnAction(ActionEvent event) {
-
-    }
 }
+
+
+
