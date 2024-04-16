@@ -8,6 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 @EqualsAndHashCode
+@ToString
 
 public class Booking {
     private String bookingId;

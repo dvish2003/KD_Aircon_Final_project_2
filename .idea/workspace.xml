@@ -4,15 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/View/LoginForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment="Second Commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/List/CustomerLocation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/Login_from.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LocationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/LocationRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/LocationRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/ItemForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Product.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/LocationForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/LocationForm.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +22,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="CSS File" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -51,24 +53,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.AppInitializerWrapper.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/vishmee/Documents/My final project/KD_Aircon_Final_project/src/main/java/lk/Ijse/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AppInitializerWrapper.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/vishmee/Documents/ideaProject/CarRntalSystem",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/home/vishmee/Documents/My final project/KD_Aircon_Final_project/src/main/java/lk/Ijse/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/Icon" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="lk.Ijse.Controller" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="AppInitializerWrapper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="lk.Ijse.AppInitializerWrapper" />
@@ -108,12 +121,75 @@
       <workItem from="1712899714217" duration="6000" />
       <workItem from="1712911366041" duration="282000" />
       <workItem from="1712914768566" duration="811000" />
-      <workItem from="1712917721148" duration="3619000" />
+      <workItem from="1712917721148" duration="10155000" />
+      <workItem from="1712955783399" duration="950000" />
+      <workItem from="1713021856976" duration="2238000" />
+      <workItem from="1713167663248" duration="350000" />
+      <workItem from="1713198630014" duration="2413000" />
+      <workItem from="1713202854979" duration="2338000" />
+      <workItem from="1713206895181" duration="4203000" />
+      <workItem from="1713253686206" duration="397000" />
+      <workItem from="1713255052207" duration="2450000" />
+      <workItem from="1713258119277" duration="4303000" />
+      <workItem from="1713279927181" duration="7102000" />
+      <workItem from="1713288672911" duration="8159000" />
+      <workItem from="1713335370223" duration="11202000" />
+      <workItem from="1713372183677" duration="5059000" />
+      <workItem from="1713378143619" duration="1798000" />
+      <workItem from="1713428721842" duration="21569000" />
+      <workItem from="1713509809284" duration="1378000" />
     </task>
+    <task id="LOCAL-00001" summary="ss">
+      <option name="closed" value="true" />
+      <created>1712925689349</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1712925689349</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ss">
+      <option name="closed" value="true" />
+      <created>1713261158868</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713261158868</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ss">
+      <option name="closed" value="true" />
+      <created>1713261187402</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713261187402</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Second Commit">
+      <option name="closed" value="true" />
+      <created>1713261289578</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1713261289578</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Second Commit">
+      <option name="closed" value="true" />
+      <created>1713378545951</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1713378545951</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="secon comit" />
+    <MESSAGE value="ss" />
+    <MESSAGE value="Second Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Second Commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -122,6 +198,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/lk/Ijse/Main.java</url>
           <line>13</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/lk/Ijse/repository/LocationRepo.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
