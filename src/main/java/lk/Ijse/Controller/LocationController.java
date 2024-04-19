@@ -4,9 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -15,7 +12,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Stage;
 import javafx.util.Pair;
 import lk.Ijse.List.CustomerLocation;
 import lk.Ijse.Model.Customer;
@@ -23,7 +19,6 @@ import lk.Ijse.Model.Location;
 import lk.Ijse.repository.CustomerRepo;
 import lk.Ijse.repository.LocationRepo;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -134,13 +129,12 @@ public class LocationController {
     }
 
     private void setCellValueFactory() {
-        colCu_ID.setCellValueFactory(new PropertyValueFactory<>("cu_ID"));
-       // colCu_ID.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
-        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
-        colZipCode.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
+        colCu_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_id"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("Location_id"));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>("Location_Province"));
+        colCity.setCellValueFactory(new PropertyValueFactory<>("Location_City"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("Location_Address"));
+        colZipCode.setCellValueFactory(new PropertyValueFactory<>("Location_ZipCode"));
 
     }
 
@@ -196,7 +190,6 @@ public class LocationController {
 
     @FXML
     void btnLocNextOnAction(ActionEvent event) {
-
     }
 
     @FXML
@@ -247,12 +240,7 @@ public class LocationController {
     }
 
     @FXML
-    void btnNewCusOnAction(ActionEvent event) throws IOException {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/View/CustomerForm.fxml"));
-        Scene scene = new Scene(rootNode);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+    void btnNewCusOnAction(ActionEvent event) {
     }
 
     @FXML
