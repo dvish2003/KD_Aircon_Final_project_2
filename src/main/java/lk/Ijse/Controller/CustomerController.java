@@ -192,7 +192,7 @@ public class CustomerController {
         try {
             boolean isSaved = CustomerRepo.save(customer);
             if (isSaved) {
-                // Add the new customer to the TableView
+
                 colCuTel.getItems().add(customer);
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer saved successfully!").show();
                 clearFields();

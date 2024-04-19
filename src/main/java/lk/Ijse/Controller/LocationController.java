@@ -129,12 +129,12 @@ public class LocationController {
     }
 
     private void setCellValueFactory() {
-        colCu_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_id"));
-        colId.setCellValueFactory(new PropertyValueFactory<>("Location_id"));
-        colProvince.setCellValueFactory(new PropertyValueFactory<>("Location_Province"));
-        colCity.setCellValueFactory(new PropertyValueFactory<>("Location_City"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>("Location_Address"));
-        colZipCode.setCellValueFactory(new PropertyValueFactory<>("Location_ZipCode"));
+        colCu_ID.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
+        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
+        colZipCode.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
 
     }
 
