@@ -21,7 +21,7 @@ import lk.Ijse.repository.LocationRepo;
 
 import java.sql.SQLException;
 import java.util.List;
-
+//
 public class LocationController {
 
     @FXML
