@@ -161,6 +161,7 @@ public class LocationController {
 
     @FXML
     void btnLocCleanOnAction(ActionEvent event) {
+        clearFields();
     }
 
     @FXML
