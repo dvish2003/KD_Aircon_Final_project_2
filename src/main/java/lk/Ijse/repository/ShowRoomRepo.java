@@ -1,1 +1,97 @@
 package lk.Ijse.repository;
+
+import lk.Ijse.Db.DbConnection;
+import lk.Ijse.Model.ShowRoom;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShowRoomRepo {
+
+    public static boolean save(ShowRoom showRoom) throws SQLException {
+        String sql = "INSERT INTO ShowRoom (ShowRoom_id, ShowRoom_Location, ShowRoom_Description) VALUES (?, ?, ?)";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, showRoom.getShowRoomId());
+        pstm.setString(2, showRoom.getShowRoomLocation());
+        pstm.setString(3, showRoom.getShowRoomDescription());
+
+        return pstm.executeUpdate() > 0;
+    }
+
+    public static ShowRoom searchById(String id) throws SQLException {
+        String sql = "SELECT * FROM ShowRoom WHERE ShowRoom_id = ?";
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, id);
+        ResultSet rs = pstm.executeQuery();
+        if (rs.next()) {
+            String showRoomId = rs.getString("ShowRoom_id");
+            String location = rs.getString("ShowRoom_Location");
+            String description = rs.getString("ShowRoom_Description");
+
+            ShowRoom showRoom = new ShowRoom(showRoomId, location, description);
+
+            return showRoom;
+        }
+        return null;
+    }
+
+    public static boolean update(ShowRoom showRoom) throws SQLException {
+        String sql = "UPDATE ShowRoom SET ShowRoom_Location = ?, ShowRoom_Description = ? WHERE ShowRoom_id = ?";
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, showRoom.getShowRoomLocation());
+        pstm.setString(2, showRoom.getShowRoomDescription());
+        pstm.setString(3, showRoom.getShowRoomId());
+        return pstm.executeUpdate() > 0;
+    }
+
+    public static boolean delete(String id) throws SQLException {
+        String sql = "DELETE FROM ShowRoom WHERE ShowRoom_id = ?";
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, id);
+
+        return pstm.executeUpdate() > 0;
+    }
+
+    public static List<ShowRoom> getAll() throws SQLException {
+        String sql = "SELECT * FROM ShowRoom";
+
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        List<ShowRoom> showRoomList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            String showRoomId = resultSet.getString("ShowRoom_id");
+            String location = resultSet.getString("ShowRoom_Location");
+            String description = resultSet.getString("ShowRoom_Description");
+            ShowRoom showRoom = new ShowRoom(showRoomId, location, description);
+            showRoomList.add(showRoom);
+        }
+        return showRoomList;
+    }
+
+    public static List<String> getIds() throws SQLException {
+        String sql = "SELECT ShowRoom_id FROM ShowRoom";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
+
+        List<String> idList = new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+        while (resultSet.next()) {
+            String id = resultSet.getString("ShowRoom_id");
+            idList.add(id);
+        }
+        return idList;
+    }
+
+}
