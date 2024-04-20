@@ -36,13 +36,13 @@ public class LoginController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         txtUserId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                txtPassword.requestFocus(); // Move focus to the next field (Password)
+                txtPassword.requestFocus();
             }
         });
 
         txtPassword.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                btnLogin.fire(); // Simulate button click for login
+                btnLogin.fire();
             }
         });
     }
