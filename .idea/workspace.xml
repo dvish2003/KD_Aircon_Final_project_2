@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment="Second Commit 1">
-      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ShowRoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/ShowRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/ShowRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ShowRoomRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ShowRoomRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/ShowRoom.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/ShowRoom.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment="Second Commit 1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,7 +133,7 @@
       <workItem from="1713519768958" duration="6822000" />
       <workItem from="1713550436925" duration="4620000" />
       <workItem from="1713560112149" duration="265000" />
-      <workItem from="1713601467887" duration="4501000" />
+      <workItem from="1713601467887" duration="4938000" />
     </task>
     <task id="LOCAL-00001" summary="ss">
       <option name="closed" value="true" />
@@ -271,7 +263,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713601580450</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Second Commit 1">
+      <option name="closed" value="true" />
+      <created>1713607425377</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1713607425377</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
