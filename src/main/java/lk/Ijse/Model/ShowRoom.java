@@ -12,7 +12,6 @@ import lombok.*;
 public class ShowRoom {
     private String showRoomId;
     private String showRoomLocation;
-    private String showRoomDescription;
 
 
 

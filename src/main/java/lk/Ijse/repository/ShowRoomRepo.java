@@ -13,13 +13,13 @@ import java.util.List;
 public class ShowRoomRepo {
 
     public static boolean save(ShowRoom showRoom) throws SQLException {
-        String sql = "INSERT INTO ShowRoom (ShowRoom_id, ShowRoom_Location, ShowRoom_Description) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO ShowRoom (ShowRoom_id, ShowRoom_Location) VALUES (?, ?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, showRoom.getShowRoomId());
         pstm.setString(2, showRoom.getShowRoomLocation());
-        pstm.setString(3, showRoom.getShowRoomDescription());
+
 
         return pstm.executeUpdate() > 0;
     }
@@ -33,9 +33,9 @@ public class ShowRoomRepo {
         if (rs.next()) {
             String showRoomId = rs.getString("ShowRoom_id");
             String location = rs.getString("ShowRoom_Location");
-            String description = rs.getString("ShowRoom_Description");
 
-            ShowRoom showRoom = new ShowRoom(showRoomId, location, description);
+
+            ShowRoom showRoom = new ShowRoom(showRoomId, location);
 
             return showRoom;
         }
@@ -43,11 +43,10 @@ public class ShowRoomRepo {
     }
 
     public static boolean update(ShowRoom showRoom) throws SQLException {
-        String sql = "UPDATE ShowRoom SET ShowRoom_Location = ?, ShowRoom_Description = ? WHERE ShowRoom_id = ?";
+        String sql = "UPDATE ShowRoom SET ShowRoom_Location = ? WHERE ShowRoom_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, showRoom.getShowRoomLocation());
-        pstm.setString(2, showRoom.getShowRoomDescription());
         pstm.setString(3, showRoom.getShowRoomId());
         return pstm.executeUpdate() > 0;
     }
@@ -73,8 +72,7 @@ public class ShowRoomRepo {
         while (resultSet.next()) {
             String showRoomId = resultSet.getString("ShowRoom_id");
             String location = resultSet.getString("ShowRoom_Location");
-            String description = resultSet.getString("ShowRoom_Description");
-            ShowRoom showRoom = new ShowRoom(showRoomId, location, description);
+            ShowRoom showRoom = new ShowRoom(showRoomId, location);
             showRoomList.add(showRoom);
         }
         return showRoomList;
