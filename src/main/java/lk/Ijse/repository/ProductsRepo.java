@@ -64,7 +64,7 @@ public class ProductsRepo {
         return pstm.executeUpdate() > 0;
     }
 
-/*    public static List<Products> getAll() throws SQLException {
+  public static List<Products> getAll() throws SQLException {
         String sql = "SELECT * FROM Product";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
@@ -82,7 +82,7 @@ public class ProductsRepo {
             productList.add(product);
         }
         return productList;
-    }*/
+    }
 
     public static List<String> getIds() throws SQLException {
         String sql = "SELECT Product_id FROM Product";
@@ -97,7 +97,7 @@ public class ProductsRepo {
         }
         return idList;
     }
-    public static int getTotalQuantityOnHand() throws SQLException {
+   /* public static int getTotalQuantityOnHand() throws SQLException {
         String sql = "SELECT SUM(ShowRoom_QtyOnHand) AS TotalQuantity FROM Product";
 
         try (Connection connection = DbConnection.getInstance().getConnection();
@@ -135,6 +135,6 @@ public class ProductsRepo {
             productList.add(product);
         }
         return productList;
-    }
+    }*/
 
 }

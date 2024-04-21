@@ -7,18 +7,11 @@
     <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment="Second Commit 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Products.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Products.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/ShowRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/ShowRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/OrderRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/OrderRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ProductsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ProductsRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/CustomerForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/CustomerForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/EmployeeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/EmployeeForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/LocationForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/LocationForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/View/Order.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Order.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/Product.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Product.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/ShowRoom.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/ShowRoom.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sql/query.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sql/query.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +76,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="lk.Ijse.Model" />
       <recent name="lk.Ijse.Controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -157,6 +151,7 @@
       <workItem from="1713601467887" duration="6847000" />
       <workItem from="1713634695989" duration="5751000" />
       <workItem from="1713684869877" duration="5641000" />
+      <workItem from="1713709842258" duration="6422000" />
     </task>
     <task id="LOCAL-00001" summary="ss">
       <option name="closed" value="true" />
@@ -310,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713621942146</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Second Commit 1">
+      <option name="closed" value="true" />
+      <created>1713710060791</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1713710060791</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

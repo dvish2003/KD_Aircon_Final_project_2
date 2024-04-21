@@ -210,7 +210,7 @@ public class ProductController {
         ObservableList<Products> obList = FXCollections.observableArrayList();
 
         try {
-            List<Products> productsList = ProductsRepo.getAllJoined();
+            List<Products> productsList = ProductsRepo.getAll();
             obList.addAll(productsList);
             colPrTel.setItems(obList);
         } catch (SQLException e) {
