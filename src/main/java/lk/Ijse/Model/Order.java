@@ -15,9 +15,9 @@ public class Order {
     private String orderId;
   //  public CustomerRepo id;
   //  public PaymentRepo paymentId;
-    private String status;
+   // private String status;
     private Date OrderPlaceDate;
-    private Date handOverdate;
+  //  private Date handOverdate;
 
 
 }

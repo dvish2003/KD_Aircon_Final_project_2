@@ -12,7 +12,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="551.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.EmployeeController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#093f72" height="551.0" layoutY="21.0" stroke="#093f72" strokeType="INSIDE" width="273.0" />
@@ -65,7 +64,7 @@
       <TextField fx:id="txtEmAddress" layoutX="22.0" layoutY="291.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Address" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <TextField fx:id="txtEmContact" layoutX="22.0" layoutY="347.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Contact" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <TextField fx:id="txtEmEmail" layoutX="21.0" layoutY="407.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Email" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
-      <Button fx:id="btnEmSave" layoutX="13.0" layoutY="448.0" mnemonicParsing="false" onAction="#btnEmSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
+      <Button fx:id="btnEmSave" layoutX="13.0" layoutY="448.0" mnemonicParsing="false" onAction="#btnEmSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -73,7 +72,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnEmUpdate" layoutX="140.0" layoutY="447.0" mnemonicParsing="false" onAction="#btnEmUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
+      <Button fx:id="btnEmUpdate" layoutX="140.0" layoutY="447.0" mnemonicParsing="false" onAction="#btnEmUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -81,7 +80,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnEmDelete" layoutX="13.0" layoutY="491.0" mnemonicParsing="false" onAction="#btnEmDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
+      <Button fx:id="btnEmDelete" layoutX="13.0" layoutY="491.0" mnemonicParsing="false" onAction="#btnEmDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -89,7 +88,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnEmClean" layoutX="140.0" layoutY="490.0" mnemonicParsing="false" onAction="#btnEmCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
+      <Button fx:id="btnEmClean" layoutX="140.0" layoutY="490.0" mnemonicParsing="false" onAction="#btnEmCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -139,7 +138,7 @@
             <Image url="@../Icon/bin.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnHome" layoutX="75.0" layoutY="530.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
+      <Button fx:id="btnHome" layoutX="75.0" layoutY="530.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

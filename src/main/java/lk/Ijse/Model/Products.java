@@ -12,8 +12,10 @@ import lombok.*;
       public class Products {
             private String productId;
             private String productDescription;
-            private int productUnitPrice;
+      private int productQuantity;
+      private int productUnitPrice;
 
 
-
+      public void ShowRoom(String showRoomId) {
       }
+}

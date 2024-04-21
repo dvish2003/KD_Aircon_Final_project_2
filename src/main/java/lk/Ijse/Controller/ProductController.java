@@ -117,9 +117,10 @@ public class ProductController {
     void btnPrSaveOnAction(ActionEvent event) {
         String P_ID = txtPrID.getText();
         String P_DESC = txtPrDesc.getText();
+        int P_Qty = Integer.parseInt(txtQty.getText());
         int P_UNIT_PRICE = Integer.parseInt(txtPrUnitPrice.getText());
 
-        Products product = new Products(P_ID, P_DESC, P_UNIT_PRICE);
+        Products product = new Products(P_ID, P_DESC,P_Qty,P_UNIT_PRICE);
         try {
             boolean isSaved = ProductsRepo.save(product);
             if (isSaved) {
@@ -138,9 +139,10 @@ public class ProductController {
     void btnPrUpdateOnAction(ActionEvent event) {
         String P_ID = txtPrID.getText();
         String P_DESC = txtPrDesc.getText();
+        int P_Qty = Integer.parseInt(txtQty.getText());
         int P_UNIT_PRICE = Integer.parseInt(txtPrUnitPrice.getText());
 
-        Products product = new Products(P_ID, P_DESC, P_UNIT_PRICE);
+        Products product = new Products(P_ID, P_DESC,P_Qty,P_UNIT_PRICE);
         try {
             boolean isUpdated = ProductsRepo.update(product);
             if (isUpdated) {
@@ -200,6 +202,7 @@ public class ProductController {
     private void setCellValueFactory() {
         colPrID.setCellValueFactory(new PropertyValueFactory<>("productId"));
         colPrDesc.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
+        colQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("productQuantity"));
         colPrUnitPrice.setCellValueFactory(new PropertyValueFactory<>("productUnitPrice"));
     }
 
@@ -207,7 +210,7 @@ public class ProductController {
         ObservableList<Products> obList = FXCollections.observableArrayList();
 
         try {
-            List<Products> productsList = ProductsRepo.getAll();
+            List<Products> productsList = ProductsRepo.getAllJoined();
             obList.addAll(productsList);
             colPrTel.setItems(obList);
         } catch (SQLException e) {
@@ -216,10 +219,13 @@ public class ProductController {
     }
 
     private void clearFields() {
+        cmbShowRoom.getSelectionModel().clearSelection();
+        txtQty.clear();
         txtPrID.clear();
         txtPrDesc.clear();
         txtPrUnitPrice.clear();
     }
+
     private void getShowRoomId() {
         ObservableList<String> obList = FXCollections.observableArrayList();
 

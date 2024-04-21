@@ -67,13 +67,13 @@ CREATE TABLE ShowRoom (
 CREATE TABLE Product (
                          Product_id VARCHAR(10) PRIMARY KEY,
                          Product_Description VARCHAR(50) NOT NULL,
+                         ShowRoom_QtyOnHand INT(50) NOT NULL,
                          Product_UnitPrice INT(50) NOT NULL
 );
 
 CREATE TABLE Product_ShowRoom (
                                   Product_id VARCHAR(10),
                                   ShowRoom_id VARCHAR(10),
-                                  ShowRoom_QtyOnHand INT(50) NOT NULL,
                                   FOREIGN KEY (Product_id) REFERENCES Product(Product_id) ON UPDATE CASCADE ON DELETE CASCADE,
                                   FOREIGN KEY (ShowRoom_id) REFERENCES ShowRoom(ShowRoom_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -93,6 +93,7 @@ CREATE TABLE OrderDetails (
                               Product_id VARCHAR(10),
                               Order_id VARCHAR(10),
                               Qty INT(50) NOT NULL,
+                              Product_UnitPrice INT(50) NOT NULL,
                               FOREIGN KEY (Product_id) REFERENCES Product(Product_id) ON UPDATE CASCADE ON DELETE CASCADE,
                               FOREIGN KEY (Order_id) REFERENCES `Order`(Order_id) ON UPDATE CASCADE ON DELETE CASCADE
 );

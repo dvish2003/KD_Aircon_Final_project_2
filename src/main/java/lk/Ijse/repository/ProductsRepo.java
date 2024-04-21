@@ -13,13 +13,14 @@ import java.util.List;
 public class ProductsRepo {
 
     public static boolean save(Products product) throws SQLException {
-        String sql = "INSERT INTO Product VALUES(?,?,?)";
+        String sql = "INSERT INTO Product VALUES(?,?,?,?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, product.getProductId());
         pstm.setString(2, product.getProductDescription());
-        pstm.setInt(3, product.getProductUnitPrice());
+        pstm.setInt(3, product.getProductQuantity());
+        pstm.setInt(4, product.getProductUnitPrice());
 
         return pstm.executeUpdate() > 0;
     }
@@ -33,9 +34,10 @@ public class ProductsRepo {
         if (rs.next()) {
             String productId = rs.getString("Product_id");
             String description = rs.getString("Product_Description");
+            int QtyOnHand = rs.getInt("ShowRoom_QtyOnHand");
             int unitPrice = rs.getInt("Product_UnitPrice");
 
-            Products product = new Products(productId, description, unitPrice);
+            Products product = new Products(productId, description,QtyOnHand,unitPrice);
 
             return product;
         }
@@ -43,12 +45,13 @@ public class ProductsRepo {
     }
 
     public static boolean update(Products product) throws SQLException {
-        String sql = "UPDATE Product SET Product_Description = ?, Product_UnitPrice = ? WHERE Product_id = ?";
+        String sql = "UPDATE Product SET Product_Description = ?,ShowRoom_QtyOnHand = ?,Product_UnitPrice = ? WHERE Product_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, product.getProductDescription());
-        pstm.setInt(2, product.getProductUnitPrice());
-        pstm.setString(3, product.getProductId());
+        pstm.setInt(2, product.getProductQuantity());
+        pstm.setInt(3, product.getProductUnitPrice());
+        pstm.setString(4, product.getProductId());
         return pstm.executeUpdate() > 0;
     }
 
@@ -61,7 +64,7 @@ public class ProductsRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static List<Products> getAll() throws SQLException {
+/*    public static List<Products> getAll() throws SQLException {
         String sql = "SELECT * FROM Product";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
@@ -73,12 +76,13 @@ public class ProductsRepo {
         while (resultSet.next()) {
             String productId = resultSet.getString("Product_id");
             String description = resultSet.getString("Product_Description");
+            int QtyOnHand = resultSet.getInt("ShowRoom_QtyOnHand");
             int unitPrice = resultSet.getInt("Product_UnitPrice");
-            Products product = new Products(productId, description, unitPrice);
+            Products product = new Products(productId, description,QtyOnHand,unitPrice);
             productList.add(product);
         }
         return productList;
-    }
+    }*/
 
     public static List<String> getIds() throws SQLException {
         String sql = "SELECT Product_id FROM Product";
@@ -93,4 +97,44 @@ public class ProductsRepo {
         }
         return idList;
     }
+    public static int getTotalQuantityOnHand() throws SQLException {
+        String sql = "SELECT SUM(ShowRoom_QtyOnHand) AS TotalQuantity FROM Product";
+
+        try (Connection connection = DbConnection.getInstance().getConnection();
+             PreparedStatement pstm = connection.prepareStatement(sql);
+             ResultSet rs = pstm.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getInt("TotalQuantity");
+            } else {
+                return 0; // Return 0 if no records found
+            }
+        }
+    }
+    public static List<Products> getAllJoined() throws SQLException {
+        String sql = "SELECT p.Product_id, p.Product_Description, p.ShowRoom_QtyOnHand, p.Product_UnitPrice, ps.ShowRoom_id " +
+                "FROM Product p " +
+                "JOIN Product_ShowRoom ps ON p.Product_id = ps.Product_id";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        List<Products> productList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            String productId = resultSet.getString("Product_id");
+            String description = resultSet.getString("Product_Description");
+            int qtyOnHand = resultSet.getInt("ShowRoom_QtyOnHand");
+            int unitPrice = resultSet.getInt("Product_UnitPrice");
+            String showRoomId = resultSet.getString("ShowRoom_id");
+
+            Products product = new Products(productId, description, qtyOnHand, unitPrice);
+           // product.ShowRoom(showRoomId); // Set the ShowRoomId for the product
+
+            productList.add(product);
+        }
+        return productList;
+    }
+
 }

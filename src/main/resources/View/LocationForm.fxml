@@ -65,7 +65,7 @@
       <TextField fx:id="txtLoCity" layoutX="25.0" layoutY="286.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter City" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <TextField fx:id="txtLoAddress" layoutX="25.0" layoutY="343.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter Address" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <TextField fx:id="txtLoZip" layoutX="24.0" layoutY="398.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter ZipCode" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
-      <Button fx:id="btnLocSave" layoutX="16.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnLocSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
+      <Button fx:id="btnLocSave" layoutX="16.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnLocSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -73,7 +73,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnLocUpdate" layoutX="143.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnLocUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
+      <Button fx:id="btnLocUpdate" layoutX="143.0" layoutY="436.0" mnemonicParsing="false" onAction="#btnLocUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -81,7 +81,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnLocDelete" layoutX="16.0" layoutY="488.0" mnemonicParsing="false" onAction="#btnLocDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
+      <Button fx:id="btnLocDelete" layoutX="16.0" layoutY="488.0" mnemonicParsing="false" onAction="#btnLocDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -94,7 +94,7 @@
             <Image url="@../Icon/map.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnLocClean" layoutX="143.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnLocCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
+      <Button fx:id="btnLocClean" layoutX="143.0" layoutY="485.0" mnemonicParsing="false" onAction="#btnLocCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -138,7 +138,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnLocHome" layoutX="79.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnLocHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
+      <Button fx:id="btnLocHome" layoutX="79.0" layoutY="529.0" mnemonicParsing="false" onAction="#btnLocHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 
 public class ShowRoom {
-    private String showRoomId;
+    public String showRoomId;
     private String showRoomLocation;
 
 

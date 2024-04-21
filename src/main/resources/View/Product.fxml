@@ -18,14 +18,14 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#093f72" height="551.0" stroke="#093f72" strokeType="INSIDE" width="816.0" />
       <TableView fx:id="colPrTel" layoutX="26.0" layoutY="192.0" prefHeight="284.0" prefWidth="766.0">
         <columns>
-            <TableColumn fx:id="colShowRoom" prefWidth="126.0" text="Show Room ID" />
-          <TableColumn fx:id="colPrID" prefWidth="124.0" text="Product ID" />
-            <TableColumn fx:id="colPrDesc" prefWidth="238.0" text="Description" />
+            <TableColumn fx:id="colShowRoom" prefWidth="120.0" text="Show Room ID" />
+          <TableColumn fx:id="colPrID" prefWidth="110.0" text="Product ID" />
+            <TableColumn fx:id="colPrDesc" prefWidth="258.0" text="Description" />
             <TableColumn fx:id="colQtyOnHand" prefWidth="98.0" text="QtyOnHand" />
             <TableColumn fx:id="colPrUnitPrice" prefWidth="175.0" text="Unit Price" />
         </columns>
       </TableView>
-      <Button fx:id="btnPrSave" layoutX="677.0" layoutY="498.0" mnemonicParsing="false" onAction="#btnPrSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
+      <Button fx:id="btnPrSave" layoutX="677.0" layoutY="498.0" mnemonicParsing="false" onAction="#btnPrSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -33,7 +33,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnPrUpdate" layoutX="512.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnPrUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
+      <Button fx:id="btnPrUpdate" layoutX="512.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnPrUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -41,7 +41,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnPrDelete" layoutX="355.0" layoutY="500.0" mnemonicParsing="false" onAction="#btnPrDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
+      <Button fx:id="btnPrDelete" layoutX="355.0" layoutY="500.0" mnemonicParsing="false" onAction="#btnPrDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -49,7 +49,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnPrClean" layoutX="191.0" layoutY="501.0" mnemonicParsing="false" onAction="#btnPrCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
+      <Button fx:id="btnPrClean" layoutX="191.0" layoutY="501.0" mnemonicParsing="false" onAction="#btnPrCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -77,7 +77,7 @@
             <Image url="@../Icon/bin.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnHome" layoutX="30.0" layoutY="501.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
+      <Button fx:id="btnHome" layoutX="30.0" layoutY="501.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -137,12 +137,12 @@
             <Image url="@../Icon/add-item.png" />
          </image>
       </ImageView>
-      <Label layoutX="229.0" layoutY="126.0" prefHeight="26.0" prefWidth="139.0" text="Qty :" textFill="WHITE">
+      <Label layoutX="229.0" layoutY="126.0" prefHeight="26.0" prefWidth="139.0" text="QtyOnHand :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="txtQty" layoutX="268.0" layoutY="124.0" prefHeight="26.0" prefWidth="188.0" promptText="Enter Qty" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
+      <TextField fx:id="txtQty" layoutX="330.0" layoutY="124.0" prefHeight="26.0" prefWidth="188.0" promptText="Enter Qty" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <ComboBox fx:id="cmbShowRoom" layoutX="48.0" layoutY="127.0" onAction="#cmbShowRoomOnAction" prefHeight="24.0" prefWidth="164.0" promptText="Show Room ID" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px;" />
    </children>
 </AnchorPane>
