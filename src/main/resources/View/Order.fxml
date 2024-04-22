@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="551.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.OrderController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#093f72" height="551.0" layoutX="-7.0" stroke="#093f72" strokeType="INSIDE" width="824.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#093f72" height="551.0" layoutX="-8.0" stroke="#093f72" strokeType="INSIDE" width="824.0" />
       <Label layoutX="270.0" layoutY="-7.0" prefHeight="63.0" prefWidth="334.0" text="Place Order" textFill="WHITE">
          <font>
             <Font name="System Bold" size="44.0" />
@@ -70,17 +70,17 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="174.0" layoutY="137.0" prefHeight="26.0" prefWidth="79.0" text="Product *" textFill="WHITE">
+      <Label layoutX="174.0" layoutY="136.0" prefHeight="26.0" prefWidth="79.0" text="Product *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="25.0" layoutY="137.0" prefHeight="26.0" prefWidth="114.0" text="Show Room *" textFill="WHITE">
+      <Label layoutX="25.0" layoutY="136.0" prefHeight="26.0" prefWidth="114.0" text="Show Room *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="574.0" layoutY="137.0" prefHeight="26.0" prefWidth="114.0" text="QtyOnHand *" textFill="WHITE">
+      <Label layoutX="567.0" layoutY="137.0" prefHeight="26.0" prefWidth="114.0" text="QtyOnHand *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -90,7 +90,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="294.0" layoutY="137.0" prefHeight="26.0" prefWidth="96.0" text="Description *" textFill="WHITE">
+      <Label layoutX="294.0" layoutY="136.0" prefHeight="26.0" prefWidth="96.0" text="Description *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -124,7 +124,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnAddToCart" layoutX="664.0" layoutY="197.0" mnemonicParsing="false" onAction="#btnAddToCartOnAction" prefHeight="32.0" prefWidth="141.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="AddToCart" textFill="#0a0000">
+      <Button fx:id="btnAddToCart" layoutX="667.0" layoutY="197.0" mnemonicParsing="false" onAction="#btnAddToCartOnAction" prefHeight="32.0" prefWidth="141.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="AddToCart" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -135,7 +135,7 @@
       <Label fx:id="lblOrderID" layoutX="104.0" layoutY="72.0" prefHeight="26.0" prefWidth="79.0" textFill="WHITE" />
       <Label fx:id="lblCustomerName" layoutX="643.0" layoutY="73.0" prefHeight="26.0" prefWidth="150.0" textFill="#fcfcfc" />
       <Label fx:id="LblOrderDate" layoutX="695.0" layoutY="13.0" prefHeight="26.0" prefWidth="79.0" textFill="WHITE" />
-      <Label fx:id="lblDescription" layoutX="292.0" layoutY="168.0" prefHeight="26.0" prefWidth="114.0" textFill="WHITE" />
+      <Label fx:id="lblDescription" layoutX="290.0" layoutY="159.0" prefHeight="26.0" prefWidth="114.0" textFill="WHITE" />
       <Label fx:id="lblQtyOnHand" layoutX="452.0" layoutY="167.0" prefHeight="26.0" prefWidth="67.0" textFill="WHITE" />
       <TextField fx:id="txtQty" layoutX="725.0" layoutY="163.0" prefHeight="24.0" prefWidth="35.0" />
       <ComboBox fx:id="cmbCustomerID" layoutX="311.0" layoutY="75.0" onAction="#cmbCustomerIDOnAction" prefHeight="24.0" prefWidth="104.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
@@ -155,18 +155,19 @@
             <Image url="@../Icon/cart(2).png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="18.0" fitWidth="21.0" layoutX="786.0" layoutY="512.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="21.0" layoutX="788.0" layoutY="512.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/place_order.png" />
          </image>
       </ImageView>
-      <ComboBox fx:id="cmbShowRoomID" layoutX="30.0" layoutY="168.0" onAction="#cmbShowRoomIDOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
-      <ComboBox fx:id="cmbProductID" layoutX="171.0" layoutY="167.0" onAction="#cmbProductIDOnAction" prefHeight="26.0" prefWidth="73.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
+      <ComboBox fx:id="cmbShowRoomID" layoutX="30.0" layoutY="157.0" onAction="#cmbShowRoomIDOnAction" prefHeight="26.0" prefWidth="79.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
+      <ComboBox fx:id="cmbProductID" layoutX="171.0" layoutY="158.0" onAction="#cmbProductIDOnAction" prefHeight="26.0" prefWidth="73.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <Label layoutX="441.0" layoutY="137.0" prefHeight="26.0" prefWidth="96.0" text="Unit Price*" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lblUnitPrice" layoutX="437.0" layoutY="169.0" prefHeight="26.0" prefWidth="89.0" textFill="WHITE" />
+      <Label fx:id="lblUnitPrice" layoutX="437.0" layoutY="161.0" prefHeight="26.0" prefWidth="89.0" textFill="WHITE" />
+      <Label fx:id="lblQtyOnHand" layoutX="567.0" layoutY="162.0" prefHeight="26.0" prefWidth="114.0" textFill="WHITE" />
    </children>
 </AnchorPane>

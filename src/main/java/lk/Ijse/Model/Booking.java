@@ -9,6 +9,7 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode
 @ToString
+@Data
 
 public class Booking {
     private String bookingId;

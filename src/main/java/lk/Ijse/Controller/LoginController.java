@@ -80,16 +80,10 @@ public class LoginController implements Initializable {
 
     private void navigateToDashBoard(ActionEvent event) throws IOException {
         Button btn = (Button) event.getSource();
-
-        // Get the stage from the source node
         Stage stage = (Stage) btn.getScene().getWindow();
-
-        // Load the CustomerForm.fxml into a new scene
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CustomerForm.fxml"));
         Parent rootNode = loader.load();
         Scene scene = new Scene(rootNode);
-
-        // Set the new scene in the existing stage
         stage.setScene(scene);
 
         // Show the stage

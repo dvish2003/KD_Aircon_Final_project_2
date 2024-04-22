@@ -73,7 +73,8 @@ public class OrderController {
 
     @FXML
     private Label lblCustomerName;
-
+    @FXML
+    private Label lblQtyOnHand;
     @FXML
     private Label lblDescription;
 
@@ -92,8 +93,6 @@ public class OrderController {
     @FXML
     private Label lblPaymentID;
 
-    @FXML
-    private Label lblQtyOnHand;
 
     @FXML
     private TextField txtQty;
