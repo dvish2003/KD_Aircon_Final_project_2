@@ -162,7 +162,6 @@ public class CustomerController {
             try {
                 boolean isDeleted = CustomerRepo.delete(id);
                 if (isDeleted) {
-                    // Remove the selected item from the TableView
                     Customer selectedCustomer = colCuTel.getSelectionModel().getSelectedItem();
                     if (selectedCustomer != null) {
                         colCuTel.getItems().remove(selectedCustomer);
@@ -234,7 +233,6 @@ public class CustomerController {
     }
 
     private void clearFields() {
-        // Method to clear input fields
         txtCuId.clear();
         txtCuName.clear();
         txtCuAddress.clear();

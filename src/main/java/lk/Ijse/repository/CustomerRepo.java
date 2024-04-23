@@ -47,14 +47,14 @@ public class CustomerRepo {
     }
     public static boolean update(Customer customer) throws SQLException {
         String sql = "UPDATE Customer SET Customer_Name = ?, Customer_Address = ?, Customer_Contact = ?,Customer_Email = ? WHERE Customer_id = ?";
-Connection connection = DbConnection.getInstance().getConnection();
-PreparedStatement pstm = connection.prepareStatement(sql);
-pstm.setObject(1,customer.getName());
-pstm.setObject(2,customer.getAddress());
-pstm.setObject(3,customer.getContact());
-pstm.setObject(4,customer.getEmail());
-pstm.setObject(5,customer.getId());
-return pstm.executeUpdate() > 0;
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1,customer.getName());
+        pstm.setObject(2,customer.getAddress());
+        pstm.setObject(3,customer.getContact());
+        pstm.setObject(4,customer.getEmail());
+        pstm.setObject(5,customer.getId());
+        return pstm.executeUpdate() > 0;
 
 
 

@@ -8,14 +8,11 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @ToString
+@Data
+public class Products {
+      private String product_id;
+      private String product_description;
+      private int product_unitPrice;
+      private int showRoom_qtyOnHand;
 
-      public class Products {
-            private String productId;
-            private String productDescription;
-      private int productQuantity;
-      private int productUnitPrice;
-
-
-      public void ShowRoom(String showRoomId) {
-      }
 }
