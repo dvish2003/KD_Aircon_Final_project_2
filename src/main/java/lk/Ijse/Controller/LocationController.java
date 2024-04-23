@@ -1,8 +1,5 @@
 package lk.Ijse.Controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -11,9 +8,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
-import javafx.util.Pair;
-import lk.Ijse.List.CustomerLocation;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.Location;
 import lk.Ijse.repository.CustomerRepo;
@@ -21,7 +19,7 @@ import lk.Ijse.repository.LocationRepo;
 
 import java.sql.SQLException;
 import java.util.List;
-//
+
 public class LocationController {
 
     @FXML
@@ -118,7 +116,7 @@ public class LocationController {
 
         colLoTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                cmbCustomerId.setValue(newSelection.getId());
+                cmbCustomerId.setValue(newSelection.getCustomerId());
                 txtLoId.setText(newSelection.getId());
                 txtLoProvince.setText(newSelection.getProvince());
                 txtLoCity.setText(newSelection.getCity());
@@ -129,26 +127,28 @@ public class LocationController {
     }
 
     private void setCellValueFactory() {
-        colCu_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_id"));
-        colId.setCellValueFactory(new PropertyValueFactory<>("Location_id"));
-        colProvince.setCellValueFactory(new PropertyValueFactory<>("Location_Province"));
-        colCity.setCellValueFactory(new PropertyValueFactory<>("Location_City"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>("Location_Address"));
-        colZipCode.setCellValueFactory(new PropertyValueFactory<>("Location_ZipCode"));
-
+        colCu_ID.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
+        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colZipCode.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
     }
 
     private void loadAllLocation() {
-
+        try {
+            List<Location> locationList = LocationRepo.getAll();
+            ObservableList<Location> obList = FXCollections.observableArrayList(locationList);
+            colLoTel.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error loading locations: " + e.getMessage(), e);
+        }
     }
 
-
     private void getCustomerIds() {
-        ObservableList<String> obList = FXCollections.observableArrayList();
-
         try {
             List<String> idList = CustomerRepo.getIds();
-            obList.addAll(idList);
+            ObservableList<String> obList = FXCollections.observableArrayList(idList);
             cmbCustomerId.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -184,7 +184,6 @@ public class LocationController {
         }
     }
 
-
     @FXML
     void btnLocHomeOnAction(ActionEvent event) {
     }
@@ -202,12 +201,12 @@ public class LocationController {
         String loAddress = txtLoAddress.getText();
         String loZipCode = txtLoZip.getText();
 
-        Customer customer = new Customer(cuId);
-        Location location = new Location(loId, loProvince, loCity, loAddress, loZipCode);
+        Location location = new Location(cuId, loId, loProvince, loCity, loAddress, loZipCode);
 
         try {
-            boolean isSaved = LocationRepo.save(customer, location);
+            boolean isSaved = LocationRepo.save(location);
             if (isSaved) {
+                colLoTel.getItems().add(location);
                 new Alert(Alert.AlertType.CONFIRMATION, "Location saved successfully!").show();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save location!").show();
@@ -219,19 +218,21 @@ public class LocationController {
 
     @FXML
     void btnLocUpdateOnAction(ActionEvent event) {
+        String cuId = cmbCustomerId.getValue();
         String loId = txtLoId.getText();
         String loProvince = txtLoProvince.getText();
         String loCity = txtLoCity.getText();
         String loAddress = txtLoAddress.getText();
         String loZipCode = txtLoZip.getText();
 
-        Location location = new Location(loId, loProvince, loCity, loAddress, loZipCode);
+        Location location = new Location(cuId, loId, loProvince, loCity, loAddress, loZipCode);
 
         try {
             boolean isUpdated = LocationRepo.update(location);
             if (isUpdated) {
+                int selectedIndex = colLoTel.getSelectionModel().getSelectedIndex();
+                colLoTel.getItems().set(selectedIndex, location);
                 new Alert(Alert.AlertType.CONFIRMATION, "Location updated successfully!").show();
-                clearFields();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to update location!").show();
             }

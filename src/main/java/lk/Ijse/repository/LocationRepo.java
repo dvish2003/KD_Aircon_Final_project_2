@@ -1,8 +1,6 @@
 package lk.Ijse.repository;
 
-import javafx.util.Pair;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.Location;
 
 import java.sql.Connection;
@@ -14,12 +12,12 @@ import java.util.List;
 
 public class LocationRepo {
 
-    public static boolean save(Customer customer, Location location) throws SQLException {
+    public static boolean save(Location location) throws SQLException {
         String sql = "INSERT INTO Location (Customer_id, Location_id, Location_Province, Location_City, Location_Address, Location_ZipCode) VALUES (?, ?, ?, ?, ?, ?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, customer.getId());
+        pstm.setString(1, location.getCustomerId());
         pstm.setString(2, location.getId());
         pstm.setString(3, location.getProvince());
         pstm.setString(4, location.getCity());
@@ -29,7 +27,7 @@ public class LocationRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static Pair<Customer, Location> searchById(String id) throws SQLException {
+    public static  Location searchById(String id) throws SQLException {
         String sql = "SELECT * FROM Location WHERE Location_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -44,23 +42,23 @@ public class LocationRepo {
             String loAddress = resultSet.getString("Location_Address");
             String loZipCode = resultSet.getString("Location_ZipCode");
 
-            Customer customer = new Customer(customerId);
-            Location location = new Location(loId, loProvince, loCity, loAddress, loZipCode);
 
-            return new Pair<>(customer, location);
+
+            return new   Location(customerId,loId, loProvince, loCity, loAddress, loZipCode);
         }
         return null;
     }
 
     public static boolean update(Location location) throws SQLException {
-        String sql = "UPDATE Location SET Location_Province = ?, Location_City = ?, Location_Address = ?, Location_ZipCode = ? WHERE Location_id = ?";
+        String sql = "UPDATE Location SET Customer_id = ? ,Location_Province = ?, Location_City = ?, Location_Address = ?, Location_ZipCode = ? WHERE Location_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, location.getProvince());
-        pstm.setString(2, location.getCity());
-        pstm.setString(3, location.getAddress());
-        pstm.setString(4, location.getZipCode());
-        pstm.setString(5, location.getId());
+        pstm.setString(1, location.getCustomerId());
+        pstm.setString(2, location.getProvince());
+        pstm.setString(3, location.getCity());
+        pstm.setString(4, location.getAddress());
+        pstm.setString(5, location.getZipCode());
+        pstm.setString(6, location.getId());
 
         return pstm.executeUpdate() > 0;
     }
@@ -74,16 +72,13 @@ public class LocationRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static List<Pair<Customer, Location>> getAll() throws SQLException {
+    public static List<Location> getAll() throws SQLException {
         String sql = "SELECT * FROM Location";
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
         ResultSet resultSet = pstm.executeQuery();
-
-        List<Pair<Customer, Location>> locationList = new ArrayList<>();
-
+        List<Location> locationList = new ArrayList<>();
         while (resultSet.next()) {
+
             String customerId = resultSet.getString("Customer_id");
             String loId = resultSet.getString("Location_id");
             String loProvince = resultSet.getString("Location_Province");
@@ -91,21 +86,16 @@ public class LocationRepo {
             String loAddress = resultSet.getString("Location_Address");
             String loZipCode = resultSet.getString("Location_ZipCode");
 
-            Customer customer = new Customer(customerId);
-            Location location = new Location(loId, loProvince, loCity, loAddress, loZipCode);
 
-            locationList.add(new Pair<>(customer, location));
+            locationList.add(new Location(customerId,loId,loProvince,loCity,loAddress,loZipCode));
         }
-
         return locationList;
     }
 
     public static List<String> getIds() throws SQLException {
         String sql = "SELECT Location_id FROM Location";
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
-
         List<String> idList = new ArrayList<>();
-
         ResultSet resultSet = pstm.executeQuery();
         while (resultSet.next()) {
             String id = resultSet.getString(1);

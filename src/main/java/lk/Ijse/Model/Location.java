@@ -8,10 +8,12 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @ToString
+@Data
 
 
 public class Location {
 
+    private String customerId;
     private String id;
     private String province;
     private String city;
