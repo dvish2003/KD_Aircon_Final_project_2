@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
@@ -280,5 +281,8 @@ public class CustomerController {
     }
 
     public void btnHomeOnAction(ActionEvent event) {
+    }
+
+    public void btnSearchOnAction(MouseEvent mouseEvent) {
     }
 }

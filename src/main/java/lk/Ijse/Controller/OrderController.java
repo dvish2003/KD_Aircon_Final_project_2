@@ -338,7 +338,7 @@ public class OrderController {
     }
 
     @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) {
+    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException {
         String orderID = lblOrderID.getText();
         String customerID = cmbCustomerID.getValue();
         String paymentID = lblPaymentID.getText();
@@ -359,22 +359,30 @@ public class OrderController {
             odList.add(od);
         }
 
-        var payment = new Payment(paymentID, Amount, date);
+        Payment payment = new Payment(paymentID, Amount, date);
         PlaceOrder po = new PlaceOrder(order, odList, payment);
 
-        try {
-            boolean isPlaced = PlaceOrderRepo.placeOrder(po);
-            if (isPlaced) {
-                obList.clear();
-                colOrderTel.refresh();
-                getCurrentOrderId();
-                getCurrentPayId();
-                new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        boolean isPlaced = PlaceOrderRepo.placeOrder(po);
+        if (isPlaced) {
+            obList.clear();
+            colOrderTel.setItems(obList);
+            lblOrderID.setText("");
+          //  cmbCustomerID.getSelectionModel().clearSelection();
+            lblPaymentID.setText("");
+            lblPaymentAmount.setText("");
+            lblCustomerName.setText("");
+            lblQtyOnHand.setText("");
+            lblDescription.setText("");
+            lblUnitPrice.setText("");
+            lblLocationShowRoom.setText("");
+         //   cmbShowRoomID.getSelectionModel().clearSelection();
+         //   cmbProductID.getSelectionModel().clearSelection();
+            txtQty.clear();
+            getCurrentOrderId();
+            getCurrentPayId();
+            new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
+        } else {
+            new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
         }
     }
 

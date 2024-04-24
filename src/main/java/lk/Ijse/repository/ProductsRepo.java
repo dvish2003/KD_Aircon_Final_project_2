@@ -99,7 +99,7 @@ public class ProductsRepo {
         }
         return idList;
     }
-    public static boolean update(List<OrderDetail> odList) throws SQLException {
+    public static boolean update1(List<OrderDetail> odList) throws SQLException {
         for (OrderDetail od : odList) {
             boolean isUpdateQty = updateQty(od.getProductId(), od.getQuantity());
             if(!isUpdateQty) {

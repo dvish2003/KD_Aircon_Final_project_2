@@ -10,7 +10,7 @@ import java.util.List;
 public class OrderDetailRepo {
     public static boolean save(List<OrderDetail> odList) throws SQLException {
         for (OrderDetail od : odList) {
-            boolean isSaved = save(od);
+            boolean isSaved = saveOrderDetail(od);
             if(!isSaved) {
                 return false;
             }
@@ -18,18 +18,17 @@ public class OrderDetailRepo {
         return true;
     }
 
-    private static boolean save(OrderDetail od) throws SQLException {
-        String sql = "INSERT INTO OrderDetails VALUES(?, ?, ?, ?)";
+    private static boolean saveOrderDetail(OrderDetail od) throws SQLException {
+        String sql = "INSERT INTO OrderDetails (Product_id, Order_id, Qty, Product_UnitPrice) VALUES (?, ?, ?, ?)";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
-
 
         pstm.setString(1, od.getProductId());
         pstm.setString(2, od.getOrderId());
         pstm.setInt(3, od.getQuantity());
         pstm.setDouble(4, od.getUnitPrice());
 
-        return pstm.executeUpdate() > 0;    //false ->  |
+        return pstm.executeUpdate() > 0;
     }
 }
