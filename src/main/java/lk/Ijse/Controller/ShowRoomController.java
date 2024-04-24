@@ -1,5 +1,6 @@
 package lk.Ijse.Controller;
 
+import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.ShowRoom;
 import lk.Ijse.repository.CustomerRepo;
@@ -151,6 +153,7 @@ public class ShowRoomController {
     public void initialize() {
         setCellValueFactory();
         loadAllShowRoom();
+        applyButtonAnimations();
 
         txtShowRoomID.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -166,6 +169,31 @@ public class ShowRoomController {
                 txtSrLocation.setText(newSelection.getShowRoomLocation());
 
             }
+        });
+    }
+    private void applyButtonAnimations() {
+        applyAnimation(btnHome);
+        applyAnimation(btnSrBack);
+        applyAnimation(btnSrNext);
+        applyAnimation(btnSrClean);
+        applyAnimation(btnSrUpdate);
+        applyAnimation(btnSrDelete);
+        applyAnimation(btnSrSave);
+
+
+    }
+
+    private void applyAnimation(Button button) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
+        button.setOnMouseEntered(event -> {
+            scaleTransition.setToX(1.1);
+            scaleTransition.setToY(1.1);
+            scaleTransition.play();
+        });
+        button.setOnMouseExited(event -> {
+            scaleTransition.setToX(1);
+            scaleTransition.setToY(1);
+            scaleTransition.play();
         });
     }
 

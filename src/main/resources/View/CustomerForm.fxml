@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -63,63 +64,83 @@
         <TextField fx:id="txtCuAddress" layoutX="25.0" layoutY="294.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Customer Address" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
         <TextField fx:id="txtCuContact" layoutX="25.0" layoutY="363.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Customer Contact" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
         <TextField fx:id="txtCuEmail" layoutX="24.0" layoutY="434.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Customer Email" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
-        <Button fx:id="btnSave" layoutX="16.0" layoutY="493.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
-            <font>
-                <Font name="System Bold" size="13.0" />
-            </font>
-            <effect>
-                <DropShadow />
-            </effect>
-        </Button>
-        <Button fx:id="btnUpdate" layoutX="160.0" layoutY="493.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
-            <font>
-                <Font name="System Bold" size="13.0" />
-            </font>
-            <effect>
-                <DropShadow />
-            </effect>tab
-        </Button>
-        <Button fx:id="btnDelete" layoutX="16.0" layoutY="565.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
-            <font>
-                <Font name="System Bold" size="13.0" />
-            </font>
-            <effect>
-                <DropShadow />
-            </effect>
-        </Button>
+      <Group layoutX="7.0" layoutY="484.0">
+         <children>
+            <Group>
+               <children>
+                    <Button fx:id="btnSave" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
+                        <font>
+                            <Font name="System Bold" size="13.0" />
+                        </font>
+                        <effect>
+                            <DropShadow />
+                        </effect>
+                    </Button>
+                  <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="96.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icon/diskette.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group layoutX="151.0" layoutY="484.0">
+         <children>
+              <Button fx:id="btnUpdate" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
+                  <font>
+                      <Font name="System Bold" size="13.0" />
+                  </font>
+                  <effect>
+                      <DropShadow />
+                  </effect>tab
+              </Button>
+            <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="96.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Icon/system-update.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="12.0" layoutY="556.0">
+         <children>
+              <Button fx:id="btnDelete" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
+                  <font>
+                      <Font name="System Bold" size="13.0" />
+                  </font>
+                  <effect>
+                      <DropShadow />
+                  </effect>
+              </Button>
+            <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="91.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Icon/bin.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
         <ImageView fitHeight="80.0" fitWidth="124.0" layoutX="111.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../Icon/customer.png" />
             </image>
         </ImageView>
-      <Button fx:id="btnClean" layoutX="160.0" layoutY="565.0" mnemonicParsing="false" onAction="#btnCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="246.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Icon/mop.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="247.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Icon/system-update.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="103.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Icon/diskette.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="103.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Icon/bin.png" />
-         </image>
-      </ImageView>
+      <Group layoutX="151.0" layoutY="556.0">
+         <children>
+            <Button fx:id="btnClean" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="95.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Icon/mop.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
       <Button fx:id="btnBack" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#btnBackOnAction" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="&lt;" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -136,18 +157,22 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnHome" layoutX="91.0" layoutY="631.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="172.0" layoutY="636.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Icon/home.png" />
-         </image>
-      </ImageView>
+      <Group layoutX="82.0" layoutY="622.0">
+         <children>
+            <Button fx:id="btnHome" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="90.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Icon/home.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
     </children>
 </AnchorPane>

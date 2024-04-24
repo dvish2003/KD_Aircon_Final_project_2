@@ -1,5 +1,7 @@
 package lk.Ijse.Controller;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.repository.CustomerRepo;
 
@@ -22,13 +25,15 @@ public class CustomerController {
 
     @FXML
     private Button btnBack;
-
+    @FXML
+    private Button btnHome;
     @FXML
     private Button btnClean;
 
     @FXML
     private Button btnDelete;
-
+    @FXML
+    private Button btnNext;
     @FXML
     private Button btnSave;
 
@@ -71,6 +76,8 @@ public class CustomerController {
     public void initialize() {
             setCellValueFactory();
             loadAllCustomers();
+            applyButtonAnimations();
+
 
         txtCuId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -107,6 +114,35 @@ public class CustomerController {
                 }
             });
         }
+    private void applyButtonAnimations() {
+        applyAnimation(btnBack);
+        applyAnimation(btnClean);
+        applyAnimation(btnDelete);
+        applyAnimation(btnSave);
+        applyAnimation(btnUpdate);
+        applyAnimation(btnNext);
+        applyAnimation(btnHome);
+
+    }
+
+
+
+    private void applyAnimation(Button button) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
+        button.setOnMouseEntered(event -> {
+            scaleTransition.setToX(1.1);
+            scaleTransition.setToY(1.1);
+            scaleTransition.play();
+        });
+        button.setOnMouseExited(event -> {
+            scaleTransition.setToX(1);
+            scaleTransition.setToY(1);
+            scaleTransition.play();
+        });
+    }
+
+
+
 
     private void setCellValueFactory() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));

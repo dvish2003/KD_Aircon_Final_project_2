@@ -35,10 +35,9 @@ public class ProductsRepo {
         if (rs.next()) {
             String productId = rs.getString("Product_id");
             String description = rs.getString("Product_Description");
-            int QtyOnHand = rs.getInt("ShowRoom_QtyOnHand");
             int unitPrice = rs.getInt("Product_UnitPrice");
-
-            Products product = new Products(productId, description,QtyOnHand,unitPrice);
+            int QtyOnHand = rs.getInt("ShowRoom_QtyOnHand");
+            Products product = new Products(productId, description,unitPrice,QtyOnHand);
 
             return product;
         }

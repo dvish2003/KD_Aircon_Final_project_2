@@ -1,5 +1,6 @@
 package lk.Ijse.Controller;
 
+import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lk.Ijse.Db.DbConnection;
 
 import java.io.IOException;
@@ -34,6 +36,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        applyButtonAnimations();
         txtUserId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtPassword.requestFocus();
@@ -46,6 +49,27 @@ public class LoginController implements Initializable {
             }
         });
     }
+    private void applyButtonAnimations() {
+        applyAnimation(btnLogin);
+
+
+    }
+
+
+    private void applyAnimation(Button button) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
+        button.setOnMouseEntered(event -> {
+            scaleTransition.setToX(1.1);
+            scaleTransition.setToY(1.1);
+            scaleTransition.play();
+        });
+        button.setOnMouseExited(event -> {
+            scaleTransition.setToX(1);
+            scaleTransition.setToY(1);
+            scaleTransition.play();
+        });
+    }
+
 
     @FXML
     void btnLoginOnAction(ActionEvent event) throws IOException {

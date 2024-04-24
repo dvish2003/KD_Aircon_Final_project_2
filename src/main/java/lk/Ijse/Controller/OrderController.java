@@ -1,22 +1,30 @@
 package lk.Ijse.Controller;
 
+import com.jfoenix.controls.JFXButton;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Cursor;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
+import lk.Ijse.Model.CartTm;
 import lk.Ijse.Model.Customer;
+import lk.Ijse.Model.Products;
+import lk.Ijse.Model.ShowRoom;
 import lk.Ijse.repository.CustomerRepo;
 import lk.Ijse.repository.OrderRepo;
+import lk.Ijse.repository.ProductsRepo;
+import lk.Ijse.repository.ShowRoomRepo;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public class OrderController {
 
@@ -35,17 +43,15 @@ public class OrderController {
     @FXML
     private Button btnPrBack;
 
-    @FXML
-    private Button btnPrNext;
 
     @FXML
     private ComboBox<String> cmbCustomerID;
 
     @FXML
-    private ComboBox<?> cmbProductID;
+    private ComboBox<String> cmbProductID;
 
     @FXML
-    private ComboBox<?> cmbShowRoomID;
+    private ComboBox<String> cmbShowRoomID;
 
     @FXML
     private TableColumn<?, ?> colOrAction;
@@ -62,14 +68,13 @@ public class OrderController {
     @FXML
     private TableColumn<?, ?> colOrPrTotal;
 
+
     @FXML
     private TableColumn<?, ?> colOrPrUnitPrice;
-
     @FXML
-    private TableColumn<?, ?> colOrQtyOnHand;
-
+    private TableView<CartTm> colOrderTel;
     @FXML
-    private TableView<?> colOrderTel;
+    private Label lblLocationShowRoom;
 
     @FXML
     private Label lblCustomerName;
@@ -92,6 +97,7 @@ public class OrderController {
 
     @FXML
     private Label lblPaymentID;
+    private ObservableList<CartTm> obList = FXCollections.observableArrayList();
 
 
     @FXML
@@ -102,6 +108,99 @@ public class OrderController {
         getCurrentOrderId();
         getCustomerIds();
         getCurrentPayId();
+        applyButtonAnimations();
+        applyLabelAnimations();
+        getShowRoomIds();
+        getProductIds();
+        setCellValueFactory();
+
+
+        cmbCustomerID.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                cmbShowRoomID.requestFocus();
+            }
+        });
+
+        cmbShowRoomID.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                cmbProductID.requestFocus();
+            }
+        });
+
+        cmbProductID.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtQty.requestFocus();
+            }
+        });
+
+
+
+        colOrderTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                txtQty.requestFocus();
+            }
+        });
+
+    }
+    private void setCellValueFactory() {
+        colOrPrID.setCellValueFactory(new PropertyValueFactory<>("P_ID"));
+        colOrPrDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colOrPrUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colOrPrQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colOrPrTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+        colOrAction.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
+
+    }
+    private void applyButtonAnimations() {
+        applyAnimation(btnAddToCart);
+        applyAnimation(btnNewCus);
+        applyAnimation(btnPlaceOrder);
+        applyAnimation(btnPrBack);
+        applyAnimation(btnPrBack);
+    }
+
+    private void applyLabelAnimations() {
+        applyAnimation(lblCustomerName);
+        applyAnimation(lblQtyOnHand);
+        applyAnimation(lblDescription);
+        applyAnimation(lblOrderID);
+        applyAnimation(lblPayDate);
+        applyAnimation(LblOrderDate);
+        applyAnimation(lblUnitPrice);
+        applyAnimation(lblPaymentAmount);
+        applyAnimation(lblPaymentID);
+        applyAnimation(lblLocationShowRoom);
+
+
+
+    }
+
+    private void applyAnimation(Button button) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
+        button.setOnMouseEntered(event -> {
+            scaleTransition.setToX(1.1);
+            scaleTransition.setToY(1.1);
+            scaleTransition.play();
+        });
+        button.setOnMouseExited(event -> {
+            scaleTransition.setToX(1);
+            scaleTransition.setToY(1);
+            scaleTransition.play();
+        });
+    }
+
+    private void applyAnimation(Label label) {
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), label);
+        label.setOnMouseEntered(event -> {
+            fadeTransition.setFromValue(1);
+            fadeTransition.setToValue(0.5);
+            fadeTransition.play();
+        });
+        label.setOnMouseExited(event -> {
+            fadeTransition.setFromValue(0.5);
+            fadeTransition.setToValue(1);
+            fadeTransition.play();
+        });
     }
 
     private void getCustomerIds() {
@@ -152,7 +251,56 @@ public class OrderController {
 
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
+    String P_Id = cmbProductID.getValue();
+    String Description =lblDescription.getText();
+    int Unit_Price = Integer.parseInt(lblUnitPrice.getText());
+    int Qty = Integer.parseInt(txtQty.getText());
+    int Total_Price = Unit_Price * Qty;
 
+        JFXButton btnRemove = new JFXButton("remove");
+        btnRemove.setCursor(Cursor.HAND);
+        btnRemove.setOnAction((e) -> {
+
+            ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
+            Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
+
+            if(type.orElse(no) == yes) {
+                int selectedIndex = colOrderTel.getSelectionModel().getSelectedIndex();
+                obList.remove(selectedIndex);
+
+                colOrderTel.refresh();
+                calculateNetTotal();
+            }
+        });
+        for (int i = 0; i < colOrderTel.getItems().size(); i++) {
+            if(P_Id.equals(colOrPrID.getCellData(i))){
+                CartTm tm = obList.get(i);
+                Qty += tm.getQty();
+                Total_Price = Qty*Unit_Price;
+                 tm.setQty(Qty);
+                 tm.setTotal(Total_Price);
+
+                 colOrderTel.refresh();
+                 calculateNetTotal();
+                 return;
+
+            }
+        }
+        CartTm tm = new CartTm(P_Id,Description,Qty,Unit_Price,Total_Price,btnRemove);
+        obList.add(tm);
+
+        colOrderTel.setItems(obList);
+        calculateNetTotal();
+        txtQty.setText("");
+    }
+
+    private void calculateNetTotal() {
+        int netTotal = 0;
+        for (int i = 0; i < colOrderTel.getItems().size(); i++) {
+            netTotal += (double) colOrPrTotal.getCellData(i);
+        }
+        lblPaymentAmount.setText(String.valueOf(netTotal));
     }
 
     @FXML
@@ -170,10 +318,7 @@ public class OrderController {
 
     }
 
-    @FXML
-    void btnPrNextOnAction(ActionEvent event) {
 
-    }
 
     @FXML
     void cmbCustomerIDOnAction(ActionEvent event) {
@@ -190,12 +335,55 @@ public class OrderController {
 
     @FXML
     void cmbProductIDOnAction(ActionEvent event) {
+        String id = String.valueOf(cmbProductID.getValue());
+        try {
+            Products products = ProductsRepo.searchById(id);
+
+            lblDescription.setText(products.getProduct_description());
+            lblQtyOnHand.setText(String.valueOf(products.getShowRoom_qtyOnHand()));
+            lblUnitPrice.setText(String.valueOf(products.getProduct_unitPrice()));
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    private void getProductIds() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+        try {
+            List<String> idList = ProductsRepo.getIds();
+            obList.addAll(idList);
+            cmbProductID.setItems(obList);
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Error occurred while fetching Products IDs: " + e.getMessage());
+        }
 
     }
 
     @FXML
     void cmbShowRoomIDOnAction(ActionEvent event) {
+        String id = String.valueOf(cmbShowRoomID.getValue());
+        try {
+            ShowRoom showRoom = ShowRoomRepo.searchById(id);
 
+            lblLocationShowRoom.setText(showRoom.getShowRoomLocation());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void getShowRoomIds() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+        try {
+            List<String> idList = ShowRoomRepo.getIds();
+            obList.addAll(idList);
+            cmbShowRoomID.setItems(obList);
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Error occurred while fetching showroom IDs: " + e.getMessage());
+        }
     }
     private void getCurrentPayId() {
         try {
@@ -220,6 +408,10 @@ public class OrderController {
         }
         return "P001";
     }
-
+    private void showAlert(Alert.AlertType alertType, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }

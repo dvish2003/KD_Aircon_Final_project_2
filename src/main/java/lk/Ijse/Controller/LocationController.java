@@ -1,5 +1,6 @@
 package lk.Ijse.Controller;
 
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.Location;
 import lk.Ijse.repository.CustomerRepo;
@@ -89,7 +91,7 @@ public class LocationController {
         setCellValueFactory();
         loadAllLocation();
         getCustomerIds();
-
+        applyButtonAnimations();
         txtLoId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtLoProvince.requestFocus();
@@ -125,6 +127,35 @@ public class LocationController {
             }
         });
     }
+    private void applyButtonAnimations() {
+        applyAnimation(btnNewCus);
+        applyAnimation(btnLocBack);
+        applyAnimation(btnLocClean);
+        applyAnimation(btnLocDelete);
+        applyAnimation(btnLocSave);
+        applyAnimation(btnLocNext);
+        applyAnimation(btnLocNext);
+        applyAnimation(btnLocHome);
+
+
+    }
+
+
+
+    private void applyAnimation(Button button) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
+        button.setOnMouseEntered(event -> {
+            scaleTransition.setToX(1.1);
+            scaleTransition.setToY(1.1);
+            scaleTransition.play();
+        });
+        button.setOnMouseExited(event -> {
+            scaleTransition.setToX(1);
+            scaleTransition.setToY(1);
+            scaleTransition.play();
+        });
+    }
+
 
     private void setCellValueFactory() {
         colCu_ID.setCellValueFactory(new PropertyValueFactory<>("customerId"));

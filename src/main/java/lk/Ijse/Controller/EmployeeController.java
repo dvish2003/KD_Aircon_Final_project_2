@@ -1,5 +1,6 @@
 package lk.Ijse.Controller;
 
+import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 import lk.Ijse.Model.Employee;
 import lk.Ijse.repository.EmployeeRepo;
 
@@ -78,7 +80,7 @@ public class EmployeeController {
     public void initialize() {
         setCellValueFactory();
         loadAllEmployees();
-
+        applyButtonAnimations();
         txtEmId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtEmName.requestFocus();
@@ -120,6 +122,33 @@ public class EmployeeController {
             }
         });
     }
+    private void applyButtonAnimations() {
+        applyAnimation(btnBack1);
+        applyAnimation(btnEmClean);
+        applyAnimation(btnEmDelete);
+        applyAnimation(btnEmSave);
+        applyAnimation(btnEmUpdate);
+        applyAnimation(btnNext1);
+        applyAnimation(btnHome);
+
+    }
+
+
+
+    private void applyAnimation(Button button) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
+        button.setOnMouseEntered(event -> {
+            scaleTransition.setToX(1.1);
+            scaleTransition.setToY(1.1);
+            scaleTransition.play();
+        });
+        button.setOnMouseExited(event -> {
+            scaleTransition.setToX(1);
+            scaleTransition.setToY(1);
+            scaleTransition.play();
+        });
+    }
+
 
     private void setCellValueFactory() {
         colEmId.setCellValueFactory(new PropertyValueFactory<>("empId"));

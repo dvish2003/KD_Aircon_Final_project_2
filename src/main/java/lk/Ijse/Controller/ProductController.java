@@ -1,5 +1,6 @@
 package lk.Ijse.Controller;
 
+import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 import lk.Ijse.Model.*;
 import lk.Ijse.repository.*;
 
@@ -98,7 +100,36 @@ public class ProductController {
         loadAllProduct();
         setListeners();
         getShowRoomIds();
+        applyButtonAnimations();
     }
+    private void applyButtonAnimations() {
+        applyAnimation(btnHome);
+        applyAnimation(btnPrBack);
+        applyAnimation(btnPrClean);
+        applyAnimation(btnPrNext);
+        applyAnimation(btnPrUpdate);
+        applyAnimation(btnPrSave);
+        applyAnimation(btnPrDelete);
+
+
+    }
+
+
+
+    private void applyAnimation(Button button) {
+        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
+        button.setOnMouseEntered(event -> {
+            scaleTransition.setToX(1.1);
+            scaleTransition.setToY(1.1);
+            scaleTransition.play();
+        });
+        button.setOnMouseExited(event -> {
+            scaleTransition.setToX(1);
+            scaleTransition.setToY(1);
+            scaleTransition.play();
+        });
+    }
+
 
     private void loadAllProduct() {
         ObservableList<Products> obList = FXCollections.observableArrayList();
