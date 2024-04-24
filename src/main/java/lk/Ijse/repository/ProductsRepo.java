@@ -110,7 +110,7 @@ public class ProductsRepo {
     }
 
     private static boolean updateQty(String Id, int qty) throws SQLException {
-        String sql = "UPDATE Product SET ShowRoom_QtyOnHand = ShowRoom_QtyOnHand - ? WHERE Product_id = ?";
+        String sql = "UPDATE Product SET ShowRoom_QtyOnHand = (ShowRoom_QtyOnHand - ?) WHERE Product_id = ?";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);

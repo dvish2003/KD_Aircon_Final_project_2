@@ -357,6 +357,7 @@ public class OrderController {
                     tm.getUnitPrice()
             );
             odList.add(od);
+
         }
 
         Payment payment = new Payment(paymentID, Amount, date);
@@ -370,11 +371,11 @@ public class OrderController {
           //  cmbCustomerID.getSelectionModel().clearSelection();
             lblPaymentID.setText("");
             lblPaymentAmount.setText("");
-            lblCustomerName.setText("");
-            lblQtyOnHand.setText("");
-            lblDescription.setText("");
-            lblUnitPrice.setText("");
-            lblLocationShowRoom.setText("");
+           // lblCustomerName.setText("");
+        //    lblQtyOnHand.setText("");
+           // lblDescription.setText("");
+          //  lblUnitPrice.setText("");
+          //  lblLocationShowRoom.setText("");
          //   cmbShowRoomID.getSelectionModel().clearSelection();
          //   cmbProductID.getSelectionModel().clearSelection();
             txtQty.clear();

@@ -5,15 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment=" Commit">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/search.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/OrderDetailRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/OrderDetailRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/OrderRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/OrderRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/PlaceOrderRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/PlaceOrderRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ProductsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ProductsRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/CustomerForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/CustomerForm.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,7 +154,7 @@
       <workItem from="1713855767510" duration="33570000" />
       <workItem from="1713904991727" duration="2802000" />
       <workItem from="1713945982947" duration="1497000" />
-      <workItem from="1713947626074" duration="38943000" />
+      <workItem from="1713947626074" duration="39346000" />
     </task>
     <task id="LOCAL-00001" summary="ss">
       <option name="closed" value="true" />
@@ -363,7 +356,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713985635974</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary=" Commit">
+      <option name="closed" value="true" />
+      <created>1713995134098</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1713995134099</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
