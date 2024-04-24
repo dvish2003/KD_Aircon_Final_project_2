@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 public class CartTm {
     private String P_ID;
     private String description;
-    private double unitPrice;
+    private int unitPrice;
     private int qty;
-    private double total;
+    private int total;
     private JFXButton btnRemove;
 }

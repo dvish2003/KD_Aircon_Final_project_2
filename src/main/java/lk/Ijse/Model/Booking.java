@@ -2,7 +2,8 @@ package lk.Ijse.Model;
 
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

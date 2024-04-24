@@ -12,17 +12,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
-import lk.Ijse.Model.CartTm;
-import lk.Ijse.Model.Customer;
-import lk.Ijse.Model.Products;
-import lk.Ijse.Model.ShowRoom;
-import lk.Ijse.repository.CustomerRepo;
-import lk.Ijse.repository.OrderRepo;
-import lk.Ijse.repository.ProductsRepo;
-import lk.Ijse.repository.ShowRoomRepo;
+import lk.Ijse.Model.*;
+import lk.Ijse.repository.*;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,7 +63,14 @@ public class OrderController {
 
     @FXML
     private TableColumn<?, ?> colOrPrTotal;
+    @FXML
+    private TableView<Product_ShowRoom> colPSTable;
 
+    @FXML
+    private TableColumn<?, ?> colJoinPR;
+
+    @FXML
+    private TableColumn<?, ?> colJoinSW;
 
     @FXML
     private TableColumn<?, ?> colOrPrUnitPrice;
@@ -113,7 +116,7 @@ public class OrderController {
         getShowRoomIds();
         getProductIds();
         setCellValueFactory();
-
+        loadAllPS();
 
         cmbCustomerID.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -149,8 +152,34 @@ public class OrderController {
         colOrPrQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
         colOrPrTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         colOrAction.setCellValueFactory(new PropertyValueFactory<>("btnRemove"));
+        colJoinPR.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        colJoinSW.setCellValueFactory(new PropertyValueFactory<>("showRoomId"));
+
 
     }
+
+    private void loadAllPS() {
+        ObservableList<Product_ShowRoom> obList = FXCollections.observableArrayList();
+
+        try {
+            List<Product_ShowRoom> ps = Product_ShowRoom_Repo.getAll();
+            for (Product_ShowRoom psList : ps) {
+                Product_ShowRoom tm = new Product_ShowRoom(
+
+                        psList.getShowRoomId(),
+                        psList.getProductID()
+
+                );
+
+                obList.add(tm);
+            }
+
+            colPSTable.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void applyButtonAnimations() {
         applyAnimation(btnAddToCart);
         applyAnimation(btnNewCus);
@@ -298,7 +327,7 @@ public class OrderController {
     private void calculateNetTotal() {
         int netTotal = 0;
         for (int i = 0; i < colOrderTel.getItems().size(); i++) {
-            netTotal += (double) colOrPrTotal.getCellData(i);
+            netTotal += (int) colOrPrTotal.getCellData(i);
         }
         lblPaymentAmount.setText(String.valueOf(netTotal));
     }
@@ -310,6 +339,37 @@ public class OrderController {
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
+          String orderID = lblOrderID.getText();
+          String customerID = cmbCustomerID.getValue();
+          String paymentID = lblPaymentID.getText();
+          Date date = Date.valueOf(LocalDate.now());
+          int Amount = Integer.parseInt(lblPaymentAmount.getText());
+
+        var order = new Order(orderID,customerID,paymentID,date);
+        List<OrderDetail> odList = new ArrayList<>();
+
+        for (int i = 0; i < colOrderTel.getItems().size(); i++) {
+            CartTm tm = obList.get(i);
+             OrderDetail od = new OrderDetail(
+                     orderID,
+                     tm.getP_ID(),
+                     tm.getQty(),
+                     tm.getUnitPrice()
+             );
+            odList.add(od);
+        }
+        var payment = new Payment(paymentID,Amount,date);
+        PlaceOrder po = new PlaceOrder(order, odList,payment);
+        try {
+            boolean isPlaced = PlaceOrderRepo.placeOrder(po);
+            if(isPlaced) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
 

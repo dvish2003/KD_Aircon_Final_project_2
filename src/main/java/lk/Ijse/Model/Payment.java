@@ -2,7 +2,7 @@ package lk.Ijse.Model;
 
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -13,7 +13,6 @@ import java.util.Date;
 
 public class Payment {
     private String paymentId;
-    private String paymentMethod;
     private int paymentAmount;
     private Date paymentDate;
 

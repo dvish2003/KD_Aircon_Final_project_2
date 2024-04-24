@@ -25,14 +25,14 @@
             <DropShadow />
          </effect>
       </Label>
-      <TableView fx:id="colOrderTel" layoutX="31.0" layoutY="296.0" prefHeight="306.0" prefWidth="934.0">
+      <TableView fx:id="colOrderTel" layoutX="359.0" layoutY="298.0" prefHeight="304.0" prefWidth="597.0">
          <columns>
-            <TableColumn fx:id="colOrPrID" prefWidth="148.0" text="Product ID" />
-            <TableColumn fx:id="colOrPrDesc" prefWidth="209.0" text="Description" />
-            <TableColumn fx:id="colOrPrUnitPrice" prefWidth="142.0" text="Unit Price" />
-            <TableColumn fx:id="colOrPrQty" prefWidth="116.0" text="Qty" />
-            <TableColumn fx:id="colOrPrTotal" prefWidth="162.0" text="Total" />
-            <TableColumn fx:id="colOrAction" prefWidth="155.0" text="Action" />
+            <TableColumn fx:id="colOrPrID" prefWidth="97.0" text="Product ID" />
+            <TableColumn fx:id="colOrPrDesc" prefWidth="169.0" text="Description" />
+            <TableColumn fx:id="colOrPrUnitPrice" prefWidth="116.0" text="Unit Price" />
+            <TableColumn fx:id="colOrPrQty" prefWidth="53.0" text="Qty" />
+            <TableColumn fx:id="colOrPrTotal" prefWidth="83.0" text="Total" />
+            <TableColumn fx:id="colOrAction" text="Action" />
          </columns>
       </TableView>
       <Label layoutX="25.0" layoutY="88.0" prefHeight="26.0" prefWidth="79.0" text="Order ID :" textFill="WHITE">
@@ -75,7 +75,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="24.0" layoutY="136.0" prefHeight="26.0" prefWidth="114.0" text="Show Room *" textFill="WHITE">
+      <Label layoutX="24.0" layoutY="136.0" prefHeight="26.0" prefWidth="114.0" text="Show Room  *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -162,7 +162,7 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <ComboBox fx:id="cmbShowRoomID" layoutX="23.0" layoutY="157.0" onAction="#cmbShowRoomIDOnAction" prefHeight="26.0" prefWidth="96.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
+      <ComboBox fx:id="cmbShowRoomID" layoutX="23.0" layoutY="157.0" onAction="#cmbShowRoomIDOnAction" prefHeight="26.0" prefWidth="104.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <ComboBox fx:id="cmbProductID" layoutX="26.0" layoutY="224.0" onAction="#cmbProductIDOnAction" prefHeight="26.0" prefWidth="89.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <Label layoutX="378.0" layoutY="203.0" prefHeight="26.0" prefWidth="96.0" text="Unit Price*" textFill="WHITE">
          <font>
@@ -177,12 +177,12 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label layoutX="170.0" layoutY="142.0" prefHeight="26.0" prefWidth="170.0" text="Show Room Location *" textFill="WHITE">
+      <Label layoutX="237.0" layoutY="142.0" prefHeight="26.0" prefWidth="170.0" text="Show Room Location *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="lblLocationShowRoom" layoutX="171.0" layoutY="166.0" prefHeight="26.0" prefWidth="164.0" textFill="#25ff04">
+      <Label fx:id="lblLocationShowRoom" layoutX="238.0" layoutY="166.0" prefHeight="26.0" prefWidth="320.0" textFill="#25ff04">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
@@ -193,5 +193,11 @@
             <Font name="System Bold" size="28.0" />
          </font>
       </Label>
+      <TableView fx:id="colPSTable" layoutX="23.0" layoutY="298.0" prefHeight="304.0" prefWidth="307.0">
+        <columns>
+            <TableColumn fx:id="colJoinPR" prefWidth="145.0" text="Product ID" />
+          <TableColumn fx:id="colJoinSW" prefWidth="160.0" text="Show Room ID" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

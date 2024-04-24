@@ -59,11 +59,26 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEmId" layoutX="26.0" layoutY="130.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee ID" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
-      <TextField fx:id="txtEmName" layoutX="23.0" layoutY="195.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Name" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
-      <TextField fx:id="txtEmAddress" layoutX="22.0" layoutY="316.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Address" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
-      <TextField fx:id="txtEmContact" layoutX="22.0" layoutY="374.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Contact" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
-      <TextField fx:id="txtEmEmail" layoutX="24.0" layoutY="434.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Email" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
+      <TextField fx:id="txtEmId" layoutX="26.0" layoutY="130.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee ID" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></TextField>
+      <TextField fx:id="txtEmName" layoutX="23.0" layoutY="195.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Name" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></TextField>
+      <TextField fx:id="txtEmAddress" layoutX="22.0" layoutY="316.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Address" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></TextField>
+      <TextField fx:id="txtEmContact" layoutX="22.0" layoutY="374.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Contact" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></TextField>
+      <TextField fx:id="txtEmEmail" layoutX="24.0" layoutY="434.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Email" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></TextField>
       <Button fx:id="btnEmSave" layoutX="16.0" layoutY="493.0" mnemonicParsing="false" onAction="#btnEmSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -117,7 +132,10 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEmAge" layoutX="22.0" layoutY="256.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Age" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
+      <TextField fx:id="txtEmAge" layoutX="22.0" layoutY="256.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Employee Age" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></TextField>
       <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="242.0" layoutY="571.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/mop.png" />

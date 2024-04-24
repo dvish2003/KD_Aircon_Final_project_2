@@ -1,6 +1,7 @@
 package lk.Ijse.repository;
 
 import lk.Ijse.Db.DbConnection;
+import lk.Ijse.Model.Order;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +31,18 @@ public class OrderRepo {
             return PayId;
         }
         return null;
+    }
+    public static boolean save(Order order) throws SQLException {
+        String sql = "INSERT INTO `Order` VALUES(?, ?, ?,?)";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        pstm.setString(1, order.getOrderId());
+        pstm.setString(2, order.getCustomerId());
+        pstm.setString(4, order.getCustomerId());
+        pstm.setDate(3, order.getOrderPlaceDate());
+
+        return pstm.executeUpdate() > 0;
     }
 
 }

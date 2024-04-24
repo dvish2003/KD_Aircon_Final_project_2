@@ -2,7 +2,7 @@ package lk.Ijse.Model;
 
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,12 +12,11 @@ import java.util.Date;
 @ToString
 
 public class Order {
-    private String orderId;
-  //  public CustomerRepo id;
-  //  public PaymentRepo paymentId;
-   // private String status;
-    private Date OrderPlaceDate;
-  //  private Date handOverdate;
+     private String orderId;
+     private String customerId;
+     private String payment_Id;
+     private Date OrderPlaceDate;
+
 
 
 }
