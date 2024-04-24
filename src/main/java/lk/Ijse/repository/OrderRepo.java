@@ -39,7 +39,7 @@ public class OrderRepo {
 
         pstm.setString(1, order.getOrderId());
         pstm.setString(2, order.getCustomerId());
-        pstm.setString(4, order.getCustomerId());
+        pstm.setString(4, order.getPayment_Id());
         pstm.setDate(3, order.getOrderPlaceDate());
 
         return pstm.executeUpdate() > 0;

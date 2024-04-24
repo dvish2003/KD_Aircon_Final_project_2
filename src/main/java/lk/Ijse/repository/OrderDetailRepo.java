@@ -24,8 +24,9 @@ public class OrderDetailRepo {
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
 
-        pstm.setString(1, od.getOrderId());
-        pstm.setString(2, od.getProductId());
+
+        pstm.setString(1, od.getProductId());
+        pstm.setString(2, od.getOrderId());
         pstm.setInt(3, od.getQuantity());
         pstm.setDouble(4, od.getUnitPrice());
 

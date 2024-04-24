@@ -339,30 +339,36 @@ public class OrderController {
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
-          String orderID = lblOrderID.getText();
-          String customerID = cmbCustomerID.getValue();
-          String paymentID = lblPaymentID.getText();
-          Date date = Date.valueOf(LocalDate.now());
-          int Amount = Integer.parseInt(lblPaymentAmount.getText());
+        String orderID = lblOrderID.getText();
+        String customerID = cmbCustomerID.getValue();
+        String paymentID = lblPaymentID.getText();
+        Date date = Date.valueOf(LocalDate.now());
+        int Amount = Integer.parseInt(lblPaymentAmount.getText());
 
-        var order = new Order(orderID,customerID,paymentID,date);
+        var order = new Order(orderID, customerID, paymentID, date);
         List<OrderDetail> odList = new ArrayList<>();
 
         for (int i = 0; i < colOrderTel.getItems().size(); i++) {
             CartTm tm = obList.get(i);
-             OrderDetail od = new OrderDetail(
-                     orderID,
-                     tm.getP_ID(),
-                     tm.getQty(),
-                     tm.getUnitPrice()
-             );
+            OrderDetail od = new OrderDetail(
+                    tm.getP_ID(),
+                    orderID,
+                    tm.getQty(),
+                    tm.getUnitPrice()
+            );
             odList.add(od);
         }
-        var payment = new Payment(paymentID,Amount,date);
-        PlaceOrder po = new PlaceOrder(order, odList,payment);
+
+        var payment = new Payment(paymentID, Amount, date);
+        PlaceOrder po = new PlaceOrder(order, odList, payment);
+
         try {
             boolean isPlaced = PlaceOrderRepo.placeOrder(po);
-            if(isPlaced) {
+            if (isPlaced) {
+                obList.clear();
+                colOrderTel.refresh();
+                getCurrentOrderId();
+                getCurrentPayId();
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
             } else {
                 new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
@@ -370,7 +376,6 @@ public class OrderController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-
     }
 
     @FXML
