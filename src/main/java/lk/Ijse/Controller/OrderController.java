@@ -265,7 +265,7 @@ public class OrderController {
         if (currentId != null) {
             String[] split = currentId.split("O");
             int idNum = Integer.parseInt(split[1]);
-            idNum++; // Increment the ID number
+            idNum++;
             return "O" + String.format("%03d", idNum);
         }
         return "O001";
@@ -355,7 +355,9 @@ public class OrderController {
                     orderID,
                     tm.getQty(),
                     tm.getUnitPrice()
+
             );
+
             odList.add(od);
 
         }
@@ -368,16 +370,8 @@ public class OrderController {
             obList.clear();
             colOrderTel.setItems(obList);
             lblOrderID.setText("");
-          //  cmbCustomerID.getSelectionModel().clearSelection();
             lblPaymentID.setText("");
             lblPaymentAmount.setText("");
-           // lblCustomerName.setText("");
-        //    lblQtyOnHand.setText("");
-           // lblDescription.setText("");
-          //  lblUnitPrice.setText("");
-          //  lblLocationShowRoom.setText("");
-         //   cmbShowRoomID.getSelectionModel().clearSelection();
-         //   cmbProductID.getSelectionModel().clearSelection();
             txtQty.clear();
             getCurrentOrderId();
             getCurrentPayId();
@@ -414,9 +408,8 @@ public class OrderController {
             Products products = ProductsRepo.searchById(id);
 
             lblDescription.setText(products.getProduct_description());
-            lblQtyOnHand.setText(String.valueOf(products.getShowRoom_qtyOnHand()));
             lblUnitPrice.setText(String.valueOf(products.getProduct_unitPrice()));
-
+            lblQtyOnHand.setText(String.valueOf(products.getShowRoom_qtyOnHand()));
 
 
         } catch (SQLException e) {

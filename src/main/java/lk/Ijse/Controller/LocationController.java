@@ -2,12 +2,7 @@ package lk.Ijse.Controller;
 
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -197,23 +192,34 @@ public class LocationController {
 
     @FXML
     void btnLocDeleteOnAction(ActionEvent event) {
-        String loId = txtLoId.getText();
-        try {
-            boolean isDeleted = LocationRepo.delete(loId);
-            if (isDeleted) {
-                Location selectedLocation = colLoTel.getSelectionModel().getSelectedItem();
-                if (selectedLocation != null) {
-                    colLoTel.getItems().remove(selectedLocation);
-                    new Alert(Alert.AlertType.CONFIRMATION, "Location deleted successfully!").show();
-                    clearFields();
+        ObservableList<Location> selectedLocations = colLoTel.getSelectionModel().getSelectedItems();
+        if (selectedLocations.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select location(s) to delete!").show();
+            return;
+        }
+
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected location(s)?");
+        confirmationAlert.setHeaderText(null);
+        confirmationAlert.showAndWait();
+
+        if (confirmationAlert.getResult() == ButtonType.OK) {
+            try {
+                for (Location location : selectedLocations) {
+                    boolean isDeleted = LocationRepo.delete(location.getId());
+                    if (isDeleted) {
+                        colLoTel.getItems().remove(location);
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete location: " + location.getId()).show();
+                    }
                 }
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to delete Location!").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Location(s) deleted successfully!").show();
+                clearFields();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, "Error occurred while deleting location(s): " + e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Location: " + e.getMessage()).show();
         }
     }
+
 
     @FXML
     void btnLocHomeOnAction(ActionEvent event) {

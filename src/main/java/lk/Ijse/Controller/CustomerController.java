@@ -194,24 +194,34 @@ public class CustomerController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        ObservableList<Customer> selectedCustomers = colCuTel.getSelectionModel().getSelectedItems();
+        if (selectedCustomers.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select customer(s) to delete!").show();
+            return;
+        }
 
-            String id = txtCuId.getText();
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected customer(s)?");
+        confirmationAlert.setHeaderText(null);
+        confirmationAlert.showAndWait();
+
+        if (confirmationAlert.getResult() == ButtonType.OK) {
             try {
-                boolean isDeleted = CustomerRepo.delete(id);
-                if (isDeleted) {
-                    Customer selectedCustomer = colCuTel.getSelectionModel().getSelectedItem();
-                    if (selectedCustomer != null) {
-                        colCuTel.getItems().remove(selectedCustomer);
-                        new Alert(Alert.AlertType.CONFIRMATION, "Customer deleted successfully!").show();
-                        clearFields();
+                for (Customer customer : selectedCustomers) {
+                    boolean isDeleted = CustomerRepo.delete(customer.getId());
+                    if (isDeleted) {
+                        colCuTel.getItems().remove(customer);
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete customer: " + customer.getName()).show();
                     }
-                } else {
-                    new Alert(Alert.AlertType.ERROR, "Failed to delete customer!").show();
                 }
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer(s) deleted successfully!").show();
+                clearFields();
             } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, "Error occurred while deleting customer: " + e.getMessage()).show();
+                new Alert(Alert.AlertType.ERROR, "Error occurred while deleting customer(s): " + e.getMessage()).show();
             }
         }
+    }
+
 
 
     @FXML

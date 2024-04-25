@@ -12,7 +12,7 @@ import lombok.*;
 public class Products {
       private String product_id;
       private String product_description;
-      private int product_unitPrice;
       private int showRoom_qtyOnHand;
+      private int product_unitPrice;
 
 }

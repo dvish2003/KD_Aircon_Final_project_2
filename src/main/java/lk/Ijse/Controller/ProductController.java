@@ -96,6 +96,7 @@ public class ProductController {
     @FXML
     void initialize() {
         setCellValueFactory();
+        setCellValueFactory2();
         loadAllProductShowRoom();
         loadAllProduct();
         setListeners();
@@ -161,6 +162,8 @@ public class ProductController {
         coljoinPrDesc.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
         coljoinQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("productQuantityOnHand"));
         coljoinPrUnitPrice.setCellValueFactory(new PropertyValueFactory<>("productUnitPrice"));
+    }
+    private void setCellValueFactory2() {
         colPrID.setCellValueFactory(new PropertyValueFactory<>("product_id"));
         colPrDesc.setCellValueFactory(new PropertyValueFactory<>("product_description"));
         colQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("showRoom_qtyOnHand"));
@@ -250,11 +253,7 @@ public class ProductController {
                     new Alert(Alert.AlertType.CONFIRMATION, "Product deleted successfully!").show();
                     clearFields();
                 }
-                // Remove the selected item from the colPrJoinTel table
-                ProductShowRoomJoin selectedJoinItem = colPrJoinTel.getSelectionModel().getSelectedItem();
-                if (selectedJoinItem != null) {
-                    colPrJoinTel.getItems().remove(selectedJoinItem);
-                }
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to delete product!").show();
             }
@@ -275,12 +274,13 @@ public class ProductController {
         int productUnitPrice = Integer.parseInt(txtPrUnitPrice.getText());
         int productQty = Integer.parseInt(txtQty.getText());
 
-        Products products = new Products(productId, productDescription, productUnitPrice, productQty);
+        Products products = new Products(productId, productDescription,productQty,productUnitPrice);
         Product_ShowRoom ps = new Product_ShowRoom(productId, showRoomId);
 
         try {
             boolean isProductSaved = ProductsRepo.save(products);
             if (isProductSaved) {
+                colPrTel.getItems().add(products);
                 boolean isProductShowRoomSaved = Product_ShowRoom_Repo.save(ps);
                 if (isProductShowRoomSaved) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom saved successfully!").show();
@@ -310,18 +310,17 @@ public class ProductController {
         try {
             boolean isProductUpdate = ProductsRepo.update(products, productQty);
             if (isProductUpdate) {
+                Products selectedProduct = colPrTel.getSelectionModel().getSelectedItem();
+                selectedProduct.setProduct_description(productDescription);
+                selectedProduct.setProduct_unitPrice(productUnitPrice);
+                selectedProduct.setShowRoom_qtyOnHand(productQty);
+                colPrTel.refresh();
+
                 boolean isProductShowRoomSaved = Product_ShowRoom_Repo.save(ps);
                 if (isProductShowRoomSaved) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom update successfully!").show();
-                    for (ProductShowRoomJoin joinItem : productShowRoomList) {
-                        if (joinItem.getProductId().equals(productId)) {
-                            joinItem.setProductDescription(productDescription);
-                            joinItem.setProductQuantityOnHand(productQty);
-                            joinItem.setProductUnitPrice(productUnitPrice);
-                            break;
-                        }
-                    }
+                    new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom updated successfully!").show();
                     clearFields();
+                    loadAllProductShowRoom();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Failed to update Product and ShowRoom!").show();
                 }
@@ -329,9 +328,10 @@ public class ProductController {
                 new Alert(Alert.AlertType.ERROR, "Failed to update Product!").show();
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Error occurred while update data: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Error occurred while updating data: " + e.getMessage()).show();
         }
     }
+
 
     private void clearFields() {
         cmbShowRoom.getSelectionModel().clearSelection();

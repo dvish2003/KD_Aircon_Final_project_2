@@ -186,21 +186,31 @@ public class EmployeeController {
 
     @FXML
     void btnEmDeleteOnAction(ActionEvent event) {
-        String id = txtEmId.getText();
-        try {
-            boolean isDeleted = EmployeeRepo.delete(id);
-            if (isDeleted) {
-                Employee selectedEmployee = colEmTel.getSelectionModel().getSelectedItem();
-                if (selectedEmployee != null) {
-                    colEmTel.getItems().remove(selectedEmployee);
-                    new Alert(Alert.AlertType.CONFIRMATION, "Employee deleted successfully!").show();
-                    clearFields();
+        ObservableList<Employee> selectedEmployees = colEmTel.getSelectionModel().getSelectedItems();
+        if (selectedEmployees.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select employee(s) to delete!").show();
+            return;
+        }
+
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected employee(s)?");
+        confirmationAlert.setHeaderText(null);
+        confirmationAlert.showAndWait();
+
+        if (confirmationAlert.getResult() == ButtonType.OK) {
+            try {
+                for (Employee employee : selectedEmployees) {
+                    boolean isDeleted = EmployeeRepo.delete(employee.getEmpId());
+                    if (isDeleted) {
+                        colEmTel.getItems().remove(employee);
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete employee: " + employee.getEmpName()).show();
+                    }
                 }
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to delete employee!").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "Employee(s) deleted successfully!").show();
+                clearFields();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, "Error occurred while deleting employee(s): " + e.getMessage()).show();
             }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Error occurred while deleting employee: " + e.getMessage()).show();
         }
     }
 
