@@ -323,7 +323,7 @@ public class OrderController {
         calculateNetTotal();
         txtQty.setText("");
     }
-
+//Budu Saranai
     private void calculateNetTotal() {
         int netTotal = 0;
         for (int i = 0; i < colOrderTel.getItems().size(); i++) {
