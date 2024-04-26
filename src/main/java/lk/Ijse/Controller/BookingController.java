@@ -260,28 +260,23 @@ public class BookingController {
 
     @FXML
     void btnPickDateOnAction(ActionEvent event) {
-            // Get the selected location ID
             String locationId = String.valueOf(cmbLocationID.getValue());
 
-            // Get the booked dates for the selected location
             try {
                 List<Date> bookedDates = BookingRepo.getBookedDatesForLocation(locationId);
 
-                // Set the day cell factory for the date picker
                 btnPickDate.setDayCellFactory(dayCell -> new DateCell() {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
 
-                        // Check if the item (date) is in the list of booked dates
                         if (!empty && item != null && bookedDates.contains(Date.valueOf(item))) {
-                            // If the date is booked, set the text color to red
                             setStyle("-fx-text-fill: red;");
                         }
                     }
                 });
             } catch (SQLException e) {
-                e.printStackTrace(); // Handle the exception according to your application's error handling strategy
+                e.printStackTrace();
             }
         }
 
