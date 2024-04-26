@@ -1,5 +1,7 @@
 package lk.Ijse.Model;
 
+import lk.Ijse.repository.EmployeeRepo;
+import lk.Ijse.repository.LocationRepo;
 import lombok.*;
 
 import java.sql.Date;
@@ -14,12 +16,11 @@ import java.sql.Date;
 
 public class Booking {
     private String bookingId;
-    //public CustomerRepo id;
-  //  public EmployeeRepo empId;
-   // public LocationRepo Locid;
-  //  public PaymentRepo paymentId;
+    private String empId;
+    private String LocId;
+    private String paymentId;
     private Date bookingDate;
-    private String bookingTime;
+    private Date PlaceDate;
     private String bookingDescription;
 
 
