@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import lk.Ijse.Model.*;
 import lk.Ijse.repository.*;
@@ -104,6 +105,34 @@ public class BookingController {
         applyLabelAnimations();
        setCellValueFactory();
        loadAllBooking();
+
+        cmbLocationID.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                cmbEmployeeID.requestFocus();
+            }
+        });
+
+        cmbLocationID.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnPickDate.requestFocus();
+            }
+        });
+
+        btnPickDate.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDesc.requestFocus();
+            }
+        });
+
+
+
+        ColBookTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                txtDesc.requestFocus();
+            }
+        });
+
+
     }
 
     private void loadAllBooking() {
@@ -302,6 +331,9 @@ public class BookingController {
 
                                  if (isBookingSave) {
                                  new Alert(Alert.AlertType.CONFIRMATION, "Booking placed successfully!").show();
+                 loadAllBooking();
+                   getCurrentBookingId();
+                   getCurrentPayId();
                     clearFields();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Failed to save Booking!").show();
@@ -315,14 +347,38 @@ public class BookingController {
     }
 
     private void clearFields() {
-cmbEmployeeID.getSelectionModel().clearSelection();
-cmbLocationID.getSelectionModel().clearSelection();
-
 
     }
 
+
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        ObservableList<Booking> selectedBooking = ColBookTel.getSelectionModel().getSelectedItems();
+        if (selectedBooking.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please select booking to delete!").show();
+            return;
+        }
+
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the selected booking?");
+        confirmationAlert.setHeaderText(null);
+        confirmationAlert.showAndWait();
+
+        if (confirmationAlert.getResult() == ButtonType.OK) {
+            try {
+                for (Booking booking : selectedBooking) {
+                    boolean isDeleted = BookingRepo.delete(booking.getBookingId());
+                    if (isDeleted) {
+                        ColBookTel.getItems().remove(booking);
+                    } else {
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete booking: " + booking.getBookingDescription()).show();
+                    }
+                }
+                new Alert(Alert.AlertType.CONFIRMATION, "Customer(s) deleted successfully!").show();
+                clearFields();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, "Error occurred while deleting customer(s): " + e.getMessage()).show();
+            }
+        }
 
     }
 
@@ -340,10 +396,8 @@ cmbLocationID.getSelectionModel().clearSelection();
     void btnPickDateOnAction(ActionEvent event) {
         LocalDate selectedDate = btnPickDate.getValue();
         if (selectedDate != null) {
-            // Do something with the selected date, if needed
             System.out.println("Selected date: " + selectedDate);
         } else {
-            // Handle case where no date is selected
             System.out.println("No date selected");
         }
         }
@@ -351,7 +405,36 @@ cmbLocationID.getSelectionModel().clearSelection();
 
         @FXML
     void btnUpdateOnAction(ActionEvent event) {
+            Booking selectedBooking = ColBookTel.getSelectionModel().getSelectedItem();
 
+            if (selectedBooking == null) {
+                showAlert(Alert.AlertType.ERROR, "Please select a booking to update.");
+                return;
+            }
+            String empId = cmbEmployeeID.getValue();
+            String locId = cmbLocationID.getValue();
+            String bookingDescription = txtDesc.getText();
+            LocalDate selectedDate = btnPickDate.getValue();
+            Date bookingDate = Date.valueOf(selectedDate);
+
+            selectedBooking.setEmpId(empId);
+            selectedBooking.setLocId(locId);
+            selectedBooking.setBookingDescription(bookingDescription);
+            selectedBooking.setBookingDate(bookingDate);
+
+            try {
+                boolean isUpdated = BookingRepo.update(selectedBooking);
+
+                if (isUpdated) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Booking updated successfully!").show();
+                    loadAllBooking();
+                    clearFields();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Failed to update booking!").show();
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, "Error occurred while updating booking: " + e.getMessage()).show();
+            }
     }
 
     @FXML
