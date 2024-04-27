@@ -7,11 +7,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
-import lk.Ijse.Model.Customer;
-import lk.Ijse.Model.Employee;
-import lk.Ijse.Model.Location;
-import lk.Ijse.Model.Products;
+import lk.Ijse.Model.*;
 import lk.Ijse.repository.*;
 
 import java.sql.Date;
@@ -24,7 +22,7 @@ public class BookingController {
     private Label LblCustomerName;
 
     @FXML
-    private TableView<?> ColBookTel;
+    private TableView<Booking> ColBookTel;
 
     @FXML
     private Label LblBookingID;
@@ -101,10 +99,47 @@ public class BookingController {
         getLocationIds();
         getEmployeeIds();
         getCurrentPayId();
+        lblPaymentAmount.setText("2000");
         applyButtonAnimations();
         applyLabelAnimations();
-       // setCellValueFactory();
-      //  loadAllPS();
+       setCellValueFactory();
+       loadAllBooking();
+    }
+
+    private void loadAllBooking() {
+        ObservableList<Booking> obList = FXCollections.observableArrayList();
+
+        try {
+            List<Booking> BookList = BookingRepo.getAll();
+            for (Booking booking : BookList) {
+                Booking tm = new Booking(
+                        booking.getBookingId(),
+                        booking.getLocId(),
+                        booking.getEmpId(),
+                        booking.getPaymentId(),
+                        booking.getBookingDate(),
+                        booking.getPlaceDate(),
+                        booking.getBookingDescription()
+                );
+
+                obList.add(tm);
+            }
+
+            ColBookTel.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void setCellValueFactory() {
+        colBookID.setCellValueFactory(new PropertyValueFactory<>("bookingId"));
+        colEmpID.setCellValueFactory(new PropertyValueFactory<>("LocId"));
+        colLocID.setCellValueFactory(new PropertyValueFactory<>("empId"));
+        colPayID.setCellValueFactory(new PropertyValueFactory<>("paymentId"));
+        colPlaceDate.setCellValueFactory(new PropertyValueFactory<>("PlaceDate"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("bookingDescription"));
+        colBookDate.setCellValueFactory(new PropertyValueFactory<>("bookingDate"));
+
     }
 
     private void applyLabelAnimations() {
@@ -207,7 +242,7 @@ public class BookingController {
 
     private void getCurrentBookingId() {
         try {
-            String currentId = OrderRepo.getCurrentId();
+            String currentId = BookingRepo.getCurrentId();
 
             String nextOrderId = generateNextBookingId(currentId);
             LblBookingID.setText(nextOrderId);
@@ -239,6 +274,49 @@ public class BookingController {
 
     @FXML
     void btnBookOnAction(ActionEvent event) {
+        String bookingId = LblBookingID.getText();
+        String empId = cmbEmployeeID.getValue();
+        String LocId = cmbLocationID.getValue();
+        String paymentId = lblPaymentID.getText();
+
+        LocalDate selectedDate = btnPickDate.getValue();
+        if (selectedDate == null) {
+            showAlert(Alert.AlertType.ERROR, "Please select a booking date.");
+            return;
+        }
+
+        Date bookingDate = Date.valueOf(selectedDate);
+
+        Date currentDate = Date.valueOf(LocalDate.now());
+
+        int Amount = Integer.parseInt(lblPaymentAmount.getText());
+        String bookingDescription = txtDesc.getText();
+
+        Booking booking = new Booking(bookingId, empId, LocId, paymentId, bookingDate, currentDate, bookingDescription);
+        Payment payment = new Payment(paymentId, Amount, currentDate);
+
+        try {
+                boolean isPaySaved = PaymentRepo.save(payment);
+                             if (isPaySaved) {
+                                 boolean isBookingSave = BookingRepo.save(booking);
+
+                                 if (isBookingSave) {
+                                 new Alert(Alert.AlertType.CONFIRMATION, "Booking placed successfully!").show();
+                    clearFields();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Failed to save Booking!").show();
+                }
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to save Booking!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "Error occurred while saving data: " + e.getMessage()).show();
+        }
+    }
+
+    private void clearFields() {
+cmbEmployeeID.getSelectionModel().clearSelection();
+cmbLocationID.getSelectionModel().clearSelection();
 
 
     }
@@ -260,28 +338,18 @@ public class BookingController {
 
     @FXML
     void btnPickDateOnAction(ActionEvent event) {
-            String locationId = String.valueOf(cmbLocationID.getValue());
-
-            try {
-                List<Date> bookedDates = BookingRepo.getBookedDatesForLocation(locationId);
-
-                btnPickDate.setDayCellFactory(dayCell -> new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty);
-
-                        if (!empty && item != null && bookedDates.contains(Date.valueOf(item))) {
-                            setStyle("-fx-text-fill: red;");
-                        }
-                    }
-                });
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        LocalDate selectedDate = btnPickDate.getValue();
+        if (selectedDate != null) {
+            // Do something with the selected date, if needed
+            System.out.println("Selected date: " + selectedDate);
+        } else {
+            // Handle case where no date is selected
+            System.out.println("No date selected");
+        }
         }
 
 
-    @FXML
+        @FXML
     void btnUpdateOnAction(ActionEvent event) {
 
     }
@@ -306,7 +374,7 @@ public class BookingController {
         String id = String.valueOf(cmbLocationID.getValue());
         try {
             Location location = LocationRepo.searchById(id);
-            Customer customer = CustomerRepo.searchById(id);
+
             LblLocationAddress.setText(location.getAddress());
             LblCustomerName.setText(location.getCustomerId());
 

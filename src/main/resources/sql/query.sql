@@ -40,7 +40,6 @@ CREATE TABLE Location (
 
 CREATE TABLE Payment (
                          Payment_id VARCHAR(10) PRIMARY KEY,
-                         Payment_Method VARCHAR(50) NOT NULL,
                          Payment_Amount INT(50) NOT NULL,
                          Payment_Date DATE NOT NULL
 );
@@ -51,7 +50,7 @@ CREATE TABLE Booking (
                          Location_id VARCHAR(10) NOT NULL,
                          Payment_id VARCHAR(10) NOT NULL,
                          Booking_Date DATE NOT NULL,
-                         Booking_Time VARCHAR(10) NOT NULL,
+                         Place_Date DATE NOT NULL,
                          Booking_Description VARCHAR(100),
                          FOREIGN KEY (Employee_id) REFERENCES Employee(Employee_id)ON UPDATE CASCADE ON DELETE CASCADE,
                          FOREIGN KEY (Location_id) REFERENCES Location(Location_id)ON UPDATE CASCADE ON DELETE CASCADE,
@@ -82,9 +81,7 @@ CREATE TABLE `Order` (
                          Order_id VARCHAR(10) PRIMARY KEY,
                          Customer_id VARCHAR(10) NOT NULL,
                          Payment_id VARCHAR(10) NOT NULL,
-                         Order_Status VARCHAR(50) NOT NULL,
                          OrderPlaceDate_Date DATE NOT NULL,
-                         OrderHandOverDate_Date DATE,
                          FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON UPDATE CASCADE ON DELETE CASCADE,
                          FOREIGN KEY (Payment_id) REFERENCES Payment(Payment_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
