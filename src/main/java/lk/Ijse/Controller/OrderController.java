@@ -289,13 +289,13 @@ public class OrderController {
         JFXButton btnRemove = new JFXButton("remove");
         btnRemove.setCursor(Cursor.HAND);
         btnRemove.setOnAction((e) -> {
-
             ButtonType yes = new ButtonType("yes", ButtonBar.ButtonData.OK_DONE);
             ButtonType no = new ButtonType("no", ButtonBar.ButtonData.CANCEL_CLOSE);
+
             Optional<ButtonType> type = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
             if(type.orElse(no) == yes) {
-                int selectedIndex = colOrderTel.getSelectionModel().getSelectedIndex();
+                CartTm selectedIndex = colOrderTel.getSelectionModel().getSelectedItem();
                 obList.remove(selectedIndex);
 
                 colOrderTel.refresh();
@@ -372,9 +372,12 @@ public class OrderController {
             lblOrderID.setText("");
             lblPaymentID.setText("");
             lblPaymentAmount.setText("");
+            lblDescription.setText("");
+            lblQtyOnHand.setText("");
             txtQty.clear();
             getCurrentOrderId();
             getCurrentPayId();
+
             new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
         } else {
             new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();

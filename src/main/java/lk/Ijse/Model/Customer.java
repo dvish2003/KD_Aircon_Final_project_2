@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @ToString
-
+@Data
 public class Customer {
     private String id;
     private String Name;
