@@ -373,6 +373,7 @@ public class OrderController {
             lblPaymentID.setText("");
             lblPaymentAmount.setText("");
             lblDescription.setText("");
+            lblUnitPrice.setText("");
             lblQtyOnHand.setText("");
             txtQty.clear();
             getCurrentOrderId();
