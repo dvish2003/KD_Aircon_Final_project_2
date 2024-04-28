@@ -12,7 +12,7 @@ public class PlaceOrderRepo {
         connection.setAutoCommit(false);
 
         try {
-            boolean isPayUpdated =PaymentRepo.save(po.getPayment());
+            boolean isPayUpdated = PaymentRepo.save(po.getPayment());
             if (isPayUpdated) {
             boolean isOrderSaved = OrderRepo.save(po.getOrder());
             if (isOrderSaved) {
