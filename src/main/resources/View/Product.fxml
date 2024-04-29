@@ -97,22 +97,6 @@
             <DropShadow />
          </effect>
       </Label>
-      <Button fx:id="btnPrBack" layoutX="10.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnPrBackOnAction" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="&lt;" textFill="#0a0000">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Button fx:id="btnPrNext" layoutX="959.0" layoutY="25.0" mnemonicParsing="false" onAction="#btnPrNextOnAction" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="&gt;" textFill="#0a0000">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
       <Label layoutX="16.0" layoutY="99.0" prefHeight="26.0" prefWidth="79.0" text=" ID :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />

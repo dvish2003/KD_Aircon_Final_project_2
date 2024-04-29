@@ -5,10 +5,11 @@ USE KD_Aircon;
 CREATE TABLE Register (
                           Register_id VARCHAR(10) PRIMARY KEY,
                           Register_Name VARCHAR(50) NOT NULL,
+                          Register_post VARCHAR(50) NOT NULL,
                           Register_Password VARCHAR(30) NOT NULL
 );
 
-INSERT INTO Register VALUES('R001','Vishan','Vishan2003###');
+INSERT INTO Register VALUES('R001','Vishan','Manager',''Vishan2003###'');
 
 
 CREATE TABLE Customer (

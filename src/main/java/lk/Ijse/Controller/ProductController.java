@@ -5,6 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -13,10 +16,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.*;
 import lk.Ijse.repository.*;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -25,8 +30,6 @@ public class ProductController {
     @FXML
     private Button btnHome;
 
-    @FXML
-    private Button btnPrBack;
 
     @FXML
     private Button btnPrClean;
@@ -34,8 +37,7 @@ public class ProductController {
     @FXML
     private Button btnPrDelete;
 
-    @FXML
-    private Button btnPrNext;
+
 
     @FXML
     private Button btnPrSave;
@@ -105,9 +107,7 @@ public class ProductController {
     }
     private void applyButtonAnimations() {
         applyAnimation(btnHome);
-        applyAnimation(btnPrBack);
         applyAnimation(btnPrClean);
-        applyAnimation(btnPrNext);
         applyAnimation(btnPrUpdate);
         applyAnimation(btnPrSave);
         applyAnimation(btnPrDelete);
@@ -228,12 +228,18 @@ public class ProductController {
     }
 
     @FXML
-    void btnHomeOnAction(ActionEvent event) {
+    void btnHomeOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
+        Parent rootNode = loader.load();
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
+
+        stage.show();
     }
 
-    @FXML
-    void btnPrBackOnAction(ActionEvent event) {
-    }
+
 
     @FXML
     void btnPrCleanOnAction(ActionEvent event) {
@@ -262,9 +268,7 @@ public class ProductController {
         }
     }
 
-    @FXML
-    void btnPrNextOnAction(ActionEvent event) {
-    }
+
 
     @FXML
     void btnPrSaveOnAction(ActionEvent event) {

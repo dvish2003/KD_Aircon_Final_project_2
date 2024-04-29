@@ -7,14 +7,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.*;
 import lk.Ijse.repository.*;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -333,8 +338,15 @@ public class OrderController {
     }
 
     @FXML
-    void btnNewCusOnAction(ActionEvent event) {
+    void btnNewCusOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CustomerForm.fxml"));
+        Parent rootNode = loader.load();
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
 
+        stage.show();
     }
 
     @FXML
@@ -386,8 +398,16 @@ public class OrderController {
     }
 
     @FXML
-    void btnPrBackOnAction(ActionEvent event) {
+    void btnPrBackOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
+        Parent rootNode = loader.load();
 
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
+
+        stage.show();
     }
 
 

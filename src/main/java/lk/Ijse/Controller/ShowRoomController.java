@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.ShowRoom;
@@ -18,11 +19,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ShowRoomController {
-    @FXML
-    private Button btnHome;
 
     @FXML
-    private Button btnSrBack;
+    private AnchorPane ShowRoomPane;
 
     @FXML
     private Button btnSrClean;
@@ -30,8 +29,7 @@ public class ShowRoomController {
     @FXML
     private Button btnSrDelete;
 
-    @FXML
-    private Button btnSrNext;
+
 
     @FXML
     private Button btnSrSave;
@@ -54,15 +52,7 @@ public class ShowRoomController {
     @FXML
     private TextField txtSrLocation;
 
-    @FXML
-    void btnHomeOnAction(ActionEvent event) {
 
-    }
-
-    @FXML
-    void btnPrBackOnAction(ActionEvent event) {
-
-    }
 
     @FXML
     void btnPrCleanOnAction(ActionEvent event) {
@@ -97,10 +87,7 @@ public class ShowRoomController {
     }
 
 
-    @FXML
-    void btnPrNextOnAction(ActionEvent event) {
 
-    }
 
     @FXML
     void btnPrSaveOnAction(ActionEvent event) {
@@ -172,9 +159,7 @@ public class ShowRoomController {
         });
     }
     private void applyButtonAnimations() {
-        applyAnimation(btnHome);
-        applyAnimation(btnSrBack);
-        applyAnimation(btnSrNext);
+
         applyAnimation(btnSrClean);
         applyAnimation(btnSrUpdate);
         applyAnimation(btnSrDelete);

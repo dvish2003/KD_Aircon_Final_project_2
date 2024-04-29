@@ -6,17 +6,26 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.*;
 import lk.Ijse.repository.*;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class BookingController {
     @FXML
@@ -93,6 +102,27 @@ public class BookingController {
 
     @FXML
     private Label lblPaymentID;
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private void scheduleBookingExpirationCheck() {
+        scheduler.scheduleAtFixedRate(this::deleteExpiredBookings, calculateDelayToNextMidnight(), TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
+    }
+
+    private long calculateDelayToNextMidnight() {
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
+        LocalDate nextMidnight = tomorrow.atStartOfDay().toLocalDate();
+        return java.time.Duration.between(LocalDateTime.now(), nextMidnight.atStartOfDay()).getSeconds();
+    }
+
+    private void deleteExpiredBookings() {
+        try {
+            BookingRepo.deleteExpiredBookings();
+            loadAllBooking();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
 
     public void initialize() {
         setDate();
@@ -383,13 +413,27 @@ public class BookingController {
     }
 
     @FXML
-    void btnHomeOnAction(ActionEvent event) {
+    void btnHomeOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
+        Parent rootNode = loader.load();
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
 
+        stage.show();
     }
 
     @FXML
-    void btnNewLocOnAction(ActionEvent event) {
+    void btnNewLocOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LocationForm.fxml"));
+        Parent rootNode = loader.load();
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
 
+        stage.show();
     }
 
     @FXML

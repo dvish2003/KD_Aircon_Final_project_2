@@ -4,7 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment=" Commit" />
+    <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment=" Commit">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/checkout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/f8312d98c4777799a249630dc0bbcafb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/location.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/logout.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/packaging.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/register.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/reservation.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/showroom.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/teamwork.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Icon/user (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/View/Register_form.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/DashBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/DashBoardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/EmployeeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LocationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/RegisterController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ShowRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ShowRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/BookingRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/BookingRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/RegisterRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/RegisterRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/Booking.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Booking.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/DashBoard_from.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/DashBoard_from.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/EmployeeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/EmployeeForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/LocationForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/LocationForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/Product.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Product.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/View/ShowRoom.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/ShowRoom.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/css/Style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/Style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sql/query.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sql/query.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -165,6 +201,12 @@
       <workItem from="1714287716446" duration="1935000" />
       <workItem from="1714324119307" duration="5245000" />
       <workItem from="1714333521860" duration="3090000" />
+      <workItem from="1714378124368" duration="5101000" />
+      <workItem from="1714392862360" duration="2216000" />
+      <workItem from="1714401750751" duration="2729000" />
+      <workItem from="1714404892168" duration="1125000" />
+      <workItem from="1714415087726" duration="5092000" />
+      <workItem from="1714420659739" duration="10850000" />
     </task>
     <task id="LOCAL-00001" summary="ss">
       <option name="closed" value="true" />

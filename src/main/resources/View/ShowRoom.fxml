@@ -12,16 +12,16 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="551.0" prefWidth="816.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.ShowRoomController">
+<AnchorPane fx:id="ShowRoomPane" prefHeight="511.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.ShowRoomController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#093f72" height="551.0" stroke="#093f72" strokeType="INSIDE" width="816.0" />
-      <TableView fx:id="colSrTel" layoutX="84.0" layoutY="182.0" prefHeight="284.0" prefWidth="649.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#093f72" height="511.0" stroke="#093f72" strokeType="INSIDE" width="741.0" />
+      <TableView fx:id="colSrTel" layoutX="52.0" layoutY="156.0" prefHeight="284.0" prefWidth="649.0">
          <columns>
             <TableColumn fx:id="colShowRoom" prefWidth="220.0" text="Show Room ID" />
             <TableColumn fx:id="colLocation" prefWidth="428.0" text="Show Room Locations" />
          </columns>
       </TableView>
-      <Button fx:id="btnSrSave" layoutX="187.0" layoutY="498.0" mnemonicParsing="false" onAction="#btnPrSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
+      <Button fx:id="btnSrSave" layoutX="56.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnPrSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -29,7 +29,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnSrUpdate" layoutX="521.0" layoutY="498.0" mnemonicParsing="false" onAction="#btnPrUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
+      <Button fx:id="btnSrUpdate" layoutX="414.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnPrUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -37,7 +37,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnSrDelete" layoutX="355.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnPrDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
+      <Button fx:id="btnSrDelete" layoutX="233.0" layoutY="463.0" mnemonicParsing="false" onAction="#btnPrDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -45,7 +45,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnSrClean" layoutX="666.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnPrCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
+      <Button fx:id="btnSrClean" layoutX="589.0" layoutY="463.0" mnemonicParsing="false" onAction="#btnPrCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -53,40 +53,27 @@
             <DropShadow />
          </effect>
       </Button>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="751.0" layoutY="504.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="674.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/mop.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="607.0" layoutY="502.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="500.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/system-update.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="273.0" layoutY="503.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="142.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/diskette.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="441.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="319.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/bin.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnHome" layoutX="30.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="117.0" layoutY="505.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Icon/home.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="274.0" layoutY="7.0" prefHeight="63.0" prefWidth="334.0" text="Show Room" textFill="WHITE">
+      <Label layoutX="239.0" layoutY="7.0" prefHeight="63.0" prefWidth="334.0" text="Show Room" textFill="WHITE">
          <font>
             <Font name="System Bold" size="44.0" />
          </font>
@@ -94,41 +81,25 @@
             <DropShadow />
          </effect>
       </Label>
-      <Button fx:id="btnSrBack" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" onAction="#btnPrBackOnAction" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="&lt;" textFill="#0a0000">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Button fx:id="btnSrNext" layoutX="778.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnPrNextOnAction" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="&gt;" textFill="#0a0000">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-      <Label layoutX="84.0" layoutY="93.0" prefHeight="26.0" prefWidth="126.0" text="Shwo Room ID :" textFill="WHITE">
+      <Label layoutX="51.0" layoutY="93.0" prefHeight="26.0" prefWidth="126.0" text="Shwo Room ID :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="txtShowRoomID" layoutX="204.0" layoutY="92.0" prefHeight="26.0" prefWidth="175.0" promptText="Enter Show Room ID" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtShowRoomID" layoutX="171.0" layoutY="92.0" prefHeight="26.0" prefWidth="175.0" promptText="Enter Show Room ID" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></TextField>
-      <Label layoutX="467.0" layoutY="95.0" prefHeight="26.0" prefWidth="139.0" text="Location :" textFill="WHITE">
+      <Label layoutX="434.0" layoutY="95.0" prefHeight="26.0" prefWidth="139.0" text="Location :" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="txtSrLocation" layoutX="549.0" layoutY="93.0" prefHeight="26.0" prefWidth="188.0" promptText="Enter Location" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtSrLocation" layoutX="516.0" layoutY="93.0" prefHeight="26.0" prefWidth="188.0" promptText="Enter Location" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></TextField>
-      <ImageView fitHeight="55.0" fitWidth="85.0" layoutX="97.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="55.0" fitWidth="741.0" layoutX="124.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/car-dealer.png" />
          </image>

@@ -287,12 +287,27 @@ public class CustomerController {
         txtCuEmail.clear();
     }
 
-    public void btnNextOnAction(ActionEvent event) {
+    public void btnNextOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LocationForm.fxml"));
+        Parent rootNode = loader.load();
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
+
+        stage.show();
     }
 
-    public void btnHomeOnAction(ActionEvent event) {
+    public void btnHomeOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
+        Parent rootNode = loader.load();
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
+
+        stage.show();
     }
 
-    public void btnSearchOnAction(MouseEvent mouseEvent) {
-    }
+
 }

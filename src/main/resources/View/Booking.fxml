@@ -113,17 +113,17 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="65.0" layoutY="220.0" prefHeight="26.0" prefWidth="150.0" text="Location Address *" textFill="WHITE">
+      <Label layoutX="18.0" layoutY="220.0" prefHeight="26.0" prefWidth="150.0" text="Location Address *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="64.0" layoutY="148.0" prefHeight="26.0" prefWidth="134.0" text="Employee ID *" textFill="WHITE">
+      <Label layoutX="19.0" layoutY="148.0" prefHeight="26.0" prefWidth="134.0" text="Employee ID *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="499.0" layoutY="219.0" prefHeight="26.0" prefWidth="96.0" text="Description *" textFill="WHITE">
+      <Label layoutX="563.0" layoutY="219.0" prefHeight="26.0" prefWidth="96.0" text="Description *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -141,7 +141,7 @@
             <Image url="@../Icon/booking.png" />
          </image>
       </ImageView>
-      <Label fx:id="LblLocationAddress" layoutX="65.0" layoutY="240.0" prefHeight="26.0" prefWidth="314.0" textFill="#25ff04">
+      <Label fx:id="LblLocationAddress" layoutX="18.0" layoutY="240.0" prefHeight="26.0" prefWidth="314.0" textFill="#25ff04">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -160,13 +160,13 @@
             <DropShadow />
          </effect>
       </Button>
-      <ComboBox fx:id="cmbEmployeeID" layoutX="64.0" layoutY="169.0" onAction="#cmbEmployeeIDOnAction" prefHeight="26.0" prefWidth="104.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
-      <Label layoutX="278.0" layoutY="151.0" prefHeight="26.0" prefWidth="170.0" text="Employee Name *" textFill="WHITE">
+      <ComboBox fx:id="cmbEmployeeID" layoutX="19.0" layoutY="169.0" onAction="#cmbEmployeeIDOnAction" prefHeight="26.0" prefWidth="104.0" style="-fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
+      <Label layoutX="233.0" layoutY="151.0" prefHeight="26.0" prefWidth="170.0" text="Employee Name *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="LblEmployeeName" layoutX="279.0" layoutY="173.0" prefHeight="26.0" prefWidth="320.0" textFill="#25ff04">
+      <Label fx:id="LblEmployeeName" layoutX="234.0" layoutY="173.0" prefHeight="26.0" prefWidth="320.0" textFill="#25ff04">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -182,17 +182,17 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="txtDesc" layoutX="500.0" layoutY="242.0" prefHeight="24.0" prefWidth="360.0" promptText="Enter here Case">
+      <TextField fx:id="txtDesc" layoutX="564.0" layoutY="242.0" prefHeight="24.0" prefWidth="360.0" promptText="Enter here Case">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </TextField>
-      <Label layoutX="288.0" layoutY="219.0" prefHeight="26.0" prefWidth="170.0" text="Customer Name *" textFill="WHITE">
+      <Label layoutX="371.0" layoutY="220.0" prefHeight="26.0" prefWidth="110.0" text="Customer ID *" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="LblCustomerName" layoutX="290.0" layoutY="238.0" prefHeight="26.0" prefWidth="320.0" textFill="#25ff04">
+      <Label fx:id="LblCustomerName" layoutX="373.0" layoutY="241.0" prefHeight="26.0" prefWidth="89.0" textFill="#25ff04">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

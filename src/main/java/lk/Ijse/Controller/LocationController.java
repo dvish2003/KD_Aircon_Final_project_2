@@ -2,25 +2,28 @@ package lk.Ijse.Controller;
 
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.Location;
 import lk.Ijse.repository.CustomerRepo;
 import lk.Ijse.repository.LocationRepo;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class LocationController {
 
-    @FXML
-    private Button btnLocBack;
 
     @FXML
     private Button btnLocClean;
@@ -31,8 +34,6 @@ public class LocationController {
     @FXML
     private Button btnLocHome;
 
-    @FXML
-    private Button btnLocNext;
 
     @FXML
     private Button btnLocSave;
@@ -124,12 +125,10 @@ public class LocationController {
     }
     private void applyButtonAnimations() {
         applyAnimation(btnNewCus);
-        applyAnimation(btnLocBack);
         applyAnimation(btnLocClean);
         applyAnimation(btnLocDelete);
         applyAnimation(btnLocSave);
-        applyAnimation(btnLocNext);
-        applyAnimation(btnLocNext);
+        applyAnimation(btnLocUpdate);
         applyAnimation(btnLocHome);
 
 
@@ -181,9 +180,7 @@ public class LocationController {
         }
     }
 
-    @FXML
-    void btnLocBackOnAction(ActionEvent event) {
-    }
+
 
     @FXML
     void btnLocCleanOnAction(ActionEvent event) {
@@ -222,12 +219,19 @@ public class LocationController {
 
 
     @FXML
-    void btnLocHomeOnAction(ActionEvent event) {
+    void btnLocHomeOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
+        Parent rootNode = loader.load();
+
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
+
+        stage.show();
     }
 
-    @FXML
-    void btnLocNextOnAction(ActionEvent event) {
-    }
+
 
     @FXML
     void btnLocSaveOnAction(ActionEvent event) {
@@ -279,7 +283,15 @@ public class LocationController {
     }
 
     @FXML
-    void btnNewCusOnAction(ActionEvent event) {
+    void btnNewCusOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CustomerForm.fxml"));
+        Parent rootNode = loader.load();
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
+
+        stage.show();
     }
 
     @FXML

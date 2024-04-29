@@ -5,20 +5,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Employee;
 import lk.Ijse.repository.EmployeeRepo;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class EmployeeController {
 
-    @FXML
-    private Button btnBack1;
+
 
     @FXML
     private Button btnEmClean;
@@ -35,8 +39,7 @@ public class EmployeeController {
     @FXML
     private Button btnHome;
 
-    @FXML
-    private Button btnNext1;
+
 
     @FXML
     private TableColumn<?, ?> colEmAddress;
@@ -123,12 +126,10 @@ public class EmployeeController {
         });
     }
     private void applyButtonAnimations() {
-        applyAnimation(btnBack1);
         applyAnimation(btnEmClean);
         applyAnimation(btnEmDelete);
         applyAnimation(btnEmSave);
         applyAnimation(btnEmUpdate);
-        applyAnimation(btnNext1);
         applyAnimation(btnHome);
 
     }
@@ -277,19 +278,17 @@ public class EmployeeController {
     }
 
     @FXML
-    void btnHomeOnAction(ActionEvent event) {
-        // Implement action for navigating to the home screen
-    }
+    void btnHomeOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
+        Parent rootNode = loader.load();
 
-    @FXML
-    void btnNextOnAction(ActionEvent event) {
-        // Implement action for navigating to the next screen
-    }
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
 
-    @FXML
-    void btnBackOnAction(ActionEvent event) {
-        // Implement action for navigating back
-    }
+        stage.show();    }
+
 
     @FXML
     void btnEmCleanOnAction(ActionEvent event) {

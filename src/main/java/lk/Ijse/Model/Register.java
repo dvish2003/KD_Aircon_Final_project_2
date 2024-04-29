@@ -12,6 +12,7 @@ import lombok.*;
 public class Register {
     private String registerId;
     private String registerName;
+    private String Post;
     private String registerPassword;
 
 

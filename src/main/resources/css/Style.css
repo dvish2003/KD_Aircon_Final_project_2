@@ -1,5 +1,5 @@
 .backgroundColour1 {
-    -fx-background-color: linear-gradient(to left, #1e3799,c, #000000);
+    -fx-background-color: linear-gradient(to left,#3498DBFF,#1e3799, #000000);
 }
 
 .backgroundColour2 {
@@ -11,7 +11,7 @@
 }
 
 .backgroundColour4 {
-    -fx-background-color: linear-gradient(to left, #ec7063, #f7dc6f, #a569bd);
+    -fx-background-color: linear-gradient(to left, #ecf0f1,#bdc3c7);
 }
 
 .backgroundColour5 {

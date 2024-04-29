@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,5 +141,13 @@ return booking;
 
         return bookedDates;
     }
+    public static void deleteExpiredBookings() throws SQLException {
+        String query = "DELETE FROM booking WHERE booking_date < ?";
 
-}
+        try (Connection connection = DbConnection.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
+            int rowsDeleted = preparedStatement.executeUpdate();
+            System.out.println("Deleted " + rowsDeleted + " expired bookings.");
+        }
+}}

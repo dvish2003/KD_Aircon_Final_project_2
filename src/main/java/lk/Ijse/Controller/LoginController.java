@@ -1,5 +1,6 @@
 package lk.Ijse.Controller;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -105,12 +106,13 @@ public class LoginController implements Initializable {
     private void navigateToDashBoard(ActionEvent event) throws IOException {
         Button btn = (Button) event.getSource();
         Stage stage = (Stage) btn.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CustomerForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
         Parent rootNode = loader.load();
+        FadeTransition fadeTransition = new FadeTransition(Duration.millis(950), rootNode);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
         Scene scene = new Scene(rootNode);
         stage.setScene(scene);
-
-        // Show the stage
-        stage.show();
     }
 }
