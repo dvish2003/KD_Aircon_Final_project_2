@@ -1,34 +1,49 @@
 package lk.Ijse.Controller;
 
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
 import javafx.scene.input.MouseEvent; // Import MouseEvent
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Booking;
 import lk.Ijse.repository.BookingRepo;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class DashBoardController {
+public class DashBoardController  {
+
+    @FXML
+    private BarChart<String,Integer> BarChart;
+
+    @FXML
+    private Label lblOrderCount;
 
     @FXML
     private TableView<Booking> ColBookTel;
@@ -87,6 +102,10 @@ public class DashBoardController {
     @FXML
     private TableColumn<?, ?> colPlaceDate;
 
+
+    @FXML
+    private Label lblTitle;
+
     @FXML
     private Label lblEmployeeCount;
 
@@ -102,48 +121,95 @@ public class DashBoardController {
     @FXML
     private Label lblUserName;
 
+    private String fullTitle ="Welcome To KD.Aircon System";
+
+
+
+    private int currentIndex = 0;
+
     private int EmployeeCount;
+
     private int UserCount;
+
     private int BookingCount;
+
+    private int OrderCount;
+
+
+
+
 
     @FXML
     private void initialize() {
-        setDate();
-        setCellValueFactory();
-        loadAllBooking();
-        addButtonHoverEffect(btnBooking);
-        addButtonHoverEffect(btnCustomer);
-        addButtonHoverEffect(btnEmployye);
-        addButtonHoverEffect(btnHome);
-        addButtonHoverEffect(btnLocation);
-        addButtonHoverEffect(btnLogOut);
-        addButtonHoverEffect(btnOrder);
-        addButtonHoverEffect(btnProduct);
-        addButtonHoverEffect(btnRegister);
-        addButtonHoverEffect(btnShowRoom);
-        addButtonHoverEffect(btnShowRoom);
-        addButtonHoverEffect(btnShowRoom);
+            animateLabel();
+            setDate();
+            setCellValueFactory();
+            loadAllBooking();
+            addHoverHandlers(btnBooking);
+            addHoverHandlers(btnCustomer);
+            addHoverHandlers(btnEmployye);
+            addHoverHandlers(btnHome);
+            addHoverHandlers(btnLocation);
+            addHoverHandlers(btnLogOut);
+            addHoverHandlers(btnOrder);
+            addHoverHandlers(btnProduct);
+            addHoverHandlers(btnRegister);
+            addHoverHandlers(btnShowRoom);
 
+            try {
+                EmployeeCount = getEmployeeCount();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
         try {
-          EmployeeCount = getEmployeeCount();
-        } catch (SQLException e) {
-           new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-
-        try {
-            UserCount = getUserCount();
+            OrderCount = getOrderCount();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-       try {
-           BookingCount = getBookingCount();
-       } catch (SQLException e) {
-           new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-       }
-        setBookingCount(BookingCount);
-        setEmployeeCount(EmployeeCount);
-       setUserCount(UserCount);
+
+            try {
+                UserCount = getUserCount();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+            try {
+                BookingCount = getBookingCount();
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
+            setBookingCount(BookingCount);
+            setEmployeeCount(EmployeeCount);
+            setUserCount(UserCount);
+            setOrderCount(OrderCount);
+        }
+
+
+
+    private void addHoverHandlers(Button button) {
+        button.setOnMouseEntered(event -> {
+            button.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
+        });
     }
+    private void setOrderCount(int UserCount) {
+        lblOrderCount.setText(String.valueOf(UserCount));
+
+    }
+    private int getOrderCount() throws SQLException {
+        String sql = "SELECT COUNT(*) AS Order_count FROM `Order`";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        if(resultSet.next()) {
+            return resultSet.getInt("Order_count");
+        }
+        return 0;
+    }
+
 
     private void setUserCount(int UserCount) {
         lblUserCount.setText(String.valueOf(UserCount));
@@ -199,6 +265,7 @@ public class DashBoardController {
     }
 
 
+
     private void loadAllBooking() {
         ObservableList<Booking> obList = FXCollections.observableArrayList();
 
@@ -242,66 +309,31 @@ public class DashBoardController {
     }
 
 
-    private void addButtonHoverEffect(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-        button.setOnMouseEntered((MouseEvent event) -> {
-            scaleTransition.setToX(1.1);
-            scaleTransition.setToY(1.1);
-            scaleTransition.play();
-        });
-        button.setOnMouseExited((MouseEvent event) -> {
-            scaleTransition.setToX(1);
-            scaleTransition.setToY(1);
-            scaleTransition.play();
-        });
-    }
+
 
     @FXML
     void btnBookingOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Booking.fxml"));
         Parent rootNode = loader.load();
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), rootNode);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
+        SpecialDataPane.getChildren().clear();
+        SpecialDataPane.getChildren().add(rootNode);
 
-        stage.show();
     }
 
     @FXML
     void btnCustomerOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CustomerForm.fxml"));
         Parent rootNode = loader.load();
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), rootNode);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
-
-        stage.show();
+        SpecialDataPane.getChildren().clear();
+        SpecialDataPane.getChildren().add(rootNode);
     }
 
     @FXML
     void btnEmployyeOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EmployeeForm.fxml"));
-        Parent rootNode = loader.load();   FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), rootNode);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
-
-        stage.show();
+        Parent rootNode = loader.load();
+        SpecialDataPane.getChildren().clear();
+        SpecialDataPane.getChildren().add(rootNode);
     }
 
     @FXML
@@ -310,10 +342,6 @@ public class DashBoardController {
         Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
         Parent rootNode = loader.load();
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), rootNode);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
         Scene scene = new Scene(rootNode);
         stage.setScene(scene);
 
@@ -322,18 +350,10 @@ public class DashBoardController {
 
     @FXML
     void btnLocationOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LocationForm.fxml"));
         Parent rootNode = loader.load();
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), rootNode);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
-
-        stage.show();
+        SpecialDataPane.getChildren().clear();
+        SpecialDataPane.getChildren().add(rootNode);
     }
 
     @FXML
@@ -342,10 +362,6 @@ public class DashBoardController {
         Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LognForm.fxml"));
         Parent rootNode = loader.load();
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), rootNode);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
         Scene scene = new Scene(rootNode);
         stage.setScene(scene);
 
@@ -354,34 +370,18 @@ public class DashBoardController {
 
     @FXML
     void btnOrderOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Order.fxml"));
         Parent rootNode = loader.load();
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), rootNode);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
-
-        stage.show();
+        SpecialDataPane.getChildren().clear();
+        SpecialDataPane.getChildren().add(rootNode);
     }
 
     @FXML
     void btnProductOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Product.fxml"));
         Parent rootNode = loader.load();
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(1000), rootNode);
-        fadeTransition.setFromValue(0);
-        fadeTransition.setToValue(1);
-        fadeTransition.play();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
-
-        stage.show();
+        SpecialDataPane.getChildren().clear();
+        SpecialDataPane.getChildren().add(rootNode);
     }
 
     @FXML
@@ -400,4 +400,27 @@ public class DashBoardController {
         SpecialDataPane.getChildren().add(rootNode);
     }
 
+    private void animateLabel() {
+
+        Timeline timeline = new Timeline();
+        KeyFrame keyFrame = new KeyFrame(
+                Duration.seconds(0.2),
+                event -> {
+                    if (currentIndex <= fullTitle.length()) {
+                        lblTitle.setText(fullTitle.substring(0, currentIndex));
+                        currentIndex++;
+                    }
+                }
+        );
+
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.setCycleCount(fullTitle.length() + 1);
+
+        timeline.play();
+    }
 }
+//    @Override
+//    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+

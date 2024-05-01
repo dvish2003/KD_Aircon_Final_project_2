@@ -105,10 +105,14 @@ public class LocationController {
                 txtLoAddress.requestFocus();
             }
         });
-
         txtLoAddress.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtLoZip.requestFocus();
+            }
+        });
+        txtLoZip.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnLocSave.requestFocus();
             }
         });
 

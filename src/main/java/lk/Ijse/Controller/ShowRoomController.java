@@ -146,7 +146,13 @@ public class ShowRoomController {
             if (event.getCode() == KeyCode.ENTER) {
                 txtSrLocation.requestFocus();
             }
+
         });
+        txtSrLocation.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    btnSrSave.requestFocus();
+                }
+            });
 
 
         colSrTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {

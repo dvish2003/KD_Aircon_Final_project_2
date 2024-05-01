@@ -123,6 +123,12 @@ public class OrderController {
         setCellValueFactory();
         loadAllPS();
 
+        addHoverHandlers(btnAddToCart);
+        addHoverHandlers(btnNewCus);
+        addHoverHandlers(btnPlaceOrder);
+        addHoverHandlers(btnPrBack);
+        addHoverHandlers(btnPrBack);
+
         cmbCustomerID.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 cmbShowRoomID.requestFocus();
@@ -208,7 +214,14 @@ public class OrderController {
 
 
     }
-
+    private void addHoverHandlers(Button button) {
+        button.setOnMouseEntered(event -> {
+            button.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+        });
+    }
     private void applyAnimation(Button button) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
         button.setOnMouseEntered(event -> {

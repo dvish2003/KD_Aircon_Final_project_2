@@ -97,10 +97,14 @@ public class CustomerController {
                 txtCuContact.requestFocus();
             }
         });
-
         txtCuContact.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtCuEmail.requestFocus();
+            }
+        });
+        txtCuEmail.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnSave.requestFocus();
             }
         });
 

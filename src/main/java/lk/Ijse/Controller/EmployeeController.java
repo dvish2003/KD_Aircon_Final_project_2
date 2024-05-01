@@ -112,7 +112,24 @@ public class EmployeeController {
             if (event.getCode() == KeyCode.ENTER) {
                 txtEmEmail.requestFocus();
             }
+
         });
+
+        txtEmEmail.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtEmContact.requestFocus();
+            }
+
+
+        });
+        txtEmContact.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnEmSave.requestFocus();
+            }
+
+
+        });
+
 
         colEmTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {

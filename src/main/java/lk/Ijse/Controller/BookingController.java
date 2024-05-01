@@ -62,8 +62,7 @@ public class BookingController {
     @FXML
     private DatePicker btnPickDate;
 
-    @FXML
-    private Button btnUpdate;
+
 
     @FXML
     private ComboBox<String> cmbEmployeeID;
@@ -133,8 +132,13 @@ public class BookingController {
         lblPaymentAmount.setText("2000");
         applyButtonAnimations();
         applyLabelAnimations();
-       setCellValueFactory();
-       loadAllBooking();
+        setCellValueFactory();
+        loadAllBooking();
+
+        addHoverHandlers(btnBook);
+        addHoverHandlers(btnDelete);
+        addHoverHandlers(btnHome);
+        addHoverHandlers(btnNewLoc);
 
         cmbLocationID.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -219,7 +223,6 @@ public class BookingController {
     private void applyButtonAnimations() {
         applyAnimation(btnBook);
         applyAnimation(btnDelete);
-        applyAnimation(btnUpdate);
         applyAnimation(btnHome);
         applyAnimation(btnNewLoc);
 
@@ -238,7 +241,14 @@ public class BookingController {
             scaleTransition.play();
         });
     }
-
+    private void addHoverHandlers(Button button) {
+        button.setOnMouseEntered(event -> {
+            button.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+        });
+    }
     private void applyAnimation(Label label) {
         FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), label);
         label.setOnMouseEntered(event -> {
@@ -447,39 +457,7 @@ public class BookingController {
         }
 
 
-        @FXML
-    void btnUpdateOnAction(ActionEvent event) {
-            Booking selectedBooking = ColBookTel.getSelectionModel().getSelectedItem();
 
-            if (selectedBooking == null) {
-                showAlert(Alert.AlertType.ERROR, "Please select a booking to update.");
-                return;
-            }
-            String empId = cmbEmployeeID.getValue();
-            String locId = cmbLocationID.getValue();
-            String bookingDescription = txtDesc.getText();
-            LocalDate selectedDate = btnPickDate.getValue();
-            Date bookingDate = Date.valueOf(selectedDate);
-
-            selectedBooking.setEmpId(empId);
-            selectedBooking.setLocId(locId);
-            selectedBooking.setBookingDescription(bookingDescription);
-            selectedBooking.setBookingDate(bookingDate);
-
-            try {
-                boolean isUpdated = BookingRepo.update(selectedBooking);
-
-                if (isUpdated) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Booking updated successfully!").show();
-                    loadAllBooking();
-                    clearFields();
-                } else {
-                    new Alert(Alert.AlertType.ERROR, "Failed to update booking!").show();
-                }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, "Error occurred while updating booking: " + e.getMessage()).show();
-            }
-    }
 
     @FXML
     void cmbEmployeeIDOnAction(ActionEvent event) {
