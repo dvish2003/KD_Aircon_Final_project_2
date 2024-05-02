@@ -27,3 +27,4 @@ public class DbConnection {
         return connection;
     }
 }
+// emailbalidation check Online eka nil pata logo ekak "R" akura thina

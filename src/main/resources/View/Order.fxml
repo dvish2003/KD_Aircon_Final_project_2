@@ -135,10 +135,7 @@
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
-      <ComboBox fx:id="cmbCustomerID" layoutX="450.0" layoutY="82.0" onAction="#cmbCustomerIDOnAction" prefHeight="26.0" prefWidth="114.0" style="-fx-border-color: #19460a; -fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
-         <effect>
-            <DropShadow />
-         </effect></ComboBox>
+      <ComboBox fx:id="cmbCustomerID" layoutX="450.0" layoutY="82.0" onAction="#cmbCustomerIDOnAction" prefHeight="26.0" prefWidth="114.0" style="-fx-border-color: #19460a; -fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <Button fx:id="btnNewCus" layoutX="581.0" layoutY="82.0" mnemonicParsing="false" onAction="#btnNewCusOnAction" prefHeight="40.0" prefWidth="126.0" style="-fx-background-color: Transaparent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="+  New " textFill="#0a0000">
          <font>
             <Font name="System Bold" size="21.0" />
@@ -156,14 +153,8 @@
          <font>
             <Font name="System Bold" size="21.0" />
          </font></Label>
-      <ComboBox fx:id="cmbShowRoomID" layoutX="186.0" layoutY="148.0" onAction="#cmbShowRoomIDOnAction" prefHeight="26.0" prefWidth="126.0" style="-fx-border-color: #19460a; -fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
-         <effect>
-            <DropShadow />
-         </effect></ComboBox>
-      <ComboBox fx:id="cmbProductID" layoutX="136.0" layoutY="217.0" onAction="#cmbProductIDOnAction" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: #19460a; -fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
-         <effect>
-            <DropShadow />
-         </effect></ComboBox>
+      <ComboBox fx:id="cmbShowRoomID" layoutX="186.0" layoutY="148.0" onAction="#cmbShowRoomIDOnAction" prefHeight="26.0" prefWidth="126.0" style="-fx-border-color: #19460a; -fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
+      <ComboBox fx:id="cmbProductID" layoutX="136.0" layoutY="217.0" onAction="#cmbProductIDOnAction" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: #19460a; -fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <Label layoutX="440.0" layoutY="292.0" prefHeight="26.0" prefWidth="164.0" text="Unit Price :" textFill="#1b0404">
          <font>
             <Font name="System Bold" size="21.0" />

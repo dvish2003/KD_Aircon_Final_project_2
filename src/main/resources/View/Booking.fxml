@@ -15,9 +15,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.BookingController">
+<AnchorPane prefHeight="891.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.BookingController">
    <children>
-      <Rectangle arcHeight="6.0" arcWidth="6.0" fill="#95a5a6" height="891.0" layoutX="-1.0" stroke="#95a5a6" strokeType="INSIDE" width="1250.0" />
+      <Rectangle arcHeight="6.0" arcWidth="6.0" fill="#95a5a6" height="891.0" stroke="#95a5a6" strokeType="INSIDE" width="1250.0" />
       <Line endX="479.5" layoutX="99.0" layoutY="822.0" startX="-100.0" stroke="#38ada9" />
       <Line endX="468.0" layoutX="778.0" layoutY="822.0" startX="-7.5" stroke="#38ada9" />
       <Label layoutX="606.0" layoutY="803.0" prefHeight="32.0" prefWidth="150.0" text="Payment " textFill="#1b0404">
@@ -134,19 +134,13 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbLocationID" layoutX="567.0" layoutY="104.0" onAction="#cmbLocationIDOnAction" prefHeight="24.0" prefWidth="104.0" style="-fx-border-color: #19460a; -fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
-         <effect>
-            <DropShadow />
-         </effect></ComboBox>
+      <ComboBox fx:id="cmbLocationID" layoutX="567.0" layoutY="104.0" onAction="#cmbLocationIDOnAction" prefHeight="24.0" prefWidth="104.0" style="-fx-border-color: #19460a; -fx-background-color: Transparent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <Button fx:id="btnNewLoc" layoutX="705.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnNewLocOnAction" prefHeight="24.0" prefWidth="125.0" style="-fx-background-color: transparent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="+  New " textFill="#0a0000">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Button>
-      <ComboBox fx:id="cmbEmployeeID" layoutX="189.0" layoutY="161.0" onAction="#cmbEmployeeIDOnAction" prefHeight="26.0" prefWidth="176.0" style="-fx-border-color: #19460a; -fx-background-color: Transaprent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
-         <effect>
-            <DropShadow />
-         </effect></ComboBox>
+      <ComboBox fx:id="cmbEmployeeID" layoutX="189.0" layoutY="161.0" onAction="#cmbEmployeeIDOnAction" prefHeight="26.0" prefWidth="176.0" style="-fx-border-color: #19460a; -fx-background-color: Transaprent; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;" />
       <Label layoutX="394.0" layoutY="167.0" prefHeight="26.0" prefWidth="221.0" text="Employee Name :" textFill="#1b0404">
          <font>
             <Font name="System Bold" size="21.0" />

@@ -84,6 +84,13 @@ public class EmployeeController {
         setCellValueFactory();
         loadAllEmployees();
         applyButtonAnimations();
+
+        addHoverHandlers(btnEmClean);
+        addHoverHandlers(btnEmDelete);
+        addHoverHandlers(btnEmSave);
+        addHoverHandlers(btnEmUpdate);
+        addHoverHandlers(btnHome);
+
         txtEmId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtEmName.requestFocus();
@@ -140,6 +147,14 @@ public class EmployeeController {
                 txtEmContact.setText(newSelection.getEmpPhone());
                 txtEmEmail.setText(newSelection.getEmpEmail());
             }
+        });
+    }
+    private void addHoverHandlers(Button button) {
+        button.setOnMouseEntered(event -> {
+            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
         });
     }
     private void applyButtonAnimations() {

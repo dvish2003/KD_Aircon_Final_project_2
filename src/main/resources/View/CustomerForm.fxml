@@ -10,14 +10,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.CustomerController">
+<AnchorPane prefHeight="891.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.CustomerController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#093f72" height="616.0" layoutY="86.0" stroke="#093f72" strokeType="INSIDE" width="1000.0" />
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#093f72" height="87.0" layoutY="-1.0" stroke="#093f72" strokeType="INSIDE" width="1000.0" />
-        <Label layoutX="375.0" layoutY="6.0" prefHeight="94.0" prefWidth="304.0" text="Customer" textFill="WHITE">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95a5a6" height="891.0" stroke="#95a5a6" strokeType="INSIDE" width="1250.0" />
+        <Label layoutX="496.0" layoutY="6.0" prefHeight="94.0" prefWidth="304.0" text="Customer" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="44.0" />
             </font>
@@ -25,169 +25,110 @@
                 <DropShadow />
             </effect>
         </Label>
-        <TableView fx:id="colCuTel" layoutX="280.0" layoutY="114.0" prefHeight="575.0" prefWidth="705.0">
+        <TableView fx:id="colCuTel" layoutX="464.0" layoutY="133.0" prefHeight="742.0" prefWidth="751.0">
             <columns>
-                <TableColumn fx:id="colId" text="ID" />
-                <TableColumn fx:id="colName" prefWidth="125.0" text="Name" />
-                <TableColumn fx:id="colAddress" prefWidth="147.0" text="Address" />
-                <TableColumn fx:id="colContact" prefWidth="171.0" text="Contact" />
-                <TableColumn fx:id="colEmail" prefWidth="181.0" text="     Email" />
+                <TableColumn fx:id="colId" prefWidth="63.0" text="ID" />
+                <TableColumn fx:id="colName" prefWidth="127.0" text="Name" />
+                <TableColumn fx:id="colAddress" prefWidth="235.0" text="Address" />
+                <TableColumn fx:id="colContact" prefWidth="154.0" text="Contact" />
+                <TableColumn fx:id="colEmail" prefWidth="170.0" text="     Email" />
             </columns>
         </TableView>
-        <Label layoutX="24.0" layoutY="120.0" prefHeight="26.0" prefWidth="79.0" text=" ID " textFill="WHITE">
+        <Label layoutX="7.0" layoutY="118.0" prefHeight="26.0" prefWidth="150.0" text=" ID " textFill="#1b0404">
             <font>
-                <Font name="System Bold" size="13.0" />
+                <Font name="System Bold" size="21.0" />
             </font>
         </Label>
-        <Label layoutX="23.0" layoutY="193.0" prefHeight="26.0" prefWidth="79.0" text=" Name " textFill="WHITE">
+        <Label layoutX="6.0" layoutY="196.0" prefHeight="26.0" prefWidth="150.0" text=" Name " textFill="#1b0404">
             <font>
-                <Font name="System Bold" size="13.0" />
+                <Font name="System Bold" size="21.0" />
             </font>
         </Label>
-        <Label layoutX="27.0" layoutY="265.0" prefHeight="26.0" prefWidth="79.0" text="Address" textFill="WHITE">
+        <Label layoutX="12.0" layoutY="282.0" prefHeight="26.0" prefWidth="150.0" text="Address" textFill="#1b0404">
             <font>
-                <Font name="System Bold" size="13.0" />
+                <Font name="System Bold" size="21.0" />
             </font>
         </Label>
-        <Label layoutX="26.0" layoutY="338.0" prefHeight="26.0" prefWidth="79.0" text="Contact" textFill="WHITE">
+        <Label layoutX="10.0" layoutY="368.0" prefHeight="26.0" prefWidth="150.0" text="Contact" textFill="#1b0404">
             <font>
-                <Font name="System Bold" size="13.0" />
+                <Font name="System Bold" size="21.0" />
             </font>
         </Label>
-        <Label layoutX="27.0" layoutY="411.0" prefHeight="26.0" prefWidth="79.0" text="Email " textFill="WHITE">
+        <Label layoutX="11.0" layoutY="452.0" prefHeight="26.0" prefWidth="150.0" text="Email " textFill="#1b0404">
             <font>
-                <Font name="System Bold" size="13.0" />
+                <Font name="System Bold" size="21.0" />
             </font>
         </Label>
-        <TextField fx:id="txtCuId" layoutX="29.0" layoutY="146.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Customer ID" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuId" layoutX="13.0" layoutY="139.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer ID" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="21.0" />
          </font></TextField>
-        <TextField fx:id="txtCuName" layoutX="26.0" layoutY="218.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Customer Name" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuName" layoutX="11.0" layoutY="218.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Name" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="21.0" />
          </font></TextField>
-        <TextField fx:id="txtCuAddress" layoutX="25.0" layoutY="294.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Customer Address" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuAddress" layoutX="11.0" layoutY="306.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Address" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="21.0" />
          </font></TextField>
-        <TextField fx:id="txtCuContact" layoutX="25.0" layoutY="363.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Customer Contact" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuContact" layoutX="11.0" layoutY="393.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Contact" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="21.0" />
          </font></TextField>
-        <TextField fx:id="txtCuEmail" layoutX="24.0" layoutY="434.0" prefHeight="26.0" prefWidth="226.0" promptText="Enter your Customer Email" style="-fx-background-color: transparent; -fx-border-color: #1abc9c; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuEmail" layoutX="11.0" layoutY="475.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Email" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="21.0" />
          </font></TextField>
       <Group layoutX="7.0" layoutY="484.0">
          <children>
-            <Group>
-               <children>
-                    <Button fx:id="btnSave" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
-                        <font>
-                            <Font name="System Bold" size="13.0" />
-                        </font>
-                        <effect>
-                            <DropShadow />
-                        </effect>
-                    </Button>
-                  <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="96.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Icon/diskette.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </Group>
+            <Group />
          </children>
       </Group>
-      <Group layoutX="151.0" layoutY="484.0">
-         <children>
-              <Button fx:id="btnUpdate" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font>
-                  <effect>
-                      <DropShadow />
-                  </effect>tab
-              </Button>
-            <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="96.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Icon/system-update.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Group>
-      <Group layoutX="12.0" layoutY="556.0">
-         <children>
-              <Button fx:id="btnDelete" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
-                  <font>
-                      <Font name="System Bold" size="13.0" />
-                  </font>
-                  <effect>
-                      <DropShadow />
-                  </effect>
-              </Button>
-            <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="91.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Icon/bin.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Group>
-        <ImageView fitHeight="80.0" fitWidth="124.0" layoutX="111.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+      <Group layoutX="151.0" layoutY="484.0" />
+      <Group layoutX="12.0" layoutY="556.0" />
+        <ImageView fitHeight="80.0" fitWidth="124.0" layoutX="160.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../Icon/customer.png" />
             </image>
         </ImageView>
-      <Group layoutX="151.0" layoutY="556.0">
-         <children>
-            <Button fx:id="btnClean" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnCleanOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="95.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Icon/mop.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Group>
-      <Button fx:id="btnBack" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#btnBackOnAction" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="&lt;" textFill="#0a0000">
+      <Group layoutX="151.0" layoutY="556.0" />
+      <Button fx:id="btnNext" layoutX="130.0" layoutY="729.0" mnemonicParsing="false" onAction="#btnNextOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Next" textFill="#0a0000">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="21.0" />
          </font>
-         <effect>
-            <DropShadow />
-         </effect>
       </Button>
-      <Button fx:id="btnNext" layoutX="957.0" layoutY="32.0" mnemonicParsing="false" onAction="#btnNextOnAction" prefHeight="26.0" prefWidth="29.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="&gt;" textFill="#0a0000">
+      <Group layoutX="82.0" layoutY="622.0" />
+        <Button fx:id="btnUpdate" layoutX="129.0" layoutY="613.0" mnemonicParsing="false" onAction="#btnUpdateOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: Transaprent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Update" textFill="#070000">
+            <font>
+                <Font name="System Bold" size="21.0" />
+            </font>tab
+        </Button>
+      <Button fx:id="btnClean" layoutX="248.0" layoutY="828.0" mnemonicParsing="false" onAction="#btnCleanOnAction" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: Transaprent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="21.0" />
          </font>
-         <effect>
-            <DropShadow />
-         </effect>
       </Button>
-      <Group layoutX="82.0" layoutY="622.0">
-         <children>
-            <Button fx:id="btnHome" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="32.0" prefWidth="112.0" style="-fx-background-color: #38ada9;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <ImageView fitHeight="20.0" fitWidth="47.0" layoutX="90.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Icon/home.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Group>
+      <Button fx:id="btnHome" layoutX="-6.0" layoutY="828.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: Transaprent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Button>
+        <Button fx:id="btnDelete" layoutX="129.0" layoutY="675.0" mnemonicParsing="false" onAction="#btnDeleteOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: Transaprent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Delete" textFill="#110101">
+            <font>
+                <Font name="System Bold" size="21.0" />
+            </font>
+        </Button>
+        <Button fx:id="btnSave" layoutX="129.0" layoutY="560.0" mnemonicParsing="false" onAction="#btnSaveOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: Transaprent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
+            <font>
+                <Font name="System Bold" size="21.0" />
+            </font>
+        </Button>
+      <Line endX="63.0" layoutX="109.0" layoutY="825.0" startX="-100.0" />
+      <Line endX="69.0" layoutX="337.0" layoutY="824.0" startX="-100.0" />
+      <Label layoutX="175.0" layoutY="809.0" opacity="0.54" prefHeight="26.0" prefWidth="76.0" text="Click" textFill="#1b0404">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

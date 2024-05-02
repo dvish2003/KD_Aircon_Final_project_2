@@ -24,8 +24,7 @@ import java.util.List;
 
 public class CustomerController {
 
-    @FXML
-    private Button btnBack;
+
     @FXML
     private Button btnHome;
     @FXML
@@ -47,8 +46,10 @@ public class CustomerController {
     @FXML
     private TableColumn<?, ?> colContact;
 
+
     @FXML
     private TableView<Customer> colCuTel;
+
 
     @FXML
     private TableColumn<?, ?> colEmail;
@@ -78,6 +79,13 @@ public class CustomerController {
             setCellValueFactory();
             loadAllCustomers();
             applyButtonAnimations();
+
+        addHoverHandlers(btnClean);
+        addHoverHandlers(btnDelete);
+        addHoverHandlers(btnSave);
+        addHoverHandlers(btnUpdate);
+        addHoverHandlers(btnNext);
+        addHoverHandlers(btnHome);
 
 
         txtCuId.setOnKeyPressed(event -> {
@@ -119,8 +127,15 @@ public class CustomerController {
                 }
             });
         }
+    private void addHoverHandlers(Button button) {
+        button.setOnMouseEntered(event -> {
+            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+        });
+    }
     private void applyButtonAnimations() {
-        applyAnimation(btnBack);
         applyAnimation(btnClean);
         applyAnimation(btnDelete);
         applyAnimation(btnSave);
@@ -181,14 +196,7 @@ public class CustomerController {
     }
 
 
-    @FXML
-    void btnBackOnAction(ActionEvent event) throws IOException {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/View/DashBoard_from.fxml"));
-        Scene scene = new Scene(rootNode);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
-    }
+
 
     @FXML
     void btnCleanOnAction(ActionEvent event) {

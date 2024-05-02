@@ -243,7 +243,7 @@ public class BookingController {
     }
     private void addHoverHandlers(Button button) {
         button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
         });
         button.setOnMouseExited(event -> {
             button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
