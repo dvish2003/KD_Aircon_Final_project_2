@@ -5,21 +5,27 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.ShowRoom;
 import lk.Ijse.repository.CustomerRepo;
 import lk.Ijse.repository.ShowRoomRepo;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 public class ShowRoomController {
-
+    @FXML
+    private  Button btnHome;
     @FXML
     private AnchorPane ShowRoomPane;
 
@@ -142,6 +148,12 @@ public class ShowRoomController {
         loadAllShowRoom();
         applyButtonAnimations();
 
+        addHoverHandlers(btnSrClean);
+        addHoverHandlers(btnSrUpdate);
+        addHoverHandlers(btnSrDelete);
+        addHoverHandlers(btnSrSave);
+        addHoverHandlers(btnHome);
+
         txtShowRoomID.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtSrLocation.requestFocus();
@@ -170,6 +182,7 @@ public class ShowRoomController {
         applyAnimation(btnSrUpdate);
         applyAnimation(btnSrDelete);
         applyAnimation(btnSrSave);
+        applyAnimation(btnHome);
 
 
     }
@@ -212,4 +225,23 @@ public class ShowRoomController {
     }
 
 
+    public void btnHomeOnAction(ActionEvent event) throws IOException {
+        Button btn = (Button) event.getSource();
+        Stage stage = (Stage) btn.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
+        Parent rootNode = loader.load();
+
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
+
+        stage.show();
+    }
+    private void addHoverHandlers(Button button) {
+        button.setOnMouseEntered(event -> {
+            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+        });
+    }
 }

@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
@@ -42,6 +43,9 @@ public class CustomerController {
 
     @FXML
     private TableColumn<?, ?> colAddress;
+
+    @FXML
+    private AnchorPane CustomerPane;
 
     @FXML
     private TableColumn<?, ?> colContact;
@@ -272,7 +276,6 @@ public class CustomerController {
         String email = txtCuEmail.getText();
 
         Customer customer = new Customer(id, name, address, contact, email);
-
         try {
             boolean isUpdated = CustomerRepo.update(customer);
             if (isUpdated) {
@@ -291,6 +294,7 @@ public class CustomerController {
         }
     }
 
+
     private void clearFields() {
         txtCuId.clear();
         txtCuName.clear();
@@ -300,14 +304,10 @@ public class CustomerController {
     }
 
     public void btnNextOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LocationForm.fxml"));
         Parent rootNode = loader.load();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
-
-        stage.show();
+        CustomerPane.getChildren().clear();
+        CustomerPane.getChildren().add(rootNode);
     }
 
     public void btnHomeOnAction(ActionEvent event) throws IOException {

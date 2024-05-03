@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.*;
@@ -36,6 +37,10 @@ public class BookingController {
 
     @FXML
     private Label LblBookingID;
+
+    @FXML
+    private AnchorPane BookingPane;
+
 
     @FXML
     private Label LblEmployeeName;
@@ -436,14 +441,10 @@ public class BookingController {
 
     @FXML
     void btnNewLocOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LocationForm.fxml"));
         Parent rootNode = loader.load();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
-
-        stage.show();
+        BookingPane.getChildren().clear();
+        BookingPane.getChildren().add(rootNode);
     }
 
     @FXML

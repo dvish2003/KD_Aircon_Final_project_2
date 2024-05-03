@@ -17,6 +17,7 @@ public class AppInitializer extends Application {
         stage.setScene(new Scene(FXMLLoader
                 .load(this.getClass().getResource("/View/DashBoard_from.fxml"))));
         stage.centerOnScreen();
+        stage.setTitle("KD AIRCON PVT LTD ");
         stage.show();
 
 

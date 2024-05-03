@@ -88,6 +88,15 @@ public class LocationController {
         loadAllLocation();
         getCustomerIds();
         applyButtonAnimations();
+
+        addHoverHandlers(btnNewCus);
+        addHoverHandlers(btnLocClean);
+        addHoverHandlers(btnLocDelete);
+        addHoverHandlers(btnLocSave);
+        addHoverHandlers(btnLocUpdate);
+        addHoverHandlers(btnLocHome);
+
+
         txtLoId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtLoProvince.requestFocus();
@@ -138,7 +147,14 @@ public class LocationController {
 
     }
 
-
+    private void addHoverHandlers(Button button) {
+        button.setOnMouseEntered(event -> {
+            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+        });
+    }
 
     private void applyAnimation(Button button) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);

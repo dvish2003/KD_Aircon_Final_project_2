@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="891.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.BookingController">
+<AnchorPane fx:id="BookingPane" prefHeight="891.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.BookingController">
    <children>
       <Rectangle arcHeight="6.0" arcWidth="6.0" fill="#95a5a6" height="891.0" stroke="#95a5a6" strokeType="INSIDE" width="1250.0" />
       <Line endX="479.5" layoutX="99.0" layoutY="822.0" startX="-100.0" stroke="#38ada9" />

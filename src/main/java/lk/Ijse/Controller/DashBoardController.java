@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -49,7 +50,7 @@ public class DashBoardController  {
     private TableView<Booking> ColBookTel;
 
     @FXML
-    private AnchorPane SpecialDataPane;
+    public AnchorPane SpecialDataPane;
 
     @FXML
     private Button btnBooking;
@@ -60,8 +61,7 @@ public class DashBoardController  {
     @FXML
     private Button btnEmployye;
 
-    @FXML
-    private Button btnHome;
+
 
     @FXML
     private Button btnLocation;
@@ -118,8 +118,7 @@ public class DashBoardController  {
     @FXML
     private Label lblUserCount;
 
-    @FXML
-    private Label lblUserName;
+
 
     private String fullTitle ="Welcome To KD.Aircon System";
 
@@ -148,7 +147,6 @@ public class DashBoardController  {
             addHoverHandlers(btnBooking);
             addHoverHandlers(btnCustomer);
             addHoverHandlers(btnEmployye);
-            addHoverHandlers(btnHome);
             addHoverHandlers(btnLocation);
             addHoverHandlers(btnLogOut);
             addHoverHandlers(btnOrder);
@@ -336,17 +334,7 @@ public class DashBoardController  {
         SpecialDataPane.getChildren().add(rootNode);
     }
 
-    @FXML
-    void btnHomeOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
-        Parent rootNode = loader.load();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
 
-        stage.show();
-    }
 
     @FXML
     void btnLocationOnAction(ActionEvent event) throws IOException {
@@ -358,14 +346,16 @@ public class DashBoardController  {
 
     @FXML
     void btnLogOutOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LognForm.fxml"));
         Parent rootNode = loader.load();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
 
-        stage.show();
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(rootNode));
+
+        newStage.show();
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
     }
 
     @FXML

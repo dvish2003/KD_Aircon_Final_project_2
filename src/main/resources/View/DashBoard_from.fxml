@@ -26,7 +26,7 @@
             <String fx:value="rounded-corner-panes3" />
          </styleClass>
          <children>
-            <Button fx:id="btnCustomer" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="365.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Customer" textFill="#fcfcfcfc">
+            <Button fx:id="btnCustomer" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Customer" textFill="#fcfcfcfc">
                <stylesheets>
                   <URL value="@../css/Style1.css" />
                   <URL value="@../css/Style1.css" />
@@ -35,7 +35,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Button>
-            <Button fx:id="btnEmployye" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="735.0" mnemonicParsing="false" onAction="#btnEmployyeOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Employee" textFill="#fcfcfcfc">
+            <Button fx:id="btnEmployye" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="702.0" mnemonicParsing="false" onAction="#btnEmployyeOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Employee" textFill="#fcfcfcfc">
                <stylesheets>
                   <URL value="@../css/Style1.css" />
                   <URL value="@../css/Style1.css" />
@@ -44,7 +44,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Button>
-            <Button fx:id="btnProduct" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="676.0" mnemonicParsing="false" onAction="#btnProductOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Product" textFill="#fcfcfcfc">
+            <Button fx:id="btnProduct" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="643.0" mnemonicParsing="false" onAction="#btnProductOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Product" textFill="#fcfcfcfc">
                <stylesheets>
                   <URL value="@../css/Style1.css" />
                   <URL value="@../css/Style1.css" />
@@ -53,7 +53,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Button>
-            <Button fx:id="btnLocation" alignment="BASELINE_LEFT" layoutX="24.0" layoutY="427.0" mnemonicParsing="false" onAction="#btnLocationOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Location" textFill="#fcfcfcfc">
+            <Button fx:id="btnLocation" alignment="BASELINE_LEFT" layoutX="24.0" layoutY="394.0" mnemonicParsing="false" onAction="#btnLocationOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Location" textFill="#fcfcfcfc">
                <stylesheets>
                   <URL value="@../css/Style1.css" />
                   <URL value="@../css/Style1.css" />
@@ -62,7 +62,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Button>
-            <Button fx:id="btnOrder" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="495.0" mnemonicParsing="false" onAction="#btnOrderOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Order" textFill="#fcfcfcfc">
+            <Button fx:id="btnOrder" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="462.0" mnemonicParsing="false" onAction="#btnOrderOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Order" textFill="#fcfcfcfc">
                <stylesheets>
                   <URL value="@../css/Style1.css" />
                   <URL value="@../css/Style1.css" />
@@ -71,7 +71,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Button>
-            <Button fx:id="btnBooking" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="556.0" mnemonicParsing="false" onAction="#btnBookingOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Booking" textFill="#fcfcfcfc">
+            <Button fx:id="btnBooking" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="523.0" mnemonicParsing="false" onAction="#btnBookingOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Booking" textFill="#fcfcfcfc">
                <stylesheets>
                   <URL value="@../css/Style1.css" />
                   <URL value="@../css/Style1.css" />
@@ -80,7 +80,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Button>
-            <Button fx:id="btnShowRoom" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="617.0" mnemonicParsing="false" onAction="#btnShowRoomOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     ShowRoom" textFill="#fcfcfcfc">
+            <Button fx:id="btnShowRoom" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="584.0" mnemonicParsing="false" onAction="#btnShowRoomOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     ShowRoom" textFill="#fcfcfcfc">
                <stylesheets>
                   <URL value="@../css/Style1.css" />
                   <URL value="@../css/Style1.css" />
@@ -98,7 +98,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Button>
-            <Button fx:id="btnRegister" alignment="BASELINE_LEFT" layoutX="22.0" layoutY="797.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Register User" textFill="#fcfcfcfc">
+            <Button fx:id="btnRegister" alignment="BASELINE_LEFT" layoutX="22.0" layoutY="764.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Register User" textFill="#fcfcfcfc">
                <stylesheets>
                   <URL value="@../css/Style1.css" />
                   <URL value="@../css/Style1.css" />
@@ -107,7 +107,7 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Button>
-            <ImageView fitHeight="155.0" fitWidth="185.0" layoutX="83.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="155.0" fitWidth="185.0" layoutX="70.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/user.png" />
                </image>
@@ -117,51 +117,42 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button fx:id="btnHome" alignment="BASELINE_LEFT" layoutX="23.0" layoutY="304.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="48.0" prefWidth="250.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes2" text="     Home" textFill="#fcfcfcfc">
-               <stylesheets>
-                  <URL value="@../css/Style1.css" />
-                  <URL value="@../css/Style1.css" />
-               </stylesheets>
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="34.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="34.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/f8312d98c4777799a249630dc0bbcafb.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="35.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="35.0" layoutY="402.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/location.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="33.0" layoutY="503.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="33.0" layoutY="470.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/checkout.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="36.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="36.0" layoutY="535.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/reservation.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="35.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="35.0" layoutY="595.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/showroom.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="33.0" layoutY="685.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="33.0" layoutY="652.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/packaging.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="33.0" layoutY="743.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="33.0" layoutY="710.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/teamwork.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="32.0" layoutY="805.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="32.0" layoutY="772.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/register.png" />
                </image>
@@ -169,11 +160,6 @@
             <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="37.0" layoutY="925.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/logout.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="34.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Icon/home.png" />
                </image>
             </ImageView>
             <Label layoutX="10.0" layoutY="13.0" prefHeight="38.0" prefWidth="80.0" text="Date :" textFill="#d0c7c7">
