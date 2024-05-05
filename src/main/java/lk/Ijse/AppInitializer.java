@@ -15,7 +15,7 @@ public class AppInitializer extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.setScene(new Scene(FXMLLoader
-                .load(this.getClass().getResource("/View/DashBoard_from.fxml"))));
+                .load(this.getClass().getResource("/View/LocationForm.fxml"))));
         stage.centerOnScreen();
         stage.setTitle("KD AIRCON PVT LTD ");
         stage.show();

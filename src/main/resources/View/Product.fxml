@@ -63,7 +63,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtPrID" layoutX="166.0" layoutY="99.0" prefHeight="42.0" prefWidth="304.0" promptText="Enter Product ID" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtPrID" layoutX="166.0" layoutY="99.0" onKeyReleased="#IDK" prefHeight="42.0" prefWidth="304.0" promptText="Enter Product ID" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
@@ -72,7 +72,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtPrDesc" layoutX="658.0" layoutY="99.0" prefHeight="42.0" prefWidth="426.0" promptText="Enter Description" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtPrDesc" layoutX="658.0" layoutY="99.0" onKeyReleased="#DescK" prefHeight="42.0" prefWidth="426.0" promptText="Enter Description" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
@@ -81,7 +81,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtPrUnitPrice" layoutX="660.0" layoutY="161.0" prefHeight="42.0" prefWidth="426.0" promptText="Enter Unit Price" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtPrUnitPrice" layoutX="660.0" layoutY="161.0" onKeyReleased="#UnitK" prefHeight="42.0" prefWidth="426.0" promptText="Enter Unit Price" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
@@ -95,7 +95,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtQty" layoutX="168.0" layoutY="161.0" prefHeight="42.0" prefWidth="304.0" promptText="Enter Qty" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtQty" layoutX="168.0" layoutY="161.0" onKeyReleased="#QtyK" prefHeight="42.0" prefWidth="304.0" promptText="Enter Qty" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>

@@ -37,7 +37,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Button>
-      <Button fx:id="btnClean" layoutX="250.0" layoutY="828.0" mnemonicParsing="false" onAction="#btnCleanOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
+      <Button fx:id="btnClean" layoutX="250.0" layoutY="827.0" mnemonicParsing="false" onAction="#btnCleanOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -55,7 +55,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtUserID" layoutX="6.0" layoutY="149.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter User ID" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtUserID" layoutX="6.0" layoutY="149.0" onKeyReleased="#IDK" prefHeight="26.0" prefWidth="400.0" promptText="Enter User ID" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -65,7 +65,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtName" layoutX="6.0" layoutY="249.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter Name" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtName" layoutX="6.0" layoutY="249.0" onKeyReleased="#NameK" prefHeight="26.0" prefWidth="400.0" promptText="Enter Name" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -75,7 +75,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtPost" layoutX="6.0" layoutY="335.0" prefHeight="26.0" prefWidth="400.0" promptText="input Your Position" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtPost" layoutX="6.0" layoutY="335.0" onKeyReleased="#PositionK" prefHeight="26.0" prefWidth="400.0" promptText="input Your Position" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -85,19 +85,19 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtPassword" layoutX="9.0" layoutY="431.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter Password" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtPassword" layoutX="9.0" layoutY="431.0" onKeyReleased="#PasswordK" prefHeight="26.0" prefWidth="400.0" promptText="Enter Password" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </TextField>
-      <Button fx:id="btnHome" layoutX="3.0" layoutY="828.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
+      <Button fx:id="btnHome" layoutX="3.0" layoutY="827.0" mnemonicParsing="false" onAction="#btnHomeOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
       </Button>
-      <Line endX="63.0" layoutX="103.0" layoutY="807.0" startX="-100.0" />
-      <Line endX="69.0" layoutX="331.0" layoutY="806.0" startX="-100.0" />
-      <Label layoutX="169.0" layoutY="791.0" opacity="0.54" prefHeight="26.0" prefWidth="76.0" text="Click" textFill="#1b0404">
+      <Line endX="63.0" layoutX="103.0" layoutY="820.0" startX="-100.0" />
+      <Line endX="69.0" layoutX="331.0" layoutY="819.0" startX="-100.0" />
+      <Label layoutX="169.0" layoutY="804.0" opacity="0.54" prefHeight="26.0" prefWidth="76.0" text="Click" textFill="#1b0404">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

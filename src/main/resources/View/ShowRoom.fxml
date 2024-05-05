@@ -55,7 +55,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtShowRoomID" layoutX="17.0" layoutY="303.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter Show Room ID" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtShowRoomID" layoutX="17.0" layoutY="303.0" onKeyReleased="#IDK" prefHeight="26.0" prefWidth="400.0" promptText="Enter Show Room ID" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
@@ -64,7 +64,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtSrLocation" layoutX="17.0" layoutY="402.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter Location" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtSrLocation" layoutX="17.0" layoutY="402.0" onKeyReleased="#LocationK" prefHeight="26.0" prefWidth="400.0" promptText="Enter Location" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>

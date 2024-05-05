@@ -11,9 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Employee;
+import lk.Ijse.Util.CustomerRegex;
+import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.EmployeeRepo;
 
 import java.io.IOException;
@@ -325,5 +328,36 @@ public class EmployeeController {
     @FXML
     void btnEmCleanOnAction(ActionEvent event) {
         clearFields();
+    }
+
+    public void IDK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.ID,txtEmId);
+
+    }
+
+    public void NameK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.NAME,txtEmName);
+
+    }
+
+    public void AddressK(KeyEvent keyEvent) {
+      //  CustomerRegex.setTextColor(CustomerTextField.ID,txtShowRoomID);
+
+    }
+
+    public void ContactK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.CONTACT,txtEmContact);
+
+    }
+
+    public void EmailK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.EMAIL,txtEmEmail);
+
+    }
+
+    public void AgeK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtEmAge);
+
+
     }
 }

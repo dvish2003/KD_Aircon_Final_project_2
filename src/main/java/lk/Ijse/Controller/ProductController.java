@@ -16,9 +16,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.*;
+import lk.Ijse.Util.CustomerRegex;
+import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.*;
 
 import java.io.IOException;
@@ -349,5 +352,24 @@ public class ProductController {
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void IDK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.PRODUCT_ID,txtPrID);
+
+
+    }
+
+    public void DescK(KeyEvent keyEvent) {
+    }
+
+    public void UnitK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtPrUnitPrice);
+
+    }
+
+    public void QtyK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtQty);
+
     }
 }

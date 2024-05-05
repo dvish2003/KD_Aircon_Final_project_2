@@ -162,7 +162,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtDesc" layoutX="191.0" layoutY="282.0" prefHeight="40.0" prefWidth="812.0" promptText="Enter here Case">
+      <TextField fx:id="txtDesc" layoutX="191.0" layoutY="282.0" onKeyReleased="#DescKeyreleseOnAction" prefHeight="40.0" prefWidth="812.0" promptText="Enter here Case" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

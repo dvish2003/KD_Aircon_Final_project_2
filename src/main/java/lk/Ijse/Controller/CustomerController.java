@@ -12,11 +12,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
+import lk.Ijse.Util.CustomerRegex;
+import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.CustomerRepo;
 
 import java.io.IOException;
@@ -322,4 +325,28 @@ public class CustomerController {
     }
 
 
+    public void txtCustomerIDOnKeyReleased(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.ID,txtCuId);
+    }
+
+    public void txtNameOnKeyReleased(KeyEvent keyEvent) {
+       CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuName);
+
+    }
+
+    public void txtAddressOnKeyReleased(KeyEvent keyEvent) {
+      // CustomerRegex.setTextColor(CustomerTextField.ADDRESS,txtCuAddress);
+
+    }
+
+    public void txtContactOnKeyReleased(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.CONTACT,txtCuContact);
+
+    }
+
+    public void txtEmailOnKeyReleased(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.EMAIL,txtCuEmail);
+
+
+    }
 }

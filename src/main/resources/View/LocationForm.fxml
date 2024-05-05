@@ -61,23 +61,24 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <TextField fx:id="txtLoId" layoutX="-3.0" layoutY="202.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter Location ID" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtLoId" layoutX="-3.0" layoutY="202.0" onKeyReleased="#IDK" prefHeight="26.0" prefWidth="400.0" promptText="Enter Location ID" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
-      <TextField fx:id="txtLoProvince" layoutX="-3.0" layoutY="279.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter Province" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtLoProvince" layoutX="-3.0" layoutY="279.0" onKeyReleased="#ProvinceK" prefHeight="26.0" prefWidth="400.0" promptText="Enter Province" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
-      <TextField fx:id="txtLoCity" layoutX="-3.0" layoutY="354.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter City" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtLoCity" layoutX="-3.0" layoutY="354.0" onKeyReleased="#CityK" prefHeight="26.0" prefWidth="400.0" promptText="Enter City" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
       <TextField fx:id="txtLoAddress" layoutX="-3.0" layoutY="429.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter Address" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+         <onKeyReleased>#AddressK</onKeyReleased>
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
-      <TextField fx:id="txtLoZip" layoutX="-3.0" layoutY="512.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter ZipCode" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtLoZip" layoutX="-3.0" layoutY="512.0" onKeyReleased="#ZipCodeK" prefHeight="26.0" prefWidth="400.0" promptText="Enter ZipCode" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
@@ -96,10 +97,9 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Button>
-      <ImageView fitHeight="78.0" fitWidth="90.0" layoutX="115.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Icon/map.png" />
-         </image>
+      <ImageView fitHeight="78.0" fitWidth="90.0" layoutX="115.0" layoutY="19.0" pickOnBounds="true"
+                 preserveRatio="true">
+         <Image url="@../Icon/map.png"/>
       </ImageView>
       <Button fx:id="btnLocClean" layoutX="248.0" layoutY="828.0" mnemonicParsing="false" onAction="#btnLocCleanOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: transparent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
          <font>

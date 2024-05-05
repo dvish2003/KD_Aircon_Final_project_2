@@ -59,23 +59,23 @@
                 <Font name="System Bold" size="21.0" />
             </font>
         </Label>
-        <TextField fx:id="txtCuId" layoutX="13.0" layoutY="139.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer ID" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuId" layoutX="13.0" layoutY="139.0" onKeyReleased="#txtCustomerIDOnKeyReleased" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer ID" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
-        <TextField fx:id="txtCuName" layoutX="11.0" layoutY="218.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Name" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuName" layoutX="11.0" layoutY="218.0" onKeyReleased="#txtNameOnKeyReleased" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Name" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
-        <TextField fx:id="txtCuAddress" layoutX="11.0" layoutY="306.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Address" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuAddress" layoutX="11.0" layoutY="306.0" onKeyReleased="#txtAddressOnKeyReleased" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Address" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
-        <TextField fx:id="txtCuContact" layoutX="11.0" layoutY="393.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Contact" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuContact" layoutX="11.0" layoutY="393.0" onKeyReleased="#txtContactOnKeyReleased" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Contact" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>
-        <TextField fx:id="txtCuEmail" layoutX="11.0" layoutY="475.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Email" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+        <TextField fx:id="txtCuEmail" layoutX="11.0" layoutY="475.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="26.0" prefWidth="400.0" promptText="Enter your Customer Email" style="-fx-background-color: transparent; -fx-border-color: #19460a #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font></TextField>

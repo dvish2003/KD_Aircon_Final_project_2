@@ -51,7 +51,7 @@ public class ProductsRepo {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, product.getProduct_description());
-        pstm.setInt(2, qtyChange);
+        pstm.setInt(2, product.getShowRoom_qtyOnHand());
         pstm.setInt(3, product.getProduct_unitPrice());
         pstm.setString(4, product.getProduct_id());
         return pstm.executeUpdate() > 0;

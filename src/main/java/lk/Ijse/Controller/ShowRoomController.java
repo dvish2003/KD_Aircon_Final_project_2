@@ -11,11 +11,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.ShowRoom;
+import lk.Ijse.Util.CustomerRegex;
+import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.CustomerRepo;
 import lk.Ijse.repository.ShowRoomRepo;
 
@@ -243,5 +246,15 @@ public class ShowRoomController {
         button.setOnMouseExited(event -> {
             button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
         });
+    }
+
+    public void IDK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.ID,txtShowRoomID);
+
+    }
+
+    public void LocationK(KeyEvent keyEvent) {
+      //  CustomerRegex.setTextColor(CustomerTextField.,txtShowRoomID);
+
     }
 }

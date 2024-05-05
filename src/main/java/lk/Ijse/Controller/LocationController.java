@@ -11,10 +11,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.Location;
+import lk.Ijse.Util.CustomerRegex;
+import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.CustomerRepo;
 import lk.Ijse.repository.LocationRepo;
 
@@ -331,5 +334,27 @@ public class LocationController {
         txtLoCity.clear();
         txtLoAddress.clear();
         txtLoZip.clear();
+    }
+
+    public void IDK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.ID,txtLoId);
+
+
+    }
+
+    public void ProvinceK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoProvince);
+
+    }
+
+    public void CityK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoCity);
+
+    }
+
+    public void ZipCodeK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtLoZip);
+
+
     }
 }

@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -494,5 +495,10 @@ public class BookingController {
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    void DescKeyreleseOnAction(KeyEvent event) {
+
     }
 }

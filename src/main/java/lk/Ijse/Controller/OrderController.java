@@ -14,9 +14,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.*;
+import lk.Ijse.Util.CustomerRegex;
+import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.*;
 
 import java.io.IOException;
@@ -44,6 +48,9 @@ public class OrderController {
     @FXML
     private Button btnPrBack;
 
+
+    @FXML
+    private AnchorPane orderPane;
 
     @FXML
     private ComboBox<String> cmbCustomerID;
@@ -352,14 +359,10 @@ public class OrderController {
 
     @FXML
     void btnNewCusOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CustomerForm.fxml"));
         Parent rootNode = loader.load();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
-
-        stage.show();
+        orderPane.getChildren().clear();
+        orderPane.getChildren().add(rootNode);
     }
 
     @FXML
@@ -394,12 +397,13 @@ public class OrderController {
         if (isPlaced) {
             obList.clear();
             colOrderTel.setItems(obList);
-            lblOrderID.setText("");
-            lblPaymentID.setText("");
+           // lblOrderID.setText("");
+          //  lblPaymentID.setText("");
             lblPaymentAmount.setText("");
-            lblDescription.setText("");
-            lblUnitPrice.setText("");
-            lblQtyOnHand.setText("");
+            
+          //  lblDescription.setText("");
+          //  lblUnitPrice.setText("");
+           // lblQtyOnHand.setText("");
             txtQty.clear();
             getCurrentOrderId();
             getCurrentPayId();
@@ -518,4 +522,8 @@ public class OrderController {
         alert.showAndWait();
     }
 
+    public void QtyK(KeyEvent keyEvent) {
+        CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtQty);
+
+    }
 }
