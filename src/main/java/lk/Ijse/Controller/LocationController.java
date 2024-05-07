@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
@@ -27,6 +28,8 @@ import java.util.List;
 
 public class LocationController {
 
+    @FXML
+    private AnchorPane LocationAncorPane;
 
     @FXML
     private Button btnLocClean;
@@ -307,14 +310,10 @@ public class LocationController {
 
     @FXML
     void btnNewCusOnAction(ActionEvent event) throws IOException {
-        Button btn = (Button) event.getSource();
-        Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CustomerForm.fxml"));
         Parent rootNode = loader.load();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
-
-        stage.show();
+        LocationAncorPane.getChildren().clear();
+        LocationAncorPane.getChildren().add(rootNode);
     }
 
     @FXML
@@ -335,26 +334,31 @@ public class LocationController {
         txtLoAddress.clear();
         txtLoZip.clear();
     }
-
-    public void IDK(KeyEvent keyEvent) {
+    @FXML
+    private void IDK(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.ID,txtLoId);
 
 
     }
-
-    public void ProvinceK(KeyEvent keyEvent) {
+    @FXML
+    private void ProvinceK(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoProvince);
 
     }
-
-    public void CityK(KeyEvent keyEvent) {
+    @FXML
+    private void CityK(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoCity);
 
     }
-
-    public void ZipCodeK(KeyEvent keyEvent) {
+    @FXML
+    private void ZipCodeK(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtLoZip);
 
 
     }
+
+  @FXML
+    private  void AddressK(KeyEvent keyEvent){
+
+  }
 }

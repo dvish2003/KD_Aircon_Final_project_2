@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="891.0" prefWidth="1250.0" stylesheets="@../css/custom.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.LocationController">
+<AnchorPane fx:id="LocationAncorPane" prefHeight="891.0" prefWidth="1250.0" stylesheets="@../css/custom.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.LocationController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#95a5a6" height="891.0" stroke="#95a5a6" strokeType="INSIDE" width="1250.0" />
       <Label layoutX="515.0" layoutY="23.0" prefHeight="63.0" prefWidth="243.0" text="Location" textFill="WHITE">
@@ -64,24 +64,28 @@
       <TextField fx:id="txtLoId" layoutX="-3.0" layoutY="202.0" onKeyReleased="#IDK" prefHeight="26.0" prefWidth="400.0" promptText="Enter Location ID" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
-         </font></TextField>
+         </font>
+      </TextField>
       <TextField fx:id="txtLoProvince" layoutX="-3.0" layoutY="279.0" onKeyReleased="#ProvinceK" prefHeight="26.0" prefWidth="400.0" promptText="Enter Province" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
-         </font></TextField>
+         </font>
+      </TextField>
       <TextField fx:id="txtLoCity" layoutX="-3.0" layoutY="354.0" onKeyReleased="#CityK" prefHeight="26.0" prefWidth="400.0" promptText="Enter City" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
-         </font></TextField>
-      <TextField fx:id="txtLoAddress" layoutX="-3.0" layoutY="429.0" prefHeight="26.0" prefWidth="400.0" promptText="Enter Address" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
-         <onKeyReleased>#AddressK</onKeyReleased>
+         </font>
+      </TextField>
+      <TextField fx:id="txtLoAddress" layoutX="-3.0" layoutY="429.0" onKeyReleased="#AddressK" prefHeight="26.0" prefWidth="400.0" promptText="Enter Address" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
-         </font></TextField>
+         </font>
+      </TextField>
       <TextField fx:id="txtLoZip" layoutX="-3.0" layoutY="512.0" onKeyReleased="#ZipCodeK" prefHeight="26.0" prefWidth="400.0" promptText="Enter ZipCode" style="-fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
-         </font></TextField>
+         </font>
+      </TextField>
       <Button fx:id="btnLocSave" layoutX="130.0" layoutY="592.0" mnemonicParsing="false" onAction="#btnLocSaveOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: transparent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Save" textFill="#0a0000">
          <font>
             <Font name="System Bold" size="21.0" />
@@ -97,9 +101,8 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Button>
-      <ImageView fitHeight="78.0" fitWidth="90.0" layoutX="115.0" layoutY="19.0" pickOnBounds="true"
-                 preserveRatio="true">
-         <Image url="@../Icon/map.png"/>
+      <ImageView fitHeight="78.0" fitWidth="90.0" layoutX="115.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../Icon/map.png" />
       </ImageView>
       <Button fx:id="btnLocClean" layoutX="248.0" layoutY="828.0" mnemonicParsing="false" onAction="#btnLocCleanOnAction" prefHeight="40.0" prefWidth="147.0" style="-fx-background-color: transparent;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Clear" textFill="#0d0000">
          <font>

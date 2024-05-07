@@ -174,7 +174,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1644.0" layoutY="16.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
+      <AnchorPane layoutX="1646.0" layoutY="8.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
          <children>
             <Label layoutX="33.0" layoutY="50.0" prefHeight="38.0" prefWidth="172.0" text="User Count" textFill="#ffeeee">
                <font>
@@ -193,7 +193,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1646.0" layoutY="278.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
+      <AnchorPane layoutX="1646.0" layoutY="264.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
          <children>
             <Label layoutX="8.0" layoutY="55.0" prefHeight="38.0" prefWidth="214.0" text="EmployeeCount" textFill="#ffeeee">
                <font>
