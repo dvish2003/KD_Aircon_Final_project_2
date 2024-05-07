@@ -95,3 +95,24 @@ CREATE TABLE OrderDetails (
                               FOREIGN KEY (Product_id) REFERENCES Product(Product_id) ON UPDATE CASCADE ON DELETE CASCADE,
                               FOREIGN KEY (Order_id) REFERENCES `Order`(Order_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+
+Join Query Booking
+
+SELECT
+    Booking.Booking_id,
+    Employee.Employee_Name,
+    Customer.Customer_Name,
+    Location.Location_Address,
+    Payment.Payment_Amount,
+    Booking.Booking_Date
+FROM
+    Booking
+        JOIN
+    Employee ON Booking.Employee_id = Employee.Employee_id
+        JOIN
+    Location ON Booking.Location_id = Location.Location_id
+        JOIN
+    Payment ON Booking.Payment_id = Payment.Payment_id
+        JOIN
+    Customer ON Location.Customer_id = Customer.Customer_id;

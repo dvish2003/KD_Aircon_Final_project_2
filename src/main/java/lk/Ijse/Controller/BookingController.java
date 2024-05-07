@@ -16,20 +16,30 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.*;
 import lk.Ijse.repository.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class BookingController {
+    @FXML
+    private Button btnPrintBill;
+
     @FXML
     private Label LblCustomerName;
 
@@ -145,6 +155,8 @@ public class BookingController {
         addHoverHandlers(btnDelete);
         addHoverHandlers(btnHome);
         addHoverHandlers(btnNewLoc);
+        addHoverHandlers(btnPrintBill);
+
 
         cmbLocationID.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -221,6 +233,7 @@ public class BookingController {
         applyAnimation(LblLocationAddress);
         applyAnimation(LblPlaceDate);
         applyAnimation(LblCustomerName);
+        applyAnimation(btnPrintBill);
 
 
 
@@ -500,5 +513,17 @@ public class BookingController {
     @FXML
     void DescKeyreleseOnAction(KeyEvent event) {
 
+    }
+    @FXML
+    private void btnPrintBillOnAction(ActionEvent event) throws JRException, SQLException {
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Reports/KD_Aircon_BookingReport.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+        Map<String,Object> data = new HashMap<>();
+
+
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(jasperReport, data,DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
     }
 }

@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderController {
+    @FXML
+    private Button btnPrintBill;
 
     @FXML
     private Label LblOrderDate;
@@ -135,6 +137,8 @@ public class OrderController {
         addHoverHandlers(btnPlaceOrder);
         addHoverHandlers(btnPrBack);
         addHoverHandlers(btnPrBack);
+        addHoverHandlers(btnPrintBill);
+
 
         cmbCustomerID.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -204,6 +208,8 @@ public class OrderController {
         applyAnimation(btnPlaceOrder);
         applyAnimation(btnPrBack);
         applyAnimation(btnPrBack);
+        applyAnimation(btnPrintBill);
+
     }
 
     private void applyLabelAnimations() {
@@ -525,5 +531,8 @@ public class OrderController {
     public void QtyK(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtQty);
 
+    }
+    @FXML
+    private void btnPrintBillOnAction(ActionEvent event) {
     }
 }
