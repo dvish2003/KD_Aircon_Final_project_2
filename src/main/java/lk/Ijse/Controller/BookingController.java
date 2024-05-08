@@ -20,6 +20,7 @@ import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.*;
 import lk.Ijse.repository.*;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
@@ -405,7 +406,8 @@ public class BookingController {
 
                                  if (isBookingSave) {
                                  new Alert(Alert.AlertType.CONFIRMATION, "Booking placed successfully!").show();
-                 loadAllBooking();
+                                     btnPrintBillOnAction(null);
+                                     loadAllBooking();
                    getCurrentBookingId();
                    getCurrentPayId();
                     clearFields();
@@ -417,10 +419,20 @@ public class BookingController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Error occurred while saving data: " + e.getMessage()).show();
+        } catch (JRException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void clearFields() {
+        cmbLocationID.getSelectionModel().clearSelection();
+        cmbEmployeeID.getSelectionModel().clearSelection();
+LblEmployeeName.setText("");
+LblCustomerName.setText("");
+txtDesc.clear();
+LblLocationAddress.setText("");
+
+
 
     }
 
@@ -532,13 +544,32 @@ public class BookingController {
     @FXML
     private void btnPrintBillOnAction(ActionEvent event) throws JRException, SQLException {
         JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Reports/KD_Aircon_BookingReport.jrxml");
+        JRDesignQuery jrDesignQuery = new JRDesignQuery();
+        jrDesignQuery.setText("SELECT\n" +
+                "    Booking.Booking_id,\n" +
+                "    Employee.Employee_Name,\n" +
+                "    Customer.Customer_Name,\n" +
+                "    Location.Location_Address,\n" +
+                "    Payment.Payment_Amount,\n" +
+                "    Booking.Booking_Date\n" +
+                "FROM\n" +
+                "    Booking\n" +
+                "JOIN\n" +
+                "    Employee ON Booking.Employee_id = Employee.Employee_id\n" +
+                "JOIN\n" +
+                "    Location ON Booking.Location_id = Location.Location_id\n" +
+                "JOIN\n" +
+                "    Payment ON Booking.Payment_id = Payment.Payment_id\n" +
+                "JOIN\n" +
+                "    Customer ON Location.Customer_id = Customer.Customer_id\n" +
+                "WHERE\n" +
+                "    Booking.Booking_id = (SELECT MAX(Booking_id) FROM Booking);\n");
+        jasperDesign.setQuery(jrDesignQuery);
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-
-        Map<String,Object> data = new HashMap<>();
 
 
         JasperPrint jasperPrint =
-                JasperFillManager.fillReport(jasperReport, data,DbConnection.getInstance().getConnection());
+                JasperFillManager.fillReport(jasperReport, null,DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
     }
 }

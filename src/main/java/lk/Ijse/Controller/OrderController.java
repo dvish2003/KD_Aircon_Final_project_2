@@ -24,6 +24,7 @@ import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.*;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
@@ -544,6 +545,27 @@ public class OrderController {
     }
     @FXML
     private void btnPrintBillOnAction(ActionEvent event) throws JRException, SQLException {
+           JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Reports/OrderBillReport.jrxml");
+        JRDesignQuery jrDesignQuery = new JRDesignQuery();
+        jrDesignQuery.setText("SELECT o.Order_id, c.Customer_Name, p.Product_Description, od.Qty, od.Product_UnitPrice, py.Payment_Amount\n" +
+                "FROM `Order` o\n" +
+                "JOIN Customer c ON o.Customer_id = c.Customer_id\n" +
+                "JOIN OrderDetails od ON o.Order_id = od.Order_id\n" +
+                "JOIN Product p ON od.Product_id = p.Product_id\n" +
+                "JOIN Payment py ON o.Payment_id = py.Payment_id\n" +
+                "WHERE o.Order_id = (\n" +
+                "    SELECT MAX(Order_id)\n" +
+                "    FROM `Order`\n" +
+                ");\n");
+        jasperDesign.setQuery(jrDesignQuery);
+           JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+
+
+        JasperPrint jasperPrint =
+                JasperFillManager.fillReport(jasperReport, null,DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint,false);
+
 
 
 //        // SQL query to fetch details of the latest order

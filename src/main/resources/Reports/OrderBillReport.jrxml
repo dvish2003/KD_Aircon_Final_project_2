@@ -223,12 +223,21 @@ JOIN Payment py ON o.Payment_id = py.Payment_id;]]>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<staticText>
-				<reportElement x="206" y="18" width="152" height="30" uuid="ca049212-d679-4040-8262-53b25ea02b8d"/>
+				<reportElement x="167" y="18" width="118" height="30" uuid="ca049212-d679-4040-8262-53b25ea02b8d"/>
 				<textElement>
 					<font fontName="C059" size="18" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[Thank You!]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="283" y="18" width="171" height="30" uuid="6cdda6da-8e2e-41d6-afbd-d5fff06c84dd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ad007abf-7118-46d5-8e64-f2d8d0432cd7"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="C059" size="18" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Customer_Name}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 	<summary>
