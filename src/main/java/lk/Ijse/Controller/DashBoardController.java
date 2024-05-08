@@ -32,6 +32,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -99,7 +101,11 @@ public class DashBoardController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> colPlaceDate;
+    @FXML
+    private Label lblGreeting;
 
+    @FXML
+    private Label lblTime;
 
     @FXML
     private Label lblTitle;
@@ -115,12 +121,8 @@ public class DashBoardController implements Initializable {
 
     @FXML
     private Label lblUserCount;
-
-
-
-    private String fullTitle ="Welcome To KD.Aircon System";
-
-
+    
+    private String fullTitle ="K.D Aircon Industries (Pvt) Ltd";
 
     private int currentIndex = 0;
 
@@ -134,6 +136,26 @@ public class DashBoardController implements Initializable {
 
 
 public void Initialize(){
+
+    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+        LocalTime currentTime = LocalTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedTime = currentTime.format(formatter);
+
+        lblTime.setText(formattedTime);
+
+        int currentHour = currentTime.getHour();
+        String greeting = currentHour < 12 ? "Good Morning ...." : "Good Afternoon...";
+
+        lblGreeting.setText(greeting);
+
+
+    }));
+    timeline.setCycleCount(Animation.INDEFINITE);
+    timeline.play();
+
+
     loadOrderData();
     animateLabel();
     setDate();
@@ -176,7 +198,9 @@ public void Initialize(){
     setEmployeeCount(EmployeeCount);
     setUserCount(UserCount);
     setOrderCount(OrderCount);
+
 }
+
 
 
     private void addHoverHandlers(Button button) {
@@ -432,7 +456,9 @@ public void Initialize(){
         timeline.getKeyFrames().add(keyFrame);
         timeline.setCycleCount(fullTitle.length() + 1);
 
+
         timeline.play();
+
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

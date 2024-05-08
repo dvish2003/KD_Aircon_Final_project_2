@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1920.0" style="-fx-background-color: #95a5a6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.DashBoardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1020.0" prefWidth="1920.0" style="-fx-background-color: #95a5a6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.DashBoardController">
    <stylesheets>
       <URL value="@../css/Style.css" />
       <URL value="@../css/Style1.css" />
@@ -107,16 +107,11 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Button>
-            <ImageView fitHeight="155.0" fitWidth="185.0" layoutX="70.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="155.0" fitWidth="185.0" layoutX="67.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/user.png" />
                </image>
             </ImageView>
-            <Label fx:id="lblUserName" layoutX="119.0" layoutY="223.0" prefHeight="57.0" prefWidth="73.0" text="User" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="34.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/f8312d98c4777799a249630dc0bbcafb.png" />
@@ -162,19 +157,19 @@
                   <Image url="@../Icon/logout.png" />
                </image>
             </ImageView>
-            <Label layoutX="10.0" layoutY="13.0" prefHeight="38.0" prefWidth="80.0" text="Date :" textFill="#d0c7c7">
+            <Label fx:id="lblDate" layoutX="75.0" layoutY="9.0" prefHeight="38.0" prefWidth="188.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="lblDate" layoutX="110.0" layoutY="13.0" prefHeight="38.0" prefWidth="188.0" textFill="WHITE">
+            <Label fx:id="lblGreeting" layoutX="21.0" layoutY="241.0" prefHeight="58.0" prefWidth="273.0" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1646.0" layoutY="8.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
+      <AnchorPane layoutX="1646.0" layoutY="87.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
          <children>
             <Label layoutX="33.0" layoutY="50.0" prefHeight="38.0" prefWidth="172.0" text="User Count" textFill="#ffeeee">
                <font>
@@ -193,7 +188,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1646.0" layoutY="264.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
+      <AnchorPane layoutX="1646.0" layoutY="334.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
          <children>
             <Label layoutX="8.0" layoutY="55.0" prefHeight="38.0" prefWidth="214.0" text="EmployeeCount" textFill="#ffeeee">
                <font>
@@ -212,7 +207,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="1651.0" layoutY="539.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
+      <AnchorPane layoutX="1651.0" layoutY="570.0" prefHeight="178.0" prefWidth="237.0" style="-fx-background-color: #2c3e50;" styleClass="rounded-corner-panes2">
          <children>
             <Label layoutX="16.0" layoutY="59.0" prefHeight="38.0" prefWidth="201.0" text="Booking Count" textFill="#ffeeee">
                <font>
@@ -233,7 +228,7 @@
       </AnchorPane>
       <AnchorPane fx:id="SpecialDataPane" layoutX="363.0" layoutY="91.0" prefHeight="891.0" prefWidth="1250.0" style="-fx-background-color: #95a5a6 #95a5a6;">
          <children>
-            <TableView fx:id="ColBookTel" layoutX="35.0" layoutY="517.0" prefHeight="365.0" prefWidth="1184.0">
+            <TableView fx:id="ColBookTel" layoutX="35.0" layoutY="531.0" prefHeight="365.0" prefWidth="1184.0">
                <columns>
                   <TableColumn fx:id="colBookID" prefWidth="134.0" text="B ID" />
                   <TableColumn fx:id="colLocID" minWidth="0.0" prefWidth="142.33331298828125" text="L ID" />
@@ -244,7 +239,7 @@
                   <TableColumn fx:id="colBookDate" minWidth="0.0" prefWidth="211.0" text="Date" />
                </columns>
             </TableView>
-            <BarChart fx:id="BarChart" layoutX="76.0" layoutY="40.0" prefHeight="417.0" prefWidth="1073.0">
+            <BarChart fx:id="BarChart" layoutX="76.0" layoutY="45.0" prefHeight="417.0" prefWidth="1073.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -252,7 +247,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <Label layoutX="473.0" layoutY="6.0" prefHeight="38.0" prefWidth="353.0" text="Order Report">
+            <Label layoutX="473.0" layoutY="11.0" prefHeight="38.0" prefWidth="353.0" text="Order Report">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
@@ -282,9 +277,14 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Label fx:id="lblTitle" layoutX="417.0" prefHeight="83.0" prefWidth="1227.0" text="Welcome To KD.Aircon System">
+      <Label fx:id="lblTitle" layoutX="421.0" prefHeight="77.0" prefWidth="1186.0" text="K.D Aircon Industries (Pvt) Ltd">
          <font>
             <Font name="System Bold" size="64.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTime" layoutX="1653.0" layoutY="19.0" prefHeight="38.0" prefWidth="221.0">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
          </font>
       </Label>
    </children>

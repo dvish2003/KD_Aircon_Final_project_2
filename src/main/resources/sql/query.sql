@@ -116,3 +116,24 @@ FROM
     Payment ON Booking.Payment_id = Payment.Payment_id
         JOIN
     Customer ON Location.Customer_id = Customer.Customer_id;
+
+
+
+SELECT o.Order_id, c.Customer_Name, p.Product_Description, od.Qty, od.Product_UnitPrice, py.Payment_Amount
+FROM `Order` o
+         JOIN Customer c ON o.Customer_id = c.Customer_id
+         JOIN OrderDetails od ON o.Order_id = od.Order_id
+         JOIN Product p ON od.Product_id = p.Product_id
+         JOIN Payment py ON o.Payment_id = py.Payment_id;
+
+
+SELECT o.Order_id, c.Customer_Name, p.Product_Description, od.Qty, od.Product_UnitPrice, py.Payment_Amount
+FROM `Order` o
+         JOIN Customer c ON o.Customer_id = c.Customer_id
+         JOIN OrderDetails od ON o.Order_id = od.Order_id
+         JOIN Product p ON od.Product_id = p.Product_id
+         JOIN Payment py ON o.Payment_id = py.Payment_id
+WHERE o.Order_id = 'your_order_id_here';
+
+
+

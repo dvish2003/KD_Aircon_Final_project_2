@@ -18,18 +18,23 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.*;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class OrderController {
     @FXML
@@ -372,7 +377,7 @@ public class OrderController {
     }
 
     @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException {
+    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException, JRException {
         String orderID = lblOrderID.getText();
         String customerID = cmbCustomerID.getValue();
         String paymentID = lblPaymentID.getText();
@@ -400,6 +405,7 @@ public class OrderController {
         PlaceOrder po = new PlaceOrder(order, odList, payment);
 
         boolean isPlaced = PlaceOrderRepo.placeOrder(po);
+
         if (isPlaced) {
             obList.clear();
             colOrderTel.setItems(obList);
@@ -417,6 +423,8 @@ public class OrderController {
             getCurrentPayId();
 
             new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
+            btnPrintBillOnAction(null);
+
         } else {
             new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
         }
@@ -535,6 +543,64 @@ public class OrderController {
 
     }
     @FXML
-    private void btnPrintBillOnAction(ActionEvent event) {
+    private void btnPrintBillOnAction(ActionEvent event) throws JRException, SQLException {
+
+
+//        // SQL query to fetch details of the latest order
+//        String sqlQuery = "SELECT o.Order_id, c.Customer_Name, p.Product_Description, od.Qty, od.Product_UnitPrice, py.Payment_Amount " +
+//                "FROM `Order` o " +
+//                "JOIN Customer c ON o.Customer_id = c.Customer_id " +
+//                "JOIN OrderDetails od ON o.Order_id = od.Order_id " +
+//                "JOIN Product p ON od.Product_id = p.Product_id " +
+//                "JOIN Payment py ON o.Payment_id = py.Payment_id " +
+//                "WHERE o.Order_id = ( " +
+//                "    SELECT MAX(Order_id) " +
+//                "    FROM `Order` " +
+//                ")";
+//
+//        // Prepare the statement
+//        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sqlQuery);
+//
+//        // Execute the query
+//        boolean querySuccess = preparedStatement.execute();
+//
+//        // Check if the query execution was successful
+//        if (querySuccess) {
+//            // Retrieve the result set
+//            ResultSet resultSet = preparedStatement.getResultSet();
+//
+//            // Check if the result set has data
+//            if (resultSet.next()) {
+//                // Create a map to hold the data for the report
+//                Map<String, Object> data = new HashMap<>();
+//                // Populate the map with data from the result set
+//                data.put("Order_id", resultSet.getString("Order_id"));
+//                data.put("Customer_Name", resultSet.getString("Customer_Name"));
+//                data.put("Product_Description", resultSet.getString("Product_Description"));
+//                data.put("Qty", resultSet.getInt("Qty"));
+//                data.put("Product_UnitPrice", resultSet.getInt("Product_UnitPrice"));
+//                data.put("Payment_Amount", resultSet.getInt("Payment_Amount"));
+//
+//                // Load the Jasper report
+//                JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Reports/OrderBillReport.jrxml");
+//                JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+//
+//                // Fill the report with data and view it
+//                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, data, new JREmptyDataSource());
+//                JasperViewer.viewReport(jasperPrint, false);
+//            } else {
+//                // If no data found, show an alert
+//                new Alert(Alert.AlertType.ERROR, "No data found for the latest order.").show();
+//            }
+//
+//            // Close the result set
+//            resultSet.close();
+//        } else {
+//            // If the query execution failed, show an error alert
+//            new Alert(Alert.AlertType.ERROR, "Failed to retrieve data for the latest order.").show();
+//        }
+//
+//        // Close the prepared statement
+//        preparedStatement.close();
     }
 }
