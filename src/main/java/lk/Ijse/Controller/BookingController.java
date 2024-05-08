@@ -207,6 +207,21 @@ public class BookingController {
             }
 
             ColBookTel.setItems(obList);
+
+            ColBookTel.setRowFactory(tv -> new TableRow<Booking>() {
+                @Override
+                protected void updateItem(Booking item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setStyle("-fx-background-color: white;");
+                    } else if (item.getBookingDate().toLocalDate().isBefore(LocalDate.now())) {
+                        setStyle("-fx-background-color: #27f802;;");
+                    } else {
+                        setStyle("");
+                    }
+                }
+            });
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

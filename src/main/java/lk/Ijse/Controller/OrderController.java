@@ -403,13 +403,15 @@ public class OrderController {
         if (isPlaced) {
             obList.clear();
             colOrderTel.setItems(obList);
-           // lblOrderID.setText("");
-          //  lblPaymentID.setText("");
+            cmbProductID.getSelectionModel().clearSelection();
+            cmbCustomerID.getSelectionModel().clearSelection();
+            cmbShowRoomID.getSelectionModel().clearSelection();
+            lblLocationShowRoom.setText("");
+            lblCustomerName.setText("");
             lblPaymentAmount.setText("");
-            
-          //  lblDescription.setText("");
-          //  lblUnitPrice.setText("");
-           // lblQtyOnHand.setText("");
+           lblDescription.setText("");
+           lblUnitPrice.setText("");
+           lblQtyOnHand.setText("");
             txtQty.clear();
             getCurrentOrderId();
             getCurrentPayId();

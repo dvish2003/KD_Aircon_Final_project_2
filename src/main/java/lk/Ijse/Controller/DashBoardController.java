@@ -10,23 +10,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.input.MouseEvent; // Import MouseEvent
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Booking;
 import lk.Ijse.repository.BookingRepo;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,7 +35,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DashBoardController  {
+public class DashBoardController implements Initializable {
+
 
     @FXML
     private BarChart<String,Integer> BarChart;
@@ -135,52 +133,50 @@ public class DashBoardController  {
     private int OrderCount;
 
 
+public void Initialize(){
+    loadOrderData();
+    animateLabel();
+    setDate();
+    setCellValueFactory();
+    loadAllBooking();
+    addHoverHandlers(btnBooking);
+    addHoverHandlers(btnCustomer);
+    addHoverHandlers(btnEmployye);
+    addHoverHandlers(btnLocation);
+    addHoverHandlers(btnLogOut);
+    addHoverHandlers(btnOrder);
+    addHoverHandlers(btnProduct);
+    addHoverHandlers(btnRegister);
+    addHoverHandlers(btnShowRoom);
 
+    try {
+        EmployeeCount = getEmployeeCount();
+    } catch (SQLException e) {
+        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+    }
 
+    try {
+        OrderCount = getOrderCount();
+    } catch (SQLException e) {
+        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+    }
 
-    @FXML
-    private void initialize() {
-            animateLabel();
-            setDate();
-            setCellValueFactory();
-            loadAllBooking();
-            addHoverHandlers(btnBooking);
-            addHoverHandlers(btnCustomer);
-            addHoverHandlers(btnEmployye);
-            addHoverHandlers(btnLocation);
-            addHoverHandlers(btnLogOut);
-            addHoverHandlers(btnOrder);
-            addHoverHandlers(btnProduct);
-            addHoverHandlers(btnRegister);
-            addHoverHandlers(btnShowRoom);
+    try {
+        UserCount = getUserCount();
+    } catch (SQLException e) {
+        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+    }
 
-            try {
-                EmployeeCount = getEmployeeCount();
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            }
-        try {
-            OrderCount = getOrderCount();
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-
-            try {
-                UserCount = getUserCount();
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            }
-            try {
-                BookingCount = getBookingCount();
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            }
-            setBookingCount(BookingCount);
-            setEmployeeCount(EmployeeCount);
-            setUserCount(UserCount);
-            setOrderCount(OrderCount);
-        }
-
+    try {
+        BookingCount = getBookingCount();
+    } catch (SQLException e) {
+        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+    }
+    setBookingCount(BookingCount);
+    setEmployeeCount(EmployeeCount);
+    setUserCount(UserCount);
+    setOrderCount(OrderCount);
+}
 
 
     private void addHoverHandlers(Button button) {
@@ -262,7 +258,23 @@ public class DashBoardController  {
         return 0;
     }
 
-
+    private void loadOrderData() {
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT MONTH(OrderPlaceDate_Date) AS Month, COUNT(*) AS Orders FROM `Order` GROUP BY MONTH(OrderPlaceDate_Date)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String month = resultSet.getString("Month");
+                int orders = resultSet.getInt("Orders");
+                series.getData().add(new XYChart.Data<>(month, orders));
+            }
+            BarChart.getData().add(series);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void loadAllBooking() {
         ObservableList<Booking> obList = FXCollections.observableArrayList();
@@ -284,12 +296,26 @@ public class DashBoardController  {
             }
 
             ColBookTel.setItems(obList);
+
+            ColBookTel.setRowFactory(tv -> new TableRow<Booking>() {
+                @Override
+                protected void updateItem(Booking item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setStyle("-fx-background-color: white;");
+                    } else if (item.getBookingDate().toLocalDate().isBefore(LocalDate.now())) {
+                        setStyle("-fx-background-color: #27f802;;");
+                    } else {
+                        setStyle("");
+                    }
+                }
+            });
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void setCellValueFactory() {
+            private void setCellValueFactory() {
         colBookID.setCellValueFactory(new PropertyValueFactory<>("bookingId"));
         colEmpID.setCellValueFactory(new PropertyValueFactory<>("LocId"));
         colLocID.setCellValueFactory(new PropertyValueFactory<>("empId"));
@@ -408,9 +434,60 @@ public class DashBoardController  {
 
         timeline.play();
     }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
+        XYChart.Series series1 = new XYChart.Series();
+        series1.getData().add(new XYChart.Data("January", 2323));
+        series1.getData().add(new XYChart.Data("February", 43333));
+        series1.getData().add(new XYChart.Data("March", 35000));
+        series1.getData().add(new XYChart.Data("April", 10000));
+        series1.getData().add(new XYChart.Data("May", 12000));
+        series1.getData().add(new XYChart.Data("June", 2323));
+        series1.getData().add(new XYChart.Data("July", 43333));
+        series1.getData().add(new XYChart.Data("August", 35000));
+        series1.getData().add(new XYChart.Data("September", 10000));
+        series1.getData().add(new XYChart.Data("October", 12000));
+        series1.getData().add(new XYChart.Data("November", 10000));
+        series1.getData().add(new XYChart.Data("December", 12000));
+
+        XYChart.Series series2 = new XYChart.Series();
+        series2.getData().add(new XYChart.Data("January", 23223));
+        series2.getData().add(new XYChart.Data("February", 433233));
+        series2.getData().add(new XYChart.Data("March", 35000));
+        series2.getData().add(new XYChart.Data("April", 110000));
+        series2.getData().add(new XYChart.Data("May", 122000));
+        series2.getData().add(new XYChart.Data("June", 23223));
+        series2.getData().add(new XYChart.Data("July", 433233));
+        series2.getData().add(new XYChart.Data("August", 35000));
+        series2.getData().add(new XYChart.Data("September", 110000));
+        series2.getData().add(new XYChart.Data("October", 122000));
+        series2.getData().add(new XYChart.Data("November", 110000));
+        series2.getData().add(new XYChart.Data("December", 122000));
+
+        XYChart.Series series3 = new XYChart.Series();
+        series3.getData().add(new XYChart.Data("January", 23223));
+        series3.getData().add(new XYChart.Data("February", 433233));
+        series3.getData().add(new XYChart.Data("March", 35000));
+        series3.getData().add(new XYChart.Data("April", 110000));
+        series3.getData().add(new XYChart.Data("May", 122000));
+        series3.getData().add(new XYChart.Data("June", 23223));
+        series3.getData().add(new XYChart.Data("July", 433233));
+        series3.getData().add(new XYChart.Data("August", 35000));
+        series3.getData().add(new XYChart.Data("September", 110000));
+        series3.getData().add(new XYChart.Data("October", 122000));
+        series3.getData().add(new XYChart.Data("November", 110000));
+        series3.getData().add(new XYChart.Data("December", 122000));
+        Initialize();
+        BarChart.getData().addAll(series1, series2, series3);
+
+
+    }
+
 }
-//    @Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+
 
 
 

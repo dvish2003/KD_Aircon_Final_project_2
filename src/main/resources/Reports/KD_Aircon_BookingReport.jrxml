@@ -11,15 +11,15 @@
     Location.Location_Address,
     Payment.Payment_Amount,
     Booking.Booking_Date
-FROM 
+FROM
     Booking
-JOIN 
+JOIN
     Employee ON Booking.Employee_id = Employee.Employee_id
-JOIN 
+JOIN
     Location ON Booking.Location_id = Location.Location_id
-JOIN 
+JOIN
     Payment ON Booking.Payment_id = Payment.Payment_id
-JOIN 
+JOIN
     Customer ON Location.Customer_id = Customer.Customer_id;]]>
 	</queryString>
 	<field name="Booking_id" class="java.lang.String">
@@ -56,28 +56,34 @@ JOIN
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="65" splitType="Stretch">
+		<band height="83" splitType="Stretch">
 			<staticText>
-				<reportElement x="161" y="4" width="300" height="19" uuid="35084063-4169-47ad-b963-99965fe617f3"/>
+				<reportElement x="130" y="-4" width="342" height="41" uuid="35084063-4169-47ad-b963-99965fe617f3"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font fontName="C059" size="18" isBold="true" isItalic="true"/>
 				</textElement>
 				<text><![CDATA[K.D Aircon Industries (Pvt) Ltd]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="176" y="20" width="184" height="40" uuid="8f7adb3d-fb47-457d-820a-050435c7e3e9"/>
+				<reportElement x="179" y="19" width="184" height="40" uuid="8f7adb3d-fb47-457d-820a-050435c7e3e9"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="false"/>
 				</textElement>
 				<text><![CDATA[No:321/P1,Kalderam Maduwatte,Wekada,Panadura.                                          Tel:+94725038727]]></text>
 			</staticText>
 			<image>
-				<reportElement x="4" y="-3" width="66" height="50" uuid="dfd02ffb-b6bd-45d6-8a39-80530de08034"/>
+				<reportElement x="50" y="-4" width="66" height="50" uuid="dfd02ffb-b6bd-45d6-8a39-80530de08034"/>
 				<imageExpression><![CDATA["/home/vishmee/Pictures/Screenshots/Screenshot from 2024-05-07 23-33-44.png"]]></imageExpression>
 			</image>
 			<line>
-				<reportElement x="-10" y="57" width="576" height="1" uuid="89888d0b-b624-4d5f-85ea-e6f22a956dc5"/>
+				<reportElement x="158" y="17" width="231" height="1" uuid="fee803c1-0321-4420-bd0e-2cbc516a12dd"/>
 			</line>
+			<rectangle radius="10">
+				<reportElement x="6" y="52" width="545" height="1" uuid="29f105de-9d42-4638-a102-83db5e4066ea"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
 		</band>
 	</title>
 	<pageHeader>
@@ -139,9 +145,6 @@ JOIN
 				</textElement>
 				<text><![CDATA[Date]]></text>
 			</staticText>
-			<line>
-				<reportElement x="-9" y="20" width="575" height="1" uuid="332171e9-e326-495b-a249-3dd335e10254"/>
-			</line>
 		</band>
 	</columnHeader>
 	<detail>
@@ -182,22 +185,19 @@ JOIN
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{Booking_Date}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="-8" y="32" width="574" height="1" uuid="3b46285a-c787-4066-b9b3-3fa3fb28e7c3"/>
-			</line>
 		</band>
 	</detail>
 	<columnFooter>
 		<band height="5" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="64" splitType="Stretch">
+		<band height="48" splitType="Stretch">
 			<staticText>
-				<reportElement x="228" y="18" width="100" height="30" uuid="4fdb282d-ae9e-42e9-b512-ee5bb2b4442e"/>
+				<reportElement x="228" y="18" width="152" height="30" uuid="4fdb282d-ae9e-42e9-b512-ee5bb2b4442e"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font fontName="C059" size="18" isBold="true" isItalic="true"/>
 				</textElement>
-				<text><![CDATA[Thank You..]]></text>
+				<text><![CDATA[Thank You!]]></text>
 			</staticText>
 		</band>
 	</pageFooter>
