@@ -11,7 +11,7 @@ public class CustomerRegex {
 
         switch (textField) {
             case ID:
-                filed = "^([A-Z][0-9]{3})$";
+                filed = "^([A-Z][0-9]{4})$";
                 break;
             case NAME:
                 filed = "^[A-z|\\\\s]{3,}$";
@@ -25,7 +25,7 @@ public class CustomerRegex {
                 break;
 
             case PRODUCT_ID:
-                filed="^([A-Z][A-Z][0-9]{3})$";
+                filed="^([A-Z][A-Z][0-9]{4})$";
                 break;
 
 

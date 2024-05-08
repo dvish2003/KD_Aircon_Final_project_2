@@ -204,7 +204,7 @@ JOIN
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="63509355-347f-45a7-a366-fcdad5f1a1fe"/>
 				</reportElement>
 				<textElement>
-					<font fontName="C059" size="14" isBold="true" isItalic="true"/>
+					<font fontName="C059" size="18" isBold="true" isItalic="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{Customer_Name}]]></textFieldExpression>
 			</textField>
@@ -218,7 +218,7 @@ JOIN
 				<textFieldExpression><![CDATA[$F{Booking_id}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="48" y="10" width="75" height="33" uuid="945ef621-3cc2-46dd-a9e9-692abb7b9290">
+				<reportElement x="40" y="10" width="83" height="33" uuid="945ef621-3cc2-46dd-a9e9-692abb7b9290">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93bd5287-d9a9-4c75-a1b3-575092108811"/>
 				</reportElement>
 				<textElement>

@@ -342,12 +342,12 @@ public class LocationController {
     }
     @FXML
     private void ProvinceK(KeyEvent keyEvent) {
-        CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoProvince);
+      //  CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoProvince);
 
     }
     @FXML
     private void CityK(KeyEvent keyEvent) {
-        CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoCity);
+     //   CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoCity);
 
     }
     @FXML
