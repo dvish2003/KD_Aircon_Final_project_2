@@ -255,6 +255,7 @@ public class CustomerController {
         Customer customer = new Customer(id, name, address, contact, email);
 
         try {
+            if(isValied()){}
             boolean isSaved = CustomerRepo.save(customer);
             if (isSaved) {
 
@@ -323,7 +324,17 @@ public class CustomerController {
 
         stage.show();
     }
+    public boolean isValied(){
+        if (!CustomerRegex.setTextColor(CustomerTextField.ID,txtCuId)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuName)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.CONTACT,txtCuContact)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.EMAIL,txtCuEmail)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuAddress)) return false;
 
+
+
+        return true;
+    }
 
     public void txtCustomerIDOnKeyReleased(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.ID,txtCuId);
@@ -335,7 +346,7 @@ public class CustomerController {
     }
 
     public void txtAddressOnKeyReleased(KeyEvent keyEvent) {
-      // CustomerRegex.setTextColor(CustomerTextField.ADDRESS,txtCuAddress);
+        CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuAddress);
 
     }
 
