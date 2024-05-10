@@ -103,4 +103,16 @@ public class LocationRepo {
         }
         return idList;
     }
+    public static String getLocationCurrentId() throws SQLException {
+        String sql = "SELECT Location_id FROM Location ORDER BY Location_id DESC LIMIT 1";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            String Location_id = resultSet.getString(1);
+            return Location_id;
+        }
+        return null;
+    }
 }

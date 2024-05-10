@@ -47,7 +47,7 @@ public class ShowRoomRepo {
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, showRoom.getShowRoomLocation());
-        pstm.setString(3, showRoom.getShowRoomId());
+        pstm.setString(2, showRoom.getShowRoomId());
         return pstm.executeUpdate() > 0;
     }
 
@@ -91,5 +91,16 @@ public class ShowRoomRepo {
         }
         return idList;
     }
+    public static String getCustomerCurrentId() throws SQLException {
+        String sql = "SELECT ShowRoom_id FROM ShowRoom ORDER BY ShowRoom_id DESC LIMIT 1";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
 
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            String ShowRoom_id = resultSet.getString(1);
+            return ShowRoom_id;
+        }
+        return null;
+    }
 }

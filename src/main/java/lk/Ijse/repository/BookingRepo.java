@@ -142,7 +142,7 @@ return booking;
         return bookedDates;
     }
     public static void deleteExpiredBookings() throws SQLException {
-        String query = "DELETE FROM booking WHERE booking_date < ?";
+        String query = "DELETE FROM Booking WHERE Booking_Date < ?";
 
         try (Connection connection = DbConnection.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -150,4 +150,8 @@ return booking;
             int rowsDeleted = preparedStatement.executeUpdate();
             System.out.println("Deleted " + rowsDeleted + " expired bookings.");
         }
-}}
+
+}
+
+
+}

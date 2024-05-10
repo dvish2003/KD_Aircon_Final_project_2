@@ -26,8 +26,7 @@ import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -375,15 +374,20 @@ public class BookingController {
     }
 
 
+    private boolean checkDate(Date date) throws SQLException {
+        String sql = "SELECT * FROM Booking WHERE Booking_Date = ?";
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, date);
+
+        ResultSet resultSet = pstm.executeQuery();
+        return resultSet.next(); // Returns true if a booking exists for the given date, false otherwise
+    }
 
     @FXML
     void btnBookOnAction(ActionEvent event) {
-        String bookingId = LblBookingID.getText();
-        String empId = cmbEmployeeID.getValue();
-        String LocId = cmbLocationID.getValue();
-        String paymentId = lblPaymentID.getText();
-
         LocalDate selectedDate = btnPickDate.getValue();
+
         if (selectedDate == null) {
             showAlert(Alert.AlertType.ERROR, "Please select a booking date.");
             return;
@@ -391,38 +395,48 @@ public class BookingController {
 
         Date bookingDate = Date.valueOf(selectedDate);
 
-        Date currentDate = Date.valueOf(LocalDate.now());
-
-        int Amount = Integer.parseInt(lblPaymentAmount.getText());
-        String bookingDescription = txtDesc.getText();
-
-        Booking booking = new Booking(bookingId, empId, LocId, paymentId, bookingDate, currentDate, bookingDescription);
-        Payment payment = new Payment(paymentId, Amount, currentDate);
-
         try {
-                boolean isPaySaved = PaymentRepo.save(payment);
-                             if (isPaySaved) {
-                                 boolean isBookingSave = BookingRepo.save(booking);
+            if (checkDate(bookingDate)) {
+                new Alert(Alert.AlertType.ERROR, "Booking date already exists.").show();
+                return; // Exit the method if a booking exists for the selected date
+            }
 
-                                 if (isBookingSave) {
-                                 new Alert(Alert.AlertType.CONFIRMATION, "Booking placed successfully!").show();
-                                     btnPrintBillOnAction(null);
-                                     loadAllBooking();
-                   getCurrentBookingId();
-                   getCurrentPayId();
+            String bookingId = LblBookingID.getText();
+            String empId = cmbEmployeeID.getValue();
+            String LocId = cmbLocationID.getValue();
+            String paymentId = lblPaymentID.getText();
+            Date currentDate = Date.valueOf(LocalDate.now());
+            int Amount = Integer.parseInt(lblPaymentAmount.getText());
+            String bookingDescription = txtDesc.getText();
+
+            Booking booking = new Booking(bookingId, empId, LocId, paymentId, bookingDate, currentDate, bookingDescription);
+            Payment payment = new Payment(paymentId, Amount, currentDate);
+
+            boolean isPaySaved = PaymentRepo.save(payment);
+            if (isPaySaved) {
+                boolean isBookingSave = BookingRepo.save(booking);
+                if (isBookingSave) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Booking placed successfully!").show();
+                    btnPrintBillOnAction(null);
+                    loadAllBooking();
+                    getCurrentBookingId();
+                    getCurrentPayId();
                     clearFields();
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Failed to save Booking!").show();
                 }
             } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to save Booking!").show();
+                new Alert(Alert.AlertType.ERROR, "Failed to save Payment!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Error occurred while saving data: " + e.getMessage()).show();
+        } catch (NumberFormatException e) {
+            new Alert(Alert.AlertType.ERROR, "Invalid payment amount format!").show();
         } catch (JRException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     private void clearFields() {
         cmbLocationID.getSelectionModel().clearSelection();
@@ -506,26 +520,30 @@ LblLocationAddress.setText("");
         String id = String.valueOf(cmbEmployeeID.getValue());
         try {
             Employee employee = EmployeeRepo.searchById(id);
-
-            LblEmployeeName.setText(employee.getEmpName());
-
-
-
+            if (employee != null) {
+                LblEmployeeName.setText(employee.getEmpName());
+            } else {
+                LblEmployeeName.setText("Employee not found");
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     @FXML
     void cmbLocationIDOnAction(ActionEvent event) {
         String id = String.valueOf(cmbLocationID.getValue());
         try {
             Location location = LocationRepo.searchById(id);
+if(location != null) {
+    LblLocationAddress.setText(location.getAddress());
+    LblCustomerName.setText(location.getCustomerId());
+}else{
+    LblLocationAddress.setText("Address not found");
+    LblCustomerName.setText("Not found  Customer");
 
-            LblLocationAddress.setText(location.getAddress());
-            LblCustomerName.setText(location.getCustomerId());
-
-
+}
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

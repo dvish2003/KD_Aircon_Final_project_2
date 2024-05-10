@@ -98,4 +98,16 @@ public class RegisterRepo {
         }
         return idList;
     }
+    public static String getCustomerCurrentId() throws SQLException {
+        String sql = "SELECT Register_id FROM Register ORDER BY Register_id DESC LIMIT 1";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            String Register_id = resultSet.getString(1);
+            return Register_id;
+        }
+        return null;
+    }
 }

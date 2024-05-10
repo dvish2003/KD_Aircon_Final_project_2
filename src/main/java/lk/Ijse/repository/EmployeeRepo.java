@@ -95,4 +95,16 @@ public class EmployeeRepo {
         }
         return idList;
     }
+    public static String getEmployeeCurrentId() throws SQLException {
+        String sql = "SELECT Employee_id FROM Employee ORDER BY Employee_id DESC LIMIT 1";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            String Employee_id = resultSet.getString(1);
+            return Employee_id;
+        }
+        return null;
+    }
 }

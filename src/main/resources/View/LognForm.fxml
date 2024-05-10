@@ -11,14 +11,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #000000;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.LoginController">
+<AnchorPane fx:id="MainLogAncorPane" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #000000;" stylesheets="@../css/Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.LoginController">
    <children>
       <ImageView fitHeight="735.0" fitWidth="1045.0" layoutX="-1.0" opacity="0.45" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/Screenshot%20from%202024-04-11%2000-27-20.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="620.0" layoutX="80.0" layoutY="28.0" opacity="0.82" stroke="#040317" strokeType="INSIDE" width="921.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="620.0" layoutX="80.0" layoutY="28.0" opacity="0.48" stroke="#040317" strokeType="INSIDE" width="921.0" />
       <Label layoutX="676.0" layoutY="47.0" prefHeight="73.0" prefWidth="160.0" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="45.0" />
@@ -34,7 +34,7 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogin" layoutX="674.0" layoutY="477.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="61.0" prefWidth="170.0" style="-fx-background-color: #27f802;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Sign Up" textFill="WHITE">
+      <Button fx:id="btnLogin" layoutX="674.0" layoutY="477.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="61.0" prefWidth="170.0" style="-fx-background-color: Black;" styleClass="rounded-corner-panes4" stylesheets="@../css/Style1.css" text="Sign Up" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -45,13 +45,14 @@
       <TextField fx:id="txtUserId" layoutX="587.0" layoutY="194.0" prefHeight="42.0" prefWidth="349.0" promptText="Enter your User ID" style="-fx-background-color: transparent; -fx-border-color: #27f802; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
-         </font></TextField>
+         </font>
+      </TextField>
       <ImageView fitHeight="620.0" fitWidth="446.0" layoutX="80.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Icon/Screenshot%20from%202024-04-16%2015-57-59.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="25.0" layoutX="904.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="44.0" fitWidth="25.0" layoutX="904.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true" style="-fx-blend-mode: white;">
          <image>
             <Image url="@../Icon/hidden.png" />
          </image>
@@ -59,6 +60,12 @@
       <PasswordField fx:id="txtPassword" layoutX="588.0" layoutY="305.0" prefHeight="42.0" prefWidth="349.0" promptText="Enter your Password" style="-fx-background-color: transparent; -fx-border-color: #27f802; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
-         </font></PasswordField>
+         </font>
+      </PasswordField>
+      <Label fx:id="LbLCheck" layoutX="639.0" layoutY="412.0" prefHeight="25.0" prefWidth="265.0" textFill="#fcf6f6">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

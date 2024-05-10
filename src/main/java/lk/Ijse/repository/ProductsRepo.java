@@ -121,5 +121,17 @@ public class ProductsRepo {
 
         return pstm.executeUpdate() > 0;
     }
+    public static String getProductCurrentId() throws SQLException {
+        String sql = "SELECT Product_id FROM Product ORDER BY Product_id DESC LIMIT 1";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            String Product_id = resultSet.getString(1);
+            return Product_id;
+        }
+        return null;
+    }
 
 }

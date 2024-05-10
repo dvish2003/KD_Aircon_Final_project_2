@@ -1,5 +1,21 @@
 package lk.Ijse.Controller;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+
+import java.sql.*;
+import java.time.LocalTime;
 import javafx.animation.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,18 +34,18 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Booking;
+import lk.Ijse.Model.Employee;
 import lk.Ijse.repository.BookingRepo;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import lk.Ijse.repository.EmployeeRepo;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -37,20 +53,48 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DashBoardController implements Initializable {
+public class DashBoardController {
+
+    @FXML
+    private AnchorPane B1;
+
 
 
     @FXML
-    private BarChart<String,Integer> BarChart;
+    private AnchorPane DashBoardAncorPane;
 
     @FXML
-    private Label lblOrderCount;
+    private AnchorPane E1;
 
+    @FXML
+    private Label LblBookingCustomerName;
+
+    @FXML
+    private Label LblLocationBooking;
+
+    @FXML
+    private AnchorPane MenuAncorPane;
+
+    @FXML
+    private Button MenuBtn;
+
+    @FXML
+    private Button ModeBtn;
+
+    @FXML
+    private AnchorPane O1;
     @FXML
     private TableView<Booking> ColBookTel;
 
+
     @FXML
-    public AnchorPane SpecialDataPane;
+    private PieChart PieChart;
+
+    @FXML
+    private Button SearchBtn;
+
+    @FXML
+    private AnchorPane SpecialDataPane;
 
     @FXML
     private Button btnBooking;
@@ -60,8 +104,6 @@ public class DashBoardController implements Initializable {
 
     @FXML
     private Button btnEmployye;
-
-
 
     @FXML
     private Button btnLocation;
@@ -101,8 +143,33 @@ public class DashBoardController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> colPlaceDate;
+
+    @FXML
+    private Label lblBookingDate;
+
+    @FXML
+    private Label lblDate;
+
+    @FXML
+    private Label lblEContatc;
+
+    @FXML
+    private Label lblEName;
+
+    @FXML
+    private Label lblEmail;
+
+    @FXML
+    private Label lblEmployeeCount;
+
     @FXML
     private Label lblGreeting;
+
+    @FXML
+    private Label lblOrderCount;
+
+    @FXML
+    private Label lblProductCount;
 
     @FXML
     private Label lblTime;
@@ -111,18 +178,14 @@ public class DashBoardController implements Initializable {
     private Label lblTitle;
 
     @FXML
-    private Label lblEmployeeCount;
-
-    @FXML
-    private Label lblProductCount;
-
-    @FXML
-    private Label lblDate;
+    private Label lblUser;
 
     @FXML
     private Label lblUserCount;
-    
-    private String fullTitle ="K.D Aircon Industries (Pvt) Ltd";
+
+    @FXML
+    private TextField txtSearch;
+    private String fullTitle ="KD.Aircon Industries (Pvt) Ltd";
 
     private int currentIndex = 0;
 
@@ -134,83 +197,98 @@ public class DashBoardController implements Initializable {
 
     private int OrderCount;
 
-
-public void Initialize(){
-
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-        LocalTime currentTime = LocalTime.now();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        String formattedTime = currentTime.format(formatter);
-
-        lblTime.setText(formattedTime);
-
-        int currentHour = currentTime.getHour();
-        String greeting = currentHour < 12 ? "Good Morning ...." : "Good Afternoon...";
-
-        lblGreeting.setText(greeting);
+    private boolean darkMode = false;
+    private boolean isMenuVisible = true;
 
 
-    }));
-    timeline.setCycleCount(Animation.INDEFINITE);
-    timeline.play();
+
+    public void initialize(){
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> { // set current Time
+            LocalTime currentTime = LocalTime.now();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String formattedTime = currentTime.format(formatter);
+
+            lblTime.setText(formattedTime);
+
+            int currentHour = currentTime.getHour();
+            String greeting = currentHour < 12 ? "Good Morning" : "Good Afternoon";
+
+            lblGreeting.setText(greeting); // say Good Morning
 
 
-    loadOrderData();
-    animateLabel();
-    setDate();
-    setCellValueFactory();
-    loadAllBooking();
-    addHoverHandlers(btnBooking);
-    addHoverHandlers(btnCustomer);
-    addHoverHandlers(btnEmployye);
-    addHoverHandlers(btnLocation);
-    addHoverHandlers(btnLogOut);
-    addHoverHandlers(btnOrder);
-    addHoverHandlers(btnProduct);
-    addHoverHandlers(btnRegister);
-    addHoverHandlers(btnShowRoom);
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
 
-    try {
-        EmployeeCount = getEmployeeCount();
-    } catch (SQLException e) {
-        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        txtSearch.setOnKeyPressed(event -> {
+//            if (event.getCode() == KeyCode.ENTER) {
+//                SearchBtn.requestFocus();
+//            }
+//        });
+
+        //loadOrderData();
+        displayTodayBookings();
+        animateLabel();
+        setDate();
+        setCellValueFactory();
+        loadAllBooking();
+        addHoverHandlers(btnBooking);
+        addHoverHandlers(btnCustomer);
+        addHoverHandlers(btnEmployye);
+        addHoverHandlers(btnLocation);
+        addHoverHandlers(btnLogOut);
+        addHoverHandlers(btnOrder);
+        addHoverHandlers(btnProduct);
+        addHoverHandlers(btnRegister);
+        addHoverHandlers(btnShowRoom);
+
+        try {
+            EmployeeCount = getEmployeeCount();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
+        try {
+            OrderCount = getOrderCount();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
+        try {
+            UserCount = getUserCount();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+
+        try {
+            BookingCount = getBookingCount();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+        setBookingCount(BookingCount);
+        setEmployeeCount(EmployeeCount);
+        setUserCount(UserCount);
+        setOrderCount(OrderCount);
+
     }
 
-    try {
-        OrderCount = getOrderCount();
-    } catch (SQLException e) {
-        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-    }
-
-    try {
-        UserCount = getUserCount();
-    } catch (SQLException e) {
-        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-    }
-
-    try {
-        BookingCount = getBookingCount();
-    } catch (SQLException e) {
-        new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-    }
-    setBookingCount(BookingCount);
-    setEmployeeCount(EmployeeCount);
-    setUserCount(UserCount);
-    setOrderCount(OrderCount);
-
-}
 
 
-
-    private void addHoverHandlers(Button button) {
+    private void addHoverHandlers(Button button) {// button Animation
         button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
         });
         button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
+            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
         });
     }
+
+
+
+
+
     private void setOrderCount(int UserCount) {
         lblOrderCount.setText(String.valueOf(UserCount));
 
@@ -282,24 +360,6 @@ public void Initialize(){
         return 0;
     }
 
-    private void loadOrderData() {
-        XYChart.Series<String, Integer> series = new XYChart.Series<>();
-        try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT MONTH(OrderPlaceDate_Date) AS Month, COUNT(*) AS Orders FROM `Order` GROUP BY MONTH(OrderPlaceDate_Date)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                String month = resultSet.getString("Month");
-                int orders = resultSet.getInt("Orders");
-                series.getData().add(new XYChart.Data<>(month, orders));
-            }
-            BarChart.getData().add(series);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void loadAllBooking() {
         ObservableList<Booking> obList = FXCollections.observableArrayList();
 
@@ -321,14 +381,14 @@ public void Initialize(){
 
             ColBookTel.setItems(obList);
 
-            ColBookTel.setRowFactory(tv -> new TableRow<Booking>() {
+            ColBookTel.setRowFactory(tv -> new TableRow<Booking>() {   // already expire date colour
                 @Override
                 protected void updateItem(Booking item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty || item == null) {
                         setStyle("-fx-background-color: white;");
                     } else if (item.getBookingDate().toLocalDate().isBefore(LocalDate.now())) {
-                        setStyle("-fx-background-color: #27f802;;");
+                        setStyle("-fx-background-color: #70a1ff;");
                     } else {
                         setStyle("");
                     }
@@ -339,7 +399,7 @@ public void Initialize(){
         }
     }
 
-            private void setCellValueFactory() {
+    private void setCellValueFactory() {
         colBookID.setCellValueFactory(new PropertyValueFactory<>("bookingId"));
         colEmpID.setCellValueFactory(new PropertyValueFactory<>("LocId"));
         colLocID.setCellValueFactory(new PropertyValueFactory<>("empId"));
@@ -356,15 +416,135 @@ public void Initialize(){
 
     }
 
+    private void animateLabel() {
+
+        Timeline timeline = new Timeline();
+        KeyFrame keyFrame = new KeyFrame(
+                Duration.seconds(0.2),
+                event -> {
+                    if (currentIndex <= fullTitle.length()) {
+                        lblTitle.setText(fullTitle.substring(0, currentIndex));
+                        currentIndex++;
+                    }
+                }
+        );
+
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.setCycleCount(fullTitle.length() + 1);
+
+
+        timeline.play();
+
+    }
+
+    public void setUserId(String userId) {
+        lblUser.setText(userId);
+    }
+
 
 
 
     @FXML
+    void ModeBtnOnAction(ActionEvent event) {   // Dark Mode Light Mode
+        if (darkMode) {
+            DashBoardAncorPane.setStyle("-fx-background-color: white;");
+            B1.setStyle("-fx-background-color: Black;");
+
+        } else {
+            DashBoardAncorPane.setStyle("-fx-background-color: #2f3542;");
+            B1.setStyle("-fx-background-color: White;");
+            //lblGreeting.setStyle("-fx-background-color: White;");
+
+        }
+        darkMode = !darkMode;
+    }
+
+    private void displayTodayBookings() {
+        LocalDate today = LocalDate.now();
+
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+
+            String sql = "SELECT C.Customer_Name, L.Location_Address, B.Booking_Date " +
+                    "FROM Booking B " +
+                    "INNER JOIN Location L ON B.Location_id = L.Location_id " +
+                    "INNER JOIN Customer C ON L.Customer_id = C.Customer_id " +
+                    "WHERE B.Booking_Date = ?";
+
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setDate(1, Date.valueOf(today));
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                LblBookingCustomerName.setText(rs.getString("Customer_Name"));
+                LblLocationBooking.setText(rs.getString("Location_Address"));
+                lblBookingDate.setText(rs.getDate("Booking_Date").toLocalDate().toString());
+            } else {
+                // No bookings for today
+                LblBookingCustomerName.setText("No bookings for today");
+                LblLocationBooking.setText("");
+                lblBookingDate.setText("");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void MenuBtnOnAction(ActionEvent event) {  // hide menu Bar
+        if (isMenuVisible) {
+            hideMenu();
+        } else {
+            showMenu();
+        }
+        isMenuVisible = !isMenuVisible;
+    }
+
+    private void hideMenu() {
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), MenuAncorPane);
+        transition.setToX(-MenuAncorPane.getWidth());
+        transition.play();
+    }
+
+    private void showMenu() {
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), MenuAncorPane);
+        transition.setToX(0);
+        transition.play();
+    }
+    @FXML
+    void SearchBtnOnAction(ActionEvent event) throws SQLException {
+ String EmployeeID = txtSearch.getText();
+
+
+ try{
+     Employee employee = EmployeeRepo.searchById(EmployeeID);
+     lblEName.setText(employee.getEmpName());
+     lblEContatc.setText(employee.getEmpPhone());
+     lblEmail.setText(employee.getEmpEmail());
+
+ } catch (SQLException e) {
+    // throw new RuntimeException(e);
+     showAlert(Alert.AlertType.ERROR, "Error occurred while fetching Employee: " + e.getMessage());
+
+ }
+
+    }
+
+
+    @FXML
     void btnBookingOnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Booking.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LognForm.fxml"));
         Parent rootNode = loader.load();
-        SpecialDataPane.getChildren().clear();
-        SpecialDataPane.getChildren().add(rootNode);
+
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(rootNode));
+
+        newStage.show();
+
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
 
     }
 
@@ -439,81 +619,11 @@ public void Initialize(){
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
     }
-
-    private void animateLabel() {
-
-        Timeline timeline = new Timeline();
-        KeyFrame keyFrame = new KeyFrame(
-                Duration.seconds(0.2),
-                event -> {
-                    if (currentIndex <= fullTitle.length()) {
-                        lblTitle.setText(fullTitle.substring(0, currentIndex));
-                        currentIndex++;
-                    }
-                }
-        );
-
-        timeline.getKeyFrames().add(keyFrame);
-        timeline.setCycleCount(fullTitle.length() + 1);
-
-
-        timeline.play();
-
+    private void showAlert(Alert.AlertType alertType, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
-        XYChart.Series series1 = new XYChart.Series();
-        series1.getData().add(new XYChart.Data("January", 2323));
-        series1.getData().add(new XYChart.Data("February", 43333));
-        series1.getData().add(new XYChart.Data("March", 35000));
-        series1.getData().add(new XYChart.Data("April", 10000));
-        series1.getData().add(new XYChart.Data("May", 12000));
-        series1.getData().add(new XYChart.Data("June", 2323));
-        series1.getData().add(new XYChart.Data("July", 43333));
-        series1.getData().add(new XYChart.Data("August", 35000));
-        series1.getData().add(new XYChart.Data("September", 10000));
-        series1.getData().add(new XYChart.Data("October", 12000));
-        series1.getData().add(new XYChart.Data("November", 10000));
-        series1.getData().add(new XYChart.Data("December", 12000));
-
-        XYChart.Series series2 = new XYChart.Series();
-        series2.getData().add(new XYChart.Data("January", 23223));
-        series2.getData().add(new XYChart.Data("February", 433233));
-        series2.getData().add(new XYChart.Data("March", 35000));
-        series2.getData().add(new XYChart.Data("April", 110000));
-        series2.getData().add(new XYChart.Data("May", 122000));
-        series2.getData().add(new XYChart.Data("June", 23223));
-        series2.getData().add(new XYChart.Data("July", 433233));
-        series2.getData().add(new XYChart.Data("August", 35000));
-        series2.getData().add(new XYChart.Data("September", 110000));
-        series2.getData().add(new XYChart.Data("October", 122000));
-        series2.getData().add(new XYChart.Data("November", 110000));
-        series2.getData().add(new XYChart.Data("December", 122000));
-
-        XYChart.Series series3 = new XYChart.Series();
-        series3.getData().add(new XYChart.Data("January", 23223));
-        series3.getData().add(new XYChart.Data("February", 433233));
-        series3.getData().add(new XYChart.Data("March", 35000));
-        series3.getData().add(new XYChart.Data("April", 110000));
-        series3.getData().add(new XYChart.Data("May", 122000));
-        series3.getData().add(new XYChart.Data("June", 23223));
-        series3.getData().add(new XYChart.Data("July", 433233));
-        series3.getData().add(new XYChart.Data("August", 35000));
-        series3.getData().add(new XYChart.Data("September", 110000));
-        series3.getData().add(new XYChart.Data("October", 122000));
-        series3.getData().add(new XYChart.Data("November", 110000));
-        series3.getData().add(new XYChart.Data("December", 122000));
-        Initialize();
-        BarChart.getData().addAll(series1, series2, series3);
-
-
-    }
 
 }
-
-
-
-
-

@@ -136,4 +136,15 @@ FROM `Order` o
 WHERE o.Order_id = 'your_order_id_here';
 
 
-
+SELECT
+    C.Customer_Name,
+    L.Location_Address,
+    B.Booking_Date
+FROM
+    Booking B
+        INNER JOIN
+    Location L ON B.Location_id = L.Location_id
+        INNER JOIN
+    Customer C ON L.Customer_id = C.Customer_id
+WHERE
+    B.Booking_Date =  ? ;
