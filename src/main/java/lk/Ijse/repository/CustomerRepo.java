@@ -24,20 +24,20 @@ public class CustomerRepo {
 
            return pstm.executeUpdate() > 0;
     }
-    public static Customer searchById(String id) throws SQLException {
- String sql = "SELECT * FROM Customer WHERE Customer_id = ?";
+    public static Customer searchById(String Contact) throws SQLException {
+ String sql = "SELECT * FROM Customer WHERE Customer_Contact = ?";
  Connection connection = DbConnection.getInstance().getConnection();
  PreparedStatement pstm = connection.prepareStatement(sql);
- pstm.setObject(1,id);
+ pstm.setObject(1,Contact);
  ResultSet rs = pstm.executeQuery();
  if (rs.next()){
      String cus_id = rs.getString(1);
      String Name = rs.getString(2);
      String Address = rs.getString(3);
-     String Contact = rs.getString(4);
+      String contact = rs.getString(4);
      String Email = rs.getString(5);
 
-     Customer customer = new Customer(cus_id,Name,Address,Contact,Email);
+     Customer customer = new Customer(cus_id,Name,Address,contact,Email);
 
       return customer;
 

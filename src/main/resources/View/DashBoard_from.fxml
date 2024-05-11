@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,8 +28,8 @@
    <children>
       <AnchorPane fx:id="MenuAncorPane" layoutX="12.0" layoutY="80.0" prefHeight="913.0" prefWidth="269.0" style="-fx-background-color: Black;" styleClass="rounded-corner-panes2">
          <children>
-            <Line endX="-24.0" layoutX="120.0" layoutY="799.0" startX="-105.33333587646484" stroke="WHITE" />
-            <Line endX="-24.0" layoutX="276.0" layoutY="800.0" startX="-105.33333587646484" stroke="WHITE" />
+            <Line fx:id="lblL1" endX="-24.0" layoutX="120.0" layoutY="799.0" startX="-105.33333587646484" stroke="WHITE" />
+            <Line fx:id="lblL2" endX="-24.0" layoutX="276.0" layoutY="800.0" startX="-105.33333587646484" stroke="WHITE" />
             <ImageView fitHeight="218.0" fitWidth="113.0" layoutX="80.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/profile.png" />
@@ -42,6 +43,9 @@
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Button>
             <Button fx:id="btnLocation" alignment="BOTTOM_LEFT" layoutX="30.0" layoutY="320.0" mnemonicParsing="false" onAction="#btnLocationOnAction" opacity="0.86" prefHeight="44.0" prefWidth="215.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes2" text="     Location" textFill="#fffffffc">
                <stylesheets>
@@ -51,6 +55,9 @@
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Button>
             <Button fx:id="btnOrder" alignment="BOTTOM_LEFT" layoutX="30.0" layoutY="379.0" mnemonicParsing="false" onAction="#btnOrderOnAction" opacity="0.86" prefHeight="44.0" prefWidth="215.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes2" text="     Order" textFill="#fffffffc">
                <stylesheets>
@@ -60,6 +67,9 @@
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Button>
             <Button fx:id="btnBooking" alignment="BOTTOM_LEFT" layoutX="30.0" layoutY="439.0" mnemonicParsing="false" onAction="#btnBookingOnAction" opacity="0.86" prefHeight="44.0" prefWidth="215.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes2" text="     Booking" textFill="#fffffffc">
                <stylesheets>
@@ -69,6 +79,9 @@
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Button>
             <Button fx:id="btnShowRoom" alignment="BOTTOM_LEFT" layoutX="30.0" layoutY="500.0" mnemonicParsing="false" onAction="#btnShowRoomOnAction" opacity="0.86" prefHeight="44.0" prefWidth="215.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes2" text="     ShowRoom" textFill="#fffffffc">
                <stylesheets>
@@ -78,6 +91,9 @@
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Button>
             <Button fx:id="btnProduct" alignment="BOTTOM_LEFT" layoutX="30.0" layoutY="560.0" mnemonicParsing="false" onAction="#btnProductOnAction" opacity="0.86" prefHeight="44.0" prefWidth="215.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes2" text="     Product" textFill="#fffffffc">
                <stylesheets>
@@ -87,6 +103,9 @@
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Button>
             <Button fx:id="btnEmployye" alignment="BOTTOM_LEFT" layoutX="30.0" layoutY="623.0" mnemonicParsing="false" onAction="#btnEmployyeOnAction" opacity="0.86" prefHeight="44.0" prefWidth="215.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes2" text="     Employee" textFill="#fffffffc">
                <stylesheets>
@@ -96,6 +115,9 @@
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Button>
             <Button fx:id="btnRegister" alignment="BOTTOM_LEFT" layoutX="30.0" layoutY="683.0" mnemonicParsing="false" onAction="#btnRegisterOnAction" opacity="0.86" prefHeight="44.0" prefWidth="215.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes2" text="     Register " textFill="#fffffffc">
                <stylesheets>
@@ -105,8 +127,11 @@
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Button>
-            <Label layoutX="110.0" layoutY="786.0" prefHeight="26.0" prefWidth="59.0" text="Click" textFill="WHITE">
+            <Label fx:id="lblClick" layoutX="108.0" layoutY="786.0" prefHeight="26.0" prefWidth="59.0" text="Click" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
@@ -119,6 +144,9 @@
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Button>
             <Label fx:id="lblUser" layoutX="95.0" layoutY="182.0" prefHeight="50.0" prefWidth="91.0" textFill="WHITE">
                <font>
@@ -130,18 +158,29 @@
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
-         </children></AnchorPane>
-      <AnchorPane layoutX="15.0" layoutY="8.0" prefHeight="58.0" prefWidth="1891.0" style="-fx-background-color: Black;" styleClass="rounded-corner-panes2">
+         </children>
+         <effect>
+            <DropShadow />
+         </effect></AnchorPane>
+      <AnchorPane fx:id="TitleBar" layoutX="15.0" layoutY="8.0" prefHeight="58.0" prefWidth="1891.0" style="-fx-background-color: Black;" styleClass="rounded-corner-panes2">
          <children>
             <Label fx:id="lblDate" layoutX="1274.0" layoutY="11.0" prefHeight="38.0" prefWidth="188.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
-         </children></AnchorPane>
+            <Button fx:id="MenuBtn" layoutX="10.0" layoutY="5.0" mnemonicParsing="false" onAction="#MenuBtnOnAction" prefHeight="46.0" prefWidth="141.0" style="-fx-background-color: transparent;" styleClass="rounded-corner-panes3" stylesheets="@../css/Style1.css" text="Menu" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Button>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect></AnchorPane>
       <AnchorPane fx:id="U1" layoutX="1616.0" layoutY="86.0" prefHeight="229.0" prefWidth="289.0" style="-fx-background-color: Black;" styleClass="rounded-corner-panes2">
          <children>
-            <Label layoutX="61.0" layoutY="54.0" prefHeight="38.0" prefWidth="172.0" text="User Count" textFill="#ffe5e5">
+            <Label fx:id="lblUc" layoutX="61.0" layoutY="54.0" prefHeight="38.0" prefWidth="172.0" text="User Count" textFill="#ffe5e5">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -157,10 +196,13 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </AnchorPane>
       <AnchorPane fx:id="E1" layoutX="1616.0" layoutY="320.0" prefHeight="218.0" prefWidth="289.0" style="-fx-background-color: Black;" styleClass="rounded-corner-panes2">
          <children>
-            <Label layoutX="38.0" layoutY="55.0" prefHeight="38.0" prefWidth="214.0" text="EmployeeCount" textFill="#ffe5e5">
+            <Label fx:id="LblEc" layoutX="38.0" layoutY="55.0" prefHeight="38.0" prefWidth="214.0" text="EmployeeCount" textFill="#ffe5e5">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -176,10 +218,13 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </AnchorPane>
       <AnchorPane fx:id="B1" layoutX="1616.0" layoutY="542.0" prefHeight="230.0" prefWidth="289.0" style="-fx-background-color: Black;" styleClass="rounded-corner-panes2">
          <children>
-            <Label layoutX="43.0" layoutY="59.0" prefHeight="38.0" prefWidth="201.0" text="Booking Count" textFill="#ffe5e5">
+            <Label fx:id="LblBc" layoutX="43.0" layoutY="59.0" prefHeight="38.0" prefWidth="201.0" text="Booking Count" textFill="#ffe5e5">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -195,6 +240,9 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </AnchorPane>
       <AnchorPane fx:id="SpecialDataPane" layoutX="323.0" layoutY="88.0" prefHeight="906.0" prefWidth="1250.0">
          <children>
@@ -294,7 +342,7 @@
                   <String fx:value="rounded-corner-panes3" />
                </styleClass>
                <children>
-                  <TextField fx:id="txtSearch" layoutX="106.0" layoutY="-235.0" prefHeight="44.0" prefWidth="437.0" promptText="Search Employee" styleClass="rounded-corner-panes2" stylesheets="@../css/Style1.css">
+                  <TextField fx:id="txtSearch" layoutX="106.0" layoutY="-235.0" onKeyReleased="#txtSearchKeyReleased" prefHeight="44.0" prefWidth="437.0" promptText="Search Employee" styleClass="rounded-corner-panes2" stylesheets="@../css/Style1.css">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font></TextField>
@@ -385,7 +433,7 @@
          </children></AnchorPane>
       <AnchorPane fx:id="O1" layoutX="1615.0" layoutY="777.0" prefHeight="218.0" prefWidth="290.0" style="-fx-background-color: Black;" styleClass="rounded-corner-panes2">
          <children>
-            <Label layoutX="63.0" layoutY="59.0" prefHeight="38.0" prefWidth="188.0" text="Order Count" textFill="#ffe5e5">
+            <Label fx:id="lblOc" layoutX="63.0" layoutY="59.0" prefHeight="38.0" prefWidth="188.0" text="Order Count" textFill="#ffe5e5">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -401,6 +449,9 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <DropShadow />
+         </effect>
       </AnchorPane>
       <Label fx:id="lblTime" layoutX="1490.0" layoutY="20.0" prefHeight="38.0" prefWidth="221.0" textFill="WHITE">
          <font>
@@ -409,12 +460,7 @@
       </Label>
       <Group layoutX="5.0" layoutY="10.0">
          <children>
-            <Button fx:id="MenuBtn" mnemonicParsing="false" onAction="#MenuBtnOnAction" prefHeight="46.0" prefWidth="189.0" style="-fx-background-color: transparent;" text="Menu" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-            </Button>
-            <ImageView fitHeight="32.0" fitWidth="47.0" layoutX="20.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="32.0" fitWidth="47.0" layoutX="25.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Icon/icons8-menu-48.png" />
                </image>
@@ -428,7 +474,7 @@
       </Label>
       <Group layoutX="1400.0" layoutY="16.0">
          <children>
-            <Button fx:id="ModeBtn" layoutX="343.0" layoutY="-4.0" mnemonicParsing="false" onAction="#ModeBtnOnAction" prefHeight="52.0" prefWidth="151.0" style="-fx-background-color: transparent;" text="    Mode" textFill="WHITE">
+            <Button fx:id="ModeBtn" layoutX="343.0" layoutY="-4.0" mnemonicParsing="false" onAction="#ModeBtnOnAction" prefHeight="52.0" prefWidth="151.0" style="-fx-background-color: transparent;" styleClass="rounded-corner-panes3" stylesheets="@../css/Style1.css" text="    Mode" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>

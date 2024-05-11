@@ -63,5 +63,16 @@ public class CustomerRegex {
         }
         return false;
     }
+    public static boolean setTextColor2(CustomerTextField location, TextField textField) {
+        if (CustomerRegex.isTextFieldValid(location, textField.getText())) {
+
+            textField.setStyle("-fx-text-fill: Black; ");
+        } else {
+            textField.setStyle("-fx-text-fill: red;");
+
+            return false;
+        }
+        return false;
+    }
     }
 

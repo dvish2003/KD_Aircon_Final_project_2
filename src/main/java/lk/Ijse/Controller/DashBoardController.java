@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -35,6 +36,8 @@ import javafx.util.Duration;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Booking;
 import lk.Ijse.Model.Employee;
+import lk.Ijse.Util.CustomerRegex;
+import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.BookingRepo;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Button;
@@ -55,10 +58,17 @@ import java.util.ResourceBundle;
 
 public class DashBoardController {
 
+   // public static final AnchorPane U1 = ;
+   @FXML
+  private Label LblEc;
+    @FXML
+  private Label LblBc;
+    @FXML
+  private Label lblUc;
     @FXML
     private AnchorPane B1;
-
-
+    @FXML
+    private AnchorPane U1;
 
     @FXML
     private AnchorPane DashBoardAncorPane;
@@ -86,6 +96,8 @@ public class DashBoardController {
     @FXML
     private TableView<Booking> ColBookTel;
 
+    @FXML
+    private AnchorPane TitleBar;
 
     @FXML
     private PieChart PieChart;
@@ -163,6 +175,9 @@ public class DashBoardController {
     private Label lblEmployeeCount;
 
     @FXML
+    private Label lblOc;
+
+    @FXML
     private Label lblGreeting;
 
     @FXML
@@ -170,6 +185,16 @@ public class DashBoardController {
 
     @FXML
     private Label lblProductCount;
+
+    @FXML
+    private Line lblL1;
+
+    @FXML
+    private Line lblL2;
+
+
+    @FXML
+    private Label lblClick;
 
     @FXML
     private Label lblTime;
@@ -244,6 +269,7 @@ public class DashBoardController {
         addHoverHandlers(btnRegister);
         addHoverHandlers(btnShowRoom);
 
+
         try {
             EmployeeCount = getEmployeeCount();
         } catch (SQLException e) {
@@ -284,6 +310,7 @@ public class DashBoardController {
             button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
         });
     }
+
 
 
 
@@ -449,11 +476,62 @@ public class DashBoardController {
         if (darkMode) {
             DashBoardAncorPane.setStyle("-fx-background-color: white;");
             B1.setStyle("-fx-background-color: Black;");
+            MenuAncorPane.setStyle("-fx-background-color: Black;");
+            TitleBar.setStyle("-fx-background-color: Black;");
+            O1.setStyle("-fx-background-color: Black;");
+            E1.setStyle("-fx-background-color: Black;");
+            O1.setStyle("-fx-background-color: Black;");
+            U1.setStyle("-fx-background-color: Black;");
 
+            lblGreeting.setStyle("-fx-text-fill: White;");
+            lblDate.setStyle("-fx-text-fill: White;");
+            lblProductCount.setStyle("-fx-text-fill: White;");
+            lblTitle.setStyle("-fx-text-fill: White;");
+            lblUc.setStyle("-fx-text-fill: White;");
+            lblUser.setStyle("-fx-text-fill: White;");
+            lblTime.setStyle("-fx-text-fill: White;");
+            lblOrderCount.setStyle("-fx-text-fill: White;");
+            lblUserCount.setStyle("-fx-text-fill: White;");
+            lblEmployeeCount.setStyle("-fx-text-fill: White;");
+            LblBc.setStyle("-fx-text-fill: White;");
+            LblEc.setStyle("-fx-text-fill: White;");
+            lblOc.setStyle("-fx-text-fill: White;");
+            lblL1.setStyle("-fx-text-fill: White;");
+            lblL2.setStyle("-fx-text-fill: White;");
+            lblClick.setStyle("-fx-text-fill: White;");
+            MenuBtn.setStyle("-fx-text-fill: White;-fx-background-color: Transparent");
+            ModeBtn.setStyle("-fx-text-fill: White;-fx-background-color: Transparent");
         } else {
             DashBoardAncorPane.setStyle("-fx-background-color: #2f3542;");
             B1.setStyle("-fx-background-color: White;");
-            //lblGreeting.setStyle("-fx-background-color: White;");
+            MenuAncorPane.setStyle("-fx-background-color: White;");
+            TitleBar.setStyle("-fx-background-color: White;");
+            O1.setStyle("-fx-background-color: White;");
+            E1.setStyle("-fx-background-color: White;");
+            O1.setStyle("-fx-background-color: White;");
+            U1.setStyle("-fx-background-color: White;");
+
+
+
+            lblGreeting.setStyle("-fx-text-fill: black;");
+            lblDate.setStyle("-fx-text-fill: black;");
+            lblProductCount.setStyle("-fx-text-fill: black;");
+            lblTitle.setStyle("-fx-text-fill: black;");
+            lblUc.setStyle("-fx-text-fill: black;");
+            lblUser.setStyle("-fx-text-fill: black;");
+            lblTime.setStyle("-fx-text-fill: black;");
+            lblOrderCount.setStyle("-fx-text-fill: black;");
+            lblUserCount.setStyle("-fx-text-fill: black;");
+            lblEmployeeCount.setStyle("-fx-text-fill: black;");
+            LblBc.setStyle("-fx-text-fill: black;");
+            LblEc.setStyle("-fx-text-fill: black;");
+            lblOc.setStyle("-fx-text-fill: black;");
+            lblL1.setStyle("-fx-text-fill: black;");
+            lblL2.setStyle("-fx-text-fill: black;");
+            lblClick.setStyle("-fx-text-fill: black;");
+            MenuBtn.setStyle("-fx-text-fill: black; -fx-background-color: Transparent");
+            ModeBtn.setStyle("-fx-text-fill: black; -fx-background-color: Transparent");
+
 
         }
         darkMode = !darkMode;
@@ -514,37 +592,31 @@ public class DashBoardController {
         transition.play();
     }
     @FXML
-    void SearchBtnOnAction(ActionEvent event) throws SQLException {
- String EmployeeID = txtSearch.getText();
+    void SearchBtnOnAction(ActionEvent event) {
+        String EmployeeID = txtSearch.getText();
 
-
- try{
-     Employee employee = EmployeeRepo.searchById(EmployeeID);
-     lblEName.setText(employee.getEmpName());
-     lblEContatc.setText(employee.getEmpPhone());
-     lblEmail.setText(employee.getEmpEmail());
-
- } catch (SQLException e) {
-    // throw new RuntimeException(e);
-     showAlert(Alert.AlertType.ERROR, "Error occurred while fetching Employee: " + e.getMessage());
-
- }
-
+        try {
+            Employee employee = EmployeeRepo.searchById(EmployeeID);
+            if (employee != null) {
+                lblEName.setText(employee.getEmpName());
+                lblEContatc.setText(employee.getEmpPhone());
+                lblEmail.setText(employee.getEmpEmail());
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Employee not found.");
+            }
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Error occurred while fetching Employee: " + e.getMessage());
+        }
     }
 
 
     @FXML
     void btnBookingOnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LognForm.fxml"));
-        Parent rootNode = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Booking.fxml"));
+            Parent rootNode = loader.load();
+            SpecialDataPane.getChildren().clear();
+            SpecialDataPane.getChildren().add(rootNode);
 
-        Stage newStage = new Stage();
-        newStage.setScene(new Scene(rootNode));
-
-        newStage.show();
-
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        currentStage.close();
 
     }
 
@@ -552,16 +624,26 @@ public class DashBoardController {
     void btnCustomerOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/CustomerForm.fxml"));
         Parent rootNode = loader.load();
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
 
     @FXML
     void btnEmployyeOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/EmployeeForm.fxml"));
         Parent rootNode = loader.load();
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
 
 
@@ -570,8 +652,13 @@ public class DashBoardController {
     void btnLocationOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LocationForm.fxml"));
         Parent rootNode = loader.load();
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
 
     @FXML
@@ -592,38 +679,62 @@ public class DashBoardController {
     void btnOrderOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Order.fxml"));
         Parent rootNode = loader.load();
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
 
     @FXML
     void btnProductOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Product.fxml"));
         Parent rootNode = loader.load();
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Register_form.fxml"));
         Parent rootNode = loader.load();
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
 
     @FXML
     void btnShowRoomOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ShowRoom.fxml"));
         Parent rootNode = loader.load();
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
     private void showAlert(Alert.AlertType alertType, String message) {
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
         alert.showAndWait();
     }
+    @FXML
+    void txtSearchKeyReleased(KeyEvent event) {
+        CustomerRegex.setTextColor2(CustomerTextField.ID,txtSearch);
 
+    }
 
 }

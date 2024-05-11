@@ -18,9 +18,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Model.Customer;
+import lk.Ijse.Model.Employee;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.CustomerRepo;
+import lk.Ijse.repository.EmployeeRepo;
+import lk.Ijse.repository.OrderRepo;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,6 +31,11 @@ import java.util.List;
 
 public class CustomerController {
 
+    @FXML
+    private TextField txtSearch;
+
+    @FXML
+    private Button SearchBtn;
 
     @FXML
     private Button btnHome;
@@ -40,7 +48,8 @@ public class CustomerController {
     private Button btnNext;
     @FXML
     private Button btnSave;
-
+    @FXML
+    private Label lblCustomerID;
     @FXML
     private Button btnUpdate;
 
@@ -52,7 +61,8 @@ public class CustomerController {
 
     @FXML
     private TableColumn<?, ?> colContact;
-
+    @FXML
+    private Label lblCustomerID1;
 
     @FXML
     private TableView<Customer> colCuTel;
@@ -76,8 +86,6 @@ public class CustomerController {
     @FXML
     private TextField txtCuEmail;
 
-    @FXML
-    private TextField txtCuId;
 
     @FXML
     private TextField txtCuName;
@@ -86,6 +94,8 @@ public class CustomerController {
             setCellValueFactory();
             loadAllCustomers();
             applyButtonAnimations();
+            getCurrentCustomerId();
+
 
         addHoverHandlers(btnClean);
         addHoverHandlers(btnDelete);
@@ -95,11 +105,6 @@ public class CustomerController {
         addHoverHandlers(btnHome);
 
 
-        txtCuId.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtCuName.requestFocus();
-            }
-        });
 
         txtCuName.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -126,7 +131,7 @@ public class CustomerController {
             colCuTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
 
-                    txtCuId.setText(newSelection.getId());
+
                     txtCuName.setText(newSelection.getName());
                     txtCuAddress.setText(newSelection.getAddress());
                     txtCuContact.setText(newSelection.getContact());
@@ -134,12 +139,12 @@ public class CustomerController {
                 }
             });
         }
-    private void addHoverHandlers(Button button) {
+    private void addHoverHandlers(Button button) {// button Animation
         button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
         });
         button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
         });
     }
     private void applyButtonAnimations() {
@@ -152,7 +157,27 @@ public class CustomerController {
 
     }
 
+    private void getCurrentCustomerId() {
+        try {
+            String currentId = CustomerRepo.getCustomerCurrentId();
 
+            String nextCustomerId = generateNextCustomerId(currentId);
+            lblCustomerID.setText(nextCustomerId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String generateNextCustomerId(String currentId) {
+        if (currentId != null) {
+            String[] split = currentId.split("C");
+            int idNum = Integer.parseInt(split[1]);
+            idNum++;
+            return "C" + String.format("%03d", idNum);
+        }
+        return "C001";
+    }
 
     private void applyAnimation(Button button) {
         ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
@@ -246,7 +271,7 @@ public class CustomerController {
     @FXML
     void btnSaveOnAction(ActionEvent event) {
 
-        String id = txtCuId.getText();
+        String id = lblCustomerID.getText();
         String name = txtCuName.getText();
         String address = txtCuAddress.getText();
         String contact = txtCuContact.getText();
@@ -258,7 +283,7 @@ public class CustomerController {
             if(isValied()){}
             boolean isSaved = CustomerRepo.save(customer);
             if (isSaved) {
-
+               getCurrentCustomerId();
                 colCuTel.getItems().add(customer);
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer saved successfully!").show();
                 clearFields();
@@ -273,7 +298,7 @@ public class CustomerController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        String id = txtCuId.getText();
+        String id = lblCustomerID.getText();
         String name = txtCuName.getText();
         String address = txtCuAddress.getText();
         String contact = txtCuContact.getText();
@@ -300,7 +325,7 @@ public class CustomerController {
 
 
     private void clearFields() {
-        txtCuId.clear();
+        lblCustomerID1.setText("");
         txtCuName.clear();
         txtCuAddress.clear();
         txtCuContact.clear();
@@ -325,7 +350,6 @@ public class CustomerController {
         stage.show();
     }
     public boolean isValied(){
-        if (!CustomerRegex.setTextColor(CustomerTextField.ID,txtCuId)) return false;
         if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuName)) return false;
         if (!CustomerRegex.setTextColor(CustomerTextField.CONTACT,txtCuContact)) return false;
         if (!CustomerRegex.setTextColor(CustomerTextField.EMAIL,txtCuEmail)) return false;
@@ -336,8 +360,29 @@ public class CustomerController {
         return true;
     }
 
-    public void txtCustomerIDOnKeyReleased(KeyEvent keyEvent) {
-        CustomerRegex.setTextColor(CustomerTextField.ID,txtCuId);
+    @FXML
+    void SearchBtnOnAction(ActionEvent event) throws SQLException {
+String contact = txtSearch.getText();
+        try {
+            Customer customer = CustomerRepo.searchById(contact);
+            if (customer != null) {
+                txtCuEmail.setText(customer.getEmail());
+                txtCuAddress.setText(customer.getAddress());
+                txtCuName.setText(customer.getName());
+                txtCuContact.setText(customer.getContact());
+                lblCustomerID1.setText(customer.getId());
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Customer not found.");
+            }
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Error occurred while fetching Customer: " + e.getMessage());
+        }
+
+    }
+    private void showAlert(Alert.AlertType alertType, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public void txtNameOnKeyReleased(KeyEvent keyEvent) {
@@ -360,4 +405,11 @@ public class CustomerController {
 
 
     }
+
+    @FXML
+    void txtSearchKeyRelse(KeyEvent event) {
+        CustomerRegex.setTextColor2(CustomerTextField.CONTACT,txtSearch);
+
+    }
+
 }
