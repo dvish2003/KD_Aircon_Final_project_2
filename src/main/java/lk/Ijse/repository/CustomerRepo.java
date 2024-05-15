@@ -42,8 +42,31 @@ public class CustomerRepo {
       return customer;
 
  }
+
  return null;
 
+    }
+
+    public static Customer searchById1(String id) throws SQLException {
+        String sql = "SELECT * FROM Customer WHERE Customer_id = ?";
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
+        ResultSet rs = pstm.executeQuery();
+        if (rs.next()) {
+            String cus_id = rs.getString(1);
+            String Name = rs.getString(2);
+            String Address = rs.getString(3);
+            String contact = rs.getString(4);
+            String Email = rs.getString(5);
+
+            Customer customer = new Customer(cus_id, Name, Address, contact, Email);
+
+            return customer;
+
+        }
+
+        return null;
     }
     public static boolean update(Customer customer) throws SQLException {
         String sql = "UPDATE Customer SET Customer_Name = ?, Customer_Address = ?, Customer_Contact = ?,Customer_Email = ? WHERE Customer_id = ?";

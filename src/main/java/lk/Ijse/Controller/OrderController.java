@@ -3,6 +3,7 @@ package lk.Ijse.Controller;
 import com.jfoenix.controls.JFXButton;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -103,14 +104,16 @@ public class OrderController {
     private Label lblCustomerName;
     @FXML
     private Label lblQtyOnHand;
-    @FXML
-    private Label lblDescription;
+
 
     @FXML
     private Label lblOrderID;
 
     @FXML
     private Label lblPayDate;
+
+    @FXML
+    private Label lblProductID;
 
     @FXML
     private Label lblUnitPrice;
@@ -221,7 +224,6 @@ public class OrderController {
     private void applyLabelAnimations() {
         applyAnimation(lblCustomerName);
         applyAnimation(lblQtyOnHand);
-        applyAnimation(lblDescription);
         applyAnimation(lblOrderID);
         applyAnimation(lblPayDate);
         applyAnimation(LblOrderDate);
@@ -229,16 +231,17 @@ public class OrderController {
         applyAnimation(lblPaymentAmount);
         applyAnimation(lblPaymentID);
         applyAnimation(lblLocationShowRoom);
+        applyAnimation(lblProductID);
 
 
 
     }
-    private void addHoverHandlers(Button button) {
+    private void addHoverHandlers(Button button) {// button Animation
         button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
         });
         button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
         });
     }
     private void applyAnimation(Button button) {
@@ -317,8 +320,8 @@ public class OrderController {
 
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
-    String P_Id = cmbProductID.getValue();
-    String Description =lblDescription.getText();
+    String P_Id = lblProductID.getText();
+    String Description =cmbProductID.getValue();
     int Unit_Price = Integer.parseInt(lblUnitPrice.getText());
     int Qty = Integer.parseInt(txtQty.getText());
     int Total_Price = Unit_Price * Qty;
@@ -375,6 +378,10 @@ public class OrderController {
         Parent rootNode = loader.load();
         orderPane.getChildren().clear();
         orderPane.getChildren().add(rootNode);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
 
     @FXML
@@ -416,7 +423,7 @@ public class OrderController {
             lblLocationShowRoom.setText("");
             lblCustomerName.setText("");
             lblPaymentAmount.setText("");
-           lblDescription.setText("");
+            lblProductID.setText("");
            lblUnitPrice.setText("");
            lblQtyOnHand.setText("");
             txtQty.clear();
@@ -450,9 +457,13 @@ public class OrderController {
     void cmbCustomerIDOnAction(ActionEvent event) {
         String id = cmbCustomerID.getValue();
         try {
-            Customer customer = CustomerRepo.searchById(id);
+            Customer customer = CustomerRepo.searchById1(id);
+if (customer != null){
+    lblCustomerName.setText(customer.getName());
+} else {
+    lblCustomerName.setText("Customer Not Found ");
 
-            lblCustomerName.setText(customer.getName());
+}
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -461,11 +472,11 @@ public class OrderController {
 
     @FXML
     void cmbProductIDOnAction(ActionEvent event) {
-        String id = String.valueOf(cmbProductID.getValue());
+        String Desc = String.valueOf(cmbProductID.getValue());
         try {
-            Products products = ProductsRepo.searchById(id);
+            Products products = ProductsRepo.searchByName(Desc);
 
-            lblDescription.setText(products.getProduct_description());
+            lblProductID.setText(products.getProduct_id());
             lblUnitPrice.setText(String.valueOf(products.getProduct_unitPrice()));
             lblQtyOnHand.setText(String.valueOf(products.getShowRoom_qtyOnHand()));
 
@@ -478,7 +489,7 @@ public class OrderController {
     private void getProductIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = ProductsRepo.getIds();
+            List<String> idList = ProductsRepo.getNames();
             obList.addAll(idList);
             cmbProductID.setItems(obList);
         } catch (SQLException e) {
@@ -492,9 +503,14 @@ public class OrderController {
         String id = String.valueOf(cmbShowRoomID.getValue());
         try {
             ShowRoom showRoom = ShowRoomRepo.searchById(id);
+            if (showRoom != null){
+                lblLocationShowRoom.setText(showRoom.getShowRoomLocation());
 
-            lblLocationShowRoom.setText(showRoom.getShowRoomLocation());
+            } else {
+                lblLocationShowRoom.setText("ShowRoom Not Found");
 
+
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

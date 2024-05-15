@@ -287,6 +287,9 @@
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </Label>
                </children>
             </AnchorPane>
@@ -302,16 +305,25 @@
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                         <Label prefHeight="44.0" prefWidth="120.0" text=" Contact " textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                         <Label prefHeight="44.0" prefWidth="115.0" text=" Email     " textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                      </children>
                   </VBox>
@@ -321,16 +333,25 @@
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                         <Label fx:id="lblEContatc" prefHeight="44.0" prefWidth="416.0" text="   " textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                         <Label fx:id="lblEmail" prefHeight="44.0" prefWidth="414.0" text="     " textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                      </children>
                   </VBox>
@@ -345,13 +366,16 @@
                   <TextField fx:id="txtSearch" layoutX="106.0" layoutY="-235.0" onKeyReleased="#txtSearchKeyReleased" prefHeight="44.0" prefWidth="437.0" promptText="Search Employee" styleClass="rounded-corner-panes2" stylesheets="@../css/Style1.css">
                      <font>
                         <Font name="System Bold" size="21.0" />
-                     </font></TextField>
+                     </font>
+                     <effect>
+                        <DropShadow />
+                     </effect></TextField>
                   <ImageView fitHeight="52.0" fitWidth="46.0" layoutX="41.0" layoutY="-239.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icon/employees.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="SearchBtn" layoutX="492.0" layoutY="-234.0" mnemonicParsing="false" onAction="#SearchBtnOnAction" prefHeight="36.0" prefWidth="46.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="SearchBtn" layoutX="354.0" layoutY="-232.0" mnemonicParsing="false" onAction="#SearchBtnOnAction" prefHeight="40.0" prefWidth="195.0" style="-fx-background-color: transparent;">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
@@ -367,16 +391,25 @@
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                         <Label fx:id="LblBookingCustomerName" prefHeight="44.0" prefWidth="416.0" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                         <Label fx:id="LblLocationBooking" prefHeight="44.0" prefWidth="414.0" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                      </children>
                   </VBox>
@@ -384,6 +417,9 @@
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </Label>
                   <ImageView fitHeight="50.0" fitWidth="53.0" layoutX="41.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -396,16 +432,25 @@
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                         <Label prefHeight="44.0" prefWidth="125.0" text=" Name      " textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                         <Label prefHeight="44.0" prefWidth="151.0" text=" Location " textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="21.0" />
                            </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
                         </Label>
                      </children>
                   </VBox>
@@ -422,6 +467,9 @@
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
+                     <effect>
+                        <DropShadow />
+                     </effect>
                   </Label>
                   <ImageView fitHeight="50.0" fitWidth="53.0" layoutX="66.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>

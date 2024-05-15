@@ -107,6 +107,12 @@ public class ProductController {
         setListeners();
         getShowRoomIds();
         applyButtonAnimations();
+        addHoverHandlers(btnHome);
+        addHoverHandlers(btnPrClean);
+        addHoverHandlers(btnPrUpdate);
+        addHoverHandlers(btnPrSave);
+        addHoverHandlers(btnPrDelete);
+
     }
     private void applyButtonAnimations() {
         applyAnimation(btnHome);
@@ -372,4 +378,13 @@ public class ProductController {
         CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtQty);
 
     }
+    private void addHoverHandlers(Button button) {// button Animation
+        button.setOnMouseEntered(event -> {
+            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
+        });
+        button.setOnMouseExited(event -> {
+            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
+        });
+    }
+
 }

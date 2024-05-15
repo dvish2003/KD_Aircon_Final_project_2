@@ -2,6 +2,7 @@ package lk.Ijse.Controller;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -208,14 +209,14 @@ public class BookingController {
 
             ColBookTel.setItems(obList);
 
-            ColBookTel.setRowFactory(tv -> new TableRow<Booking>() {
+            ColBookTel.setRowFactory(tv -> new TableRow<Booking>() {   // already expire date colour
                 @Override
                 protected void updateItem(Booking item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty || item == null) {
                         setStyle("-fx-background-color: white;");
                     } else if (item.getBookingDate().toLocalDate().isBefore(LocalDate.now())) {
-                        setStyle("-fx-background-color: #27f802;;");
+                        setStyle("-fx-background-color: #70a1ff;");
                     } else {
                         setStyle("");
                     }
@@ -275,12 +276,12 @@ public class BookingController {
             scaleTransition.play();
         });
     }
-    private void addHoverHandlers(Button button) {
+    private void addHoverHandlers(Button button) {// button Animation
         button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
         });
         button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
         });
     }
     private void applyAnimation(Label label) {
@@ -500,6 +501,10 @@ LblLocationAddress.setText("");
         Parent rootNode = loader.load();
         BookingPane.getChildren().clear();
         BookingPane.getChildren().add(rootNode);
+        rootNode.setTranslateX(BookingPane.getWidth());
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
 
     @FXML

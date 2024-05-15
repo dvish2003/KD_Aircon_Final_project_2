@@ -614,8 +614,13 @@ public class DashBoardController {
     void btnBookingOnAction(ActionEvent event) throws IOException {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Booking.fxml"));
             Parent rootNode = loader.load();
-            SpecialDataPane.getChildren().clear();
-            SpecialDataPane.getChildren().add(rootNode);
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
+        SpecialDataPane.getChildren().clear();
+        SpecialDataPane.getChildren().add(rootNode);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
 
 
     }
@@ -679,10 +684,9 @@ public class DashBoardController {
     void btnOrderOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Order.fxml"));
         Parent rootNode = loader.load();
-        rootNode.setTranslateX(SpecialDataPane.getWidth());
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
-
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
         transition.setToX(0);
         transition.play();
@@ -734,7 +738,23 @@ public class DashBoardController {
     @FXML
     void txtSearchKeyReleased(KeyEvent event) {
         CustomerRegex.setTextColor2(CustomerTextField.ID,txtSearch);
-
+//        try {
+//            String searchText = txtSearch.getText();
+//            List<String> suggestedIDs = EmployeeRepo.getIds();
+//
+//            txtSearch.clear();
+//
+//            for (String id : suggestedIDs) {
+//                if (id.startsWith(searchText)) {
+//                    txtSearch.appendText(id);
+//                    txtSearch.requestFocus(); // Set focus back to the text field
+//                    txtSearch.end(); // Move the caret to the end of the text
+//                    break; // Stop after adding the first suggestion
+//                }
+//            }
+//        } catch (SQLException e) {
+//            showAlert(Alert.AlertType.ERROR, "Error occurred while fetching suggestions: " + e.getMessage());
+//        }
     }
 
 }

@@ -1,6 +1,7 @@
 package lk.Ijse.Controller;
 
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +20,7 @@ import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.Location;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
+import lk.Ijse.repository.BookingRepo;
 import lk.Ijse.repository.CustomerRepo;
 import lk.Ijse.repository.LocationRepo;
 
@@ -30,6 +32,8 @@ public class LocationController {
 
     @FXML
     private AnchorPane LocationAncorPane;
+    @FXML
+    private Label lblLocationId;
 
     @FXML
     private Button btnLocClean;
@@ -94,7 +98,7 @@ public class LocationController {
         loadAllLocation();
         getCustomerIds();
         applyButtonAnimations();
-
+        getCurrentLocationId();
         addHoverHandlers(btnNewCus);
         addHoverHandlers(btnLocClean);
         addHoverHandlers(btnLocDelete);
@@ -103,11 +107,7 @@ public class LocationController {
         addHoverHandlers(btnLocHome);
 
 
-        txtLoId.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtLoProvince.requestFocus();
-            }
-        });
+
 
         txtLoProvince.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -134,7 +134,6 @@ public class LocationController {
         colLoTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 cmbCustomerId.setValue(newSelection.getCustomerId());
-                txtLoId.setText(newSelection.getId());
                 txtLoProvince.setText(newSelection.getProvince());
                 txtLoCity.setText(newSelection.getCity());
                 txtLoAddress.setText(newSelection.getAddress());
@@ -153,12 +152,12 @@ public class LocationController {
 
     }
 
-    private void addHoverHandlers(Button button) {
+    private void addHoverHandlers(Button button) {// button Animation
         button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
         });
         button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
         });
     }
 
@@ -262,7 +261,7 @@ public class LocationController {
     @FXML
     void btnLocSaveOnAction(ActionEvent event) {
         String cuId = cmbCustomerId.getValue();
-        String loId = txtLoId.getText();
+        String loId = lblLocationId.getText();
         String loProvince = txtLoProvince.getText();
         String loCity = txtLoCity.getText();
         String loAddress = txtLoAddress.getText();
@@ -286,7 +285,7 @@ public class LocationController {
     @FXML
     void btnLocUpdateOnAction(ActionEvent event) {
         String cuId = cmbCustomerId.getValue();
-        String loId = txtLoId.getText();
+        String loId = lblLocationId.getText();
         String loProvince = txtLoProvince.getText();
         String loCity = txtLoCity.getText();
         String loAddress = txtLoAddress.getText();
@@ -314,6 +313,10 @@ public class LocationController {
         Parent rootNode = loader.load();
         LocationAncorPane.getChildren().clear();
         LocationAncorPane.getChildren().add(rootNode);
+        rootNode.setTranslateX(LocationAncorPane.getWidth());
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
     }
 
     @FXML
@@ -361,4 +364,29 @@ public class LocationController {
     private  void AddressK(KeyEvent keyEvent){
 
   }
+
+    private void getCurrentLocationId() {
+        try {
+            String currentId = LocationRepo.getLocationCurrentId();
+
+            String nextOrderId = generateNextLocationId(currentId);
+            lblLocationId.setText(nextOrderId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String generateNextLocationId(String currentId) {
+        if (currentId != null && currentId.startsWith("L")) {
+            String[] split = currentId.split("L");
+            int idNum = Integer.parseInt(split[1]);
+            idNum++;
+            return "L" + String.format("%03d", idNum);
+        }
+        return "L001";
+
+
+    }
+
 }

@@ -239,14 +239,15 @@ public class ShowRoomController {
 
         stage.show();
     }
-    private void addHoverHandlers(Button button) {
+    private void addHoverHandlers(Button button) {// button Animation
         button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: #27f802; -fx-text-fill: white;");
+            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
         });
         button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
         });
     }
+
 
     public void IDK(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.ID,txtShowRoomID);

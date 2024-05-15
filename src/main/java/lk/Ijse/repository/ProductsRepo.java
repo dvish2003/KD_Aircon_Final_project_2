@@ -45,6 +45,24 @@ public class ProductsRepo {
         }
         return null;
     }
+    public static Products searchByName(String Description) throws SQLException {
+        String sql = "SELECT * FROM Product WHERE Product_Description = ?";
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, Description);
+        ResultSet rs = pstm.executeQuery();
+        if (rs.next()) {
+            String productId = rs.getString("Product_id");
+            String description = rs.getString("Product_Description");
+
+            int QtyOnHand = rs.getInt("ShowRoom_QtyOnHand");
+            int unitPrice = rs.getInt("Product_UnitPrice");
+            Products product = new Products(productId, description,QtyOnHand,unitPrice);
+
+            return product;
+        }
+        return null;
+    }
 
     public static boolean update(Products product, int qtyChange) throws SQLException {
         String sql = "UPDATE Product SET Product_Description = ?, ShowRoom_QtyOnHand = ShowRoom_QtyOnHand + ?, Product_UnitPrice = ? WHERE Product_id = ?";
@@ -97,6 +115,19 @@ public class ProductsRepo {
         while (resultSet.next()) {
             String id = resultSet.getString("Product_id");
             idList.add(id);
+        }
+        return idList;
+    }
+    public static List<String> getNames() throws SQLException {
+        String sql = "SELECT Product_Description FROM Product";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
+
+        List<String> idList = new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+        while (resultSet.next()) {
+            String Name = resultSet.getString("product_description");
+            idList.add(Name);
         }
         return idList;
     }

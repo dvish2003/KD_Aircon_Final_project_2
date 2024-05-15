@@ -2,6 +2,7 @@ package lk.Ijse.Controller;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -130,7 +131,6 @@ public class CustomerController {
 
             colCuTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
-
 
                     txtCuName.setText(newSelection.getName());
                     txtCuAddress.setText(newSelection.getAddress());
@@ -337,6 +337,11 @@ public class CustomerController {
         Parent rootNode = loader.load();
         CustomerPane.getChildren().clear();
         CustomerPane.getChildren().add(rootNode);
+        rootNode.setTranslateX(CustomerPane.getWidth());
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
+        transition.setToX(0);
+        transition.play();
+
     }
 
     public void btnHomeOnAction(ActionEvent event) throws IOException {
