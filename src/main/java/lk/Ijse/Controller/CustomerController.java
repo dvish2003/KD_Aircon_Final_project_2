@@ -280,13 +280,13 @@ public class CustomerController {
         Customer customer = new Customer(id, name, address, contact, email);
 
         try {
-            if(isValied()){}
-            boolean isSaved = CustomerRepo.save(customer);
-            if (isSaved) {
-               getCurrentCustomerId();
-                colCuTel.getItems().add(customer);
-                new Alert(Alert.AlertType.CONFIRMATION, "Customer saved successfully!").show();
-                clearFields();
+            if(isValied()){boolean isSaved = CustomerRepo.save(customer);
+                if (isSaved) {
+                    getCurrentCustomerId();
+                    colCuTel.getItems().add(customer);
+                    new Alert(Alert.AlertType.CONFIRMATION, "Customer saved successfully!").show();
+                    clearFields();}
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save customer!").show();
             }
@@ -360,8 +360,6 @@ public class CustomerController {
         if (!CustomerRegex.setTextColor(CustomerTextField.EMAIL,txtCuEmail)) return false;
         if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuAddress)) return false;
 
-
-
         return true;
     }
 
@@ -416,5 +414,15 @@ String contact = txtSearch.getText();
         CustomerRegex.setTextColor2(CustomerTextField.CONTACT,txtSearch);
 
     }
+//    public boolean isValied(){
+//        if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuName)) return false;
+//        if (!CustomerRegex.setTextColor(CustomerTextField.EMAIL,txtCuEmail)) return false;
+//        if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuAddress)) return false;
+//        if (!CustomerRegex.setTextColor(CustomerTextField.CONTACT,txtCuContact)) return false;
+//
+//        return true;
+    }
 
-}
+
+
+

@@ -378,7 +378,7 @@ public class OrderController {
         Parent rootNode = loader.load();
         orderPane.getChildren().clear();
         orderPane.getChildren().add(rootNode);
-
+        rootNode.setTranslateX(orderPane.getWidth());
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
         transition.setToX(0);
         transition.play();

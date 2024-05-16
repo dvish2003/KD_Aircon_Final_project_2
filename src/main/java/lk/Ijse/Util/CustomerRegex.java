@@ -11,10 +11,13 @@ public class CustomerRegex {
 
         switch (textField) {
             case ID:
-                filed = "^([A-Z][0-9]{4})$";
+                filed = "^([A-Z][0-9]{3})$";
                 break;
             case NAME:
                 filed = "^[A-z|\\\\s]{3,}$";
+                break;
+            case ADDRESS:
+                filed =".+";
                 break;
             case EMAIL:
                 filed = "^([A-z])([A-z0-9.]){1,}[@]([A-z0-9]){1,10}[.]([A-z]){2,5}$";
@@ -54,25 +57,26 @@ public class CustomerRegex {
 
     public static boolean setTextColor(CustomerTextField location, TextField textField) {
         if (CustomerRegex.isTextFieldValid(location, textField.getText())) {
-
-            textField.setStyle("-fx-text-fill: White; -fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px;");
+            textField.setStyle("-fx-text-fill: White; -fx-background-color: transparent; -fx-border-color: White; -fx-border-width: 0px 0px 2px 0px;");
+       return true;
         } else {
-            textField.setStyle("-fx-text-fill: red; -fx-background-color: transparent; -fx-border-color: #19460a; -fx-border-width: 0px 0px 2px 0px;");
+            textField.setStyle("-fx-text-fill: red; -fx-background-color: transparent; -fx-border-color: White; -fx-border-width: 0px 0px 2px 0px;");
 
             return false;
         }
-        return false;
+
     }
     public static boolean setTextColor2(CustomerTextField location, TextField textField) {
         if (CustomerRegex.isTextFieldValid(location, textField.getText())) {
 
             textField.setStyle("-fx-text-fill: Black; ");
+            return true;
+
         } else {
             textField.setStyle("-fx-text-fill: red;");
 
             return false;
         }
-        return false;
     }
     }
 

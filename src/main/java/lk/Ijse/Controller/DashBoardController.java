@@ -304,7 +304,7 @@ public class DashBoardController {
 
     private void addHoverHandlers(Button button) {// button Animation
         button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
+            button.setStyle("-fx-background-color: Black; -fx-text-fill: white; ");
         });
         button.setOnMouseExited(event -> {
             button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
@@ -413,7 +413,7 @@ public class DashBoardController {
                 protected void updateItem(Booking item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty || item == null) {
-                        setStyle("-fx-background-color: white;");
+                        setStyle("-fx-background-color: white; ");
                     } else if (item.getBookingDate().toLocalDate().isBefore(LocalDate.now())) {
                         setStyle("-fx-background-color: #70a1ff;");
                     } else {
@@ -709,10 +709,9 @@ public class DashBoardController {
     void btnRegisterOnAction(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Register_form.fxml"));
         Parent rootNode = loader.load();
-        rootNode.setTranslateX(SpecialDataPane.getWidth());
         SpecialDataPane.getChildren().clear();
         SpecialDataPane.getChildren().add(rootNode);
-
+        rootNode.setTranslateX(SpecialDataPane.getWidth());
         TranslateTransition transition = new TranslateTransition(Duration.seconds(0.5), rootNode);
         transition.setToX(0);
         transition.play();

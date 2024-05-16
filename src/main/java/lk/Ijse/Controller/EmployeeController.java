@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import lk.Ijse.Model.Employee;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
+import lk.Ijse.repository.CustomerRepo;
 import lk.Ijse.repository.EmployeeRepo;
 
 import java.io.IOException;
@@ -32,6 +33,9 @@ public class EmployeeController {
 
     @FXML
     private Button btnEmDelete;
+
+    @FXML
+    private Button SearchBtn;
 
     @FXML
     private Button btnEmSave;
@@ -77,16 +81,24 @@ public class EmployeeController {
     @FXML
     private TextField txtEmEmail;
 
-    @FXML
-    private TextField txtEmId;
+
 
     @FXML
     private TextField txtEmName;
+    @FXML
+    private Label lblEmployee;
+
+    @FXML
+    private Label lblEmployeeAuto;
+
+    @FXML
+    private TextField txtSearch;
 
     public void initialize() {
         setCellValueFactory();
         loadAllEmployees();
         applyButtonAnimations();
+        getCurrentEmployeeID();
 
         addHoverHandlers(btnEmClean);
         addHoverHandlers(btnEmDelete);
@@ -94,11 +106,7 @@ public class EmployeeController {
         addHoverHandlers(btnEmUpdate);
         addHoverHandlers(btnHome);
 
-        txtEmId.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtEmName.requestFocus();
-            }
-        });
+
 
         txtEmName.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -134,6 +142,13 @@ public class EmployeeController {
         });
         txtEmContact.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
+                txtEmEmail.requestFocus();
+            }
+
+
+        });
+        txtEmEmail  .setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
                 btnEmSave.requestFocus();
             }
 
@@ -143,7 +158,6 @@ public class EmployeeController {
 
         colEmTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                txtEmId.setText(newSelection.getEmpId());
                 txtEmName.setText(newSelection.getEmpName());
                 txtEmAge.setText(newSelection.getEmpAge());
                 txtEmAddress.setText(newSelection.getEmpAddress());
@@ -253,7 +267,7 @@ public class EmployeeController {
 
     @FXML
     void btnEmSaveOnAction(ActionEvent event) {
-        String id = txtEmId.getText();
+        String id = lblEmployeeAuto.getText();
         String name = txtEmName.getText();
         String age = txtEmAge.getText();
         String address = txtEmAddress.getText();
@@ -262,11 +276,14 @@ public class EmployeeController {
 
         Employee employee = new Employee(id, name, age, address, contact, email);
         try {
-            boolean isSaved = EmployeeRepo.save(employee);
-            if (isSaved) {
-                colEmTel.getItems().add(employee);
-                new Alert(Alert.AlertType.CONFIRMATION, "Employee saved successfully!").show();
-                clearFields();
+            if(isValied()){boolean isSaved = EmployeeRepo.save(employee);
+                if (isSaved) {
+                    colEmTel.getItems().add(employee);
+                    new Alert(Alert.AlertType.CONFIRMATION, "Employee saved successfully!").show();
+                    getCurrentEmployeeID();
+                    clearFields();
+                }
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save employee!").show();
             }
@@ -278,7 +295,7 @@ public class EmployeeController {
 
     @FXML
     void btnEmUpdateOnAction(ActionEvent event) {
-        String id = txtEmId.getText();
+        String id = lblEmployeeAuto.getText();
         String name = txtEmName.getText();
         String age = txtEmAge.getText();
         String address = txtEmAddress.getText();
@@ -305,7 +322,7 @@ public class EmployeeController {
     }
 
     private void clearFields() {
-        txtEmId.clear();
+lblEmployee.setText("");
         txtEmName.clear();
         txtEmAge.clear();
         txtEmAddress.clear();
@@ -325,16 +342,21 @@ public class EmployeeController {
 
         stage.show();    }
 
+    public boolean isValied(){
+        if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtEmName)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.CONTACT,txtEmContact)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.EMAIL,txtEmEmail)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.ADDRESS,txtEmAddress)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtEmAge)) return false;
 
+        return true;
+    }
     @FXML
     void btnEmCleanOnAction(ActionEvent event) {
         clearFields();
     }
 
-    public void IDK(KeyEvent keyEvent) {
-        CustomerRegex.setTextColor(CustomerTextField.ID,txtEmId);
-
-    }
+   
 
     public void NameK(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.NAME,txtEmName);
@@ -342,7 +364,7 @@ public class EmployeeController {
     }
 
     public void AddressK(KeyEvent keyEvent) {
-      //  CustomerRegex.setTextColor(CustomerTextField.ID,txtShowRoomID);
+        CustomerRegex.setTextColor(CustomerTextField.ADDRESS,txtEmAddress);
 
     }
 
@@ -360,5 +382,59 @@ public class EmployeeController {
         CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtEmAge);
 
 
+    }
+
+    public void txtSearchKeyRelse(KeyEvent keyEvent) {
+          CustomerRegex.setTextColor2(CustomerTextField.ID,txtSearch);
+
+    }
+
+    @FXML
+    void SearchBtnOnAction(ActionEvent event) {
+        String EmployeeID = txtSearch.getText();
+
+        try {
+            Employee employee = EmployeeRepo.searchById(EmployeeID);
+            if (employee != null) {
+                lblEmployee.setText(employee.getEmpId());
+                txtEmName.setText(employee.getEmpName());
+                txtEmContact.setText(employee.getEmpPhone());
+                txtEmEmail.setText(employee.getEmpEmail());
+                txtEmAge.setText(employee.getEmpAge());
+                txtEmEmail.setText(employee.getEmpEmail());
+                txtEmAddress.setText(employee.getEmpAddress());
+
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Employee not found.");
+            }
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Error occurred while fetching Employee: " + e.getMessage());
+        }
+    }
+    private void showAlert(Alert.AlertType alertType, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void getCurrentEmployeeID() {
+        try {
+            String currentId = EmployeeRepo.getEmployeeCurrentId();
+
+            String nextEmployeeID = generateNextEmployeeId(currentId);
+            lblEmployeeAuto.setText(nextEmployeeID);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String generateNextEmployeeId(String currentId) {
+        if (currentId != null) {
+            String[] split = currentId.split("E");
+            int idNum = Integer.parseInt(split[1]);
+            idNum++;
+            return "E" + String.format("%03d", idNum);
+        }
+        return "E001";
     }
 }

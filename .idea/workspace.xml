@@ -7,22 +7,14 @@
     <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment=" Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/AppInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/DashBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/DashBoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LocationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ShowRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ShowRoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/CustomerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/CustomerRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ProductsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ProductsRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/Booking.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Booking.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/CustomerForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/CustomerForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/DashBoard_from.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/DashBoard_from.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Util/CustomerRegex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Util/CustomerRegex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Util/CustomerTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Util/CustomerTextField.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/View/EmployeeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/EmployeeForm.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/View/LocationForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/LocationForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/Order.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Order.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +59,9 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.AppInitializer.executor&quot;: &quot;Run&quot;,
     &quot;Application.AppInitializerWrapper.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OrderGenerator.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
@@ -109,7 +103,20 @@
       <recent name="lk.Ijse.Controller" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.AppInitializerWrapper">
+    <configuration name="AppInitializer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lk.Ijse.AppInitializer" />
+      <module name="KD_Aircon_Final_project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lk.Ijse.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AppInitializerWrapper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="lk.Ijse.AppInitializerWrapper" />
       <module name="KD_Aircon_Final_project" />
@@ -123,9 +130,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="OrderGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lk.Ijse.Controller.OrderGenerator" />
+      <module name="KD_Aircon_Final_project" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lk.Ijse.Controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.AppInitializerWrapper" />
+        <item itemvalue="Application.AppInitializer" />
+        <item itemvalue="Application.OrderGenerator" />
       </list>
     </recent_temporary>
   </component>
@@ -256,6 +278,13 @@
       <workItem from="1715707062163" duration="3329000" />
       <workItem from="1715712127425" duration="599000" />
       <workItem from="1715757195473" duration="599000" />
+      <workItem from="1715764911382" duration="301000" />
+      <workItem from="1715765441439" duration="13143000" />
+      <workItem from="1715793197514" duration="3035000" />
+      <workItem from="1715802853237" duration="1743000" />
+      <workItem from="1715808404061" duration="497000" />
+      <workItem from="1715842490396" duration="5405000" />
+      <workItem from="1715862714162" duration="312000" />
     </task>
     <task id="LOCAL-00001" summary="ss">
       <option name="closed" value="true" />
@@ -553,7 +582,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715234389907</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary=" Commit">
+      <option name="closed" value="true" />
+      <created>1715765000117</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1715765000117</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
