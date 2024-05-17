@@ -476,11 +476,14 @@ if (customer != null){
         String Desc = String.valueOf(cmbProductID.getValue());
         try {
             Products products = ProductsRepo.searchByName(Desc);
-
-            lblProductID.setText(products.getProduct_id());
-            lblUnitPrice.setText(String.valueOf(products.getProduct_unitPrice()));
-            lblQtyOnHand.setText(String.valueOf(products.getShowRoom_qtyOnHand()));
-
+            if(products != null) {lblProductID.setText(products.getProduct_id());
+                lblUnitPrice.setText(String.valueOf(products.getProduct_unitPrice()));
+                lblQtyOnHand.setText(String.valueOf(products.getShowRoom_qtyOnHand()));
+            }else{
+            lblProductID.setText("not Found");
+            lblUnitPrice.setText("not Found");
+            lblQtyOnHand.setText("not Found");
+}
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
