@@ -91,7 +91,7 @@ public class ShowRoomRepo {
         }
         return idList;
     }
-    public static String getCustomerCurrentId() throws SQLException {
+    public static String getBookingCurrentId() throws SQLException {
         String sql = "SELECT ShowRoom_id FROM ShowRoom ORDER BY ShowRoom_id DESC LIMIT 1";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);

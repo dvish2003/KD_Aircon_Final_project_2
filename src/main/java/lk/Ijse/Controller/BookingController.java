@@ -185,7 +185,7 @@ public class BookingController {
             }
         });
 
-
+        applyComboBoxStyles();
     }
 
     private void loadAllBooking() {
@@ -594,5 +594,10 @@ if(location != null) {
         JasperPrint jasperPrint =
                 JasperFillManager.fillReport(jasperReport, null,DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint,false);
+    }
+    public void applyComboBoxStyles() {
+        cmbEmployeeID.setStyle(" -fx-text-fill: white;");
+        cmbLocationID.setStyle(" -fx-text-fill: white;");
+
     }
 }

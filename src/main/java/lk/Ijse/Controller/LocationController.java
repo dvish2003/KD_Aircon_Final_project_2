@@ -105,7 +105,7 @@ public class LocationController {
         addHoverHandlers(btnLocSave);
         addHoverHandlers(btnLocUpdate);
         addHoverHandlers(btnLocHome);
-
+applyComboBoxStyles();
 
 
 
@@ -134,6 +134,7 @@ public class LocationController {
         colLoTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 cmbCustomerId.setValue(newSelection.getCustomerId());
+                lblLocationId.setText(newSelection.getId());
                 txtLoProvince.setText(newSelection.getProvince());
                 txtLoCity.setText(newSelection.getCity());
                 txtLoAddress.setText(newSelection.getAddress());
@@ -270,10 +271,12 @@ public class LocationController {
         Location location = new Location(cuId, loId, loProvince, loCity, loAddress, loZipCode);
 
         try {
-            boolean isSaved = LocationRepo.save(location);
-            if (isSaved) {
-                colLoTel.getItems().add(location);
-                new Alert(Alert.AlertType.CONFIRMATION, "Location saved successfully!").show();
+            if(isValied()){ boolean isSaved = LocationRepo.save(location);
+                if (isSaved) {
+                    colLoTel.getItems().add(location);
+                    new Alert(Alert.AlertType.CONFIRMATION, "Location saved successfully!").show();
+                    clearFields();}
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save location!").show();
             }
@@ -294,11 +297,13 @@ public class LocationController {
         Location location = new Location(cuId, loId, loProvince, loCity, loAddress, loZipCode);
 
         try {
-            boolean isUpdated = LocationRepo.update(location);
-            if (isUpdated) {
-                int selectedIndex = colLoTel.getSelectionModel().getSelectedIndex();
-                colLoTel.getItems().set(selectedIndex, location);
-                new Alert(Alert.AlertType.CONFIRMATION, "Location updated successfully!").show();
+            if(isValied()){boolean isUpdated = LocationRepo.update(location);
+                if (isUpdated) {
+                    int selectedIndex = colLoTel.getSelectionModel().getSelectedIndex();
+                    colLoTel.getItems().set(selectedIndex, location);
+                    clearFields();
+                    new Alert(Alert.AlertType.CONFIRMATION, "Location updated successfully!").show();}
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to update location!").show();
             }
@@ -328,6 +333,10 @@ public class LocationController {
             throw new RuntimeException(e);
         }
     }
+    public void applyComboBoxStyles() {
+        cmbCustomerId.setStyle(" -fx-text-fill: white;");
+
+    }
 
     private void clearFields() {
         cmbCustomerId.getSelectionModel().clearSelection();
@@ -336,13 +345,10 @@ public class LocationController {
         txtLoCity.clear();
         txtLoAddress.clear();
         txtLoZip.clear();
-    }
-    @FXML
-    private void IDK(KeyEvent keyEvent) {
-        CustomerRegex.setTextColor(CustomerTextField.ID,txtLoId);
-
+        getCurrentLocationId();
 
     }
+
     @FXML
     private void ProvinceK(KeyEvent keyEvent) {
       //  CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoProvince);
@@ -353,6 +359,13 @@ public class LocationController {
      //   CustomerRegex.setTextColor(CustomerTextField.NAME,txtLoCity);
 
     }
+    public boolean isValied(){
+        if (!CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtLoZip)) return false;
+
+
+        return true;
+    }
+
     @FXML
     private void ZipCodeK(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtLoZip);

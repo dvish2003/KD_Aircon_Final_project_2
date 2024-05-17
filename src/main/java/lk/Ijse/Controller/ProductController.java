@@ -8,12 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -86,9 +81,9 @@ public class ProductController {
 
     @FXML
     private TextField txtPrDesc;
-
     @FXML
-    private TextField txtPrID;
+    private Label lblProductID;
+
 
     @FXML
     private TextField txtPrUnitPrice;
@@ -103,6 +98,7 @@ public class ProductController {
         setCellValueFactory();
         setCellValueFactory2();
         loadAllProductShowRoom();
+        applyComboBoxStyles();
         loadAllProduct();
         setListeners();
         getShowRoomIds();
@@ -112,6 +108,7 @@ public class ProductController {
         addHoverHandlers(btnPrUpdate);
         addHoverHandlers(btnPrSave);
         addHoverHandlers(btnPrDelete);
+        getProductId();
 
     }
     private void applyButtonAnimations() {
@@ -185,11 +182,7 @@ public class ProductController {
     }
 
     private void setTextFieldFocusTraversal() {
-        txtPrID.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtPrDesc.requestFocus();
-            }
-        });
+
 
         txtPrDesc.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -207,7 +200,7 @@ public class ProductController {
     private void setTableSelectionListener() {
         colPrTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                txtPrID.setText(newSelection.getProduct_id());
+                lblProductID.setText(newSelection.getProduct_id());
                 txtPrDesc.setText(newSelection.getProduct_description());
                 txtPrUnitPrice.setText(String.valueOf(newSelection.getProduct_unitPrice()));
                 txtQty.setText(String.valueOf(newSelection.getShowRoom_qtyOnHand()));
@@ -235,6 +228,27 @@ public class ProductController {
             showAlert(Alert.AlertType.ERROR, "Error occurred while fetching showroom IDs: " + e.getMessage());
         }
     }
+    private void getProductId() {
+        try {
+            String currentId = ProductsRepo.getProductCurrentId();
+
+            String nextProductId = generateNextProductID(currentId);
+            lblProductID.setText(nextProductId);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String generateNextProductID(String currentId) {
+        if (currentId != null) {
+            String[] split = currentId.split("PRD");
+            int idNum = Integer.parseInt(split[1]);
+            idNum++;
+            return "PRD" + String.format("%03d", idNum);
+        }
+        return "PRD001";
+    }
 
     @FXML
     void btnHomeOnAction(ActionEvent event) throws IOException {
@@ -248,7 +262,10 @@ public class ProductController {
         stage.show();
     }
 
+    public void applyComboBoxStyles() {
+        cmbShowRoom.setStyle(" -fx-text-fill: white;");
 
+    }
 
     @FXML
     void btnPrCleanOnAction(ActionEvent event) {
@@ -257,7 +274,7 @@ public class ProductController {
 
     @FXML
     void btnPrDeleteOnAction(ActionEvent event) {
-        String id = txtPrID.getText();
+        String id = lblProductID.getText();
         try {
             boolean isDeleted = ProductsRepo.delete(id);
             if (isDeleted) {
@@ -282,7 +299,7 @@ public class ProductController {
     @FXML
     void btnPrSaveOnAction(ActionEvent event) {
         String showRoomId = cmbShowRoom.getValue();
-        String productId = txtPrID.getText();
+        String productId = lblProductID.getText();
         String productDescription = txtPrDesc.getText();
         int productUnitPrice = Integer.parseInt(txtPrUnitPrice.getText());
         int productQty = Integer.parseInt(txtQty.getText());
@@ -291,14 +308,16 @@ public class ProductController {
         Product_ShowRoom ps = new Product_ShowRoom(productId, showRoomId);
 
         try {
-            boolean isProductSaved = ProductsRepo.save(products);
-            if (isProductSaved) {
-                colPrTel.getItems().add(products);
-                boolean isProductShowRoomSaved = Product_ShowRoom_Repo.save(ps);
-                if (isProductShowRoomSaved) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom saved successfully!").show();
-                    productShowRoomList.add(new ProductShowRoomJoin(productId, showRoomId, productDescription, productQty, productUnitPrice));
-                    clearFields();
+            if(isValied()){ boolean isProductSaved = ProductsRepo.save(products);
+                if (isProductSaved) {
+                    colPrTel.getItems().add(products);
+                    boolean isProductShowRoomSaved = Product_ShowRoom_Repo.save(ps);
+                    if (isProductShowRoomSaved) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom saved successfully!").show();
+                        productShowRoomList.add(new ProductShowRoomJoin(productId, showRoomId, productDescription, productQty, productUnitPrice));
+                        clearFields();
+                    }
+
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Failed to save Product and ShowRoom!").show();
                 }
@@ -313,7 +332,7 @@ public class ProductController {
     @FXML
     void btnPrUpdateOnAction(ActionEvent event) {
         String showRoomId = cmbShowRoom.getValue();
-        String productId = txtPrID.getText();
+        String productId = lblProductID.getText();
         String productDescription = txtPrDesc.getText();
         int productUnitPrice = Integer.parseInt(txtPrUnitPrice.getText());
         int productQty = Integer.parseInt(txtQty.getText());
@@ -321,19 +340,20 @@ public class ProductController {
         Products products = new Products(productId, productDescription, productUnitPrice, productQty);
         Product_ShowRoom ps = new Product_ShowRoom(productId, showRoomId);
         try {
-            boolean isProductUpdate = ProductsRepo.update(products, productQty);
-            if (isProductUpdate) {
-                Products selectedProduct = colPrTel.getSelectionModel().getSelectedItem();
-                selectedProduct.setProduct_description(productDescription);
-                selectedProduct.setProduct_unitPrice(productUnitPrice);
-                selectedProduct.setShowRoom_qtyOnHand(productQty);
-                colPrTel.refresh();
+            if(isValied()){ boolean isProductUpdate = ProductsRepo.update(products, productQty);
+                if (isProductUpdate) {
+                    Products selectedProduct = colPrTel.getSelectionModel().getSelectedItem();
+                    selectedProduct.setProduct_description(productDescription);
+                    selectedProduct.setProduct_unitPrice(productUnitPrice);
+                    selectedProduct.setShowRoom_qtyOnHand(productQty);
+                    colPrTel.refresh();
 
-                boolean isProductShowRoomSaved = Product_ShowRoom_Repo.save(ps);
-                if (isProductShowRoomSaved) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom updated successfully!").show();
-                    clearFields();
-                    loadAllProductShowRoom();
+                    boolean isProductShowRoomSaved = Product_ShowRoom_Repo.save(ps);
+                    if (isProductShowRoomSaved) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom updated successfully!").show();
+                        clearFields();
+                        loadAllProductShowRoom();}
+
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Failed to update Product and ShowRoom!").show();
                 }
@@ -349,9 +369,10 @@ public class ProductController {
     private void clearFields() {
         cmbShowRoom.getSelectionModel().clearSelection();
         txtQty.clear();
-        txtPrID.clear();
         txtPrDesc.clear();
         txtPrUnitPrice.clear();
+        getProductId();
+
     }
 
     private void showAlert(Alert.AlertType alertType, String message) {
@@ -360,10 +381,13 @@ public class ProductController {
         alert.showAndWait();
     }
 
-    public void IDK(KeyEvent keyEvent) {
-        CustomerRegex.setTextColor(CustomerTextField.PRODUCT_ID,txtPrID);
+    public boolean isValied(){
+        if (!CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtPrUnitPrice)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtQty)) return false;
 
 
+
+        return true;
     }
 
     public void DescK(KeyEvent keyEvent) {

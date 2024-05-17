@@ -20,6 +20,7 @@ import lk.Ijse.Model.ShowRoom;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.repository.CustomerRepo;
+import lk.Ijse.repository.EmployeeRepo;
 import lk.Ijse.repository.ShowRoomRepo;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ShowRoomController {
+    public Label lblRegisterId;
     @FXML
     private  Button btnHome;
     @FXML
@@ -55,8 +57,7 @@ public class ShowRoomController {
     @FXML
     private TableView<ShowRoom> colSrTel;
 
-    @FXML
-    private TextField txtShowRoomID;
+
 
     @FXML
     private TextField txtSrLocation;
@@ -70,14 +71,14 @@ public class ShowRoomController {
     }
 
     private void clearFields() {
-        txtShowRoomID.clear();
         txtSrLocation.clear();
+        getCurrentShowRomD();
     }
 
     @FXML
     void btnPrDeleteOnAction(ActionEvent event) {
 
-        String id = txtShowRoomID.getText();
+        String id = lblRegisterId.getText();
         try {
             boolean isDeleted = ShowRoomRepo.delete(id);
             if (isDeleted) {
@@ -100,7 +101,7 @@ public class ShowRoomController {
 
     @FXML
     void btnPrSaveOnAction(ActionEvent event) {
-        String id = txtShowRoomID.getText();
+        String id = lblRegisterId.getText();
         String location = txtSrLocation.getText();
 
 
@@ -113,6 +114,8 @@ public class ShowRoomController {
                 colSrTel.getItems().add(showRoom);
                 new Alert(Alert.AlertType.CONFIRMATION, "ShowRoom saved successfully!").show();
                 clearFields();
+                getCurrentShowRomD();
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save ShowRoom!").show();
             }
@@ -123,7 +126,7 @@ public class ShowRoomController {
 
     @FXML
     void btnPrUpdateOnAction(ActionEvent event) {
-        String id = txtShowRoomID.getText();
+        String id = lblRegisterId.getText();
         String location = txtSrLocation.getText();
 
 
@@ -150,19 +153,14 @@ public class ShowRoomController {
         setCellValueFactory();
         loadAllShowRoom();
         applyButtonAnimations();
-
+        getCurrentShowRomD();
         addHoverHandlers(btnSrClean);
         addHoverHandlers(btnSrUpdate);
         addHoverHandlers(btnSrDelete);
         addHoverHandlers(btnSrSave);
         addHoverHandlers(btnHome);
 
-        txtShowRoomID.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtSrLocation.requestFocus();
-            }
 
-        });
         txtSrLocation.setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.ENTER) {
                     btnSrSave.requestFocus();
@@ -173,7 +171,7 @@ public class ShowRoomController {
         colSrTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
 
-                txtShowRoomID.setText(newSelection.getShowRoomId());
+                lblRegisterId.setText(newSelection.getShowRoomId());
                 txtSrLocation.setText(newSelection.getShowRoomLocation());
 
             }
@@ -249,12 +247,31 @@ public class ShowRoomController {
     }
 
 
-    public void IDK(KeyEvent keyEvent) {
-        CustomerRegex.setTextColor(CustomerTextField.ID,txtShowRoomID);
+    private void getCurrentShowRomD() {
+        try {
+            String currentId = ShowRoomRepo.getBookingCurrentId();
 
+            String nextShowRoomID = generateNextShowRoom(currentId);
+            lblRegisterId.setText(nextShowRoomID);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void LocationK(KeyEvent keyEvent) {
+    private String generateNextShowRoom(String currentId) {
+        if (currentId != null) {
+            String[] split = currentId.split("S");
+            int idNum = Integer.parseInt(split[1]);
+            idNum++;
+            return "S" + String.format("%03d", idNum);
+        }
+        return "S001";
+
+}
+
+
+public void LocationK(KeyEvent keyEvent) {
       //  CustomerRegex.setTextColor(CustomerTextField.,txtShowRoomID);
 
     }

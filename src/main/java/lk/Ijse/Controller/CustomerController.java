@@ -131,7 +131,7 @@ public class CustomerController {
 
             colCuTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
-
+                    lblCustomerID.setText(newSelection.getId());
                     txtCuName.setText(newSelection.getName());
                     txtCuAddress.setText(newSelection.getAddress());
                     txtCuContact.setText(newSelection.getContact());
@@ -306,15 +306,18 @@ public class CustomerController {
 
         Customer customer = new Customer(id, name, address, contact, email);
         try {
-            boolean isUpdated = CustomerRepo.update(customer);
-            if (isUpdated) {
-                Customer selectedItem = colCuTel.getSelectionModel().getSelectedItem();
-                if (selectedItem != null) {
-                    int selectedIndex = colCuTel.getItems().indexOf(selectedItem);
-                    colCuTel.getItems().set(selectedIndex, customer);
-                    new Alert(Alert.AlertType.CONFIRMATION, "Customer updated successfully!").show();
-                    clearFields();
-                }
+            if(isValied()){ boolean isUpdated = CustomerRepo.update(customer);
+                if (isUpdated) {
+                    Customer selectedItem = colCuTel.getSelectionModel().getSelectedItem();
+                    if (selectedItem != null) {
+                        int selectedIndex = colCuTel.getItems().indexOf(selectedItem);
+                        colCuTel.getItems().set(selectedIndex, customer);
+                        new Alert(Alert.AlertType.CONFIRMATION, "Customer updated successfully!").show();
+                        clearFields();
+                        getCurrentCustomerId();
+
+                    }}
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to update customer!").show();
             }
@@ -325,6 +328,7 @@ public class CustomerController {
 
 
     private void clearFields() {
+        getCurrentCustomerId();
         lblCustomerID1.setText("");
         txtCuName.clear();
         txtCuAddress.clear();
@@ -358,7 +362,7 @@ public class CustomerController {
         if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuName)) return false;
         if (!CustomerRegex.setTextColor(CustomerTextField.CONTACT,txtCuContact)) return false;
         if (!CustomerRegex.setTextColor(CustomerTextField.EMAIL,txtCuEmail)) return false;
-        if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuAddress)) return false;
+        if (!CustomerRegex.setTextColor(CustomerTextField.ADDRESS,txtCuAddress)) return false;
 
         return true;
     }
@@ -374,7 +378,8 @@ String contact = txtSearch.getText();
                 txtCuName.setText(customer.getName());
                 txtCuContact.setText(customer.getContact());
                 lblCustomerID1.setText(customer.getId());
-            } else {
+              //  lblCustomerID.setText(customer.getId());
+                            } else {
                 showAlert(Alert.AlertType.ERROR, "Customer not found.");
             }
         } catch (SQLException e) {

@@ -140,7 +140,7 @@ public class OrderController {
         getProductIds();
         setCellValueFactory();
         loadAllPS();
-
+        applyComboBoxStyles();
         addHoverHandlers(btnAddToCart);
         addHoverHandlers(btnNewCus);
         addHoverHandlers(btnPlaceOrder);
@@ -427,6 +427,7 @@ public class OrderController {
            lblUnitPrice.setText("");
            lblQtyOnHand.setText("");
             txtQty.clear();
+
             getCurrentOrderId();
             getCurrentPayId();
 
@@ -640,5 +641,13 @@ if (customer != null){
 //
 //        // Close the prepared statement
 //        preparedStatement.close();
+    }
+
+    public void applyComboBoxStyles() {
+        cmbProductID.setStyle(" -fx-text-fill: white;");
+        cmbShowRoomID.setStyle(" -fx-text-fill: white;");
+        cmbCustomerID.setStyle(" -fx-text-fill: white;");
+
+
     }
 }

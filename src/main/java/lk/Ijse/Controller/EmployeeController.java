@@ -158,6 +158,7 @@ public class EmployeeController {
 
         colEmTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                lblEmployeeAuto.setText(newSelection.getEmpId());
                 txtEmName.setText(newSelection.getEmpName());
                 txtEmAge.setText(newSelection.getEmpAge());
                 txtEmAddress.setText(newSelection.getEmpAddress());
@@ -304,15 +305,17 @@ public class EmployeeController {
 
         Employee employee = new Employee(id, name, age, address, contact, email);
         try {
-            boolean isUpdated = EmployeeRepo.update(employee);
-            if (isUpdated) {
-                Employee selectedItem = colEmTel.getSelectionModel().getSelectedItem();
-                if (selectedItem != null) {
-                    int selectedIndex = colEmTel.getItems().indexOf(selectedItem);
-                    colEmTel.getItems().set(selectedIndex, employee);
-                    new Alert(Alert.AlertType.CONFIRMATION, "Employee updated successfully!").show();
-                    clearFields();
+            if(isValied()){ boolean isUpdated = EmployeeRepo.update(employee);
+                if (isUpdated) {
+                    Employee selectedItem = colEmTel.getSelectionModel().getSelectedItem();
+                    if (selectedItem != null) {
+                        int selectedIndex = colEmTel.getItems().indexOf(selectedItem);
+                        colEmTel.getItems().set(selectedIndex, employee);
+                        new Alert(Alert.AlertType.CONFIRMATION, "Employee updated successfully!").show();
+                        clearFields();
+                    }
                 }
+
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to update employee!").show();
             }
@@ -328,6 +331,8 @@ lblEmployee.setText("");
         txtEmAddress.clear();
         txtEmContact.clear();
         txtEmEmail.clear();
+        getCurrentEmployeeID();
+
     }
 
     @FXML
@@ -356,7 +361,7 @@ lblEmployee.setText("");
         clearFields();
     }
 
-   
+
 
     public void NameK(KeyEvent keyEvent) {
         CustomerRegex.setTextColor(CustomerTextField.NAME,txtEmName);

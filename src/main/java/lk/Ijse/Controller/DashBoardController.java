@@ -240,8 +240,9 @@ public class DashBoardController {
             int currentHour = currentTime.getHour();
             String greeting = currentHour < 12 ? "Good Morning" : "Good Afternoon";
 
-            lblGreeting.setText(greeting); // say Good Morning
-
+            lblGreeting.setText(greeting);
+            PieChart.setPrefWidth(600);
+            PieChart.setPrefHeight(400);
 
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -269,7 +270,7 @@ public class DashBoardController {
         addHoverHandlers(btnRegister);
         addHoverHandlers(btnShowRoom);
 
-
+        setupOrderPieChart();
         try {
             EmployeeCount = getEmployeeCount();
         } catch (SQLException e) {
@@ -301,7 +302,34 @@ public class DashBoardController {
     }
 
 
+    private void setupOrderPieChart() {
+        try {
+            ObservableList<PieChart.Data> pieChartData = getOrderDataForPieChart();
+            PieChart.setData(pieChartData);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
 
+    private ObservableList<PieChart.Data> getOrderDataForPieChart() throws SQLException {
+        String sql = "SELECT C.Customer_Name, COUNT(O.Order_id) AS Order_Count " +
+                "FROM `Order` O " +
+                "INNER JOIN Customer C ON O.Customer_id = C.Customer_id " +
+                "GROUP BY C.Customer_Name";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        while (resultSet.next()) {
+            String customerName = resultSet.getString("Customer_Name");
+            int orderCount = resultSet.getInt("Order_Count");
+            pieChartData.add(new PieChart.Data(customerName, orderCount));
+        }
+
+        return pieChartData;
+    }
     private void addHoverHandlers(Button button) {// button Animation
         button.setOnMouseEntered(event -> {
             button.setStyle("-fx-background-color: Black; -fx-text-fill: white; ");

@@ -139,7 +139,7 @@
                 <TableColumn fx:id="colEmail" prefWidth="170.0" text="     Email" />
             </columns>
         </TableView>
-        <Label layoutX="6.0" layoutY="207.0" prefHeight="26.0" prefWidth="150.0" text=" Name *" textFill="WHITE">
+        <Label layoutX="6.0" layoutY="207.0" prefHeight="26.0" prefWidth="150.0" text=" Name " textFill="WHITE">
             <font>
                 <Font name="System Bold" size="21.0" />
             </font>
@@ -147,7 +147,7 @@
             <DropShadow />
          </effect>
         </Label>
-        <Label layoutX="12.0" layoutY="301.0" prefHeight="26.0" prefWidth="150.0" text="Address * " textFill="WHITE">
+        <Label layoutX="12.0" layoutY="301.0" prefHeight="26.0" prefWidth="150.0" text="Address " textFill="WHITE">
             <font>
                 <Font name="System Bold" size="21.0" />
             </font>
@@ -155,7 +155,7 @@
             <DropShadow />
          </effect>
         </Label>
-        <Label layoutX="10.0" layoutY="391.0" prefHeight="26.0" prefWidth="150.0" text="Contact *" textFill="WHITE">
+        <Label layoutX="10.0" layoutY="391.0" prefHeight="26.0" prefWidth="150.0" text="Contact " textFill="WHITE">
             <font>
                 <Font name="System Bold" size="21.0" />
             </font>
@@ -163,7 +163,7 @@
             <DropShadow />
          </effect>
         </Label>
-        <Label layoutX="11.0" layoutY="480.0" prefHeight="26.0" prefWidth="150.0" text="Email *" textFill="WHITE">
+        <Label layoutX="11.0" layoutY="480.0" prefHeight="26.0" prefWidth="150.0" text="Email " textFill="WHITE">
             <font>
                 <Font name="System Bold" size="21.0" />
             </font>
