@@ -1,7 +1,5 @@
 package lk.Ijse.Controller;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,9 +15,33 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.CustomerBO.CustomerBO;
+import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
+import lk.Ijse.DAO.BookingDAO.BookingDAO;
+import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
+import lk.Ijse.DAO.LocationDAO.LocationDAO;
+import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
+import lk.Ijse.DAO.OrderDAO.OrderDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
+import lk.Ijse.DAO.ProductDAO.ProductDAO;
+import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.*;
-import lk.Ijse.repository.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -29,15 +51,10 @@ import net.sf.jasperreports.view.JasperViewer;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class BookingController {
+
     @FXML
     private Button btnPrintBill;
 
@@ -118,29 +135,21 @@ public class BookingController {
 
     @FXML
     private Label lblPaymentID;
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-    private void scheduleBookingExpirationCheck() {
-        scheduler.scheduleAtFixedRate(this::deleteExpiredBookings, calculateDelayToNextMidnight(), TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
-    }
 
-    private long calculateDelayToNextMidnight() {
-        LocalDate today = LocalDate.now();
-        LocalDate tomorrow = today.plusDays(1);
-        LocalDate nextMidnight = tomorrow.atStartOfDay().toLocalDate();
-        return java.time.Duration.between(LocalDateTime.now(), nextMidnight.atStartOfDay()).getSeconds();
-    }
-
-    private void deleteExpiredBookings() {
-        try {
-            BookingRepo.deleteExpiredBookings();
-            loadAllBooking();
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
-    }
-
-    public void initialize() {
+    Animation1 animation1 = new Animation1();
+    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    CustomerBO customerDAO = new CustomerBOImpl();
+    LocationDAO locationDAO = new LocationDAOImpl();
+    OrderDAO orderDAO = new OrderDAOImpl();
+    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
+    RegisterDAO registerDAO = new RegisterDAOImpl();
+    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
+    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
+    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
+    ProductDAO productDAO = new ProductDAOImpl();
+    PaymentDAO paymentDAO = new PaymentDAOImpl();
+    BookingDAO bookingDAO = new BookingDAOImpl();
+    public void initialize() throws ClassNotFoundException {
         setDate();
         getCurrentBookingId();
         getLocationIds();
@@ -152,11 +161,11 @@ public class BookingController {
         setCellValueFactory();
         loadAllBooking();
 
-        addHoverHandlers(btnBook);
-        addHoverHandlers(btnDelete);
-        addHoverHandlers(btnHome);
-        addHoverHandlers(btnNewLoc);
-        addHoverHandlers(btnPrintBill);
+        animation1.addHoverHandlers(btnBook);
+        animation1.addHoverHandlers(btnDelete);
+        animation1.addHoverHandlers(btnHome);
+        animation1.addHoverHandlers(btnNewLoc);
+        animation1.addHoverHandlers(btnPrintBill);
 
 
         cmbLocationID.setOnKeyPressed(event -> {
@@ -188,11 +197,11 @@ public class BookingController {
         applyComboBoxStyles();
     }
 
-    private void loadAllBooking() {
+    private void loadAllBooking() throws ClassNotFoundException {
         ObservableList<Booking> obList = FXCollections.observableArrayList();
 
         try {
-            List<Booking> BookList = BookingRepo.getAll();
+            List<Booking> BookList = bookingDAO.getAll();
             for (Booking booking : BookList) {
                 Booking tm = new Booking(
                         booking.getBookingId(),
@@ -240,68 +249,31 @@ public class BookingController {
     }
 
     private void applyLabelAnimations() {
-        applyAnimation(lblPayDate);
-        applyAnimation(lblPayDate);
-        applyAnimation(lblPaymentAmount);
-        applyAnimation(lblPaymentID);
-        applyAnimation(LblBookingID);
-        applyAnimation(LblEmployeeName);
-        applyAnimation(LblLocationAddress);
-        applyAnimation(LblPlaceDate);
-        applyAnimation(LblCustomerName);
-        applyAnimation(btnPrintBill);
-
-
+        animation1.applyAnimation(lblPayDate);
+       animation1.applyAnimation(lblPayDate);
+       animation1.applyAnimation(lblPaymentAmount);
+       animation1.applyAnimation(lblPaymentID);
+       animation1.applyAnimation(LblBookingID);
+       animation1.applyAnimation(LblEmployeeName);
+       animation1.applyAnimation(LblLocationAddress);
+       animation1.applyAnimation(LblPlaceDate);
+       animation1.applyAnimation(LblCustomerName);
+       animation1.applyAnimation(btnPrintBill);
 
     }
 
     private void applyButtonAnimations() {
-        applyAnimation(btnBook);
-        applyAnimation(btnDelete);
-        applyAnimation(btnHome);
-        applyAnimation(btnNewLoc);
+        animation1.applyAnimation(btnBook);
+        animation1.applyAnimation(btnDelete);
+        animation1.applyAnimation(btnHome);
+        animation1.applyAnimation(btnNewLoc);
 
 
     }
-    private void applyAnimation(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-        button.setOnMouseEntered(event -> {
-            scaleTransition.setToX(1.1);
-            scaleTransition.setToY(1.1);
-            scaleTransition.play();
-        });
-        button.setOnMouseExited(event -> {
-            scaleTransition.setToX(1);
-            scaleTransition.setToY(1);
-            scaleTransition.play();
-        });
-    }
-    private void addHoverHandlers(Button button) {// button Animation
-        button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
-        });
-        button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
-        });
-    }
-    private void applyAnimation(Label label) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), label);
-        label.setOnMouseEntered(event -> {
-            fadeTransition.setFromValue(1);
-            fadeTransition.setToValue(0.5);
-            fadeTransition.play();
-        });
-        label.setOnMouseExited(event -> {
-            fadeTransition.setFromValue(0.5);
-            fadeTransition.setToValue(1);
-            fadeTransition.play();
-        });
-    }
-
 
     private void getCurrentPayId() {
         try {
-            String currentId = OrderRepo.getPayCurrentId();
+            String currentId = orderDAO.getPayCurrentId();
 
             String nextPayId = generateNextPay(currentId);
             lblPaymentID.setText(nextPayId);
@@ -321,10 +293,10 @@ public class BookingController {
         }
         return "P001";
     }
-    private void getEmployeeIds() {
+    private void getEmployeeIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = EmployeeRepo.getIds();
+            List<String> idList = employeeDAO.getIds();
             obList.addAll(idList);
             cmbEmployeeID.setItems(obList);
         } catch (SQLException e) {
@@ -333,20 +305,51 @@ public class BookingController {
 
     }
 
-    private void getLocationIds() {
+    private void getLocationIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = LocationRepo.getIds();
+            List<String> idList = locationDAO.getIds();
             obList.addAll(idList);
             cmbLocationID.setItems(obList);
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Error occurred while fetching showroom IDs: " + e.getMessage());
         }
     }
-
-    private void getCurrentBookingId() {
+    @FXML
+    void cmbEmployeeIDOnAction(ActionEvent event) throws ClassNotFoundException {
+        String id = String.valueOf(cmbEmployeeID.getValue());
         try {
-            String currentId = BookingRepo.getCurrentId();
+            Employee employee = employeeDAO.searchById(id);
+            if (employee != null) {
+                LblEmployeeName.setText(employee.getEmpName());
+            } else {
+                LblEmployeeName.setText("Employee not found");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void cmbLocationIDOnAction(ActionEvent event) throws ClassNotFoundException {
+        String id = String.valueOf(cmbLocationID.getValue());
+        try {
+            Location location = locationDAO.searchById(id);
+            if(location != null) {
+                LblLocationAddress.setText(location.getAddress());
+                LblCustomerName.setText(location.getCustomerId());
+            }else{
+                LblLocationAddress.setText("Address not found");
+                LblCustomerName.setText("Not found  Customer");
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private void getCurrentBookingId() throws ClassNotFoundException {
+        try {
+            String currentId = bookingDAO.getCurrentId();
 
             String nextOrderId = generateNextBookingId(currentId);
             LblBookingID.setText(nextOrderId);
@@ -386,7 +389,7 @@ public class BookingController {
     }
 
     @FXML
-    void btnBookOnAction(ActionEvent event) {
+    void btnBookOnAction(ActionEvent event) throws ClassNotFoundException {
         LocalDate selectedDate = btnPickDate.getValue();
 
         if (selectedDate == null) {
@@ -413,12 +416,12 @@ public class BookingController {
             Booking booking = new Booking(bookingId, empId, LocId, paymentId, bookingDate, currentDate, bookingDescription);
             Payment payment = new Payment(paymentId, Amount, currentDate);
 
-            boolean isPaySaved = PaymentRepo.save(payment);
+            boolean isPaySaved = paymentDAO.save(payment);
             if (isPaySaved) {
-                boolean isBookingSave = BookingRepo.save(booking);
+                boolean isBookingSave = bookingDAO.save(booking);
                 if (isBookingSave) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Booking placed successfully!").show();
-                    btnPrintBillOnAction(null);
+                   // btnPrintBillOnAction(null);
                     loadAllBooking();
                     getCurrentBookingId();
                     getCurrentPayId();
@@ -433,27 +436,11 @@ public class BookingController {
             new Alert(Alert.AlertType.ERROR, "Error occurred while saving data: " + e.getMessage()).show();
         } catch (NumberFormatException e) {
             new Alert(Alert.AlertType.ERROR, "Invalid payment amount format!").show();
-        } catch (JRException e) {
-            throw new RuntimeException(e);
         }
     }
 
-
-    private void clearFields() {
-        cmbLocationID.getSelectionModel().clearSelection();
-        cmbEmployeeID.getSelectionModel().clearSelection();
-LblEmployeeName.setText("");
-LblCustomerName.setText("");
-txtDesc.clear();
-LblLocationAddress.setText("");
-
-
-
-    }
-
-
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
         ObservableList<Booking> selectedBooking = ColBookTel.getSelectionModel().getSelectedItems();
         if (selectedBooking.isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "Please select booking to delete!").show();
@@ -467,7 +454,7 @@ LblLocationAddress.setText("");
         if (confirmationAlert.getResult() == ButtonType.OK) {
             try {
                 for (Booking booking : selectedBooking) {
-                    boolean isDeleted = BookingRepo.delete(booking.getBookingId());
+                    boolean isDeleted = bookingDAO.delete(booking.getBookingId());
                     if (isDeleted) {
                         ColBookTel.getItems().remove(booking);
                     } else {
@@ -517,43 +504,6 @@ LblLocationAddress.setText("");
         }
         }
 
-
-
-
-    @FXML
-    void cmbEmployeeIDOnAction(ActionEvent event) {
-        String id = String.valueOf(cmbEmployeeID.getValue());
-        try {
-            Employee employee = EmployeeRepo.searchById(id);
-            if (employee != null) {
-                LblEmployeeName.setText(employee.getEmpName());
-            } else {
-                LblEmployeeName.setText("Employee not found");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    @FXML
-    void cmbLocationIDOnAction(ActionEvent event) {
-        String id = String.valueOf(cmbLocationID.getValue());
-        try {
-            Location location = LocationRepo.searchById(id);
-if(location != null) {
-    LblLocationAddress.setText(location.getAddress());
-    LblCustomerName.setText(location.getCustomerId());
-}else{
-    LblLocationAddress.setText("Address not found");
-    LblCustomerName.setText("Not found  Customer");
-
-}
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private void showAlert(Alert.AlertType alertType, String message) {
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
@@ -598,6 +548,17 @@ if(location != null) {
     public void applyComboBoxStyles() {
         cmbEmployeeID.setStyle(" -fx-text-fill: white;");
         cmbLocationID.setStyle(" -fx-text-fill: white;");
+
+    }
+
+    private void clearFields() {
+        cmbLocationID.getSelectionModel().clearSelection();
+        cmbEmployeeID.getSelectionModel().clearSelection();
+        LblEmployeeName.setText("");
+        LblCustomerName.setText("");
+        txtDesc.clear();
+        LblLocationAddress.setText("");
+
 
     }
 }

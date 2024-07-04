@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="MySQL" uuid="be933619-2cb9-4e69-910e-8b8725764121">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>&quot;jdbc:mysql://localhost:3306/KD_Aircon&quot;,</jdbc-url>
       <jdbc-additional-properties>
         <property name="com.intellij.clouds.kubernetes.db.host.port" />

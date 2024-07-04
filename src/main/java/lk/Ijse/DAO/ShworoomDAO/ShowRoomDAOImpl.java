@@ -1,4 +1,4 @@
-package lk.Ijse.repository;
+package lk.Ijse.DAO.ShworoomDAO;
 
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.ShowRoom;
@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowRoomRepo {
+public class ShowRoomDAOImpl implements ShowRoomDAO {
 
-    public static boolean save(ShowRoom showRoom) throws SQLException {
+    public  boolean save(ShowRoom showRoom) throws SQLException {
         String sql = "INSERT INTO ShowRoom (ShowRoom_id, ShowRoom_Location) VALUES (?, ?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
@@ -24,7 +24,7 @@ public class ShowRoomRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static ShowRoom searchById(String id) throws SQLException {
+    public  ShowRoom searchById(String id) throws SQLException {
         String sql = "SELECT * FROM ShowRoom WHERE ShowRoom_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class ShowRoomRepo {
         return null;
     }
 
-    public static boolean update(ShowRoom showRoom) throws SQLException {
+    public  boolean update(ShowRoom showRoom) throws SQLException {
         String sql = "UPDATE ShowRoom SET ShowRoom_Location = ? WHERE ShowRoom_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -51,7 +51,7 @@ public class ShowRoomRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static boolean delete(String id) throws SQLException {
+    public  boolean delete(String id) throws SQLException {
         String sql = "DELETE FROM ShowRoom WHERE ShowRoom_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -60,7 +60,7 @@ public class ShowRoomRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static List<ShowRoom> getAll() throws SQLException {
+    public  List<ShowRoom> getAll() throws SQLException {
         String sql = "SELECT * FROM ShowRoom";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
@@ -78,7 +78,7 @@ public class ShowRoomRepo {
         return showRoomList;
     }
 
-    public static List<String> getIds() throws SQLException {
+    public  List<String> getIds() throws SQLException {
         String sql = "SELECT ShowRoom_id FROM ShowRoom";
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
 
@@ -91,7 +91,9 @@ public class ShowRoomRepo {
         }
         return idList;
     }
-    public static String getBookingCurrentId() throws SQLException {
+
+
+    public  String getCurrentId() throws SQLException {
         String sql = "SELECT ShowRoom_id FROM ShowRoom ORDER BY ShowRoom_id DESC LIMIT 1";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);

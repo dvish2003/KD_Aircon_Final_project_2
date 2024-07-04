@@ -1,4 +1,4 @@
-package lk.Ijse.repository;
+package lk.Ijse.DAO.RegisterDAO;
 
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Register;
@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegisterRepo {
-    public static boolean save(Register register) throws SQLException {
+public class RegisterDAOImpl implements RegisterDAO {
+    public  boolean save(Register register) throws SQLException {
         String sql = "INSERT INTO Register (Register_id, Register_Name, Register_post, Register_Password) VALUES(?,?,?,?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
@@ -24,7 +24,7 @@ public class RegisterRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static Register searchById(String id) throws SQLException {
+    public  Register searchById(String id) throws SQLException {
         String sql = "SELECT * FROM Register WHERE Register_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class RegisterRepo {
         return null;
     }
 
-    public static boolean update(Register register) throws SQLException {
+    public  boolean update(Register register) throws SQLException {
         String sql = "UPDATE Register SET Register_Name = ?, Register_post = ?, Register_Password = ? WHERE Register_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -53,7 +53,7 @@ public class RegisterRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static boolean delete(String id) throws SQLException {
+    public  boolean delete(String id) throws SQLException {
         String sql = "DELETE FROM Register WHERE Register_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -62,7 +62,7 @@ public class RegisterRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static List<Register> getAll() throws SQLException {
+    public  List<Register> getAll() throws SQLException {
         String sql = "SELECT * FROM Register";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
@@ -84,7 +84,7 @@ public class RegisterRepo {
         return registerList;
     }
 
-    public static List<String> getIds() throws SQLException {
+    public  List<String> getIds() throws SQLException {
         String sql = "SELECT Register_id FROM Register";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
@@ -98,7 +98,7 @@ public class RegisterRepo {
         }
         return idList;
     }
-    public static String getCustomerCurrentId() throws SQLException {
+    public  String getCurrentId() throws SQLException {
         String sql = "SELECT Register_id FROM Register ORDER BY Register_id DESC LIMIT 1";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);

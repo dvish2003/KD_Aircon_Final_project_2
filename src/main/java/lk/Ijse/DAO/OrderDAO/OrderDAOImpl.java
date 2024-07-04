@@ -1,4 +1,4 @@
-package lk.Ijse.repository;
+package lk.Ijse.DAO.OrderDAO;
 
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Order;
@@ -7,8 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderRepo {
-    public static String getCurrentId() throws SQLException {
+public class OrderDAOImpl implements OrderDAO {
+    public  String getCurrentId() throws SQLException {
         String sql = "SELECT Order_id FROM `Order` ORDER BY Order_id DESC LIMIT 1";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
@@ -20,7 +20,7 @@ public class OrderRepo {
         }
         return null;
     }
-    public static String getPayCurrentId() throws SQLException {
+    public  String getPayCurrentId() throws SQLException {
         String sql = "SELECT Payment_id FROM Payment ORDER BY Payment_id DESC LIMIT 1";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
@@ -32,7 +32,7 @@ public class OrderRepo {
         }
         return null;
     }
-    public static boolean save(Order order) throws SQLException {
+    public  boolean save(Order order) throws SQLException {
         String sql = "INSERT INTO `Order` VALUES(?, ?, ?,?)";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);

@@ -1,6 +1,5 @@
 package lk.Ijse.Controller;
 
-import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,13 +15,35 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.CustomerBO.CustomerBO;
+import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
+import lk.Ijse.DAO.BookingDAO.BookingDAO;
+import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
+import lk.Ijse.DAO.LocationDAO.LocationDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
+import lk.Ijse.DAO.ProductDAO.ProductDAO;
+import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.Location;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.repository.BookingRepo;
-import lk.Ijse.repository.CustomerRepo;
-import lk.Ijse.repository.LocationRepo;
+import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -93,19 +114,34 @@ public class LocationController {
     @FXML
     private TextField txtLoProvince;
 
-    public void initialize() {
+    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    BookingDAO bookingDAO = new BookingDAOImpl();
+    CustomerBO customerDAO = new CustomerBOImpl();
+    LocationDAO locationDAO = new LocationDAOImpl();
+    OrderDAO orderDAO = new OrderDAOImpl();
+    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
+    RegisterDAO registerDAO = new RegisterDAOImpl();
+    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
+    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
+    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
+    PaymentDAO paymentDAO = new PaymentDAOImpl();
+    ProductDAO productDAO = new ProductDAOImpl();
+    Animation1 animation1 = new Animation1();
+
+
+    public void initialize() throws ClassNotFoundException {
         setCellValueFactory();
         loadAllLocation();
         getCustomerIds();
         applyButtonAnimations();
-        getCurrentLocationId();
-        addHoverHandlers(btnNewCus);
-        addHoverHandlers(btnLocClean);
-        addHoverHandlers(btnLocDelete);
-        addHoverHandlers(btnLocSave);
-        addHoverHandlers(btnLocUpdate);
-        addHoverHandlers(btnLocHome);
-applyComboBoxStyles();
+        getCurrentId();
+        animation1.addHoverHandlers(btnNewCus);
+        animation1.addHoverHandlers(btnLocClean);
+        animation1.addHoverHandlers(btnLocDelete);
+        animation1.addHoverHandlers(btnLocSave);
+        animation1.addHoverHandlers(btnLocUpdate);
+        animation1.addHoverHandlers(btnLocHome);
+        applyComboBoxStyles();
 
 
 
@@ -143,39 +179,15 @@ applyComboBoxStyles();
         });
     }
     private void applyButtonAnimations() {
-        applyAnimation(btnNewCus);
-        applyAnimation(btnLocClean);
-        applyAnimation(btnLocDelete);
-        applyAnimation(btnLocSave);
-        applyAnimation(btnLocUpdate);
-        applyAnimation(btnLocHome);
+       animation1. applyAnimation(btnNewCus);
+       animation1. applyAnimation(btnLocClean);
+       animation1. applyAnimation(btnLocDelete);
+       animation1. applyAnimation(btnLocSave);
+       animation1. applyAnimation(btnLocUpdate);
+       animation1. applyAnimation(btnLocHome);
 
 
     }
-
-    private void addHoverHandlers(Button button) {// button Animation
-        button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
-        });
-        button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
-        });
-    }
-
-    private void applyAnimation(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-        button.setOnMouseEntered(event -> {
-            scaleTransition.setToX(1.1);
-            scaleTransition.setToY(1.1);
-            scaleTransition.play();
-        });
-        button.setOnMouseExited(event -> {
-            scaleTransition.setToX(1);
-            scaleTransition.setToY(1);
-            scaleTransition.play();
-        });
-    }
-
 
     private void setCellValueFactory() {
         colCu_ID.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -186,9 +198,9 @@ applyComboBoxStyles();
         colZipCode.setCellValueFactory(new PropertyValueFactory<>("zipCode"));
     }
 
-    private void loadAllLocation() {
+    private void loadAllLocation() throws ClassNotFoundException {
         try {
-            List<Location> locationList = LocationRepo.getAll();
+            List<Location> locationList = locationDAO.getAll();
             ObservableList<Location> obList = FXCollections.observableArrayList(locationList);
             colLoTel.setItems(obList);
         } catch (SQLException e) {
@@ -196,9 +208,9 @@ applyComboBoxStyles();
         }
     }
 
-    private void getCustomerIds() {
+    private void getCustomerIds() throws ClassNotFoundException {
         try {
-            List<String> idList = CustomerRepo.getIds();
+            List<String> idList = customerDAO.getIds();
             ObservableList<String> obList = FXCollections.observableArrayList(idList);
             cmbCustomerId.setItems(obList);
         } catch (SQLException e) {
@@ -209,12 +221,12 @@ applyComboBoxStyles();
 
 
     @FXML
-    void btnLocCleanOnAction(ActionEvent event) {
+    void btnLocCleanOnAction(ActionEvent event) throws ClassNotFoundException {
         clearFields();
     }
 
     @FXML
-    void btnLocDeleteOnAction(ActionEvent event) {
+    void btnLocDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
         ObservableList<Location> selectedLocations = colLoTel.getSelectionModel().getSelectedItems();
         if (selectedLocations.isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "Please select location(s) to delete!").show();
@@ -228,7 +240,7 @@ applyComboBoxStyles();
         if (confirmationAlert.getResult() == ButtonType.OK) {
             try {
                 for (Location location : selectedLocations) {
-                    boolean isDeleted = LocationRepo.delete(location.getId());
+                    boolean isDeleted = locationDAO.delete(location.getId());
                     if (isDeleted) {
                         colLoTel.getItems().remove(location);
                     } else {
@@ -260,7 +272,7 @@ applyComboBoxStyles();
 
 
     @FXML
-    void btnLocSaveOnAction(ActionEvent event) {
+    void btnLocSaveOnAction(ActionEvent event) throws ClassNotFoundException {
         String cuId = cmbCustomerId.getValue();
         String loId = lblLocationId.getText();
         String loProvince = txtLoProvince.getText();
@@ -271,7 +283,7 @@ applyComboBoxStyles();
         Location location = new Location(cuId, loId, loProvince, loCity, loAddress, loZipCode);
 
         try {
-            if(isValied()){ boolean isSaved = LocationRepo.save(location);
+            if(isValied()){ boolean isSaved = locationDAO.save(location);
                 if (isSaved) {
                     colLoTel.getItems().add(location);
                     new Alert(Alert.AlertType.CONFIRMATION, "Location saved successfully!").show();
@@ -286,7 +298,7 @@ applyComboBoxStyles();
     }
 
     @FXML
-    void btnLocUpdateOnAction(ActionEvent event) {
+    void btnLocUpdateOnAction(ActionEvent event) throws ClassNotFoundException {
         String cuId = cmbCustomerId.getValue();
         String loId = lblLocationId.getText();
         String loProvince = txtLoProvince.getText();
@@ -297,7 +309,7 @@ applyComboBoxStyles();
         Location location = new Location(cuId, loId, loProvince, loCity, loAddress, loZipCode);
 
         try {
-            if(isValied()){boolean isUpdated = LocationRepo.update(location);
+            if(isValied()){boolean isUpdated = locationDAO.update(location);
                 if (isUpdated) {
                     int selectedIndex = colLoTel.getSelectionModel().getSelectedIndex();
                     colLoTel.getItems().set(selectedIndex, location);
@@ -325,10 +337,10 @@ applyComboBoxStyles();
     }
 
     @FXML
-    void cmbCustomerIdOnAction(ActionEvent event) {
+    void cmbCustomerIdOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = cmbCustomerId.getValue();
         try {
-            Customer customer = CustomerRepo.searchById(id);
+            Customer customer = customerDAO.searchById(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -338,14 +350,13 @@ applyComboBoxStyles();
 
     }
 
-    private void clearFields() {
+    private void clearFields() throws ClassNotFoundException {
         cmbCustomerId.getSelectionModel().clearSelection();
-        txtLoId.clear();
         txtLoProvince.clear();
         txtLoCity.clear();
         txtLoAddress.clear();
         txtLoZip.clear();
-        getCurrentLocationId();
+        getCurrentId();
 
     }
 
@@ -378,9 +389,9 @@ applyComboBoxStyles();
 
   }
 
-    private void getCurrentLocationId() {
+    private void getCurrentId() throws ClassNotFoundException {
         try {
-            String currentId = LocationRepo.getLocationCurrentId();
+            String currentId = locationDAO.getCurrentId();
 
             String nextOrderId = generateNextLocationId(currentId);
             lblLocationId.setText(nextOrderId);

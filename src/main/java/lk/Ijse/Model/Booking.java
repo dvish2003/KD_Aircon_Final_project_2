@@ -1,7 +1,5 @@
 package lk.Ijse.Model;
 
-import lk.Ijse.repository.EmployeeRepo;
-import lk.Ijse.repository.LocationRepo;
 import lombok.*;
 
 import java.sql.Date;

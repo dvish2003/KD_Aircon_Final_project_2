@@ -1,7 +1,5 @@
 package lk.Ijse.Controller;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,17 +12,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.CustomerBO.CustomerBO;
+import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
 import lk.Ijse.Model.Customer;
-import lk.Ijse.Model.Employee;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.repository.CustomerRepo;
-import lk.Ijse.repository.EmployeeRepo;
-import lk.Ijse.repository.OrderRepo;
+import lk.Ijse.entity.CustomerEntity;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -91,21 +88,16 @@ public class CustomerController {
     @FXML
     private TextField txtCuName;
 
-    public void initialize() {
+
+    CustomerBO customerDAO = new CustomerBOImpl();
+
+    Animation1 animation1 = new Animation1();
+
+    public void initialize() throws ClassNotFoundException {
             setCellValueFactory();
             loadAllCustomers();
             applyButtonAnimations();
             getCurrentCustomerId();
-
-
-        addHoverHandlers(btnClean);
-        addHoverHandlers(btnDelete);
-        addHoverHandlers(btnSave);
-        addHoverHandlers(btnUpdate);
-        addHoverHandlers(btnNext);
-        addHoverHandlers(btnHome);
-
-
 
         txtCuName.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -139,27 +131,26 @@ public class CustomerController {
                 }
             });
         }
-    private void addHoverHandlers(Button button) {// button Animation
-        button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
-        });
-        button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
-        });
-    }
+
     private void applyButtonAnimations() {
-        applyAnimation(btnClean);
-        applyAnimation(btnDelete);
-        applyAnimation(btnSave);
-        applyAnimation(btnUpdate);
-        applyAnimation(btnNext);
-        applyAnimation(btnHome);
+        animation1.applyAnimation(btnClean);
+        animation1.applyAnimation(btnDelete);
+        animation1.applyAnimation(btnSave);
+        animation1.applyAnimation(btnUpdate);
+        animation1.applyAnimation(btnNext);
+        animation1.applyAnimation(btnHome);
+        animation1.addHoverHandlers(btnClean);
+        animation1.addHoverHandlers(btnDelete);
+        animation1.addHoverHandlers(btnSave);
+        animation1.addHoverHandlers(btnUpdate);
+        animation1.addHoverHandlers(btnNext);
+        animation1.addHoverHandlers(btnHome);
 
     }
 
-    private void getCurrentCustomerId() {
+    private void getCurrentCustomerId() throws ClassNotFoundException {
         try {
-            String currentId = CustomerRepo.getCustomerCurrentId();
+            String currentId = customerDAO.getCurrentId();
 
             String nextCustomerId = generateNextCustomerId(currentId);
             lblCustomerID.setText(nextCustomerId);
@@ -179,23 +170,6 @@ public class CustomerController {
         return "C001";
     }
 
-    private void applyAnimation(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-        button.setOnMouseEntered(event -> {
-            scaleTransition.setToX(1.1);
-            scaleTransition.setToY(1.1);
-            scaleTransition.play();
-        });
-        button.setOnMouseExited(event -> {
-            scaleTransition.setToX(1);
-            scaleTransition.setToY(1);
-            scaleTransition.play();
-        });
-    }
-
-
-
-
     private void setCellValueFactory() {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -204,12 +178,12 @@ public class CustomerController {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
     }
 
-    private void loadAllCustomers() {
+    private void loadAllCustomers() throws ClassNotFoundException {
         ObservableList<Customer> obList = FXCollections.observableArrayList();
 
         try {
-            List<Customer> customerList = CustomerRepo.getAll();
-            for (Customer customer : customerList) {
+            List<CustomerEntity> customerList = customerDAO.getAll();
+            for (CustomerEntity customer : customerList) {
                 Customer tm = new Customer(
                         customer.getId(),
                         customer.getName(),
@@ -226,18 +200,12 @@ public class CustomerController {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
     @FXML
-    void btnCleanOnAction(ActionEvent event) {
-
+    void btnCleanOnAction(ActionEvent event) throws ClassNotFoundException {
         clearFields();
     }
-
     @FXML
-    void btnDeleteOnAction(ActionEvent event) {
+    void btnDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
         ObservableList<Customer> selectedCustomers = colCuTel.getSelectionModel().getSelectedItems();
         if (selectedCustomers.isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "Please select customer(s) to delete!").show();
@@ -251,7 +219,7 @@ public class CustomerController {
         if (confirmationAlert.getResult() == ButtonType.OK) {
             try {
                 for (Customer customer : selectedCustomers) {
-                    boolean isDeleted = CustomerRepo.delete(customer.getId());
+                    boolean isDeleted = customerDAO.delete(customer.getId());
                     if (isDeleted) {
                         colCuTel.getItems().remove(customer);
                     } else {
@@ -265,11 +233,8 @@ public class CustomerController {
             }
         }
     }
-
-
-
     @FXML
-    void btnSaveOnAction(ActionEvent event) {
+    void btnSaveOnAction(ActionEvent event) throws ClassNotFoundException {
 
         String id = lblCustomerID.getText();
         String name = txtCuName.getText();
@@ -280,7 +245,7 @@ public class CustomerController {
         Customer customer = new Customer(id, name, address, contact, email);
 
         try {
-            if(isValied()){boolean isSaved = CustomerRepo.save(customer);
+            if(isValied()){boolean isSaved = customerDAO.save(customer);
                 if (isSaved) {
                     getCurrentCustomerId();
                     colCuTel.getItems().add(customer);
@@ -294,10 +259,8 @@ public class CustomerController {
             new Alert(Alert.AlertType.ERROR, "Error occurred while saving customer: " + e.getMessage()).show();
         }
     }
-
-
     @FXML
-    void btnUpdateOnAction(ActionEvent event) {
+    void btnUpdateOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = lblCustomerID.getText();
         String name = txtCuName.getText();
         String address = txtCuAddress.getText();
@@ -306,7 +269,7 @@ public class CustomerController {
 
         Customer customer = new Customer(id, name, address, contact, email);
         try {
-            if(isValied()){ boolean isUpdated = CustomerRepo.update(customer);
+            if(isValied()){ boolean isUpdated = customerDAO.update(customer);
                 if (isUpdated) {
                     Customer selectedItem = colCuTel.getSelectionModel().getSelectedItem();
                     if (selectedItem != null) {
@@ -325,9 +288,33 @@ public class CustomerController {
             new Alert(Alert.AlertType.ERROR, "Error occurred while updating customer: " + e.getMessage()).show();
         }
     }
+    @FXML
+    void SearchBtnOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        String contact = txtSearch.getText();
+        try {
+            Customer customer = customerDAO.searchById1(contact);
+            if (customer != null) {
+                txtCuEmail.setText(customer.getEmail());
+                txtCuAddress.setText(customer.getAddress());
+                txtCuName.setText(customer.getName());
+                txtCuContact.setText(customer.getContact());
+                lblCustomerID1.setText(customer.getId());
+                //  lblCustomerID.setText(customer.getId());
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Customer not found.");
+            }
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Error occurred while fetching Customer: " + e.getMessage());
+        }
 
+    }
+    @FXML
+    void txtSearchKeyRelse(KeyEvent event) {
+        CustomerRegex.setTextColor2(CustomerTextField.CONTACT,txtSearch);
 
-    private void clearFields() {
+    }
+
+    private void clearFields() throws ClassNotFoundException {
         getCurrentCustomerId();
         lblCustomerID1.setText("");
         txtCuName.clear();
@@ -358,6 +345,7 @@ public class CustomerController {
 
         stage.show();
     }
+
     public boolean isValied(){
         if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuName)) return false;
         if (!CustomerRegex.setTextColor(CustomerTextField.CONTACT,txtCuContact)) return false;
@@ -367,26 +355,6 @@ public class CustomerController {
         return true;
     }
 
-    @FXML
-    void SearchBtnOnAction(ActionEvent event) throws SQLException {
-String contact = txtSearch.getText();
-        try {
-            Customer customer = CustomerRepo.searchById(contact);
-            if (customer != null) {
-                txtCuEmail.setText(customer.getEmail());
-                txtCuAddress.setText(customer.getAddress());
-                txtCuName.setText(customer.getName());
-                txtCuContact.setText(customer.getContact());
-                lblCustomerID1.setText(customer.getId());
-              //  lblCustomerID.setText(customer.getId());
-                            } else {
-                showAlert(Alert.AlertType.ERROR, "Customer not found.");
-            }
-        } catch (SQLException e) {
-            showAlert(Alert.AlertType.ERROR, "Error occurred while fetching Customer: " + e.getMessage());
-        }
-
-    }
     private void showAlert(Alert.AlertType alertType, String message) {
         Alert alert = new Alert(alertType);
         alert.setContentText(message);
@@ -414,18 +382,7 @@ String contact = txtSearch.getText();
 
     }
 
-    @FXML
-    void txtSearchKeyRelse(KeyEvent event) {
-        CustomerRegex.setTextColor2(CustomerTextField.CONTACT,txtSearch);
 
-    }
-//    public boolean isValied(){
-//        if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuName)) return false;
-//        if (!CustomerRegex.setTextColor(CustomerTextField.EMAIL,txtCuEmail)) return false;
-//        if (!CustomerRegex.setTextColor(CustomerTextField.NAME,txtCuAddress)) return false;
-//        if (!CustomerRegex.setTextColor(CustomerTextField.CONTACT,txtCuContact)) return false;
-//
-//        return true;
     }
 
 

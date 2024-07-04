@@ -1,28 +1,38 @@
 
-package lk.Ijse.repository;
+package lk.Ijse.DAO.PaymentDAO;
 
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.Customer;
 import lk.Ijse.Model.Payment;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaymentRepo {
-    public static boolean save(Payment payment) throws SQLException {
+public class PaymentDAOImpl implements PaymentDAO {
+    public  boolean save(Payment dto) throws SQLException {
         String sql = "INSERT INTO Payment VALUES(?,?,?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1,payment.getPaymentId());
-        pstm.setObject(2,payment.getPaymentAmount());
-        pstm.setObject(3, payment.getPaymentDate());
+        pstm.setObject(1,dto.getPaymentId());
+        pstm.setObject(2,dto.getPaymentAmount());
+        pstm.setObject(3, dto.getPaymentDate());
 
 
         return pstm.executeUpdate() > 0;
     }
-    public static Payment searchById(String id) throws SQLException {
+
+    @Override
+    public boolean update(Payment dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    public  Payment searchById(String id) throws SQLException {
         String sql = "SELECT * FROM Payment WHERE Payment_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -34,7 +44,7 @@ public class PaymentRepo {
             Date date = Date.valueOf(rs.getString(3));
 
 
-Payment payment = new Payment(Pay_ID,Amount,date);
+        Payment payment = new Payment(Pay_ID,Amount,date);
             return payment;
 
         }
@@ -42,7 +52,7 @@ Payment payment = new Payment(Pay_ID,Amount,date);
 
     }
 
-    public static List<Payment> getAll() throws SQLException {
+    public  List<Payment> getAll() throws SQLException {
         String sql = "SELECT * FROM Payment";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
@@ -63,7 +73,7 @@ Payment payment = new Payment(Pay_ID,Amount,date);
         return paymentList;
     }
 
-    public static List<String> getIds() throws SQLException {
+    public  List<String> getIds() throws SQLException {
         String sql = "SELECT Payment_id FROM Payment";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
@@ -76,6 +86,11 @@ Payment payment = new Payment(Pay_ID,Amount,date);
             idList.add(id);
         }
         return idList;
+    }
+
+    @Override
+    public String getCurrentId() throws SQLException, ClassNotFoundException {
+        return "";
     }
 }
 

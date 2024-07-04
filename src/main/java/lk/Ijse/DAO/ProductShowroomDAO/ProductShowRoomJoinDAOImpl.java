@@ -1,4 +1,4 @@
-package lk.Ijse.repository;
+package lk.Ijse.DAO.ProductShowroomDAO;
 
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.ProductShowRoomJoin;
@@ -9,8 +9,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductShowRoomJoinRepo {
-    public static List<ProductShowRoomJoin> getAll() throws SQLException {
+public class ProductShowRoomJoinDAOImpl implements ProductShowRoomJoinDAO {
+    @Override
+    public boolean save(ProductShowRoomJoin dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(ProductShowRoomJoin dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    public  List<ProductShowRoomJoin> getAll() throws SQLException {
         String sql = "SELECT \n" +
                 "    Product.Product_id,\n" +
                 "    Product.Product_Description,\n" +
@@ -35,5 +50,15 @@ public class ProductShowRoomJoinRepo {
             productShowRoomJoinList.add(new ProductShowRoomJoin(showRoomId,productId, productDescription, showRoomQtyOnHand, productUnitPrice));
         }
         return productShowRoomJoinList;
+    }
+
+    @Override
+    public List<String> getIds() throws SQLException, ClassNotFoundException {
+        return List.of();
+    }
+
+    @Override
+    public String getCurrentId() throws SQLException, ClassNotFoundException {
+        return "";
     }
 }

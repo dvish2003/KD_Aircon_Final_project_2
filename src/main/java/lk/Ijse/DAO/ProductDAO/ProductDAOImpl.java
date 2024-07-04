@@ -1,4 +1,4 @@
-package lk.Ijse.repository;
+package lk.Ijse.DAO.ProductDAO;
 
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.OrderDetail;
@@ -11,9 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsRepo {
+public class ProductDAOImpl implements ProductDAO {
 
-    public static boolean save(Products product) throws SQLException {
+    public  boolean save(Products product) throws SQLException {
         String sql = "INSERT INTO Product VALUES(?,?,?,?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
@@ -26,8 +26,7 @@ public class ProductsRepo {
 
         return pstm.executeUpdate() > 0;
     }
-
-    public static Products searchById(String id) throws SQLException {
+    public  Products searchById(String id) throws SQLException {
         String sql = "SELECT * FROM Product WHERE Product_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -45,7 +44,7 @@ public class ProductsRepo {
         }
         return null;
     }
-    public static Products searchByName(String Description) throws SQLException {
+    public  Products searchByName(String Description) throws SQLException {
         String sql = "SELECT * FROM Product WHERE Product_Description = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -63,8 +62,7 @@ public class ProductsRepo {
         }
         return null;
     }
-
-    public static boolean update(Products product, int qtyChange) throws SQLException {
+    public  boolean update(Products product) throws SQLException {
         String sql = "UPDATE Product SET Product_Description = ?, ShowRoom_QtyOnHand = ShowRoom_QtyOnHand + ?, Product_UnitPrice = ? WHERE Product_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -74,9 +72,7 @@ public class ProductsRepo {
         pstm.setString(4, product.getProduct_id());
         return pstm.executeUpdate() > 0;
     }
-
-
-    public static boolean delete(String id) throws SQLException {
+    public  boolean delete(String id) throws SQLException {
         String sql = "DELETE FROM Product WHERE Product_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -84,8 +80,7 @@ public class ProductsRepo {
 
         return pstm.executeUpdate() > 0;
     }
-
-  public static List<Products> getAll() throws SQLException {
+    public  List<Products> getAll() throws SQLException {
         String sql = "SELECT * FROM Product";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
@@ -104,8 +99,7 @@ public class ProductsRepo {
         }
         return productList;
     }
-
-    public static List<String> getIds() throws SQLException {
+    public  List<String> getIds() throws SQLException {
         String sql = "SELECT Product_id FROM Product";
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
 
@@ -118,7 +112,7 @@ public class ProductsRepo {
         }
         return idList;
     }
-    public static List<String> getNames() throws SQLException {
+    public  List<String> getNames() throws SQLException {
         String sql = "SELECT Product_Description FROM Product";
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
 
@@ -131,7 +125,7 @@ public class ProductsRepo {
         }
         return idList;
     }
-    public static boolean update1(List<OrderDetail> odList) throws SQLException {
+    public  boolean update1(List<OrderDetail> odList) throws SQLException {
         for (OrderDetail od : odList) {
             boolean isUpdateQty = updateQty(od.getProductId(), od.getQuantity());
             if(!isUpdateQty) {
@@ -140,8 +134,7 @@ public class ProductsRepo {
         }
         return true;
     }
-
-    private static boolean updateQty(String Id, int qty) throws SQLException {
+    public  boolean updateQty(String Id, int qty) throws SQLException {
         String sql = "UPDATE Product SET ShowRoom_QtyOnHand = ShowRoom_QtyOnHand - ? WHERE Product_id = ?";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
@@ -152,7 +145,7 @@ public class ProductsRepo {
 
         return pstm.executeUpdate() > 0;
     }
-    public static String getProductCurrentId() throws SQLException {
+    public  String  getCurrentId() throws SQLException {
         String sql = "SELECT Product_id FROM Product ORDER BY Product_id DESC LIMIT 1";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);

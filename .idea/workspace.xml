@@ -5,6 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment=" Commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Animation1/Animation1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/CustomerBO/CustomerBO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/CustomerBO/CustomerBOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/BookingDAO/BookingDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/CrudDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/CustomerDAO/CustomerDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/CustomerDAO/CustomerDAOImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/EmployeeDAO/EmployeeDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/LocationDAO/LocationDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDetailDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductDAO/ProductDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/ProductShowRoomJoinDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/Product_ShowRoom_DAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/RegisterDAO/RegisterDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ShworoomDAO/ShowRoomDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/SqlUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/CustomerEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" afterDir="false" />
@@ -14,15 +33,23 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ShowRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ShowRoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ShowRoomRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ShowRoomRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/Booking.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Booking.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/CustomerForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/CustomerForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/DashBoard_from.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/DashBoard_from.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/EmployeeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/EmployeeForm.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/Order.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Order.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/Product.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Product.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/List/CustomerLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/List/CustomerLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/BookingRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/BookingDAO/BookingDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/CustomerRepo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/EmployeeRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/EmployeeDAO/EmployeeDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/LocationRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/LocationDAO/LocationDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/OrderDetailRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDetailDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/OrderRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/PaymentRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/PaymentDAO/PaymentDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/PlaceOrderRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/PlaceOrderRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ProductShowRoomJoinRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/ProductShowRoomJoinDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/Product_ShowRoom_Repo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/Product_ShowRoom_DAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ProductsRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductDAO/ProductDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/RegisterRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/RegisterDAO/RegisterDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/repository/ShowRoomRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ShworoomDAO/ShowRoomDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/View/Register_form.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/Register_form.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/View/ShowRoom.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/View/ShowRoom.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sql/query.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sql/query.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +63,7 @@
         <option value="FxmlFile" />
         <option value="CSS File" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -65,35 +93,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.AppInitializer.executor&quot;: &quot;Run&quot;,
-    &quot;Application.AppInitializerWrapper.executor&quot;: &quot;Run&quot;,
-    &quot;Application.OrderGenerator.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/vishmee/Documents/My final project/KD_Aircon_Final_project/src/main/resources/Icon&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/home/vishmee/Documents/My final project/KD_Aircon_Final_project/src/main/java/lk/Ijse/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AppInitializer.executor": "Run",
+    "Application.AppInitializerWrapper.executor": "Run",
+    "Application.OrderGenerator.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/visha/Desktop/KD_Aircon_Final_project 2/src/main/java/lk/Ijse",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "/home/vishmee/Documents/My final project/KD_Aircon_Final_project/src/main/java/lk/Ijse/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="lk.Ijse.repository" />
@@ -101,14 +129,23 @@
       <recent name="lk.Ijse.Controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\visha\Desktop\KD_Aircon_Final_project 2\src\main\java\lk\Ijse" />
+      <recent name="C:\Users\visha\Desktop\KD_Aircon_Final_project 2\src\main\java\lk\Ijse\BO" />
+      <recent name="C:\Users\visha\Desktop\KD_Aircon_Final_project 2\src\main\java\lk\Ijse\DAO\CustomerDAO" />
+      <recent name="C:\Users\visha\Desktop\KD_Aircon_Final_project 2\src\main\java\lk\Ijse\DAO" />
       <recent name="$PROJECT_DIR$/src/main/resources/Icon" />
-      <recent name="$PROJECT_DIR$/src/main/resources/Reports" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/Icon" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="lk.Ijse.Controller" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="lk.Ijse.DAO.OrderDAO" />
+      <recent name="lk.Ijse.DAO.ShworoomDAO" />
+      <recent name="lk.Ijse.Controller" />
+      <recent name="lk.Ijse.Animation" />
     </key>
   </component>
   <component name="RunManager" selected="Application.AppInitializerWrapper">
@@ -162,8 +199,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
       </set>
     </attachedChunks>
   </component>
@@ -297,6 +334,16 @@
       <workItem from="1715883878370" duration="8127000" />
       <workItem from="1715924658255" duration="1864000" />
       <workItem from="1715932426725" duration="1801000" />
+      <workItem from="1715937423802" duration="380000" />
+      <workItem from="1715955413938" duration="4555000" />
+      <workItem from="1715970298551" duration="574000" />
+      <workItem from="1715979007339" duration="1084000" />
+      <workItem from="1716003798996" duration="4164000" />
+      <workItem from="1716043248171" duration="4046000" />
+      <workItem from="1719817921944" duration="14337000" />
+      <workItem from="1719932236133" duration="5342000" />
+      <workItem from="1720026824400" duration="17000" />
+      <workItem from="1720072244526" duration="7085000" />
     </task>
     <task id="LOCAL-00001" summary="ss">
       <option name="closed" value="true" />
@@ -618,7 +665,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715933314487</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary=" Commit">
+      <option name="closed" value="true" />
+      <created>1715937681121</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1715937681121</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -655,5 +710,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -8,11 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.sql.*;
@@ -20,41 +18,31 @@ import java.time.LocalTime;
 import javafx.animation.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.DAO.BookingDAO.BookingDAO;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Booking;
 import lk.Ijse.Model.Employee;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.repository.BookingRepo;
-import javafx.scene.chart.BarChart;
+import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import lk.Ijse.repository.EmployeeRepo;
-
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class DashBoardController {
 
@@ -226,8 +214,12 @@ public class DashBoardController {
     private boolean isMenuVisible = true;
 
 
+    BookingDAO bookingDAO = new BookingDAOImpl();
+    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    Animation1 animation = new Animation1();
 
-    public void initialize(){
+
+    public void initialize() throws ClassNotFoundException {
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> { // set current Time
             LocalTime currentTime = LocalTime.now();
@@ -260,15 +252,15 @@ public class DashBoardController {
         setDate();
         setCellValueFactory();
         loadAllBooking();
-        addHoverHandlers(btnBooking);
-        addHoverHandlers(btnCustomer);
-        addHoverHandlers(btnEmployye);
-        addHoverHandlers(btnLocation);
-        addHoverHandlers(btnLogOut);
-        addHoverHandlers(btnOrder);
-        addHoverHandlers(btnProduct);
-        addHoverHandlers(btnRegister);
-        addHoverHandlers(btnShowRoom);
+        animation.addHoverHandlers(btnBooking);
+        animation.addHoverHandlers(btnCustomer);
+        animation.addHoverHandlers(btnEmployye);
+        animation.addHoverHandlers(btnLocation);
+        animation.addHoverHandlers(btnLogOut);
+        animation.addHoverHandlers(btnOrder);
+        animation.addHoverHandlers(btnProduct);
+        animation.addHoverHandlers(btnRegister);
+        animation.addHoverHandlers(btnShowRoom);
 
         setupOrderPieChart();
         try {
@@ -415,11 +407,11 @@ public class DashBoardController {
         return 0;
     }
 
-    private void loadAllBooking() {
+    private void loadAllBooking() throws ClassNotFoundException {
         ObservableList<Booking> obList = FXCollections.observableArrayList();
 
         try {
-            List<Booking> BookList = BookingRepo.getAll();
+            List<Booking> BookList = bookingDAO.getAll();
             for (Booking booking : BookList) {
                 Booking tm = new Booking(
                         booking.getBookingId(),
@@ -620,11 +612,11 @@ public class DashBoardController {
         transition.play();
     }
     @FXML
-    void SearchBtnOnAction(ActionEvent event) {
+    void SearchBtnOnAction(ActionEvent event) throws ClassNotFoundException {
         String EmployeeID = txtSearch.getText();
 
         try {
-            Employee employee = EmployeeRepo.searchById(EmployeeID);
+            Employee employee = employeeDAO.searchById(EmployeeID);
             if (employee != null) {
                 lblEName.setText(employee.getEmpName());
                 lblEContatc.setText(employee.getEmpPhone());

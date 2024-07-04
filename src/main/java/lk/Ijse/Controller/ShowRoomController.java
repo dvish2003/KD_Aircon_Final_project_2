@@ -15,13 +15,31 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import lk.Ijse.Model.Customer;
+import lk.Ijse.BO.CustomerBO.CustomerBO;
+import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
+import lk.Ijse.DAO.BookingDAO.BookingDAO;
+import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
+import lk.Ijse.DAO.LocationDAO.LocationDAO;
+import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
+import lk.Ijse.DAO.OrderDAO.OrderDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
+import lk.Ijse.DAO.ProductDAO.ProductDAO;
+import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
 import lk.Ijse.Model.ShowRoom;
-import lk.Ijse.Util.CustomerRegex;
-import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.repository.CustomerRepo;
-import lk.Ijse.repository.EmployeeRepo;
-import lk.Ijse.repository.ShowRoomRepo;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -62,25 +80,36 @@ public class ShowRoomController {
     @FXML
     private TextField txtSrLocation;
 
-
+    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    BookingDAO bookingDAO = new BookingDAOImpl();
+    CustomerBO customerDAO = new CustomerBOImpl();
+    LocationDAO locationDAO = new LocationDAOImpl();
+    OrderDAO orderDAO = new OrderDAOImpl();
+    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
+    RegisterDAO registerDAO = new RegisterDAOImpl();
+    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
+    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
+    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
+    PaymentDAO paymentDAO = new PaymentDAOImpl();
+    ProductDAO productDAO = new ProductDAOImpl();
 
     @FXML
-    void btnPrCleanOnAction(ActionEvent event) {
+    void btnPrCleanOnAction(ActionEvent event) throws ClassNotFoundException {
         clearFields();
 
     }
 
-    private void clearFields() {
+    private void clearFields() throws ClassNotFoundException {
         txtSrLocation.clear();
-        getCurrentShowRomD();
+        getCurrentShowRoomID();
     }
 
     @FXML
-    void btnPrDeleteOnAction(ActionEvent event) {
+    void btnPrDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
 
         String id = lblRegisterId.getText();
         try {
-            boolean isDeleted = ShowRoomRepo.delete(id);
+            boolean isDeleted = showRoomDAO.delete(id);
             if (isDeleted) {
                 ShowRoom showRoom = (ShowRoom) colSrTel.getSelectionModel().getSelectedItem();
                 if (showRoom != null) {
@@ -100,7 +129,7 @@ public class ShowRoomController {
 
 
     @FXML
-    void btnPrSaveOnAction(ActionEvent event) {
+    void btnPrSaveOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = lblRegisterId.getText();
         String location = txtSrLocation.getText();
 
@@ -108,13 +137,13 @@ public class ShowRoomController {
         ShowRoom showRoom = new ShowRoom(id,location);
 
         try {
-            boolean isSaved = ShowRoomRepo.save(showRoom);
+            boolean isSaved = showRoomDAO.save(showRoom);
             if (isSaved) {
 
                 colSrTel.getItems().add(showRoom);
                 new Alert(Alert.AlertType.CONFIRMATION, "ShowRoom saved successfully!").show();
                 clearFields();
-                getCurrentShowRomD();
+                getCurrentShowRoomID();
 
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save ShowRoom!").show();
@@ -125,14 +154,14 @@ public class ShowRoomController {
     }
 
     @FXML
-    void btnPrUpdateOnAction(ActionEvent event) {
+    void btnPrUpdateOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = lblRegisterId.getText();
         String location = txtSrLocation.getText();
 
 
         ShowRoom showRoom = new ShowRoom(id,location);
         try {
-            boolean isUpdated = ShowRoomRepo.update(showRoom);
+            boolean isUpdated = showRoomDAO.update(showRoom);
             if (isUpdated) {
                 ShowRoom selectedItem = colSrTel.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
@@ -149,11 +178,11 @@ public class ShowRoomController {
         }
 
     }
-    public void initialize() {
+    public void initialize() throws ClassNotFoundException {
         setCellValueFactory();
         loadAllShowRoom();
         applyButtonAnimations();
-        getCurrentShowRomD();
+        getCurrentShowRoomID();
         addHoverHandlers(btnSrClean);
         addHoverHandlers(btnSrUpdate);
         addHoverHandlers(btnSrDelete);
@@ -207,10 +236,10 @@ public class ShowRoomController {
         colLocation.setCellValueFactory(new PropertyValueFactory<>("showRoomLocation"));
     }
 
-    private void loadAllShowRoom() {
+    private void loadAllShowRoom() throws ClassNotFoundException {
         ObservableList<ShowRoom> obList = FXCollections.observableArrayList();
         try {
-            List<ShowRoom> showRoomList = ShowRoomRepo.getAll();
+            List<ShowRoom> showRoomList = showRoomDAO.getAll();
             for (ShowRoom showRoom : showRoomList) {
                 ShowRoom tm = new ShowRoom(
                         showRoom.getShowRoomId(),
@@ -247,9 +276,9 @@ public class ShowRoomController {
     }
 
 
-    private void getCurrentShowRomD() {
+    private void getCurrentShowRoomID() throws ClassNotFoundException {
         try {
-            String currentId = ShowRoomRepo.getBookingCurrentId();
+            String currentId = showRoomDAO.getCurrentId();
 
             String nextShowRoomID = generateNextShowRoom(currentId);
             lblRegisterId.setText(nextShowRoomID);

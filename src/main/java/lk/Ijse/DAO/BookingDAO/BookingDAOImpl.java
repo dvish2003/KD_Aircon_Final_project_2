@@ -1,8 +1,7 @@
-package lk.Ijse.repository;
+package lk.Ijse.DAO.BookingDAO;
 
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Booking;
-import lk.Ijse.Model.Customer;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,10 +12,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookingRepo {
-    public static boolean save(Booking booking) throws SQLException {
+public class BookingDAOImpl implements BookingDAO {
+    public  boolean save(Booking booking) throws SQLException {
         String sql = "INSERT INTO Booking (Booking_id, Employee_id, Location_id, Payment_id, Booking_Date, Place_Date, Booking_Description) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, booking.getBookingId());
@@ -30,7 +28,7 @@ public class BookingRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static Booking searchById(String id) throws SQLException {
+    public  Booking searchById(String id) throws SQLException {
         String sql = "SELECT * FROM Booking WHERE Booking_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -51,7 +49,7 @@ return booking;
 
     }
 
-    public static boolean update(Booking booking) throws SQLException {
+    public  boolean update(Booking booking) throws SQLException {
         String sql = "UPDATE Booking SET Employee_id = ?, Location_id = ?, Payment_id = ?, Booking_Date = ?, Place_Date = ?, Booking_Description = ? WHERE Booking_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -65,7 +63,7 @@ return booking;
         return pstm.executeUpdate() > 0;
     }
 
-    public static boolean delete(String id) throws SQLException {
+    public  boolean delete(String id) throws SQLException {
         String sql = "DELETE FROM Booking WHERE Booking_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -73,7 +71,7 @@ return booking;
 
         return pstm.executeUpdate() > 0;
     }
-    public static List<Booking> getAll() throws SQLException {
+    public  List<Booking> getAll() throws SQLException {
         String sql = "SELECT * FROM Booking";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
@@ -97,7 +95,7 @@ return booking;
         return bookList;
     }
 
-    public static List<String> getIds() throws SQLException {
+    public  List<String> getIds() throws SQLException {
         String sql = "SELECT Booking_id FROM Booking";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
@@ -111,7 +109,7 @@ return booking;
         }
         return idList;
     }
-    public static String getCurrentId() throws SQLException {
+    public  String getCurrentId() throws SQLException {
         String sql = "SELECT Booking_id FROM Booking ORDER BY Booking_id DESC LIMIT 1";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
@@ -123,7 +121,7 @@ return booking;
         }
         return null;
     }
-    public static List<Date> getBookedDatesForLocation(String locationId) throws SQLException {
+    public  List<Date> getBookedDatesForLocation(String locationId) throws SQLException {
         List<Date> bookedDates = new ArrayList<>();
         String sql = "SELECT Booking_Date FROM Booking WHERE Location_id = ?";
 
@@ -141,7 +139,7 @@ return booking;
 
         return bookedDates;
     }
-    public static void deleteExpiredBookings() throws SQLException {
+    public  void deleteExpiredBookings() throws SQLException {
         String query = "DELETE FROM Booking WHERE Booking_Date < ?";
 
         try (Connection connection = DbConnection.getInstance().getConnection();

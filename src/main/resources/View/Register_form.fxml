@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane opacity="0.98" prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.RegisterController">
+<AnchorPane opacity="0.98" prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.RegisterController">
    <children>
       <AnchorPane layoutX="4.0" layoutY="-6.0" prefHeight="68.0" prefWidth="1244.0">
          <stylesheets>
@@ -43,6 +43,14 @@
                   <DropShadow />
                </effect>
             </Label>
+            <Label fx:id="lblRegisterId" layoutX="141.0" layoutY="85.0" prefHeight="31.0" prefWidth="207.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="451.0" layoutY="71.0" prefHeight="834.0" prefWidth="798.0">
@@ -63,15 +71,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label fx:id="lblRegisterId" layoutX="638.0" layoutY="36.0" prefHeight="26.0" prefWidth="125.0" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <Label fx:id="lblRegisterId1" layoutX="-293.0" layoutY="86.0" prefHeight="26.0" prefWidth="147.0" textFill="WHITE">
+            <Label fx:id="lblRegisterId1" layoutX="635.0" layoutY="36.0" prefHeight="26.0" prefWidth="147.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>

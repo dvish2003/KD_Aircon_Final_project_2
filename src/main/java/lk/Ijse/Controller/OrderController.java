@@ -19,11 +19,31 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.Ijse.BO.CustomerBO.CustomerBO;
+import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
+import lk.Ijse.DAO.BookingDAO.BookingDAO;
+import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
+import lk.Ijse.DAO.LocationDAO.LocationDAO;
+import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
+import lk.Ijse.DAO.OrderDAO.*;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
+import lk.Ijse.DAO.ProductDAO.ProductDAO;
+import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.*;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.repository.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -32,13 +52,14 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
+
 public class OrderController {
+
+
     @FXML
     private Button btnPrintBill;
 
@@ -129,7 +150,21 @@ public class OrderController {
     @FXML
     private TextField txtQty;
 
-    public void initialize() {
+    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+
+    BookingDAO bookingDAO = new BookingDAOImpl();
+    CustomerBO customerDAO = new CustomerBOImpl();
+    LocationDAO locationDAO = new LocationDAOImpl();
+    OrderDAO orderDAO = new OrderDAOImpl();
+    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
+    RegisterDAO registerDAO = new RegisterDAOImpl();
+    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
+    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
+    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
+    PaymentDAO paymentDAO = new PaymentDAOImpl();
+    ProductDAO productDAO = new ProductDAOImpl();
+
+    public void initialize() throws ClassNotFoundException {
         setDate();
         getCurrentOrderId();
         getCustomerIds();
@@ -189,11 +224,11 @@ public class OrderController {
 
     }
 
-    private void loadAllPS() {
+    private void loadAllPS() throws ClassNotFoundException {
         ObservableList<Product_ShowRoom> obList = FXCollections.observableArrayList();
 
         try {
-            List<Product_ShowRoom> ps = Product_ShowRoom_Repo.getAll();
+            List<Product_ShowRoom> ps = productShowRoomDao.getAll();
             for (Product_ShowRoom psList : ps) {
                 Product_ShowRoom tm = new Product_ShowRoom(
 
@@ -272,11 +307,11 @@ public class OrderController {
         });
     }
 
-    private void getCustomerIds() {
+    private void getCustomerIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = CustomerRepo.getIds();
+            List<String> idList = customerDAO.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -291,7 +326,7 @@ public class OrderController {
 
     private void getCurrentOrderId() {
         try {
-            String currentId = OrderRepo.getCurrentId();
+            String currentId = orderDAO.getCurrentId();
 
             String nextOrderId = generateNextOrderId(currentId);
             lblOrderID.setText(nextOrderId);
@@ -363,7 +398,7 @@ public class OrderController {
         calculateNetTotal();
         txtQty.setText("");
     }
-//Budu Saranai
+
     private void calculateNetTotal() {
         int netTotal = 0;
         for (int i = 0; i < colOrderTel.getItems().size(); i++) {
@@ -432,7 +467,7 @@ public class OrderController {
             getCurrentPayId();
 
             new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
-            btnPrintBillOnAction(null);
+          //  btnPrintBillOnAction(null);
 
         } else {
             new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
@@ -455,10 +490,10 @@ public class OrderController {
 
 
     @FXML
-    void cmbCustomerIDOnAction(ActionEvent event) {
+    void cmbCustomerIDOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = cmbCustomerID.getValue();
         try {
-            Customer customer = CustomerRepo.searchById1(id);
+            Customer customer = customerDAO.searchById1(id);
 if (customer != null){
     lblCustomerName.setText(customer.getName());
 } else {
@@ -475,7 +510,7 @@ if (customer != null){
     void cmbProductIDOnAction(ActionEvent event) {
         String Desc = String.valueOf(cmbProductID.getValue());
         try {
-            Products products = ProductsRepo.searchByName(Desc);
+            Products products = productDAO.searchByName(Desc);
             if(products != null) {lblProductID.setText(products.getProduct_id());
                 lblUnitPrice.setText(String.valueOf(products.getProduct_unitPrice()));
                 lblQtyOnHand.setText(String.valueOf(products.getShowRoom_qtyOnHand()));
@@ -493,7 +528,7 @@ if (customer != null){
     private void getProductIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = ProductsRepo.getNames();
+            List<String> idList = productDAO.getNames();
             obList.addAll(idList);
             cmbProductID.setItems(obList);
         } catch (SQLException e) {
@@ -506,7 +541,7 @@ if (customer != null){
     void cmbShowRoomIDOnAction(ActionEvent event) {
         String id = String.valueOf(cmbShowRoomID.getValue());
         try {
-            ShowRoom showRoom = ShowRoomRepo.searchById(id);
+            ShowRoom showRoom = showRoomDAO.searchById(id);
             if (showRoom != null){
                 lblLocationShowRoom.setText(showRoom.getShowRoomLocation());
 
@@ -520,10 +555,10 @@ if (customer != null){
         }
     }
 
-    private void getShowRoomIds() {
+    private void getShowRoomIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = ShowRoomRepo.getIds();
+            List<String> idList = showRoomDAO.getIds();
             obList.addAll(idList);
             cmbShowRoomID.setItems(obList);
         } catch (SQLException e) {
@@ -532,7 +567,7 @@ if (customer != null){
     }
     private void getCurrentPayId() {
         try {
-            String currentId = OrderRepo.getPayCurrentId();
+            String currentId = orderDAO.getPayCurrentId();
 
             String nextPayId = generateNextPay(currentId);
             lblPaymentID.setText(nextPayId);
@@ -544,12 +579,10 @@ if (customer != null){
 
     private String generateNextPay(String currentId) {
         if (currentId != null && currentId.startsWith("P")) {
-            try {
+
                 int idNum = Integer.parseInt(currentId.substring(1)) + 1;
                 return "P" + String.format("%03d", idNum);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid current payment ID format");
-            }
+
         }
         return "P001";
     }
@@ -588,62 +621,6 @@ if (customer != null){
 
 
 
-//        // SQL query to fetch details of the latest order
-//        String sqlQuery = "SELECT o.Order_id, c.Customer_Name, p.Product_Description, od.Qty, od.Product_UnitPrice, py.Payment_Amount " +
-//                "FROM `Order` o " +
-//                "JOIN Customer c ON o.Customer_id = c.Customer_id " +
-//                "JOIN OrderDetails od ON o.Order_id = od.Order_id " +
-//                "JOIN Product p ON od.Product_id = p.Product_id " +
-//                "JOIN Payment py ON o.Payment_id = py.Payment_id " +
-//                "WHERE o.Order_id = ( " +
-//                "    SELECT MAX(Order_id) " +
-//                "    FROM `Order` " +
-//                ")";
-//
-//        // Prepare the statement
-//        PreparedStatement preparedStatement = DbConnection.getInstance().getConnection().prepareStatement(sqlQuery);
-//
-//        // Execute the query
-//        boolean querySuccess = preparedStatement.execute();
-//
-//        // Check if the query execution was successful
-//        if (querySuccess) {
-//            // Retrieve the result set
-//            ResultSet resultSet = preparedStatement.getResultSet();
-//
-//            // Check if the result set has data
-//            if (resultSet.next()) {
-//                // Create a map to hold the data for the report
-//                Map<String, Object> data = new HashMap<>();
-//                // Populate the map with data from the result set
-//                data.put("Order_id", resultSet.getString("Order_id"));
-//                data.put("Customer_Name", resultSet.getString("Customer_Name"));
-//                data.put("Product_Description", resultSet.getString("Product_Description"));
-//                data.put("Qty", resultSet.getInt("Qty"));
-//                data.put("Product_UnitPrice", resultSet.getInt("Product_UnitPrice"));
-//                data.put("Payment_Amount", resultSet.getInt("Payment_Amount"));
-//
-//                // Load the Jasper report
-//                JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/Reports/OrderBillReport.jrxml");
-//                JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-//
-//                // Fill the report with data and view it
-//                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, data, new JREmptyDataSource());
-//                JasperViewer.viewReport(jasperPrint, false);
-//            } else {
-//                // If no data found, show an alert
-//                new Alert(Alert.AlertType.ERROR, "No data found for the latest order.").show();
-//            }
-//
-//            // Close the result set
-//            resultSet.close();
-//        } else {
-//            // If the query execution failed, show an error alert
-//            new Alert(Alert.AlertType.ERROR, "Failed to retrieve data for the latest order.").show();
-//        }
-//
-//        // Close the prepared statement
-//        preparedStatement.close();
     }
 
     public void applyComboBoxStyles() {

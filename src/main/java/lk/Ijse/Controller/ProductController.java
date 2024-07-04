@@ -1,6 +1,5 @@
 package lk.Ijse.Controller;
 
-import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,11 +12,34 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.CustomerBO.CustomerBO;
+import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
+import lk.Ijse.DAO.BookingDAO.BookingDAO;
+import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
+import lk.Ijse.DAO.LocationDAO.LocationDAO;
+import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
+import lk.Ijse.DAO.OrderDAO.OrderDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
+import lk.Ijse.DAO.ProductDAO.ProductDAO;
+import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 import lk.Ijse.Model.*;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.repository.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -93,8 +115,22 @@ public class ProductController {
 
     private ObservableList<ProductShowRoomJoin> productShowRoomList;
 
+    Animation1 animation1 = new Animation1();
+    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    BookingDAO bookingDAO = new BookingDAOImpl();
+    CustomerBO customerDAO = new CustomerBOImpl();
+    LocationDAO locationDAO = new LocationDAOImpl();
+    OrderDAO orderDAO = new OrderDAOImpl();
+    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
+    RegisterDAO registerDAO = new RegisterDAOImpl();
+    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
+    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
+    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
+    PaymentDAO paymentDAO = new PaymentDAOImpl();
+    ProductDAO productDAO = new ProductDAOImpl();
+
     @FXML
-    void initialize() {
+    void initialize() throws ClassNotFoundException {
         setCellValueFactory();
         setCellValueFactory2();
         loadAllProductShowRoom();
@@ -103,46 +139,31 @@ public class ProductController {
         setListeners();
         getShowRoomIds();
         applyButtonAnimations();
-        addHoverHandlers(btnHome);
-        addHoverHandlers(btnPrClean);
-        addHoverHandlers(btnPrUpdate);
-        addHoverHandlers(btnPrSave);
-        addHoverHandlers(btnPrDelete);
+        animation1.addHoverHandlers(btnHome);
+        animation1.addHoverHandlers(btnPrClean);
+        animation1.addHoverHandlers(btnPrUpdate);
+        animation1.addHoverHandlers(btnPrSave);
+        animation1.addHoverHandlers(btnPrDelete);
         getProductId();
 
     }
     private void applyButtonAnimations() {
-        applyAnimation(btnHome);
-        applyAnimation(btnPrClean);
-        applyAnimation(btnPrUpdate);
-        applyAnimation(btnPrSave);
-        applyAnimation(btnPrDelete);
+        animation1.applyAnimation(btnHome);
+        animation1.applyAnimation(btnPrClean);
+        animation1.applyAnimation(btnPrUpdate);
+        animation1.applyAnimation(btnPrSave);
+        animation1.applyAnimation(btnPrDelete);
 
 
     }
 
 
 
-    private void applyAnimation(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-        button.setOnMouseEntered(event -> {
-            scaleTransition.setToX(1.1);
-            scaleTransition.setToY(1.1);
-            scaleTransition.play();
-        });
-        button.setOnMouseExited(event -> {
-            scaleTransition.setToX(1);
-            scaleTransition.setToY(1);
-            scaleTransition.play();
-        });
-    }
-
-
-    private void loadAllProduct() {
+    private void loadAllProduct() throws ClassNotFoundException {
         ObservableList<Products> obList = FXCollections.observableArrayList();
 
         try {
-            List<Products> productsList = ProductsRepo.getAll();
+            List<Products> productsList = productDAO.getAll();
             obList.addAll(productsList);
             colPrTel.setItems(obList);
         } catch (SQLException e) {
@@ -150,11 +171,11 @@ public class ProductController {
         }
     }
 
-    private void loadAllProductShowRoom() {
+    private void loadAllProductShowRoom() throws ClassNotFoundException {
         productShowRoomList = FXCollections.observableArrayList();
 
         try {
-            List<ProductShowRoomJoin> productsShowRoomList = ProductShowRoomJoinRepo.getAll();
+            List<ProductShowRoomJoin> productsShowRoomList = productShowRoomJoinDAO.getAll();
             productShowRoomList.addAll(productsShowRoomList);
             colPrJoinTel.setItems(productShowRoomList);
         } catch (SQLException e) {
@@ -212,25 +233,25 @@ public class ProductController {
     void cmbShowRoomOnAction(ActionEvent event) {
         String id = cmbShowRoom.getValue();
         try {
-            ShowRoom showRoom = ShowRoomRepo.searchById(id);
+            ShowRoom showRoom = showRoomDAO.searchById(id);
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Error occurred while searching for showroom: " + e.getMessage());
         }
     }
 
-    private void getShowRoomIds() {
+    private void getShowRoomIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = ShowRoomRepo.getIds();
+            List<String> idList = showRoomDAO.getIds();
             obList.addAll(idList);
             cmbShowRoom.setItems(obList);
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Error occurred while fetching showroom IDs: " + e.getMessage());
         }
     }
-    private void getProductId() {
+    private void getProductId() throws ClassNotFoundException {
         try {
-            String currentId = ProductsRepo.getProductCurrentId();
+            String currentId = productDAO.getCurrentId();
 
             String nextProductId = generateNextProductID(currentId);
             lblProductID.setText(nextProductId);
@@ -268,15 +289,15 @@ public class ProductController {
     }
 
     @FXML
-    void btnPrCleanOnAction(ActionEvent event) {
+    void btnPrCleanOnAction(ActionEvent event) throws ClassNotFoundException {
         clearFields();
     }
 
     @FXML
-    void btnPrDeleteOnAction(ActionEvent event) {
+    void btnPrDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = lblProductID.getText();
         try {
-            boolean isDeleted = ProductsRepo.delete(id);
+            boolean isDeleted = productDAO.delete(id);
             if (isDeleted) {
                 Products selectedItem = colPrTel.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
@@ -297,21 +318,21 @@ public class ProductController {
 
 
     @FXML
-    void btnPrSaveOnAction(ActionEvent event) {
+    void btnPrSaveOnAction(ActionEvent event) throws ClassNotFoundException {
         String showRoomId = cmbShowRoom.getValue();
         String productId = lblProductID.getText();
         String productDescription = txtPrDesc.getText();
-        int productUnitPrice = Integer.parseInt(txtPrUnitPrice.getText());
+        int productUnitPrice = Integer. parseInt(txtPrUnitPrice.getText());
         int productQty = Integer.parseInt(txtQty.getText());
 
         Products products = new Products(productId, productDescription,productQty,productUnitPrice);
         Product_ShowRoom ps = new Product_ShowRoom(productId, showRoomId);
 
         try {
-            if(isValied()){ boolean isProductSaved = ProductsRepo.save(products);
+            if(isValied()){ boolean isProductSaved = productDAO.save(products);
                 if (isProductSaved) {
                     colPrTel.getItems().add(products);
-                    boolean isProductShowRoomSaved = Product_ShowRoom_Repo.save(ps);
+                    boolean isProductShowRoomSaved = productShowRoomDao.save(ps);
                     if (isProductShowRoomSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom saved successfully!").show();
                         productShowRoomList.add(new ProductShowRoomJoin(productId, showRoomId, productDescription, productQty, productUnitPrice));
@@ -330,7 +351,7 @@ public class ProductController {
     }
 
     @FXML
-    void btnPrUpdateOnAction(ActionEvent event) {
+    void btnPrUpdateOnAction(ActionEvent event) throws ClassNotFoundException {
         String showRoomId = cmbShowRoom.getValue();
         String productId = lblProductID.getText();
         String productDescription = txtPrDesc.getText();
@@ -340,7 +361,7 @@ public class ProductController {
         Products products = new Products(productId, productDescription, productUnitPrice, productQty);
         Product_ShowRoom ps = new Product_ShowRoom(productId, showRoomId);
         try {
-            if(isValied()){ boolean isProductUpdate = ProductsRepo.update(products, productQty);
+            if(isValied()){ boolean isProductUpdate = productDAO.update(products);
                 if (isProductUpdate) {
                     Products selectedProduct = colPrTel.getSelectionModel().getSelectedItem();
                     selectedProduct.setProduct_description(productDescription);
@@ -348,7 +369,7 @@ public class ProductController {
                     selectedProduct.setShowRoom_qtyOnHand(productQty);
                     colPrTel.refresh();
 
-                    boolean isProductShowRoomSaved = Product_ShowRoom_Repo.save(ps);
+                    boolean isProductShowRoomSaved = productShowRoomDao.save(ps);
                     if (isProductShowRoomSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom updated successfully!").show();
                         clearFields();
@@ -366,7 +387,7 @@ public class ProductController {
     }
 
 
-    private void clearFields() {
+    private void clearFields() throws ClassNotFoundException {
         cmbShowRoom.getSelectionModel().clearSelection();
         txtQty.clear();
         txtPrDesc.clear();
@@ -402,13 +423,6 @@ public class ProductController {
         CustomerRegex.setTextColor(CustomerTextField.NUMBER,txtQty);
 
     }
-    private void addHoverHandlers(Button button) {// button Animation
-        button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
-        });
-        button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
-        });
-    }
+
 
 }

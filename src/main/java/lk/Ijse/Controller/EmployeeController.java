@@ -1,6 +1,5 @@
 package lk.Ijse.Controller;
 
-import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,12 +12,34 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.CustomerBO.CustomerBO;
+import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
+import lk.Ijse.DAO.BookingDAO.BookingDAO;
+import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
+import lk.Ijse.DAO.LocationDAO.LocationDAO;
+import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
+import lk.Ijse.DAO.OrderDAO.OrderDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
+import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
+import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
+import lk.Ijse.DAO.ProductDAO.ProductDAO;
+import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
+import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
+import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
+import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 import lk.Ijse.Model.Employee;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.repository.CustomerRepo;
-import lk.Ijse.repository.EmployeeRepo;
+import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -82,7 +103,6 @@ public class EmployeeController {
     private TextField txtEmEmail;
 
 
-
     @FXML
     private TextField txtEmName;
     @FXML
@@ -94,17 +114,32 @@ public class EmployeeController {
     @FXML
     private TextField txtSearch;
 
-    public void initialize() {
+    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
+    BookingDAO bookingDAO = new BookingDAOImpl();
+    CustomerBO customerDAO = new CustomerBOImpl();
+    LocationDAO locationDAO = new LocationDAOImpl();
+    OrderDAO orderDAO = new OrderDAOImpl();
+    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
+    RegisterDAO registerDAO = new RegisterDAOImpl();
+    ShowRoomDAO  showRoomDAO = new ShowRoomDAOImpl();
+    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
+    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
+    PaymentDAO paymentDAO = new PaymentDAOImpl();
+    ProductDAO productDAO = new ProductDAOImpl();
+
+    Animation1 animation1 = new Animation1();
+
+    public void initialize() throws ClassNotFoundException {
         setCellValueFactory();
         loadAllEmployees();
         applyButtonAnimations();
         getCurrentEmployeeID();
 
-        addHoverHandlers(btnEmClean);
-        addHoverHandlers(btnEmDelete);
-        addHoverHandlers(btnEmSave);
-        addHoverHandlers(btnEmUpdate);
-        addHoverHandlers(btnHome);
+        animation1.addHoverHandlers(btnEmClean);
+        animation1.addHoverHandlers(btnEmDelete);
+        animation1.addHoverHandlers(btnEmSave);
+        animation1.addHoverHandlers(btnEmUpdate);
+        animation1.addHoverHandlers(btnHome);
 
 
 
@@ -167,39 +202,19 @@ public class EmployeeController {
             }
         });
     }
-    private void addHoverHandlers(Button button) {// button Animation
-        button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
-        });
-        button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
-        });
-    }
 
     private void applyButtonAnimations() {
-        applyAnimation(btnEmClean);
-        applyAnimation(btnEmDelete);
-        applyAnimation(btnEmSave);
-        applyAnimation(btnEmUpdate);
-        applyAnimation(btnHome);
+        animation1.applyAnimation(btnEmClean);
+        animation1.applyAnimation(btnEmDelete);
+        animation1.applyAnimation(btnEmSave);
+        animation1.applyAnimation(btnEmUpdate);
+        animation1.applyAnimation(btnHome);
 
     }
 
 
 
-    private void applyAnimation(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-        button.setOnMouseEntered(event -> {
-            scaleTransition.setToX(1.1);
-            scaleTransition.setToY(1.1);
-            scaleTransition.play();
-        });
-        button.setOnMouseExited(event -> {
-            scaleTransition.setToX(1);
-            scaleTransition.setToY(1);
-            scaleTransition.play();
-        });
-    }
+
 
 
     private void setCellValueFactory() {
@@ -211,11 +226,11 @@ public class EmployeeController {
         colEmEmail.setCellValueFactory(new PropertyValueFactory<>("empEmail"));
     }
 
-    private void loadAllEmployees() {
+    private void loadAllEmployees() throws ClassNotFoundException {
         ObservableList<Employee> obList = FXCollections.observableArrayList();
 
         try {
-            List<Employee> employeeList = EmployeeRepo.getAll();
+            List<Employee> employeeList = employeeDAO.getAll();
             for (Employee employee : employeeList) {
                 Employee tm = new Employee(
                        employee.getEmpId(),
@@ -237,7 +252,7 @@ public class EmployeeController {
     }
 
     @FXML
-    void btnEmDeleteOnAction(ActionEvent event) {
+    void btnEmDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
         ObservableList<Employee> selectedEmployees = colEmTel.getSelectionModel().getSelectedItems();
         if (selectedEmployees.isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "Please select employee(s) to delete!").show();
@@ -251,7 +266,7 @@ public class EmployeeController {
         if (confirmationAlert.getResult() == ButtonType.OK) {
             try {
                 for (Employee employee : selectedEmployees) {
-                    boolean isDeleted = EmployeeRepo.delete(employee.getEmpId());
+                    boolean isDeleted = employeeDAO.delete(employee.getEmpId());
                     if (isDeleted) {
                         colEmTel.getItems().remove(employee);
                     } else {
@@ -267,7 +282,7 @@ public class EmployeeController {
     }
 
     @FXML
-    void btnEmSaveOnAction(ActionEvent event) {
+    void btnEmSaveOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = lblEmployeeAuto.getText();
         String name = txtEmName.getText();
         String age = txtEmAge.getText();
@@ -277,7 +292,7 @@ public class EmployeeController {
 
         Employee employee = new Employee(id, name, age, address, contact, email);
         try {
-            if(isValied()){boolean isSaved = EmployeeRepo.save(employee);
+            if(isValied()){boolean isSaved = employeeDAO.save(employee);
                 if (isSaved) {
                     colEmTel.getItems().add(employee);
                     new Alert(Alert.AlertType.CONFIRMATION, "Employee saved successfully!").show();
@@ -295,7 +310,7 @@ public class EmployeeController {
     }
 
     @FXML
-    void btnEmUpdateOnAction(ActionEvent event) {
+    void btnEmUpdateOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = lblEmployeeAuto.getText();
         String name = txtEmName.getText();
         String age = txtEmAge.getText();
@@ -305,7 +320,7 @@ public class EmployeeController {
 
         Employee employee = new Employee(id, name, age, address, contact, email);
         try {
-            if(isValied()){ boolean isUpdated = EmployeeRepo.update(employee);
+            if(isValied()){ boolean isUpdated = employeeDAO.update(employee);
                 if (isUpdated) {
                     Employee selectedItem = colEmTel.getSelectionModel().getSelectedItem();
                     if (selectedItem != null) {
@@ -324,7 +339,7 @@ public class EmployeeController {
         }
     }
 
-    private void clearFields() {
+    private void clearFields() throws ClassNotFoundException {
 lblEmployee.setText("");
         txtEmName.clear();
         txtEmAge.clear();
@@ -357,7 +372,7 @@ lblEmployee.setText("");
         return true;
     }
     @FXML
-    void btnEmCleanOnAction(ActionEvent event) {
+    void btnEmCleanOnAction(ActionEvent event) throws ClassNotFoundException {
         clearFields();
     }
 
@@ -395,11 +410,11 @@ lblEmployee.setText("");
     }
 
     @FXML
-    void SearchBtnOnAction(ActionEvent event) {
+    void SearchBtnOnAction(ActionEvent event) throws ClassNotFoundException {
         String EmployeeID = txtSearch.getText();
 
         try {
-            Employee employee = EmployeeRepo.searchById(EmployeeID);
+            Employee employee = employeeDAO.searchById(EmployeeID);
             if (employee != null) {
                 lblEmployee.setText(employee.getEmpId());
                 txtEmName.setText(employee.getEmpName());
@@ -421,9 +436,9 @@ lblEmployee.setText("");
         alert.setContentText(message);
         alert.showAndWait();
     }
-    private void getCurrentEmployeeID() {
+    private void getCurrentEmployeeID() throws ClassNotFoundException {
         try {
-            String currentId = EmployeeRepo.getEmployeeCurrentId();
+            String currentId = employeeDAO.getCurrentId();
 
             String nextEmployeeID = generateNextEmployeeId(currentId);
             lblEmployeeAuto.setText(nextEmployeeID);
