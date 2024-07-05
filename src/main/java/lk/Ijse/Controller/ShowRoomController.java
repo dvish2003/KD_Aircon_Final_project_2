@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.Ijse.Animation1.Animation1;
 import lk.Ijse.BO.CustomerBO.CustomerBO;
 import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
 import lk.Ijse.DAO.BookingDAO.BookingDAO;
@@ -92,6 +93,7 @@ public class ShowRoomController {
     Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
     PaymentDAO paymentDAO = new PaymentDAOImpl();
     ProductDAO productDAO = new ProductDAOImpl();
+    Animation1 animation1 = new Animation1();
 
     @FXML
     void btnPrCleanOnAction(ActionEvent event) throws ClassNotFoundException {
@@ -181,13 +183,8 @@ public class ShowRoomController {
     public void initialize() throws ClassNotFoundException {
         setCellValueFactory();
         loadAllShowRoom();
-        applyButtonAnimations();
         getCurrentShowRoomID();
-        addHoverHandlers(btnSrClean);
-        addHoverHandlers(btnSrUpdate);
-        addHoverHandlers(btnSrDelete);
-        addHoverHandlers(btnSrSave);
-        addHoverHandlers(btnHome);
+        applyAnimation();
 
 
         txtSrLocation.setOnKeyPressed(event -> {
@@ -206,30 +203,20 @@ public class ShowRoomController {
             }
         });
     }
-    private void applyButtonAnimations() {
 
-        applyAnimation(btnSrClean);
-        applyAnimation(btnSrUpdate);
-        applyAnimation(btnSrDelete);
-        applyAnimation(btnSrSave);
-        applyAnimation(btnHome);
-
-
+    private void applyAnimation() {
+        animation1.addHoverHandlers(btnSrClean);
+        animation1.addHoverHandlers(btnSrUpdate);
+        animation1.addHoverHandlers(btnSrDelete);
+        animation1.addHoverHandlers(btnSrSave);
+        animation1.addHoverHandlers(btnHome);
+        animation1.applyAnimation(btnSrClean);
+        animation1.applyAnimation(btnSrUpdate);
+        animation1.applyAnimation(btnSrDelete);
+        animation1.applyAnimation(btnSrSave);
+        animation1.applyAnimation(btnHome);
     }
 
-    private void applyAnimation(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-        button.setOnMouseEntered(event -> {
-            scaleTransition.setToX(1.1);
-            scaleTransition.setToY(1.1);
-            scaleTransition.play();
-        });
-        button.setOnMouseExited(event -> {
-            scaleTransition.setToX(1);
-            scaleTransition.setToY(1);
-            scaleTransition.play();
-        });
-    }
 
     private void setCellValueFactory() {
         colShowRoom.setCellValueFactory(new PropertyValueFactory<>("showRoomId"));
@@ -266,14 +253,7 @@ public class ShowRoomController {
 
         stage.show();
     }
-    private void addHoverHandlers(Button button) {// button Animation
-        button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
-        });
-        button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
-        });
-    }
+
 
 
     private void getCurrentShowRoomID() throws ClassNotFoundException {

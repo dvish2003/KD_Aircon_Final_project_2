@@ -132,15 +132,9 @@ public class EmployeeController {
     public void initialize() throws ClassNotFoundException {
         setCellValueFactory();
         loadAllEmployees();
-        applyButtonAnimations();
         getCurrentEmployeeID();
 
-        animation1.addHoverHandlers(btnEmClean);
-        animation1.addHoverHandlers(btnEmDelete);
-        animation1.addHoverHandlers(btnEmSave);
-        animation1.addHoverHandlers(btnEmUpdate);
-        animation1.addHoverHandlers(btnHome);
-
+        applyAnimation();
 
 
         txtEmName.setOnKeyPressed(event -> {
@@ -203,18 +197,18 @@ public class EmployeeController {
         });
     }
 
-    private void applyButtonAnimations() {
+    private void applyAnimation() {
+        animation1.addHoverHandlers(btnEmClean);
+        animation1.addHoverHandlers(btnEmDelete);
+        animation1.addHoverHandlers(btnEmSave);
+        animation1.addHoverHandlers(btnEmUpdate);
+        animation1.addHoverHandlers(btnHome);
         animation1.applyAnimation(btnEmClean);
         animation1.applyAnimation(btnEmDelete);
         animation1.applyAnimation(btnEmSave);
         animation1.applyAnimation(btnEmUpdate);
         animation1.applyAnimation(btnHome);
-
     }
-
-
-
-
 
 
     private void setCellValueFactory() {

@@ -1,5 +1,6 @@
 package lk.Ijse.DAO.ShworoomDAO;
 
+import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.ShowRoom;
 
@@ -12,8 +13,8 @@ import java.util.List;
 
 public class ShowRoomDAOImpl implements ShowRoomDAO {
 
-    public  boolean save(ShowRoom showRoom) throws SQLException {
-        String sql = "INSERT INTO ShowRoom (ShowRoom_id, ShowRoom_Location) VALUES (?, ?)";
+    public  boolean save(ShowRoom showRoom) throws SQLException, ClassNotFoundException {
+       /* String sql = "INSERT INTO ShowRoom (ShowRoom_id, ShowRoom_Location) VALUES (?, ?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -21,15 +22,18 @@ public class ShowRoomDAOImpl implements ShowRoomDAO {
         pstm.setString(2, showRoom.getShowRoomLocation());
 
 
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
+        return SqlUtil.execute("INSERT INTO ShowRoom (ShowRoom_id, ShowRoom_Location) VALUES (?, ?)",
+                showRoom.getShowRoomId(),
+                showRoom.getShowRoomLocation());
     }
 
-    public  ShowRoom searchById(String id) throws SQLException {
-        String sql = "SELECT * FROM ShowRoom WHERE ShowRoom_id = ?";
+    public  ShowRoom searchById(String id) throws SQLException, ClassNotFoundException {
+        /*String sql = "SELECT * FROM ShowRoom WHERE ShowRoom_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, id);
-        ResultSet rs = pstm.executeQuery();
+        pstm.setString(1, id);*/
+        ResultSet rs =SqlUtil.execute("SELECT * FROM ShowRoom WHERE ShowRoom_id = ?",id);
         if (rs.next()) {
             String showRoomId = rs.getString("ShowRoom_id");
             String location = rs.getString("ShowRoom_Location");
@@ -42,30 +46,35 @@ public class ShowRoomDAOImpl implements ShowRoomDAO {
         return null;
     }
 
-    public  boolean update(ShowRoom showRoom) throws SQLException {
-        String sql = "UPDATE ShowRoom SET ShowRoom_Location = ? WHERE ShowRoom_id = ?";
+    public  boolean update(ShowRoom showRoom) throws SQLException, ClassNotFoundException {
+       /* String sql = "UPDATE ShowRoom SET ShowRoom_Location = ? WHERE ShowRoom_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, showRoom.getShowRoomLocation());
         pstm.setString(2, showRoom.getShowRoomId());
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
+        return SqlUtil.execute("UPDATE ShowRoom SET ShowRoom_Location = ? WHERE ShowRoom_id = ?",
+                  showRoom.getShowRoomLocation(),
+                  showRoom.getShowRoomId());
+
     }
 
-    public  boolean delete(String id) throws SQLException {
-        String sql = "DELETE FROM ShowRoom WHERE ShowRoom_id = ?";
+    public  boolean delete(String id) throws SQLException, ClassNotFoundException {
+        /*String sql = "DELETE FROM ShowRoom WHERE ShowRoom_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, id);
 
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
+        return SqlUtil.execute("DELETE FROM ShowRoom WHERE ShowRoom_id = ?",id);
     }
 
-    public  List<ShowRoom> getAll() throws SQLException {
-        String sql = "SELECT * FROM ShowRoom";
+    public  List<ShowRoom> getAll() throws SQLException, ClassNotFoundException {
+       /* String sql = "SELECT * FROM ShowRoom";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
-
-        ResultSet resultSet = pstm.executeQuery();
+*/
+        ResultSet resultSet = SqlUtil.execute("SELECT * FROM ShowRoom");
 
         List<ShowRoom> showRoomList = new ArrayList<>();
 
@@ -78,13 +87,13 @@ public class ShowRoomDAOImpl implements ShowRoomDAO {
         return showRoomList;
     }
 
-    public  List<String> getIds() throws SQLException {
-        String sql = "SELECT ShowRoom_id FROM ShowRoom";
+    public  List<String> getIds() throws SQLException, ClassNotFoundException {
+       /* String sql = "SELECT ShowRoom_id FROM ShowRoom";
         PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
-
+*/
         List<String> idList = new ArrayList<>();
 
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SqlUtil.execute("SELECT ShowRoom_id FROM ShowRoom");
         while (resultSet.next()) {
             String id = resultSet.getString("ShowRoom_id");
             idList.add(id);
@@ -92,13 +101,12 @@ public class ShowRoomDAOImpl implements ShowRoomDAO {
         return idList;
     }
 
-
-    public  String getCurrentId() throws SQLException {
-        String sql = "SELECT ShowRoom_id FROM ShowRoom ORDER BY ShowRoom_id DESC LIMIT 1";
+    public  String getCurrentId() throws SQLException, ClassNotFoundException {
+       /* String sql = "SELECT ShowRoom_id FROM ShowRoom ORDER BY ShowRoom_id DESC LIMIT 1";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
-                .prepareStatement(sql);
+                .prepareStatement(sql);*/
 
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SqlUtil.execute("SELECT ShowRoom_id FROM ShowRoom ORDER BY ShowRoom_id DESC LIMIT 1");
         if(resultSet.next()) {
             String ShowRoom_id = resultSet.getString(1);
             return ShowRoom_id;

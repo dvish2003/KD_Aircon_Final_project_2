@@ -139,11 +139,7 @@ public class ProductController {
         setListeners();
         getShowRoomIds();
         applyButtonAnimations();
-        animation1.addHoverHandlers(btnHome);
-        animation1.addHoverHandlers(btnPrClean);
-        animation1.addHoverHandlers(btnPrUpdate);
-        animation1.addHoverHandlers(btnPrSave);
-        animation1.addHoverHandlers(btnPrDelete);
+
         getProductId();
 
     }
@@ -153,6 +149,11 @@ public class ProductController {
         animation1.applyAnimation(btnPrUpdate);
         animation1.applyAnimation(btnPrSave);
         animation1.applyAnimation(btnPrDelete);
+        animation1.addHoverHandlers(btnHome);
+        animation1.addHoverHandlers(btnPrClean);
+        animation1.addHoverHandlers(btnPrUpdate);
+        animation1.addHoverHandlers(btnPrSave);
+        animation1.addHoverHandlers(btnPrDelete);
 
 
     }
@@ -230,7 +231,7 @@ public class ProductController {
     }
 
     @FXML
-    void cmbShowRoomOnAction(ActionEvent event) {
+    void cmbShowRoomOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = cmbShowRoom.getValue();
         try {
             ShowRoom showRoom = showRoomDAO.searchById(id);

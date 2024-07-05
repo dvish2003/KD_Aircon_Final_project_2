@@ -1,5 +1,6 @@
 package lk.Ijse.DAO.BookingDAO;
 
+import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Booking;
 
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookingDAOImpl implements BookingDAO {
-    public  boolean save(Booking booking) throws SQLException {
-        String sql = "INSERT INTO Booking (Booking_id, Employee_id, Location_id, Payment_id, Booking_Date, Place_Date, Booking_Description) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    public  boolean save(Booking booking) throws SQLException, ClassNotFoundException {
+       /* String sql = "INSERT INTO Booking (Booking_id, Employee_id, Location_id, Payment_id, Booking_Date, Place_Date, Booking_Description) VALUES (?, ?, ?, ?, ?, ?, ?)";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, booking.getBookingId());
@@ -25,15 +26,24 @@ public class BookingDAOImpl implements BookingDAO {
         pstm.setDate(6, booking.getPlaceDate());
         pstm.setString(7, booking.getBookingDescription());
 
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
+        return SqlUtil.execute("INSERT INTO Booking (Booking_id, Employee_id, Location_id, Payment_id, Booking_Date, Place_Date, Booking_Description) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                booking.getBookingId(),
+                booking.getEmpId(),
+                booking.getLocId(),
+                booking.getPaymentId(),
+                booking.getBookingDate(),
+                booking.getPlaceDate(),
+                booking.getBookingDescription());
+
     }
 
-    public  Booking searchById(String id) throws SQLException {
-        String sql = "SELECT * FROM Booking WHERE Booking_id = ?";
+    public  Booking searchById(String id) throws SQLException, ClassNotFoundException {
+       /* String sql = "SELECT * FROM Booking WHERE Booking_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, id);
-        ResultSet rs = pstm.executeQuery();
+        pstm.setString(1, id);*/
+        ResultSet rs = SqlUtil.execute("SELECT * FROM Booking WHERE Booking_id = ?",id);
         if (rs.next()){
             String BookingId = rs.getString(1);
             String empId = rs.getString(2);
@@ -49,35 +59,45 @@ return booking;
 
     }
 
-    public  boolean update(Booking booking) throws SQLException {
-        String sql = "UPDATE Booking SET Employee_id = ?, Location_id = ?, Payment_id = ?, Booking_Date = ?, Place_Date = ?, Booking_Description = ? WHERE Booking_id = ?";
+    public  boolean update(Booking booking) throws SQLException, ClassNotFoundException {
+      /*  String sql = "UPDATE Booking SET Employee_id = ?, Location_id = ?, Payment_id = ?, Booking_Date = ?, Place_Date = ?, Booking_Description = ? WHERE Booking_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setString(1, booking.getEmpId());
         pstm.setString(2, booking.getLocId());
         pstm.setString(3, booking.getPaymentId());
-        pstm.setDate(4, booking.getBookingDate());
-        pstm.setDate(5, booking.getPlaceDate());
+        pstm.setDate(4,   booking.getBookingDate());
+        pstm.setDate(5,   booking.getPlaceDate());
         pstm.setString(6, booking.getBookingDescription());
         pstm.setString(7, booking.getBookingId());
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
+
+        return SqlUtil.execute( "UPDATE Booking SET Employee_id = ?, Location_id = ?, Payment_id = ?, Booking_Date = ?, Place_Date = ?, Booking_Description = ? WHERE Booking_id = ?",
+                booking.getEmpId(),
+                booking.getLocId(),
+                booking.getPaymentId(),
+                booking.getBookingDate(),
+                booking.getPlaceDate(),
+                booking.getBookingDescription(),
+                booking.getBookingId());
+
     }
 
-    public  boolean delete(String id) throws SQLException {
-        String sql = "DELETE FROM Booking WHERE Booking_id = ?";
+    public  boolean delete(String id) throws SQLException, ClassNotFoundException {
+      /*  String sql = "DELETE FROM Booking WHERE Booking_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, id);
+        pstm.setString(1, id);*/
 
-        return pstm.executeUpdate() > 0;
+        return SqlUtil.execute("DELETE FROM Booking WHERE Booking_id = ?",id);
     }
-    public  List<Booking> getAll() throws SQLException {
-        String sql = "SELECT * FROM Booking";
+    public  List<Booking> getAll() throws SQLException, ClassNotFoundException {
+       /* String sql = "SELECT * FROM Booking";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
-                .prepareStatement(sql);
+                .prepareStatement(sql);*/
 
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SqlUtil.execute("SELECT * FROM Booking");
 
         List<Booking> bookList = new ArrayList<>();
 
@@ -95,61 +115,42 @@ return booking;
         return bookList;
     }
 
-    public  List<String> getIds() throws SQLException {
-        String sql = "SELECT Booking_id FROM Booking";
+    public  List<String> getIds() throws SQLException, ClassNotFoundException {
+       /* String sql = "SELECT Booking_id FROM Booking";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
                 .prepareStatement(sql);
-
+*/
         List<String> idList = new ArrayList<>();
 
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SqlUtil.execute("SELECT Booking_id FROM Booking");
         while (resultSet.next()) {
             String id = resultSet.getString(1);
             idList.add(id);
         }
         return idList;
     }
-    public  String getCurrentId() throws SQLException {
-        String sql = "SELECT Booking_id FROM Booking ORDER BY Booking_id DESC LIMIT 1";
-        PreparedStatement pstm = DbConnection.getInstance().getConnection()
-                .prepareStatement(sql);
 
-        ResultSet resultSet = pstm.executeQuery();
+    @Override
+    public String getCurrentId() throws SQLException, ClassNotFoundException {
+        return "";
+    }
+
+    /*  public  String getCurrentId() throws SQLException, ClassNotFoundException {
+        *//*String sql = "SELECT Booking_id FROM Booking ORDER BY Booking_id DESC LIMIT 1";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);*//*
+
+        ResultSet resultSet =SqlUtil.execute("SELECT Booking_id FROM Booking ORDER BY Booking_id DESC LIMIT 1");
         if(resultSet.next()) {
             String BookingID = resultSet.getString(1);
             return BookingID;
         }
         return null;
-    }
-    public  List<Date> getBookedDatesForLocation(String locationId) throws SQLException {
-        List<Date> bookedDates = new ArrayList<>();
-        String sql = "SELECT Booking_Date FROM Booking WHERE Location_id = ?";
+    }*/
 
-        try (
-                Connection connection = DbConnection.getInstance().getConnection();
-                PreparedStatement pstm = connection.prepareStatement(sql)
-        ) {
-            pstm.setString(1, locationId);
-            ResultSet resultSet = pstm.executeQuery();
 
-            while (resultSet.next()) {
-                bookedDates.add(resultSet.getDate("Booking_Date"));
-            }
-        }
-
-        return bookedDates;
-    }
-    public  void deleteExpiredBookings() throws SQLException {
-        String query = "DELETE FROM Booking WHERE Booking_Date < ?";
-
-        try (Connection connection = DbConnection.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setDate(1, java.sql.Date.valueOf(LocalDate.now()));
-            int rowsDeleted = preparedStatement.executeUpdate();
-            System.out.println("Deleted " + rowsDeleted + " expired bookings.");
-        }
 
 }
 
 
-}
+

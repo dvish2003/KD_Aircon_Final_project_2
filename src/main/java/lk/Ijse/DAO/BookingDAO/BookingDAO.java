@@ -11,11 +11,9 @@ import java.util.List;
 
 public interface BookingDAO extends CrudDAO<Booking> {
 
-    public  Booking searchById(String id) throws SQLException;
+    public  Booking searchById(String id) throws SQLException, ClassNotFoundException;
 
-    public  List<Date> getBookedDatesForLocation(String locationId) throws SQLException;
 
-    public  void deleteExpiredBookings() throws SQLException;
 
 
 }

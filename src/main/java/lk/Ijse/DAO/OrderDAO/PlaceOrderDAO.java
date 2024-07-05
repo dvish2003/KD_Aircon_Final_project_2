@@ -26,7 +26,7 @@ import lk.Ijse.Model.PlaceOrder;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class PlaceOrderRepo {
+public class PlaceOrderDAO {
     public static boolean placeOrder(PlaceOrder po) throws SQLException {
 
         EmployeeDAO employeeDAO = new EmployeeDAOImpl();

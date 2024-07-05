@@ -1,5 +1,6 @@
 package lk.Ijse.DAO.ProductShowroomDAO;
 
+import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.ProductShowRoomJoin;
 
@@ -25,8 +26,8 @@ public class ProductShowRoomJoinDAOImpl implements ProductShowRoomJoinDAO {
         return false;
     }
 
-    public  List<ProductShowRoomJoin> getAll() throws SQLException {
-        String sql = "SELECT \n" +
+    public  List<ProductShowRoomJoin> getAll() throws SQLException, ClassNotFoundException {
+      /*  String sql = "SELECT \n" +
                 "    Product.Product_id,\n" +
                 "    Product.Product_Description,\n" +
                 "    Product.ShowRoom_QtyOnHand,\n" +
@@ -36,8 +37,17 @@ public class ProductShowRoomJoinDAOImpl implements ProductShowRoomJoinDAO {
                 "    Product\n" +
                 "JOIN \n" +
                 "    Product_ShowRoom ON Product.Product_id = Product_ShowRoom.Product_id;\n";
-        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);*/
+        ResultSet resultSet = SqlUtil.execute("SELECT \n" +
+                "    Product.Product_id,\n" +
+                "    Product.Product_Description,\n" +
+                "    Product.ShowRoom_QtyOnHand,\n" +
+                "    Product.Product_UnitPrice,\n" +
+                "    Product_ShowRoom.ShowRoom_id\n" +
+                "FROM \n" +
+                "    Product\n" +
+                "JOIN \n" +
+                "    Product_ShowRoom ON Product.Product_id = Product_ShowRoom.Product_id;\n");
         List<ProductShowRoomJoin> productShowRoomJoinList = new ArrayList<>();
         while (resultSet.next()) {
             String showRoomId = resultSet.getString("ShowRoom_id");

@@ -1,6 +1,7 @@
 
 package lk.Ijse.DAO.PaymentDAO;
 
+import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Model.Payment;
 
@@ -9,17 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentDAOImpl implements PaymentDAO {
-    public  boolean save(Payment dto) throws SQLException {
-        String sql = "INSERT INTO Payment VALUES(?,?,?)";
+    public  boolean save(Payment dto) throws SQLException, ClassNotFoundException {
+        /*String sql = "INSERT INTO Payment VALUES(?,?,?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
         pstm.setObject(1,dto.getPaymentId());
         pstm.setObject(2,dto.getPaymentAmount());
         pstm.setObject(3, dto.getPaymentDate());
-
-
-        return pstm.executeUpdate() > 0;
+        return pstm.executeUpdate() > 0;*/
+        return SqlUtil.execute("INSERT INTO Payment VALUES(?,?,?)",
+               dto.getPaymentId(),
+               dto.getPaymentAmount(),
+               dto.getPaymentDate());
     }
 
     @Override
@@ -32,12 +35,12 @@ public class PaymentDAOImpl implements PaymentDAO {
         return false;
     }
 
-    public  Payment searchById(String id) throws SQLException {
-        String sql = "SELECT * FROM Payment WHERE Payment_id = ?";
+    public  Payment searchById(String id) throws SQLException, ClassNotFoundException {
+       /* String sql = "SELECT * FROM Payment WHERE Payment_id = ?";
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1,id);
-        ResultSet rs = pstm.executeQuery();
+        pstm.setObject(1,id);*/
+        ResultSet rs = SqlUtil.execute( "SELECT * FROM Payment WHERE Payment_id = ?",id);
         if (rs.next()){
             String Pay_ID = rs.getString(1);
             int Amount = Integer.parseInt(rs.getString(2));
@@ -52,13 +55,13 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     }
 
-    public  List<Payment> getAll() throws SQLException {
-        String sql = "SELECT * FROM Payment";
+    public  List<Payment> getAll() throws SQLException, ClassNotFoundException {
+       /* String sql = "SELECT * FROM Payment";
 
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
-                .prepareStatement(sql);
+                .prepareStatement(sql);*/
 
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SqlUtil.execute("SELECT * FROM Payment");
 
         List<Payment> paymentList = new ArrayList<>();
 
@@ -73,14 +76,14 @@ public class PaymentDAOImpl implements PaymentDAO {
         return paymentList;
     }
 
-    public  List<String> getIds() throws SQLException {
-        String sql = "SELECT Payment_id FROM Payment";
+    public  List<String> getIds() throws SQLException, ClassNotFoundException {
+      /*  String sql = "SELECT Payment_id FROM Payment";
         PreparedStatement pstm = DbConnection.getInstance().getConnection()
-                .prepareStatement(sql);
+                .prepareStatement(sql);*/
 
         List<String> idList = new ArrayList<>();
 
-        ResultSet resultSet = pstm.executeQuery();
+        ResultSet resultSet = SqlUtil.execute("SELECT Payment_id FROM Payment");
         while (resultSet.next()) {
             String id = resultSet.getString(1);
             idList.add(id);
@@ -90,8 +93,12 @@ public class PaymentDAOImpl implements PaymentDAO {
 
     @Override
     public String getCurrentId() throws SQLException, ClassNotFoundException {
-        return "";
-    }
+        ResultSet resultSet = SqlUtil.execute( "SELECT Payment_id FROM Payment ORDER BY Payment_id DESC LIMIT 1");
+        if(resultSet.next()) {
+            String PayId = resultSet.getString(1);
+            return PayId;
+        }
+        return null;    }
 }
 
 

@@ -240,27 +240,13 @@ public class DashBoardController {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
 
-//        txtSearch.setOnKeyPressed(event -> {
-//            if (event.getCode() == KeyCode.ENTER) {
-//                SearchBtn.requestFocus();
-//            }
-//        });
 
-        //loadOrderData();
         displayTodayBookings();
         animateLabel();
         setDate();
         setCellValueFactory();
         loadAllBooking();
-        animation.addHoverHandlers(btnBooking);
-        animation.addHoverHandlers(btnCustomer);
-        animation.addHoverHandlers(btnEmployye);
-        animation.addHoverHandlers(btnLocation);
-        animation.addHoverHandlers(btnLogOut);
-        animation.addHoverHandlers(btnOrder);
-        animation.addHoverHandlers(btnProduct);
-        animation.addHoverHandlers(btnRegister);
-        animation.addHoverHandlers(btnShowRoom);
+        applyAnimation();
 
         setupOrderPieChart();
         try {
@@ -291,6 +277,18 @@ public class DashBoardController {
         setUserCount(UserCount);
         setOrderCount(OrderCount);
 
+    }
+
+    private void applyAnimation() {
+        animation.addHoverHandlers(btnBooking);
+        animation.addHoverHandlers(btnCustomer);
+        animation.addHoverHandlers(btnEmployye);
+        animation.addHoverHandlers(btnLocation);
+        animation.addHoverHandlers(btnLogOut);
+        animation.addHoverHandlers(btnOrder);
+        animation.addHoverHandlers(btnProduct);
+        animation.addHoverHandlers(btnRegister);
+        animation.addHoverHandlers(btnShowRoom);
     }
 
 

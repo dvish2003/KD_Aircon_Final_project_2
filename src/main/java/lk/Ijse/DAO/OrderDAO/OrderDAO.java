@@ -8,10 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface OrderDAO {
-    public  String getCurrentId() throws SQLException;
+    public  String getCurrentId() throws SQLException, ClassNotFoundException;
 
-    public  String getPayCurrentId() throws SQLException;
+ //   public  String getPayCurrentId() throws SQLException, ClassNotFoundException;
 
-    public  boolean save(Order order) throws SQLException;
+    public  boolean save(Order order) throws SQLException, ClassNotFoundException;
 
 }

@@ -1,8 +1,6 @@
 package lk.Ijse.Controller;
 
 import com.jfoenix.controls.JFXButton;
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.Ijse.Animation1.Animation1;
 import lk.Ijse.BO.CustomerBO.CustomerBO;
 import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
 import lk.Ijse.DAO.BookingDAO.BookingDAO;
@@ -163,6 +162,7 @@ public class OrderController {
     Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
     PaymentDAO paymentDAO = new PaymentDAOImpl();
     ProductDAO productDAO = new ProductDAOImpl();
+      Animation1 animation1 = new Animation1();
 
     public void initialize() throws ClassNotFoundException {
         setDate();
@@ -176,12 +176,7 @@ public class OrderController {
         setCellValueFactory();
         loadAllPS();
         applyComboBoxStyles();
-        addHoverHandlers(btnAddToCart);
-        addHoverHandlers(btnNewCus);
-        addHoverHandlers(btnPlaceOrder);
-        addHoverHandlers(btnPrBack);
-        addHoverHandlers(btnPrBack);
-        addHoverHandlers(btnPrintBill);
+
 
 
         cmbCustomerID.setOnKeyPressed(event -> {
@@ -247,64 +242,35 @@ public class OrderController {
     }
 
     private void applyButtonAnimations() {
-        applyAnimation(btnAddToCart);
-        applyAnimation(btnNewCus);
-        applyAnimation(btnPlaceOrder);
-        applyAnimation(btnPrBack);
-        applyAnimation(btnPrBack);
-        applyAnimation(btnPrintBill);
+        animation1.applyAnimation(btnAddToCart);
+        animation1.applyAnimation(btnNewCus);
+        animation1.applyAnimation(btnPlaceOrder);
+        animation1.applyAnimation(btnPrBack);
+        animation1.applyAnimation(btnPrBack);
+        animation1.applyAnimation(btnPrintBill);
+        animation1.addHoverHandlers(btnAddToCart);
+        animation1.addHoverHandlers(btnNewCus);
+        animation1.addHoverHandlers(btnPlaceOrder);
+        animation1.addHoverHandlers(btnPrBack);
+        animation1.addHoverHandlers(btnPrBack);
+        animation1.addHoverHandlers(btnPrintBill);
 
     }
 
     private void applyLabelAnimations() {
-        applyAnimation(lblCustomerName);
-        applyAnimation(lblQtyOnHand);
-        applyAnimation(lblOrderID);
-        applyAnimation(lblPayDate);
-        applyAnimation(LblOrderDate);
-        applyAnimation(lblUnitPrice);
-        applyAnimation(lblPaymentAmount);
-        applyAnimation(lblPaymentID);
-        applyAnimation(lblLocationShowRoom);
-        applyAnimation(lblProductID);
+       animation1. applyAnimation(lblCustomerName);
+       animation1. applyAnimation(lblQtyOnHand);
+       animation1. applyAnimation(lblOrderID);
+       animation1. applyAnimation(lblPayDate);
+       animation1. applyAnimation(LblOrderDate);
+       animation1. applyAnimation(lblUnitPrice);
+       animation1. applyAnimation(lblPaymentAmount);
+       animation1. applyAnimation(lblPaymentID);
+       animation1. applyAnimation(lblLocationShowRoom);
+       animation1. applyAnimation(lblProductID);
 
 
 
-    }
-    private void addHoverHandlers(Button button) {// button Animation
-        button.setOnMouseEntered(event -> {
-            button.setStyle("-fx-background-color: Black; -fx-text-fill: white;");
-        });
-        button.setOnMouseExited(event -> {
-            button.setStyle("-fx-background-color:  #1e272e; -fx-text-fill: white;");
-        });
-    }
-    private void applyAnimation(Button button) {
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(100), button);
-        button.setOnMouseEntered(event -> {
-            scaleTransition.setToX(1.1);
-            scaleTransition.setToY(1.1);
-            scaleTransition.play();
-        });
-        button.setOnMouseExited(event -> {
-            scaleTransition.setToX(1);
-            scaleTransition.setToY(1);
-            scaleTransition.play();
-        });
-    }
-
-    private void applyAnimation(Label label) {
-        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), label);
-        label.setOnMouseEntered(event -> {
-            fadeTransition.setFromValue(1);
-            fadeTransition.setToValue(0.5);
-            fadeTransition.play();
-        });
-        label.setOnMouseExited(event -> {
-            fadeTransition.setFromValue(0.5);
-            fadeTransition.setToValue(1);
-            fadeTransition.play();
-        });
     }
 
     private void getCustomerIds() throws ClassNotFoundException {
@@ -324,7 +290,7 @@ public class OrderController {
         }
     }
 
-    private void getCurrentOrderId() {
+    private void getCurrentOrderId() throws ClassNotFoundException {
         try {
             String currentId = orderDAO.getCurrentId();
 
@@ -420,7 +386,7 @@ public class OrderController {
     }
 
     @FXML
-    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException, JRException {
+    void btnPlaceOrderOnAction(ActionEvent event) throws SQLException, JRException, ClassNotFoundException {
         String orderID = lblOrderID.getText();
         String customerID = cmbCustomerID.getValue();
         String paymentID = lblPaymentID.getText();
@@ -447,7 +413,7 @@ public class OrderController {
         Payment payment = new Payment(paymentID, Amount, date);
         PlaceOrder po = new PlaceOrder(order, odList, payment);
 
-        boolean isPlaced = PlaceOrderRepo.placeOrder(po);
+        boolean isPlaced = PlaceOrderDAO.placeOrder(po);
 
         if (isPlaced) {
             obList.clear();
@@ -507,7 +473,7 @@ if (customer != null){
     }
 
     @FXML
-    void cmbProductIDOnAction(ActionEvent event) {
+    void cmbProductIDOnAction(ActionEvent event) throws ClassNotFoundException {
         String Desc = String.valueOf(cmbProductID.getValue());
         try {
             Products products = productDAO.searchByName(Desc);
@@ -525,7 +491,7 @@ if (customer != null){
         }
 
     }
-    private void getProductIds() {
+    private void getProductIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
             List<String> idList = productDAO.getNames();
@@ -538,7 +504,7 @@ if (customer != null){
     }
 
     @FXML
-    void cmbShowRoomIDOnAction(ActionEvent event) {
+    void cmbShowRoomIDOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = String.valueOf(cmbShowRoomID.getValue());
         try {
             ShowRoom showRoom = showRoomDAO.searchById(id);
@@ -565,9 +531,9 @@ if (customer != null){
             showAlert(Alert.AlertType.ERROR, "Error occurred while fetching showroom IDs: " + e.getMessage());
         }
     }
-    private void getCurrentPayId() {
+    private void getCurrentPayId() throws ClassNotFoundException {
         try {
-            String currentId = orderDAO.getPayCurrentId();
+            String currentId = paymentDAO.getCurrentId();
 
             String nextPayId = generateNextPay(currentId);
             lblPaymentID.setText(nextPayId);

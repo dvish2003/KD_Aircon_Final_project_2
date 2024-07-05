@@ -248,8 +248,7 @@ public class BookingController {
 
     }
 
-    private void applyLabelAnimations() {
-        animation1.applyAnimation(lblPayDate);
+    private void applyLabelAnimations() {animation1.applyAnimation(lblPayDate);
        animation1.applyAnimation(lblPayDate);
        animation1.applyAnimation(lblPaymentAmount);
        animation1.applyAnimation(lblPaymentID);
@@ -271,9 +270,9 @@ public class BookingController {
 
     }
 
-    private void getCurrentPayId() {
+    private void getCurrentPayId() throws ClassNotFoundException {
         try {
-            String currentId = orderDAO.getPayCurrentId();
+            String currentId = paymentDAO.getCurrentId();
 
             String nextPayId = generateNextPay(currentId);
             lblPaymentID.setText(nextPayId);

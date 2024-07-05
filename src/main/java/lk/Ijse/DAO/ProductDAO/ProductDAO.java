@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ProductDAO extends CrudDAO<Products> {
-    public  Products searchById(String id) throws SQLException;
-    public  Products searchByName(String Description) throws SQLException;
-    public  List<String> getNames() throws SQLException;
-    public  boolean update1(List<OrderDetail> odList) throws SQLException;
-    public  boolean updateQty(String Id, int qty) throws SQLException;
+    public  Products searchById(String id) throws SQLException, ClassNotFoundException;
+    public  Products searchByName(String Description) throws SQLException, ClassNotFoundException;
+    public  List<String> getNames() throws SQLException, ClassNotFoundException;
+    public  boolean update1(List<OrderDetail> odList) throws SQLException, ClassNotFoundException;
+    public  boolean updateQty(String Id, int qty) throws SQLException, ClassNotFoundException;
 
 }

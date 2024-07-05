@@ -7,5 +7,5 @@ import lk.Ijse.Model.ShowRoom;
 import java.sql.SQLException;
 
 public interface ShowRoomDAO extends CrudDAO <ShowRoom> {
-    public ShowRoom searchById(String id) throws SQLException;
+    public ShowRoom searchById(String id) throws SQLException, ClassNotFoundException;
 }

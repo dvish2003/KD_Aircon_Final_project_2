@@ -135,12 +135,7 @@ public class LocationController {
         getCustomerIds();
         applyButtonAnimations();
         getCurrentId();
-        animation1.addHoverHandlers(btnNewCus);
-        animation1.addHoverHandlers(btnLocClean);
-        animation1.addHoverHandlers(btnLocDelete);
-        animation1.addHoverHandlers(btnLocSave);
-        animation1.addHoverHandlers(btnLocUpdate);
-        animation1.addHoverHandlers(btnLocHome);
+
         applyComboBoxStyles();
 
 
@@ -185,7 +180,12 @@ public class LocationController {
        animation1. applyAnimation(btnLocSave);
        animation1. applyAnimation(btnLocUpdate);
        animation1. applyAnimation(btnLocHome);
-
+        animation1.addHoverHandlers(btnNewCus);
+        animation1.addHoverHandlers(btnLocClean);
+        animation1.addHoverHandlers(btnLocDelete);
+        animation1.addHoverHandlers(btnLocSave);
+        animation1.addHoverHandlers(btnLocUpdate);
+        animation1.addHoverHandlers(btnLocHome);
 
     }
 
