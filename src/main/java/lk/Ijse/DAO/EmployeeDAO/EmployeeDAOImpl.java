@@ -2,7 +2,7 @@ package lk.Ijse.DAO.EmployeeDAO;
 
 import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.Employee;
+import lk.Ijse.Entity.Employee;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

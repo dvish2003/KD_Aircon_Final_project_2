@@ -1,4 +1,4 @@
-package lk.Ijse.entity;
+package lk.Ijse.Entity;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import lombok.*;
 @Data
 
 
-public class LocationEntity {
+public class Location {
 
     private String customerId;
     private String id;

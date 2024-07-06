@@ -18,11 +18,9 @@ import javafx.util.Duration;
 import lk.Ijse.Animation1.Animation1;
 import lk.Ijse.BO.CustomerBO.CustomerBO;
 import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
-import lk.Ijse.Model.Customer;
+import lk.Ijse.Entity.Customer;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.entity.CustomerEntity;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -182,8 +180,8 @@ public class CustomerController {
         ObservableList<Customer> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerEntity> customerList = customerDAO.getAll();
-            for (CustomerEntity customer : customerList) {
+            List<Customer> customerList = customerDAO.getAll();
+            for (Customer customer : customerList) {
                 Customer tm = new Customer(
                         customer.getId(),
                         customer.getName(),

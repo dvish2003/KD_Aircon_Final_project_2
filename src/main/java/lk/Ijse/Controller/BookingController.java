@@ -41,7 +41,7 @@ import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.*;
+import lk.Ijse.Entity.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;

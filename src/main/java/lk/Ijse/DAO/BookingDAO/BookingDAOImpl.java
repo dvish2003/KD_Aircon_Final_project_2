@@ -2,7 +2,7 @@ package lk.Ijse.DAO.BookingDAO;
 
 import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.Booking;
+import lk.Ijse.Entity.Booking;
 
 import java.sql.Connection;
 import java.sql.Date;

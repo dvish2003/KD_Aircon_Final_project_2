@@ -1,7 +1,6 @@
 package lk.Ijse.BO.CustomerBO;
 
-import lk.Ijse.Model.Customer;
-import lk.Ijse.entity.CustomerEntity;
+import lk.Ijse.Entity.Customer;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,7 +15,7 @@ public interface CustomerBO {
 
     public  boolean delete(String id) throws SQLException, ClassNotFoundException ;
 
-    public List<CustomerEntity> getAll() throws SQLException, ClassNotFoundException ;
+    public List<Customer> getAll() throws SQLException, ClassNotFoundException ;
 
     public  List<String> getIds() throws SQLException, ClassNotFoundException ;
 

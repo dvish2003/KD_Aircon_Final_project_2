@@ -2,8 +2,8 @@ package lk.Ijse.DAO.ProductDAO;
 
 import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.OrderDetail;
-import lk.Ijse.Model.Products;
+import lk.Ijse.Entity.OrderDetail;
+import lk.Ijse.Entity.Products;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

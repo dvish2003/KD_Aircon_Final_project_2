@@ -1,8 +1,8 @@
 package lk.Ijse.DAO.ShworoomDAO;
 
 import lk.Ijse.DAO.CrudDAO;
-import lk.Ijse.Model.Register;
-import lk.Ijse.Model.ShowRoom;
+import lk.Ijse.Entity.Register;
+import lk.Ijse.Entity.ShowRoom;
 
 import java.sql.SQLException;
 

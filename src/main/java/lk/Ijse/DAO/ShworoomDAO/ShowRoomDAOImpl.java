@@ -2,7 +2,7 @@ package lk.Ijse.DAO.ShworoomDAO;
 
 import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.ShowRoom;
+import lk.Ijse.Entity.ShowRoom;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

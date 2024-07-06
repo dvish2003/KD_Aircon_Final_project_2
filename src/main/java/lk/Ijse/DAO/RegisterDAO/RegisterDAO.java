@@ -1,7 +1,7 @@
 package lk.Ijse.DAO.RegisterDAO;
 
 import lk.Ijse.DAO.CrudDAO;
-import lk.Ijse.Model.Register;
+import lk.Ijse.Entity.Register;
 
 import java.sql.SQLException;
 

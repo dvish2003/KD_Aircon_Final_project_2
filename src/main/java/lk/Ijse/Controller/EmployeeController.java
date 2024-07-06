@@ -36,7 +36,7 @@ import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
 import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
-import lk.Ijse.Model.Employee;
+import lk.Ijse.Entity.Employee;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
 import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;

@@ -1,4 +1,4 @@
-package lk.Ijse.entity;
+package lk.Ijse.Entity;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.sql.Date;
 @EqualsAndHashCode
 @ToString
 
-public class PaymentEntity {
+public class Payment {
     private String paymentId;
     private int paymentAmount;
     private Date paymentDate;

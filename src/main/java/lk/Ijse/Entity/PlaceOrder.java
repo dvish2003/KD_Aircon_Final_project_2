@@ -1,4 +1,4 @@
-package lk.Ijse.Model;
+package lk.Ijse.Entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

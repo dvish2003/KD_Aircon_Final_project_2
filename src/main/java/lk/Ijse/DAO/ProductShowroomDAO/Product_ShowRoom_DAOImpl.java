@@ -2,7 +2,7 @@ package lk.Ijse.DAO.ProductShowroomDAO;
 
 import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.Product_ShowRoom;
+import lk.Ijse.Entity.Product_ShowRoom;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

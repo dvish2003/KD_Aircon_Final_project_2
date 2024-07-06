@@ -21,7 +21,7 @@ import lk.Ijse.BO.RegisterBO.RegisterBOImpl;
 import lk.Ijse.BO.ShworoomBO.ShowRoomBO;
 import lk.Ijse.BO.ShworoomBO.ShowRoomBOImpl;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.PlaceOrder;
+import lk.Ijse.Entity.PlaceOrder;
 
 import java.sql.Connection;
 import java.sql.SQLException;

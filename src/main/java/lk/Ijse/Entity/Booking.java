@@ -1,4 +1,4 @@
-package lk.Ijse.entity;
+package lk.Ijse.Entity;
 
 import lombok.*;
 
@@ -12,7 +12,7 @@ import java.sql.Date;
 @ToString
 @Data
 
-public class BookingEntity {
+public class Booking {
     private String bookingId;
     private String empId;
     private String LocId;

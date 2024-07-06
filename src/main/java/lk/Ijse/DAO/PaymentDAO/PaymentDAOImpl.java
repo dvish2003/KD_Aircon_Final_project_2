@@ -3,7 +3,7 @@ package lk.Ijse.DAO.PaymentDAO;
 
 import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.Payment;
+import lk.Ijse.Entity.Payment;
 
 import java.sql.*;
 import java.util.ArrayList;

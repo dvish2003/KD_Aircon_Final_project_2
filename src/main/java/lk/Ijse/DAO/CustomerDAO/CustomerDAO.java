@@ -1,7 +1,7 @@
 package lk.Ijse.DAO.CustomerDAO;
 
 import lk.Ijse.DAO.CrudDAO;
-import lk.Ijse.Model.Customer;
+import lk.Ijse.Entity.Customer;
 
 import java.sql.SQLException;
 

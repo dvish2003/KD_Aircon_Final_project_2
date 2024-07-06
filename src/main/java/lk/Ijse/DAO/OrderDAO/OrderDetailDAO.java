@@ -1,8 +1,8 @@
 package lk.Ijse.DAO.OrderDAO;
 
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.Order;
-import lk.Ijse.Model.OrderDetail;
+import lk.Ijse.Entity.Order;
+import lk.Ijse.Entity.OrderDetail;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

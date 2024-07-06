@@ -2,8 +2,7 @@ package lk.Ijse.BO.CustomerBO;
 
 import lk.Ijse.DAO.CustomerDAO.CustomerDAO;
 import lk.Ijse.DAO.CustomerDAO.CustomerDAOImpl;
-import lk.Ijse.Model.Customer;
-import lk.Ijse.entity.CustomerEntity;
+import lk.Ijse.Entity.Customer;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -33,14 +32,9 @@ public class CustomerBOImpl implements CustomerBO {
     }
 
     @Override
-    public List<CustomerEntity> getAll() throws SQLException, ClassNotFoundException {
+    public List<Customer> getAll() throws SQLException, ClassNotFoundException {
       List<Customer> customerList = customerDAO.getAll();
-      List<CustomerEntity> customerEntityList = new ArrayList<>();
-      for (Customer c : customerList) {
-          customerEntityList.add(new CustomerEntity(c.getId(),c.getName(),c.getAddress(),c.getContact(),c.getEmail()));
-
-      }
-      return customerEntityList;
+      return customerList;
     }
 
     @Override

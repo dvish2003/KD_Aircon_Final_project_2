@@ -2,7 +2,7 @@ package lk.Ijse.DAO.LocationDAO;
 
 import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.Location;
+import lk.Ijse.Entity.Location;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

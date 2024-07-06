@@ -1,4 +1,4 @@
-package lk.Ijse.entity;
+package lk.Ijse.Entity;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class EmployeeEntity {
+public class Employee {
     private String empId;
     private String empName;
     private String empAge;

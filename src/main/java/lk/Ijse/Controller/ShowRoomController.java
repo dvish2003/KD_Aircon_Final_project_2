@@ -39,7 +39,7 @@ import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
 import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
 import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
-import lk.Ijse.Model.ShowRoom;
+import lk.Ijse.Entity.ShowRoom;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 
 import java.io.IOException;

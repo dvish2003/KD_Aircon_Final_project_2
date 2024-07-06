@@ -1,4 +1,4 @@
-package lk.Ijse.entity;
+package lk.Ijse.Entity;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 @Data
-public class Product_ShowRoomEntity {
+public class Product_ShowRoom {
     private String productID;
     private String showRoomId;
 }

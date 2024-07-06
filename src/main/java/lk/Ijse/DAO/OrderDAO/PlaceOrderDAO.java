@@ -21,7 +21,7 @@ import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.PlaceOrder;
+import lk.Ijse.Entity.PlaceOrder;
 
 import java.sql.Connection;
 import java.sql.SQLException;

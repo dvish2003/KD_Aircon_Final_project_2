@@ -2,7 +2,7 @@ package lk.Ijse.DAO.RegisterDAO;
 
 import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Model.Register;
+import lk.Ijse.Entity.Register;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

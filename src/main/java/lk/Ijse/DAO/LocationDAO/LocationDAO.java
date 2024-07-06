@@ -1,7 +1,7 @@
 package lk.Ijse.DAO.LocationDAO;
 
 import lk.Ijse.DAO.CrudDAO;
-import lk.Ijse.Model.Location;
+import lk.Ijse.Entity.Location;
 
 import java.sql.SQLException;
 

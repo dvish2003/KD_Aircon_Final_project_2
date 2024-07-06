@@ -1,15 +1,9 @@
 package lk.Ijse.BO.BookingBO;
 
 import lk.Ijse.BO.SuperBO;
-import lk.Ijse.DAO.CrudDAO;
-import lk.Ijse.DAO.SqlUtil;
-import lk.Ijse.Model.Booking;
-import lk.Ijse.entity.BookingEntity;
+import lk.Ijse.Entity.Booking;
 
-import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface BookingBO extends SuperBO {
@@ -22,7 +16,7 @@ public interface BookingBO extends SuperBO {
 
     public  boolean delete(String id) throws SQLException, ClassNotFoundException;
 
-    public List<BookingEntity> getAll() throws SQLException, ClassNotFoundException;
+    public List<Booking> getAll() throws SQLException, ClassNotFoundException;
 
     public  List<String> getIds() throws SQLException, ClassNotFoundException ;
 
