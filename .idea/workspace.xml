@@ -6,92 +6,40 @@
   <component name="ChangeListManager">
     <list default="true" id="e60534ab-4448-4540-9d4e-fcee40a5b441" name="Changes" comment=" Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Animation1/Animation1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Animation1/Animation1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/BookingBO/BookingBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/BookingBO/BookingBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/BookingBO/BookingBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/BookingBO/BookingBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/CustomerBO/CustomerBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/CustomerBO/CustomerBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/CustomerBO/CustomerBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/CustomerBO/CustomerBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/EmployeeBO/EmployeeBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/EmployeeBO/EmployeeBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/EmployeeBO/EmployeeBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/EmployeeBO/EmployeeBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/LocationBO/LocationBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/LocationBO/LocationBO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/LocationBO/LocationBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/LocationBO/LocationBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/OrderBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/OrderBO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/OrderBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/OrderBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/OrderDetailBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/OrderDetailBO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/OrderDetailBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/OrderDetailBOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/PlaceOrderBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/OrderBO/PlaceOrderBO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/PaymentBO/PaymentBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/PaymentBO/PaymentBO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/PaymentBO/PaymentBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/PaymentBO/PaymentBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductBO/ProductBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductBO/ProductBO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductBO/ProductBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductBO/ProductBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductShowroomBO/ProductShowRoomJoinBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductShowroomBO/ProductShowRoomJoinBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductShowroomBO/ProductShowRoomJoinBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductShowroomBO/ProductShowRoomJoinBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductShowroomBO/Product_ShowRoom_BO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductShowroomBO/Product_ShowRoom_BO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductShowroomBO/Product_ShowRoom_BOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ProductShowroomBO/Product_ShowRoom_BOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/RegisterBO/RegisterBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/RegisterBO/RegisterBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/RegisterBO/RegisterBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/RegisterBO/RegisterBOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ShworoomBO/ShowRoomBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ShworoomBO/ShowRoomBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ShworoomBO/ShowRoomBOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/ShworoomBO/ShowRoomBOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/DashBoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/DashBoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/LocationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ShowRoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Controller/ShowRoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/SuperBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/BO/SuperBO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/BookingDAO/BookingDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/BookingDAO/BookingDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/BookingDAO/BookingDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/BookingDAO/BookingDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/CrudDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/CrudDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/CustomerDAO/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/CustomerDAO/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/CustomerDAO/CustomerDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/CustomerDAO/CustomerDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/EmployeeDAO/EmployeeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/EmployeeDAO/EmployeeDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/EmployeeDAO/EmployeeDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/EmployeeDAO/EmployeeDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/LocationDAO/LocationDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/LocationDAO/LocationDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/LocationDAO/LocationDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/LocationDAO/LocationDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDetailDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDetailDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDetailDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/OrderDetailDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/PlaceOrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/OrderDAO/PlaceOrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/PaymentDAO/PaymentDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/PaymentDAO/PaymentDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/PaymentDAO/PaymentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/PaymentDAO/PaymentDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductDAO/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductDAO/ProductDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductDAO/ProductDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductDAO/ProductDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/ProductShowRoomJoinDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/ProductShowRoomJoinDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/ProductShowRoomJoinDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/ProductShowRoomJoinDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/Product_ShowRoom_DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/Product_ShowRoom_DAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/Product_ShowRoom_DAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ProductShowroomDAO/Product_ShowRoom_DAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/RegisterDAO/RegisterDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/RegisterDAO/RegisterDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/RegisterDAO/RegisterDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/RegisterDAO/RegisterDAOImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ShworoomDAO/ShowRoomDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ShworoomDAO/ShowRoomDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ShworoomDAO/ShowRoomDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/ShworoomDAO/ShowRoomDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/CartTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/CartTm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/OrderDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/OrderDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/PlaceOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/PlaceOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/ProductShowRoomJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/ProductShowRoomJoin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/ProductShowRoom_St.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/ProductShowRoom_St.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Product_ShowRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/Product_ShowRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Products.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/Products.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Model/ShowRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Entity/ShowRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/BookingEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/CustomerEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/EmployeeEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/LocationEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/OrderDetailEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/OrderEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/PaymentEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/PlaceOrderEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/ProductShowRoomEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/ProductShowRoomJoinEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/Product_ShowRoomEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/ProductsEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/RegisterEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/entity/ShowRoomEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/SqlUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/DAO/SqlUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/Ijse/Db/DbConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/Ijse/Db/DbConnection.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,9 +100,9 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;/home/vishmee/Documents/My final project/KD_Aircon_Final_project/src/main/java/lk/Ijse/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -390,6 +338,8 @@
       <workItem from="1720217716469" duration="6449000" />
       <workItem from="1720259662738" duration="912000" />
       <workItem from="1720292263063" duration="285000" />
+      <workItem from="1720350038058" duration="949000" />
+      <workItem from="1720351672403" duration="7717000" />
     </task>
     <task id="LOCAL-00001" summary="ss">
       <option name="closed" value="true" />
