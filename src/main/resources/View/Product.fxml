@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.ProductController">
+<AnchorPane prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.ProductController">
    <children>
       <AnchorPane layoutX="420.0" layoutY="68.0" prefHeight="834.0" prefWidth="825.0">
          <stylesheets>
@@ -88,7 +88,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnHome" layoutX="11.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnHomeOnAction" opacity="0.65" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="WHITE">
+      <Button fx:id="btnHome" layoutX="11.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnHomeOnAction" opacity="0.65" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

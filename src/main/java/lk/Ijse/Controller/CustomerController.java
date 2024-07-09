@@ -16,11 +16,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.BOFactory;
 import lk.Ijse.BO.CustomerBO.CustomerBO;
-import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
 import lk.Ijse.Entity.Customer;
+import lk.Ijse.dto.CustomerDTO;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -61,7 +63,7 @@ public class CustomerController {
     private Label lblCustomerID1;
 
     @FXML
-    private TableView<Customer> colCuTel;
+    private TableView<CustomerDTO> colCuTel;
 
 
     @FXML
@@ -87,7 +89,8 @@ public class CustomerController {
     private TextField txtCuName;
 
 
-    CustomerBO customerDAO = new CustomerBOImpl();
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Customer);
+
 
     Animation1 animation1 = new Animation1();
 
@@ -148,7 +151,7 @@ public class CustomerController {
 
     private void getCurrentCustomerId() throws ClassNotFoundException {
         try {
-            String currentId = customerDAO.getCurrentId();
+            String currentId = customerBO.getCurrentId();
 
             String nextCustomerId = generateNextCustomerId(currentId);
             lblCustomerID.setText(nextCustomerId);
@@ -177,17 +180,17 @@ public class CustomerController {
     }
 
     private void loadAllCustomers() throws ClassNotFoundException {
-        ObservableList<Customer> obList = FXCollections.observableArrayList();
+        ObservableList<CustomerDTO> obList = FXCollections.observableArrayList();
 
         try {
-            List<Customer> customerList = customerDAO.getAll();
-            for (Customer customer : customerList) {
-                Customer tm = new Customer(
-                        customer.getId(),
-                        customer.getName(),
-                        customer.getAddress(),
-                        customer.getContact(),
-                        customer.getEmail()
+            List<CustomerDTO> customerDTOList = customerBO.getAll();
+            for (CustomerDTO customerDTO : customerDTOList) {
+                CustomerDTO tm = new CustomerDTO(
+                        customerDTO.getId(),
+                        customerDTO.getName(),
+                        customerDTO.getAddress(),
+                        customerDTO.getContact(),
+                        customerDTO.getEmail()
                 );
 
                 obList.add(tm);
@@ -204,8 +207,8 @@ public class CustomerController {
     }
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
-        ObservableList<Customer> selectedCustomers = colCuTel.getSelectionModel().getSelectedItems();
-        if (selectedCustomers.isEmpty()) {
+        ObservableList<CustomerDTO> selectedCustomerDTOS = colCuTel.getSelectionModel().getSelectedItems();
+        if (selectedCustomerDTOS.isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "Please select customer(s) to delete!").show();
             return;
         }
@@ -216,12 +219,12 @@ public class CustomerController {
 
         if (confirmationAlert.getResult() == ButtonType.OK) {
             try {
-                for (Customer customer : selectedCustomers) {
-                    boolean isDeleted = customerDAO.delete(customer.getId());
+                for (CustomerDTO customerDTO : selectedCustomerDTOS) {
+                    boolean isDeleted = customerBO.delete(customerDTO.getId());
                     if (isDeleted) {
-                        colCuTel.getItems().remove(customer);
+                        colCuTel.getItems().remove(customerDTO);
                     } else {
-                        new Alert(Alert.AlertType.ERROR, "Failed to delete customer: " + customer.getName()).show();
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete customer: " + customerDTO.getName()).show();
                     }
                 }
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer(s) deleted successfully!").show();
@@ -240,13 +243,13 @@ public class CustomerController {
         String contact = txtCuContact.getText();
         String email = txtCuEmail.getText();
 
-        Customer customer = new Customer(id, name, address, contact, email);
+        CustomerDTO customerDTO = new CustomerDTO(id, name, address, contact, email);
 
         try {
-            if(isValied()){boolean isSaved = customerDAO.save(customer);
+            if(isValied()){boolean isSaved = customerBO.save(customerDTO);
                 if (isSaved) {
                     getCurrentCustomerId();
-                    colCuTel.getItems().add(customer);
+                    colCuTel.getItems().add(customerDTO);
                     new Alert(Alert.AlertType.CONFIRMATION, "Customer saved successfully!").show();
                     clearFields();}
 
@@ -265,14 +268,14 @@ public class CustomerController {
         String contact = txtCuContact.getText();
         String email = txtCuEmail.getText();
 
-        Customer customer = new Customer(id, name, address, contact, email);
+        CustomerDTO customerDTO = new CustomerDTO(id, name, address, contact, email);
         try {
-            if(isValied()){ boolean isUpdated = customerDAO.update(customer);
+            if(isValied()){ boolean isUpdated = customerBO.update(customerDTO);
                 if (isUpdated) {
-                    Customer selectedItem = colCuTel.getSelectionModel().getSelectedItem();
+                    CustomerDTO selectedItem = colCuTel.getSelectionModel().getSelectedItem();
                     if (selectedItem != null) {
                         int selectedIndex = colCuTel.getItems().indexOf(selectedItem);
-                        colCuTel.getItems().set(selectedIndex, customer);
+                        colCuTel.getItems().set(selectedIndex, customerDTO);
                         new Alert(Alert.AlertType.CONFIRMATION, "Customer updated successfully!").show();
                         clearFields();
                         getCurrentCustomerId();
@@ -287,10 +290,10 @@ public class CustomerController {
         }
     }
     @FXML
-    void SearchBtnOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+    void SearchBtnOnAction(ActionEvent event) throws  ClassNotFoundException {
         String contact = txtSearch.getText();
         try {
-            Customer customer = customerDAO.searchById1(contact);
+            Customer customer= customerBO.searchById(contact);
             if (customer != null) {
                 txtCuEmail.setText(customer.getEmail());
                 txtCuAddress.setText(customer.getAddress());

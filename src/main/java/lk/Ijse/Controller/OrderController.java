@@ -18,29 +18,21 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.BOFactory;
 import lk.Ijse.BO.CustomerBO.CustomerBO;
-import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
-import lk.Ijse.DAO.BookingDAO.BookingDAO;
-import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
+import lk.Ijse.BO.OrderBO.OrderBO;
+import lk.Ijse.BO.OrderBO.PlaceOrderBO;
+import lk.Ijse.BO.PaymentBO.PaymentBO;
+import lk.Ijse.BO.ProductBO.ProductBO;
+import lk.Ijse.BO.ProductShowroomBO.Product_ShowRoom_BO;
+import lk.Ijse.BO.ShowroomBO.ShowRoomBO;
 import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
 import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
-import lk.Ijse.DAO.LocationDAO.LocationDAO;
-import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
-import lk.Ijse.DAO.OrderDAO.*;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
-import lk.Ijse.DAO.ProductDAO.ProductDAO;
-import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Entity.*;
+import lk.Ijse.Entity.Customer;
+import lk.Ijse.Entity.Products;
+import lk.Ijse.Entity.ShowRoom;
+import lk.Ijse.dto.*;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
 import net.sf.jasperreports.engine.*;
@@ -105,7 +97,7 @@ public class OrderController {
     @FXML
     private TableColumn<?, ?> colOrPrTotal;
     @FXML
-    private TableView<Product_ShowRoom> colPSTable;
+    private TableView<Product_ShowRoomDTO> colPSTable;
 
     @FXML
     private TableColumn<?, ?> colJoinPR;
@@ -151,17 +143,13 @@ public class OrderController {
 
     EmployeeDAO employeeDAO = new EmployeeDAOImpl();
 
-    BookingDAO bookingDAO = new BookingDAOImpl();
-    CustomerBO customerDAO = new CustomerBOImpl();
-    LocationDAO locationDAO = new LocationDAOImpl();
-    OrderDAO orderDAO = new OrderDAOImpl();
-    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
-    RegisterDAO registerDAO = new RegisterDAOImpl();
-    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
-    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
-    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
-    PaymentDAO paymentDAO = new PaymentDAOImpl();
-    ProductDAO productDAO = new ProductDAOImpl();
+    ShowRoomBO showRoomBO = (ShowRoomBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.ShowRoom);
+    Product_ShowRoom_BO productShowRoomBo = (Product_ShowRoom_BO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Product_ShowRoom);
+    ProductBO productBo = (ProductBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Products);
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Customer);
+    OrderBO orderBO = (OrderBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Order);
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Payment);
+
       Animation1 animation1 = new Animation1();
 
     public void initialize() throws ClassNotFoundException {
@@ -220,12 +208,12 @@ public class OrderController {
     }
 
     private void loadAllPS() throws ClassNotFoundException {
-        ObservableList<Product_ShowRoom> obList = FXCollections.observableArrayList();
+        ObservableList<Product_ShowRoomDTO> obList = FXCollections.observableArrayList();
 
         try {
-            List<Product_ShowRoom> ps = productShowRoomDao.getAll();
-            for (Product_ShowRoom psList : ps) {
-                Product_ShowRoom tm = new Product_ShowRoom(
+            List<Product_ShowRoomDTO> ps = productShowRoomBo.getAll();
+            for (Product_ShowRoomDTO psList : ps) {
+                Product_ShowRoomDTO tm = new Product_ShowRoomDTO(
 
                         psList.getShowRoomId(),
                         psList.getProductID()
@@ -277,7 +265,7 @@ public class OrderController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<String> idList = customerDAO.getIds();
+            List<String> idList = customerBO.getIds();
 
             for(String id : idList) {
                 obList.add(id);
@@ -292,7 +280,7 @@ public class OrderController {
 
     private void getCurrentOrderId() throws ClassNotFoundException {
         try {
-            String currentId = orderDAO.getCurrentId();
+            String currentId = orderBO.getCurrentId();
 
             String nextOrderId = generateNextOrderId(currentId);
             lblOrderID.setText(nextOrderId);
@@ -393,12 +381,12 @@ public class OrderController {
         Date date = Date.valueOf(LocalDate.now());
         int Amount = Integer.parseInt(lblPaymentAmount.getText());
 
-        var order = new Order(orderID, customerID, paymentID, date);
-        List<OrderDetail> odList = new ArrayList<>();
+        var order = new OrderDTO(orderID, customerID, paymentID, date);
+        List<OrderDetailDTO> odList = new ArrayList<>();
 
         for (int i = 0; i < colOrderTel.getItems().size(); i++) {
             CartTm tm = obList.get(i);
-            OrderDetail od = new OrderDetail(
+            OrderDetailDTO od = new OrderDetailDTO(
                     tm.getP_ID(),
                     orderID,
                     tm.getQty(),
@@ -410,10 +398,10 @@ public class OrderController {
 
         }
 
-        Payment payment = new Payment(paymentID, Amount, date);
-        PlaceOrder po = new PlaceOrder(order, odList, payment);
+        PaymentDTO paymentDTO = new PaymentDTO(paymentID, Amount, date);
+        PlaceOrderDTO po = new PlaceOrderDTO(order, odList, paymentDTO);
 
-        boolean isPlaced = PlaceOrderDAO.placeOrder(po);
+        boolean isPlaced = PlaceOrderBO.placeOrder(po);
 
         if (isPlaced) {
             obList.clear();
@@ -459,7 +447,7 @@ public class OrderController {
     void cmbCustomerIDOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = cmbCustomerID.getValue();
         try {
-            Customer customer = customerDAO.searchById1(id);
+            Customer customer = customerBO.searchById1(id);
 if (customer != null){
     lblCustomerName.setText(customer.getName());
 } else {
@@ -476,8 +464,9 @@ if (customer != null){
     void cmbProductIDOnAction(ActionEvent event) throws ClassNotFoundException {
         String Desc = String.valueOf(cmbProductID.getValue());
         try {
-            Products products = productDAO.searchByName(Desc);
-            if(products != null) {lblProductID.setText(products.getProduct_id());
+            Products products = productBo.searchByName(Desc);
+            if(products != null) {
+                lblProductID.setText(products.getProduct_id());
                 lblUnitPrice.setText(String.valueOf(products.getProduct_unitPrice()));
                 lblQtyOnHand.setText(String.valueOf(products.getShowRoom_qtyOnHand()));
             }else{
@@ -494,7 +483,7 @@ if (customer != null){
     private void getProductIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = productDAO.getNames();
+            List<String> idList = productBo.getNames();
             obList.addAll(idList);
             cmbProductID.setItems(obList);
         } catch (SQLException e) {
@@ -507,7 +496,7 @@ if (customer != null){
     void cmbShowRoomIDOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = String.valueOf(cmbShowRoomID.getValue());
         try {
-            ShowRoom showRoom = showRoomDAO.searchById(id);
+            ShowRoom showRoom = showRoomBO.searchById(id);
             if (showRoom != null){
                 lblLocationShowRoom.setText(showRoom.getShowRoomLocation());
 
@@ -524,7 +513,7 @@ if (customer != null){
     private void getShowRoomIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = showRoomDAO.getIds();
+            List<String> idList = showRoomBO.getIds();
             obList.addAll(idList);
             cmbShowRoomID.setItems(obList);
         } catch (SQLException e) {
@@ -533,9 +522,9 @@ if (customer != null){
     }
     private void getCurrentPayId() throws ClassNotFoundException {
         try {
-            String currentId = paymentDAO.getCurrentId();
+            String currentId = paymentBO.getCurrentId();
 
-            String nextPayId = generateNextPay(currentId);
+            String nextPayId = paymentBO.generateNextPay(currentId);
             lblPaymentID.setText(nextPayId);
 
         } catch (SQLException e) {
@@ -543,15 +532,7 @@ if (customer != null){
         }
     }
 
-    private String generateNextPay(String currentId) {
-        if (currentId != null && currentId.startsWith("P")) {
 
-                int idNum = Integer.parseInt(currentId.substring(1)) + 1;
-                return "P" + String.format("%03d", idNum);
-
-        }
-        return "P001";
-    }
     private void showAlert(Alert.AlertType alertType, String message) {
         Alert alert = new Alert(alertType);
         alert.setContentText(message);

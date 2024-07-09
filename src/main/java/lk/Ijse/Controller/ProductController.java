@@ -13,31 +13,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.Ijse.Animation1.Animation1;
-import lk.Ijse.BO.CustomerBO.CustomerBO;
-import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
-import lk.Ijse.DAO.BookingDAO.BookingDAO;
-import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
-import lk.Ijse.DAO.LocationDAO.LocationDAO;
-import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
-import lk.Ijse.DAO.OrderDAO.OrderDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
-import lk.Ijse.DAO.ProductDAO.ProductDAO;
-import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
-import lk.Ijse.Entity.*;
+import lk.Ijse.BO.BOFactory;
+import lk.Ijse.BO.ProductBO.ProductBO;
+import lk.Ijse.BO.ProductShowroomBO.ProductShowRoomJoinBO;
+import lk.Ijse.BO.ProductShowroomBO.Product_ShowRoom_BO;
+import lk.Ijse.BO.ShowroomBO.ShowRoomBO;
+import lk.Ijse.Entity.ShowRoom;
+import lk.Ijse.dto.*;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
 
@@ -69,37 +51,37 @@ public class ProductController {
     private ComboBox<String> cmbShowRoom;
 
     @FXML
-    private TableColumn<Products, String> colPrDesc;
+    private TableColumn<ProductsDTO, String> colPrDesc;
 
     @FXML
-    private TableColumn<Products, String> colPrID;
+    private TableColumn<ProductsDTO, String> colPrID;
 
     @FXML
-    private TableView<Products> colPrTel;
+    private TableView<ProductsDTO> colPrTel;
 
     @FXML
-    private TableColumn<Products, Integer> colPrUnitPrice;
+    private TableColumn<ProductsDTO, Integer> colPrUnitPrice;
 
     @FXML
-    private TableColumn<Products, Integer> colQtyOnHand;
+    private TableColumn<ProductsDTO, Integer> colQtyOnHand;
 
     @FXML
-    private TableColumn<Product_ShowRoom, String> coljoinPrDesc;
+    private TableColumn<Product_ShowRoomDTO, String> coljoinPrDesc;
 
     @FXML
-    private TableColumn<Product_ShowRoom, String> coljoinPrID;
+    private TableColumn<Product_ShowRoomDTO, String> coljoinPrID;
 
     @FXML
-    private TableColumn<Product_ShowRoom, String> coljoinShowRoom;
+    private TableColumn<Product_ShowRoomDTO, String> coljoinShowRoom;
 
     @FXML
-    private TableView<ProductShowRoomJoin> colPrJoinTel;
+    private TableView<ProductShowRoomJoinDTO> colPrJoinTel;
 
     @FXML
-    private TableColumn<Product_ShowRoom, Integer> coljoinQtyOnHand;
+    private TableColumn<Product_ShowRoomDTO, Integer> coljoinQtyOnHand;
 
     @FXML
-    private TableColumn<Product_ShowRoom, Integer> coljoinPrUnitPrice;
+    private TableColumn<Product_ShowRoomDTO, Integer> coljoinPrUnitPrice;
 
     @FXML
     private TextField txtPrDesc;
@@ -113,21 +95,16 @@ public class ProductController {
     @FXML
     private TextField txtQty;
 
-    private ObservableList<ProductShowRoomJoin> productShowRoomList;
+    private ObservableList<ProductShowRoomJoinDTO> productShowRoomList;
 
     Animation1 animation1 = new Animation1();
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    BookingDAO bookingDAO = new BookingDAOImpl();
-    CustomerBO customerDAO = new CustomerBOImpl();
-    LocationDAO locationDAO = new LocationDAOImpl();
-    OrderDAO orderDAO = new OrderDAOImpl();
-    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
-    RegisterDAO registerDAO = new RegisterDAOImpl();
-    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
-    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
-    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
-    PaymentDAO paymentDAO = new PaymentDAOImpl();
-    ProductDAO productDAO = new ProductDAOImpl();
+
+    ShowRoomBO showRoomBO = (ShowRoomBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.ShowRoom);
+    ProductShowRoomJoinBO productShowRoomJoinBO = (ProductShowRoomJoinBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.ProductShowRoomJoin);
+    Product_ShowRoom_BO productShowRoomBo = (Product_ShowRoom_BO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Product_ShowRoom);
+    ProductBO productBo = (ProductBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Products);
+
+
 
     @FXML
     void initialize() throws ClassNotFoundException {
@@ -161,11 +138,11 @@ public class ProductController {
 
 
     private void loadAllProduct() throws ClassNotFoundException {
-        ObservableList<Products> obList = FXCollections.observableArrayList();
+        ObservableList<ProductsDTO> obList = FXCollections.observableArrayList();
 
         try {
-            List<Products> productsList = productDAO.getAll();
-            obList.addAll(productsList);
+            List<ProductsDTO> productsDTOList = productBo.getAll();
+            obList.addAll(productsDTOList);
             colPrTel.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException("Error loading products: " + e.getMessage(), e);
@@ -173,12 +150,12 @@ public class ProductController {
     }
 
     private void loadAllProductShowRoom() throws ClassNotFoundException {
-        productShowRoomList = FXCollections.observableArrayList();
+        ObservableList<ProductShowRoomJoinDTO> obList = FXCollections.observableArrayList();
 
         try {
-            List<ProductShowRoomJoin> productsShowRoomList = productShowRoomJoinDAO.getAll();
-            productShowRoomList.addAll(productsShowRoomList);
-            colPrJoinTel.setItems(productShowRoomList);
+            List<ProductShowRoomJoinDTO> productsShowRoomList = productShowRoomJoinBO.getAll();
+            obList.addAll(productsShowRoomList);
+            colPrJoinTel.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException("Error loading products: " + e.getMessage(), e);
         }
@@ -234,7 +211,7 @@ public class ProductController {
     void cmbShowRoomOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = cmbShowRoom.getValue();
         try {
-            ShowRoom showRoom = showRoomDAO.searchById(id);
+            ShowRoom showRoom = showRoomBO.searchById(id);
         } catch (SQLException e) {
             showAlert(Alert.AlertType.ERROR, "Error occurred while searching for showroom: " + e.getMessage());
         }
@@ -243,7 +220,7 @@ public class ProductController {
     private void getShowRoomIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = showRoomDAO.getIds();
+            List<String> idList = showRoomBO.getIds();
             obList.addAll(idList);
             cmbShowRoom.setItems(obList);
         } catch (SQLException e) {
@@ -252,7 +229,7 @@ public class ProductController {
     }
     private void getProductId() throws ClassNotFoundException {
         try {
-            String currentId = productDAO.getCurrentId();
+            String currentId = productBo.getCurrentId();
 
             String nextProductId = generateNextProductID(currentId);
             lblProductID.setText(nextProductId);
@@ -298,9 +275,9 @@ public class ProductController {
     void btnPrDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = lblProductID.getText();
         try {
-            boolean isDeleted = productDAO.delete(id);
+            boolean isDeleted = productBo.delete(id);
             if (isDeleted) {
-                Products selectedItem = colPrTel.getSelectionModel().getSelectedItem();
+                ProductsDTO selectedItem = colPrTel.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
                     colPrTel.getItems().remove(selectedItem);
                     productShowRoomList.removeIf(item -> item.getProductId().equals(id));
@@ -326,17 +303,17 @@ public class ProductController {
         int productUnitPrice = Integer. parseInt(txtPrUnitPrice.getText());
         int productQty = Integer.parseInt(txtQty.getText());
 
-        Products products = new Products(productId, productDescription,productQty,productUnitPrice);
-        Product_ShowRoom ps = new Product_ShowRoom(productId, showRoomId);
+        ProductsDTO productsDTO = new ProductsDTO(productId, productDescription,productQty,productUnitPrice);
+        Product_ShowRoomDTO ps = new Product_ShowRoomDTO(productId, showRoomId);
 
         try {
-            if(isValied()){ boolean isProductSaved = productDAO.save(products);
+            if(isValied()){ boolean isProductSaved = productBo.save(productsDTO);
                 if (isProductSaved) {
-                    colPrTel.getItems().add(products);
-                    boolean isProductShowRoomSaved = productShowRoomDao.save(ps);
+                    colPrTel.getItems().add(productsDTO);
+                    boolean isProductShowRoomSaved = productShowRoomBo.save(ps);
                     if (isProductShowRoomSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom saved successfully!").show();
-                        productShowRoomList.add(new ProductShowRoomJoin(productId, showRoomId, productDescription, productQty, productUnitPrice));
+                        productShowRoomList.add(new ProductShowRoomJoinDTO(productId, showRoomId, productDescription, productQty, productUnitPrice));
                         clearFields();
                     }
 
@@ -359,18 +336,18 @@ public class ProductController {
         int productUnitPrice = Integer.parseInt(txtPrUnitPrice.getText());
         int productQty = Integer.parseInt(txtQty.getText());
 
-        Products products = new Products(productId, productDescription, productUnitPrice, productQty);
-        Product_ShowRoom ps = new Product_ShowRoom(productId, showRoomId);
+        ProductsDTO productsDTO = new ProductsDTO(productId, productDescription, productUnitPrice, productQty);
+        Product_ShowRoomDTO ps = new Product_ShowRoomDTO(productId, showRoomId);
         try {
-            if(isValied()){ boolean isProductUpdate = productDAO.update(products);
+            if(isValied()){ boolean isProductUpdate = productBo.update(productsDTO);
                 if (isProductUpdate) {
-                    Products selectedProduct = colPrTel.getSelectionModel().getSelectedItem();
+                    ProductsDTO selectedProduct = colPrTel.getSelectionModel().getSelectedItem();
                     selectedProduct.setProduct_description(productDescription);
                     selectedProduct.setProduct_unitPrice(productUnitPrice);
                     selectedProduct.setShowRoom_qtyOnHand(productQty);
                     colPrTel.refresh();
 
-                    boolean isProductShowRoomSaved = productShowRoomDao.save(ps);
+                    boolean isProductShowRoomSaved = productShowRoomBo.save(ps);
                     if (isProductShowRoomSaved) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Product and ShowRoom updated successfully!").show();
                         clearFields();

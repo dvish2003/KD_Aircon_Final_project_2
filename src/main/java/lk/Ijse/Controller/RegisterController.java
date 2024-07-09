@@ -1,6 +1,5 @@
 package lk.Ijse.Controller;
 
-import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,35 +12,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.BOFactory;
+import lk.Ijse.BO.BookingBO.BookingBO;
 import lk.Ijse.BO.CustomerBO.CustomerBO;
-import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
-import lk.Ijse.DAO.BookingDAO.BookingDAO;
-import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
-import lk.Ijse.DAO.LocationDAO.LocationDAO;
-import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
-import lk.Ijse.DAO.OrderDAO.OrderDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
-import lk.Ijse.DAO.ProductDAO.ProductDAO;
-import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
+import lk.Ijse.BO.EmployeeBO.EmployeeBO;
+import lk.Ijse.BO.LocationBO.LocationBO;
+import lk.Ijse.BO.OrderBO.OrderBO;
+import lk.Ijse.BO.OrderBO.OrderDetailBO;
+import lk.Ijse.BO.PaymentBO.PaymentBO;
+import lk.Ijse.BO.ProductBO.ProductBO;
+import lk.Ijse.BO.ProductShowroomBO.ProductShowRoomJoinBO;
+import lk.Ijse.BO.ProductShowroomBO.Product_ShowRoom_BO;
+import lk.Ijse.BO.RegisterBO.RegisterBO;
 import lk.Ijse.Entity.Register;
+import lk.Ijse.dto.RegisterDTO;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -78,7 +65,7 @@ public class   RegisterController {
     private TableColumn<?, ?> colPosition;
 
     @FXML
-    private TableView<Register> colRegiTel;
+    private TableView<RegisterDTO> colRegiTel;
 
     @FXML
     private TableColumn<?, ?> colUserId;
@@ -95,18 +82,18 @@ public class   RegisterController {
     @FXML
     private TextField txtPost;
 
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    BookingDAO bookingDAO = new BookingDAOImpl();
-    CustomerBO customerDAO = new CustomerBOImpl();
-    LocationDAO locationDAO = new LocationDAOImpl();
-    OrderDAO orderDAO = new OrderDAOImpl();
-    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
-    RegisterDAO registerDAO = new RegisterDAOImpl();
-    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
-    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
-    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
-    PaymentDAO paymentDAO = new PaymentDAOImpl();
-    ProductDAO productDAO = new ProductDAOImpl();
+   // ShowRoomBO showRoomBO = (ShowRoomBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Booking);
+    ProductShowRoomJoinBO productShowRoomJoinBO = (ProductShowRoomJoinBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.ProductShowRoomJoin);
+    Product_ShowRoom_BO productShowRoomBo = (Product_ShowRoom_BO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Product_ShowRoom);
+    ProductBO productBo = (ProductBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Products);
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Customer);
+    LocationBO locationBO = (LocationBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Location);
+    OrderBO orderBO = (OrderBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Order);
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Payment);
+    OrderDetailBO orderDetailBO = (OrderDetailBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.OrderDetail);
+    RegisterBO registerBO = (RegisterBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Register);
+    BookingBO bookingBO = (BookingBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Booking);
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Employee);
     Animation1 animation1 = new Animation1();
 
     public void initialize() throws ClassNotFoundException {
@@ -129,7 +116,7 @@ public class   RegisterController {
 
         colRegiTel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                lblRegisterId1.setText(newSelection.getRegisterId());
+                lblRegisterId.setText(newSelection.getRegisterId());
                 txtName.setText(newSelection.getRegisterName());
                 txtPost.setText(newSelection.getPost());
                 txtPassword.setText(newSelection.getRegisterPassword());
@@ -159,10 +146,10 @@ public class   RegisterController {
     }
 
     private void loadAllUsers() throws ClassNotFoundException {
-        ObservableList<Register> obList = FXCollections.observableArrayList();
+        ObservableList<RegisterDTO> obList = FXCollections.observableArrayList();
 
         try {
-            List<Register> userList = registerDAO.getAll();
+            List<RegisterDTO> userList = registerBO.getAll();
             obList.addAll(userList);
             colRegiTel.setItems(obList);
         } catch (SQLException e) {
@@ -177,12 +164,12 @@ public class   RegisterController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
-        Register selectedRegister = colRegiTel.getSelectionModel().getSelectedItem();
-        if (selectedRegister != null) {
+        RegisterDTO selectedRegisterDTO = colRegiTel.getSelectionModel().getSelectedItem();
+        if (selectedRegisterDTO != null) {
             try {
-                boolean isDeleted = registerDAO.delete(selectedRegister.getRegisterId());
+                boolean isDeleted = registerBO.delete(selectedRegisterDTO.getRegisterId());
                 if (isDeleted) {
-                    colRegiTel.getItems().remove(selectedRegister);
+                    colRegiTel.getItems().remove(selectedRegisterDTO);
                     new Alert(Alert.AlertType.CONFIRMATION, "User deleted successfully!").show();
                     clearFields();
                 } else {
@@ -203,13 +190,13 @@ public class   RegisterController {
         String post = txtPost.getText();
         String password = txtPassword.getText();
 
-        Register register = new Register(id, name, post, password);
+        RegisterDTO registerDTO = new RegisterDTO(id, name, post, password);
         System.out.println("is done"+name);
 
         try {
-            boolean isSaved = registerDAO.save(register);
+            boolean isSaved = registerBO.save(registerDTO);
             if (isSaved) {
-                colRegiTel.getItems().add(register);
+                colRegiTel.getItems().add(registerDTO);
                 new Alert(Alert.AlertType.CONFIRMATION, "User saved successfully!").show();
                 clearFields();
             } else {
@@ -222,20 +209,20 @@ public class   RegisterController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws ClassNotFoundException {
-        Register selectedRegister = colRegiTel.getSelectionModel().getSelectedItem();
-        if (selectedRegister != null) {
+        RegisterDTO selectedRegisterDTO = colRegiTel.getSelectionModel().getSelectedItem();
+        if (selectedRegisterDTO != null) {
             String id = lblRegisterId.getText();
             String name = txtName.getText();
             String post = txtPost.getText();
             String password = txtPassword.getText();
 
-            Register updatedRegister = new Register(id, name, post, password);
+            RegisterDTO updatedRegisterDTO = new RegisterDTO(id, name, post, password);
 
             try {
-                boolean isUpdated = registerDAO.update(updatedRegister);
+                boolean isUpdated = registerBO.update(updatedRegisterDTO);
                 if (isUpdated) {
                     int selectedIndex = colRegiTel.getSelectionModel().getSelectedIndex();
-                    colRegiTel.getItems().set(selectedIndex, updatedRegister);
+                    colRegiTel.getItems().set(selectedIndex, updatedRegisterDTO);
                     new Alert(Alert.AlertType.CONFIRMATION, "User updated successfully!").show();
                     clearFields();
                 } else {
@@ -290,12 +277,12 @@ public class   RegisterController {
         String UserID = txtSearch.getText();
 
         try {
-            Register register = registerDAO.searchById(UserID);
+            Register register = registerBO.searchById(UserID);
             if (register != null) {
 
                 lblRegisterId1.setText(register.getRegisterId());
               //  lblRegisterId1.setText(register.getRegisterId());
-                txtPassword.setText(register.getRegisterPassword());
+                   txtPassword.setText(register.getRegisterPassword());
                   txtName.setText(register.getRegisterName());
                     txtPost.setText(register.getPost());
 
@@ -314,7 +301,7 @@ public class   RegisterController {
     }
     private void getCurrentRegister() throws ClassNotFoundException {
         try {
-            String currentId = registerDAO.getCurrentId();
+            String currentId = registerBO.getCurrentId();
 
             String nextRegisterID = generateNexRegisterID(currentId);
             lblRegisterId.setText(nextRegisterID);

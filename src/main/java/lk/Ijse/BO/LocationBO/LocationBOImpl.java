@@ -1,42 +1,43 @@
 package lk.Ijse.BO.LocationBO;
 
+import lk.Ijse.DAO.DAOFactory;
 import lk.Ijse.DAO.LocationDAO.LocationDAO;
 import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
-import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Entity.Location;
+import lk.Ijse.dto.LocationDTO;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LocationBOImpl implements LocationBO {
 
-    LocationDAO locationDAO = new LocationDAOImpl();
+    LocationDAO locationDAO = (LocationDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.Location);
     @Override
-    public boolean save(Location location) throws SQLException, ClassNotFoundException {
+    public boolean save(LocationDTO locationDTO) throws SQLException, ClassNotFoundException {
         return locationDAO.save(new Location
-                (location.getCustomerId(),
-                location.getId(),
-                location.getProvince(),
-                location.getCity(),
-                location.getAddress(),
-                location.getZipCode()));
+                (locationDTO.getCustomerId(),
+                locationDTO.getId(),
+                locationDTO.getProvince(),
+                locationDTO.getCity(),
+                locationDTO.getAddress(),
+                locationDTO.getZipCode()));
     }
 
     @Override
     public Location searchById(String id) throws SQLException, ClassNotFoundException {
-        return locationDAO.searchById(id);
+return locationDAO.searchById(id);
     }
-
     @Override
-    public boolean update(Location location) throws SQLException, ClassNotFoundException {
-        return locationDAO.update(new Location(location.getCustomerId(),
+    public boolean update(LocationDTO location) throws SQLException, ClassNotFoundException {
+        return locationDAO.update(new Location(
+                location.getCustomerId(),
+                location.getId(),
                 location.getProvince(),
                 location.getCity(),
                 location.getAddress(),
-                location.getZipCode(),
-                location.getId()));
+                location.getZipCode()
+               ));
     }
 
     @Override
@@ -45,10 +46,20 @@ public class LocationBOImpl implements LocationBO {
     }
 
     @Override
-    public List<Location> getAll() throws SQLException, ClassNotFoundException {
-    List<Location> locations = locationDAO.getAll();
-    return locations;
-        }
+    public List<LocationDTO> getAll() throws SQLException, ClassNotFoundException {
+List <Location> locations = locationDAO.getAll();
+List<LocationDTO> locationDTOS = new ArrayList<>();
+for (Location l : locations) {
+    locationDTOS.add(new LocationDTO(
+            l.getCustomerId(),
+            l.getId(),
+            l.getProvince(),
+            l.getCity(),
+            l.getAddress(),
+            l.getZipCode()));
+}
+return locationDTOS;
+    }
 
     @Override
     public List<String> getIds() throws SQLException, ClassNotFoundException {

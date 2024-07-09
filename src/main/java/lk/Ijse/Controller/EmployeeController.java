@@ -13,11 +13,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.BOFactory;
 import lk.Ijse.BO.CustomerBO.CustomerBO;
 import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
+import lk.Ijse.BO.EmployeeBO.EmployeeBO;
 import lk.Ijse.DAO.BookingDAO.BookingDAO;
 import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
 import lk.Ijse.DAO.LocationDAO.LocationDAO;
 import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
 import lk.Ijse.DAO.OrderDAO.OrderDAO;
@@ -37,9 +38,9 @@ import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
 import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
 import lk.Ijse.Entity.Employee;
+import lk.Ijse.dto.EmployeeDTO;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -88,7 +89,7 @@ public class EmployeeController {
     private TableColumn<?, ?> colEmName;
 
     @FXML
-    private TableView<Employee> colEmTel;
+    private TableView<EmployeeDTO> colEmTel;
 
     @FXML
     private TextField txtEmAddress;
@@ -114,8 +115,8 @@ public class EmployeeController {
     @FXML
     private TextField txtSearch;
 
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    BookingDAO bookingDAO = new BookingDAOImpl();
+EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Employee);
+   BookingDAO bookingDAO = new BookingDAOImpl();
     CustomerBO customerDAO = new CustomerBOImpl();
     LocationDAO locationDAO = new LocationDAOImpl();
     OrderDAO orderDAO = new OrderDAOImpl();
@@ -221,18 +222,18 @@ public class EmployeeController {
     }
 
     private void loadAllEmployees() throws ClassNotFoundException {
-        ObservableList<Employee> obList = FXCollections.observableArrayList();
+        ObservableList<EmployeeDTO> obList = FXCollections.observableArrayList();
 
         try {
-            List<Employee> employeeList = employeeDAO.getAll();
-            for (Employee employee : employeeList) {
-                Employee tm = new Employee(
-                       employee.getEmpId(),
-                       employee.getEmpName(),
-                       employee.getEmpAge(),
-                       employee.getEmpAddress(),
-                       employee.getEmpPhone(),
-                       employee.getEmpEmail()
+            List<EmployeeDTO> employeeDTOList = employeeBO.getAll();
+            for (EmployeeDTO employeeDTO : employeeDTOList) {
+                EmployeeDTO tm = new EmployeeDTO(
+                       employeeDTO.getEmpId(),
+                       employeeDTO.getEmpName(),
+                       employeeDTO.getEmpAge(),
+                       employeeDTO.getEmpAddress(),
+                       employeeDTO.getEmpPhone(),
+                       employeeDTO.getEmpEmail()
                 );
 
                 obList.add(tm);
@@ -247,8 +248,8 @@ public class EmployeeController {
 
     @FXML
     void btnEmDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
-        ObservableList<Employee> selectedEmployees = colEmTel.getSelectionModel().getSelectedItems();
-        if (selectedEmployees.isEmpty()) {
+        ObservableList<EmployeeDTO> selectedEmployeeDTOS = colEmTel.getSelectionModel().getSelectedItems();
+        if (selectedEmployeeDTOS.isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "Please select employee(s) to delete!").show();
             return;
         }
@@ -259,12 +260,12 @@ public class EmployeeController {
 
         if (confirmationAlert.getResult() == ButtonType.OK) {
             try {
-                for (Employee employee : selectedEmployees) {
-                    boolean isDeleted = employeeDAO.delete(employee.getEmpId());
+                for (EmployeeDTO employeeDTO : selectedEmployeeDTOS) {
+                    boolean isDeleted = employeeBO.delete(employeeDTO.getEmpId());
                     if (isDeleted) {
-                        colEmTel.getItems().remove(employee);
+                        colEmTel.getItems().remove(employeeDTO);
                     } else {
-                        new Alert(Alert.AlertType.ERROR, "Failed to delete employee: " + employee.getEmpName()).show();
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete employee: " + employeeDTO.getEmpName()).show();
                     }
                 }
                 new Alert(Alert.AlertType.CONFIRMATION, "Employee(s) deleted successfully!").show();
@@ -284,11 +285,11 @@ public class EmployeeController {
         String contact = txtEmContact.getText();
         String email = txtEmEmail.getText();
 
-        Employee employee = new Employee(id, name, age, address, contact, email);
+        EmployeeDTO employeeDTO = new EmployeeDTO(id, name, age, address, contact, email);
         try {
-            if(isValied()){boolean isSaved = employeeDAO.save(employee);
+            if(isValied()){boolean isSaved = employeeBO.save(employeeDTO);
                 if (isSaved) {
-                    colEmTel.getItems().add(employee);
+                    colEmTel.getItems().add(employeeDTO);
                     new Alert(Alert.AlertType.CONFIRMATION, "Employee saved successfully!").show();
                     getCurrentEmployeeID();
                     clearFields();
@@ -312,14 +313,14 @@ public class EmployeeController {
         String contact = txtEmContact.getText();
         String email = txtEmEmail.getText();
 
-        Employee employee = new Employee(id, name, age, address, contact, email);
+        EmployeeDTO employeeDTO = new EmployeeDTO(id, name, age, address, contact, email);
         try {
-            if(isValied()){ boolean isUpdated = employeeDAO.update(employee);
+            if(isValied()){ boolean isUpdated = employeeBO.update(employeeDTO);
                 if (isUpdated) {
-                    Employee selectedItem = colEmTel.getSelectionModel().getSelectedItem();
+                    EmployeeDTO selectedItem = colEmTel.getSelectionModel().getSelectedItem();
                     if (selectedItem != null) {
                         int selectedIndex = colEmTel.getItems().indexOf(selectedItem);
-                        colEmTel.getItems().set(selectedIndex, employee);
+                        colEmTel.getItems().set(selectedIndex, employeeDTO);
                         new Alert(Alert.AlertType.CONFIRMATION, "Employee updated successfully!").show();
                         clearFields();
                     }
@@ -408,7 +409,7 @@ lblEmployee.setText("");
         String EmployeeID = txtSearch.getText();
 
         try {
-            Employee employee = employeeDAO.searchById(EmployeeID);
+            Employee employee = employeeBO.searchById(EmployeeID);
             if (employee != null) {
                 lblEmployee.setText(employee.getEmpId());
                 txtEmName.setText(employee.getEmpName());
@@ -432,7 +433,7 @@ lblEmployee.setText("");
     }
     private void getCurrentEmployeeID() throws ClassNotFoundException {
         try {
-            String currentId = employeeDAO.getCurrentId();
+            String currentId = employeeBO.getCurrentId();
 
             String nextEmployeeID = generateNextEmployeeId(currentId);
             lblEmployeeAuto.setText(nextEmployeeID);

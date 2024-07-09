@@ -16,34 +16,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Animation1.Animation1;
+import lk.Ijse.BO.BOFactory;
 import lk.Ijse.BO.CustomerBO.CustomerBO;
-import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
-import lk.Ijse.DAO.BookingDAO.BookingDAO;
-import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
-import lk.Ijse.DAO.LocationDAO.LocationDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
-import lk.Ijse.DAO.ProductDAO.ProductDAO;
-import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
+import lk.Ijse.BO.LocationBO.LocationBO;
 import lk.Ijse.Entity.Customer;
-import lk.Ijse.Entity.Location;
+import lk.Ijse.dto.CustomerDTO;
+import lk.Ijse.dto.LocationDTO;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -79,25 +59,25 @@ public class LocationController {
     private ComboBox<String> cmbCustomerId;
 
     @FXML
-    private TableColumn<Location, String> colId;
+    private TableColumn<LocationDTO, String> colId;
 
     @FXML
-    private TableColumn<Location, String> colProvince;
+    private TableColumn<LocationDTO, String> colProvince;
 
     @FXML
-    private TableColumn<Location, String> colCity;
+    private TableColumn<LocationDTO, String> colCity;
 
     @FXML
-    private TableColumn<Location, String> colAddress;
+    private TableColumn<LocationDTO, String> colAddress;
 
     @FXML
-    private TableColumn<Location, String> colZipCode;
+    private TableColumn<LocationDTO, String> colZipCode;
 
     @FXML
-    private TableColumn<Location, String> colCu_ID;
+    private TableColumn<LocationDTO, String> colCu_ID;
 
     @FXML
-    private TableView<Location> colLoTel;
+    private TableView<LocationDTO> colLoTel;
 
     @FXML
     private TextField txtLoZip;
@@ -114,18 +94,10 @@ public class LocationController {
     @FXML
     private TextField txtLoProvince;
 
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    BookingDAO bookingDAO = new BookingDAOImpl();
-    CustomerBO customerDAO = new CustomerBOImpl();
-    LocationDAO locationDAO = new LocationDAOImpl();
-    OrderDAO orderDAO = new OrderDAOImpl();
-    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
-    RegisterDAO registerDAO = new RegisterDAOImpl();
-    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
-    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
-    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
-    PaymentDAO paymentDAO = new PaymentDAOImpl();
-    ProductDAO productDAO = new ProductDAOImpl();
+
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Customer);
+    LocationBO locationBO = (LocationBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Location);
+
     Animation1 animation1 = new Animation1();
 
 
@@ -200,8 +172,8 @@ public class LocationController {
 
     private void loadAllLocation() throws ClassNotFoundException {
         try {
-            List<Location> locationList = locationDAO.getAll();
-            ObservableList<Location> obList = FXCollections.observableArrayList(locationList);
+            List<LocationDTO> locationDTOList = locationBO.getAll();
+            ObservableList<LocationDTO> obList = FXCollections.observableArrayList(locationDTOList);
             colLoTel.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException("Error loading locations: " + e.getMessage(), e);
@@ -210,7 +182,7 @@ public class LocationController {
 
     private void getCustomerIds() throws ClassNotFoundException {
         try {
-            List<String> idList = customerDAO.getIds();
+            List<String> idList = customerBO.getIds();
             ObservableList<String> obList = FXCollections.observableArrayList(idList);
             cmbCustomerId.setItems(obList);
         } catch (SQLException e) {
@@ -227,8 +199,8 @@ public class LocationController {
 
     @FXML
     void btnLocDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
-        ObservableList<Location> selectedLocations = colLoTel.getSelectionModel().getSelectedItems();
-        if (selectedLocations.isEmpty()) {
+        ObservableList<LocationDTO> selectedLocationDTOS = colLoTel.getSelectionModel().getSelectedItems();
+        if (selectedLocationDTOS.isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "Please select location(s) to delete!").show();
             return;
         }
@@ -239,12 +211,12 @@ public class LocationController {
 
         if (confirmationAlert.getResult() == ButtonType.OK) {
             try {
-                for (Location location : selectedLocations) {
-                    boolean isDeleted = locationDAO.delete(location.getId());
+                for (LocationDTO locationDTO : selectedLocationDTOS) {
+                    boolean isDeleted = locationBO.delete(locationDTO.getId());
                     if (isDeleted) {
-                        colLoTel.getItems().remove(location);
+                        colLoTel.getItems().remove(locationDTO);
                     } else {
-                        new Alert(Alert.AlertType.ERROR, "Failed to delete location: " + location.getId()).show();
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete location: " + locationDTO.getId()).show();
                     }
                 }
                 new Alert(Alert.AlertType.CONFIRMATION, "Location(s) deleted successfully!").show();
@@ -280,12 +252,12 @@ public class LocationController {
         String loAddress = txtLoAddress.getText();
         String loZipCode = txtLoZip.getText();
 
-        Location location = new Location(cuId, loId, loProvince, loCity, loAddress, loZipCode);
+        LocationDTO locationDTO = new LocationDTO(cuId, loId, loProvince, loCity, loAddress, loZipCode);
 
         try {
-            if(isValied()){ boolean isSaved = locationDAO.save(location);
+            if(isValied()){ boolean isSaved = locationBO.save(locationDTO);
                 if (isSaved) {
-                    colLoTel.getItems().add(location);
+                    colLoTel.getItems().add(locationDTO);
                     new Alert(Alert.AlertType.CONFIRMATION, "Location saved successfully!").show();
                     clearFields();}
 
@@ -306,13 +278,13 @@ public class LocationController {
         String loAddress = txtLoAddress.getText();
         String loZipCode = txtLoZip.getText();
 
-        Location location = new Location(cuId, loId, loProvince, loCity, loAddress, loZipCode);
+        LocationDTO locationDTO = new LocationDTO(cuId, loId, loProvince, loCity, loAddress, loZipCode);
 
         try {
-            if(isValied()){boolean isUpdated = locationDAO.update(location);
+            if(isValied()){boolean isUpdated = locationBO.update(locationDTO);
                 if (isUpdated) {
                     int selectedIndex = colLoTel.getSelectionModel().getSelectedIndex();
-                    colLoTel.getItems().set(selectedIndex, location);
+                    colLoTel.getItems().set(selectedIndex, locationDTO);
                     clearFields();
                     new Alert(Alert.AlertType.CONFIRMATION, "Location updated successfully!").show();}
 
@@ -340,7 +312,7 @@ public class LocationController {
     void cmbCustomerIdOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = cmbCustomerId.getValue();
         try {
-            Customer customer = customerDAO.searchById(id);
+            Customer customer = customerBO.searchById(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -391,7 +363,7 @@ public class LocationController {
 
     private void getCurrentId() throws ClassNotFoundException {
         try {
-            String currentId = locationDAO.getCurrentId();
+            String currentId = locationBO.getCurrentId();
 
             String nextOrderId = generateNextLocationId(currentId);
             lblLocationId.setText(nextOrderId);

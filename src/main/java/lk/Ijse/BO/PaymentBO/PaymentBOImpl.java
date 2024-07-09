@@ -1,23 +1,22 @@
 
 package lk.Ijse.BO.PaymentBO;
 
+import lk.Ijse.DAO.DAOFactory;
 import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
 import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
-import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Entity.Payment;
+import lk.Ijse.dto.PaymentDTO;
 
-import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentBOImpl implements PaymentBO {
 
-    PaymentDAO paymentDAO = new PaymentDAOImpl();
+    PaymentDAO paymentDAO = (PaymentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.Payment);
 
     @Override
-    public boolean save(Payment dto) throws SQLException, ClassNotFoundException {
+    public boolean save(PaymentDTO dto) throws SQLException, ClassNotFoundException {
         return paymentDAO.save(new Payment(
                 dto.getPaymentId(),
                 dto.getPaymentAmount(),
@@ -25,14 +24,13 @@ public class PaymentBOImpl implements PaymentBO {
     }
 
     @Override
-    public Payment searchById(String id) throws SQLException, ClassNotFoundException {
-        return paymentDAO.searchById(id);
+    public PaymentDTO searchById(String id) throws SQLException, ClassNotFoundException {
+return null;
     }
 
     @Override
-    public List<Payment> getAll() throws SQLException, ClassNotFoundException {
-List<Payment> payment = paymentDAO.getAll();
-    return payment;
+    public List<PaymentDTO> getAll() throws SQLException, ClassNotFoundException {
+        return List.of();
     }
 
     @Override
@@ -49,6 +47,10 @@ List<String> ids = new ArrayList<>();
     public String getCurrentId() throws SQLException, ClassNotFoundException {
         return paymentDAO.getCurrentId();
     }
+
+    @Override
+    public String generateNextPay(String currentId) {
+return paymentDAO.generateNextPay(currentId);    }
 }
 
 

@@ -66,7 +66,7 @@ public class LoadingController {
     private void loadLoginPage() {
         try {
             Stage stage = (Stage) LoadingAncorPane.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LognForm.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginForm.fxml"));
             Parent rootNode = loader.load();
             Scene scene = new Scene(rootNode);
 

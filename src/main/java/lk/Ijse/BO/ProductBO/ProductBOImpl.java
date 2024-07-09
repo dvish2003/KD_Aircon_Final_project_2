@@ -1,21 +1,21 @@
 package lk.Ijse.BO.ProductBO;
 
+import lk.Ijse.DAO.DAOFactory;
 import lk.Ijse.DAO.ProductDAO.ProductDAO;
 import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
-import lk.Ijse.DAO.SqlUtil;
-import lk.Ijse.Entity.OrderDetail;
 import lk.Ijse.Entity.Products;
+import lk.Ijse.dto.OrderDetailDTO;
+import lk.Ijse.dto.ProductsDTO;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductBOImpl implements ProductBO {
 
-ProductDAO productDAO = new ProductDAOImpl();
+ProductDAO productDAO = (ProductDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.Products);
     @Override
-    public boolean save(Products product) throws SQLException, ClassNotFoundException {
+    public boolean save(ProductsDTO product) throws SQLException, ClassNotFoundException {
         return productDAO.save(new Products( product.getProduct_id(),
                 product.getProduct_description(),
                 product.getShowRoom_qtyOnHand(),
@@ -24,16 +24,15 @@ ProductDAO productDAO = new ProductDAOImpl();
 
     @Override
     public Products searchById(String id) throws SQLException, ClassNotFoundException {
-        return productDAO.searchById(id);
-    }
+        return productDAO.searchById(id);     }
 
     @Override
     public Products searchByName(String Description) throws SQLException, ClassNotFoundException {
-        return productDAO.searchByName(Description);
+return productDAO.searchByName(Description);
     }
 
     @Override
-    public boolean update(Products product) throws SQLException, ClassNotFoundException {
+    public boolean update(ProductsDTO product) throws SQLException, ClassNotFoundException {
         return productDAO.update(new Products(
                 product.getProduct_id(),
                 product.getProduct_description(),
@@ -48,9 +47,17 @@ ProductDAO productDAO = new ProductDAOImpl();
     }
 
     @Override
-    public List<Products> getAll() throws SQLException, ClassNotFoundException {
-        List<Products> products = productDAO.getAll();
-    return products;
+    public List<ProductsDTO> getAll() throws SQLException, ClassNotFoundException {
+List<Products> products = productDAO.getAll();
+    List<ProductsDTO> productDTOS = new ArrayList<>();
+    for (Products p : products) {
+        productDTOS.add(new ProductsDTO(
+                p.getProduct_id(),
+                p.getProduct_description(),
+                p.getShowRoom_qtyOnHand(),
+                p.getProduct_unitPrice()));
+    }
+    return productDTOS;
     }
 
     @Override
@@ -65,7 +72,7 @@ ProductDAO productDAO = new ProductDAOImpl();
 
     @Override
     public List<String> getNames() throws SQLException, ClassNotFoundException {
-        List<String> Name = productDAO.getIds();
+        List<String> Name = productDAO.getNames();
         List<String> names = new ArrayList<>();
         for (String name : Name) {
             names.add(name);
@@ -74,8 +81,8 @@ ProductDAO productDAO = new ProductDAOImpl();
         }
 
     @Override
-    public boolean update1(List<OrderDetail> odList) throws SQLException, ClassNotFoundException {
-        for (OrderDetail od : odList) {
+    public boolean update1(List<OrderDetailDTO> odList) throws SQLException, ClassNotFoundException {
+        for (OrderDetailDTO od : odList) {
             boolean isUpdateQty = updateQty(od.getProductId(), od.getQuantity());
             if(!isUpdateQty) {
                 return false;

@@ -17,7 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="DashBoardAncorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1020.0" prefWidth="1920.0" style="-fx-background-color: white;" styleClass="backgroundColour4" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.DashBoardController">
+<AnchorPane fx:id="DashBoardAncorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1020.0" prefWidth="1920.0" style="-fx-background-color: white;" styleClass="backgroundColour4" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.DashBoardController">
    <stylesheets>
       <URL value="@../css/Style.css" />
       <URL value="@../css/Style1.css" />
@@ -30,7 +30,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblOrderCount" layoutX="112.0" layoutY="112.0" prefHeight="50.0" prefWidth="61.0" textFill="#ffe5e5">
+            <Label fx:id="lblOrderCount" layoutX="124.0" layoutY="113.0" prefHeight="50.0" prefWidth="61.0" textFill="#ffe5e5">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -204,7 +204,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblUserCount" layoutX="105.0" layoutY="113.0" prefHeight="50.0" prefWidth="61.0" textFill="#ffe5e5">
+            <Label fx:id="lblUserCount" layoutX="124.0" layoutY="113.0" prefHeight="50.0" prefWidth="61.0" textFill="#ffe5e5">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -226,7 +226,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblEmployeeCount" layoutX="107.0" layoutY="117.0" prefHeight="50.0" prefWidth="61.0" textFill="#ffe5e5">
+            <Label fx:id="lblEmployeeCount" layoutX="124.0" layoutY="113.0" prefHeight="50.0" prefWidth="61.0" textFill="#ffe5e5">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -248,7 +248,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="lblProductCount" layoutX="112.0" layoutY="120.0" prefHeight="50.0" prefWidth="61.0" textFill="#ffe5e5">
+            <Label fx:id="lblProductCount" layoutX="124.0" layoutY="113.0" prefHeight="50.0" prefWidth="61.0" textFill="#ffe5e5">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -422,7 +422,7 @@
                   </Label>
                   <ImageView fitHeight="50.0" fitWidth="53.0" layoutX="41.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Icon/online-booking.png" />
+                        <Image url="@../Icon/online-bookingDTO.png" />
                      </image>
                   </ImageView>
                   <VBox layoutX="64.0" layoutY="68.0" prefHeight="143.0" prefWidth="121.0" style="-fx-background-color: Transparent;" styleClass="rounded-corner-panes3">

@@ -1,48 +1,68 @@
 package lk.Ijse.BO.RegisterBO;
 
-import lk.Ijse.DAO.SqlUtil;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
+import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
 import lk.Ijse.Entity.Register;
+import lk.Ijse.dto.RegisterDTO;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterBOImpl implements RegisterBO {
 
+    RegisterDAO registerDAO = new RegisterDAOImpl();
 
     @Override
-    public boolean save(Register register) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean save(RegisterDTO registerDTO) throws SQLException, ClassNotFoundException {
+    return registerDAO.save(new Register(  registerDTO.getRegisterId(),
+        registerDTO.getRegisterName(),
+        registerDTO.getPost(),
+        registerDTO.getRegisterPassword()));
     }
 
     @Override
     public Register searchById(String id) throws SQLException, ClassNotFoundException {
-        return null;
-    }
+return registerDAO.searchById(id);    }
 
     @Override
-    public boolean update(Register register) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean update(RegisterDTO registerDTO) throws SQLException, ClassNotFoundException {
+        return registerDAO.update(new Register(
+
+                registerDTO.getRegisterName(),
+                registerDTO.getPost(),
+                registerDTO.getRegisterPassword(),
+                registerDTO.getRegisterId()));
     }
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
-        return false;
+        return registerDAO.delete(id);
     }
 
     @Override
-    public List<Register> getAll() throws SQLException, ClassNotFoundException {
-        return List.of();
+    public List<RegisterDTO> getAll() throws SQLException, ClassNotFoundException {
+List<Register> registers = registerDAO.getAll();
+List<RegisterDTO> registerDTOS = new ArrayList<>();
+for (Register r : registers) {
+    registerDTOS.add(new RegisterDTO(r.getRegisterId(),r.getRegisterName(),r.getPost(),r.getRegisterPassword()));
+
+}
+return registerDTOS;
     }
 
     @Override
     public List<String> getIds() throws SQLException, ClassNotFoundException {
-        return List.of();
-    }
+
+        List<String> ids = registerDAO.getIds();
+        List<String> list = new ArrayList<>();
+        for (String id : ids) {
+            list.add(id);
+        }
+        return list;   }
 
     @Override
     public String getCurrentId() throws SQLException, ClassNotFoundException {
-        return "";
+return registerDAO.getCurrentId();
     }
 }

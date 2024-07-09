@@ -16,32 +16,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.Ijse.Animation1.Animation1;
-import lk.Ijse.BO.CustomerBO.CustomerBO;
-import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
-import lk.Ijse.DAO.BookingDAO.BookingDAO;
-import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
-import lk.Ijse.DAO.LocationDAO.LocationDAO;
-import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
-import lk.Ijse.DAO.OrderDAO.OrderDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
-import lk.Ijse.DAO.ProductDAO.ProductDAO;
-import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
+import lk.Ijse.BO.BOFactory;
+import lk.Ijse.BO.BookingBO.BookingBO;
+import lk.Ijse.BO.EmployeeBO.EmployeeBO;
+import lk.Ijse.BO.LocationBO.LocationBO;
+import lk.Ijse.BO.PaymentBO.PaymentBO;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Entity.*;
+import lk.Ijse.Entity.Employee;
+import lk.Ijse.Entity.Location;
+import lk.Ijse.dto.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
@@ -62,7 +45,7 @@ public class BookingController {
     private Label LblCustomerName;
 
     @FXML
-    private TableView<Booking> ColBookTel;
+    private TableView<BookingDTO> ColBookTel;
 
     @FXML
     private Label LblBookingID;
@@ -137,18 +120,12 @@ public class BookingController {
     private Label lblPaymentID;
 
     Animation1 animation1 = new Animation1();
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    CustomerBO customerDAO = new CustomerBOImpl();
-    LocationDAO locationDAO = new LocationDAOImpl();
-    OrderDAO orderDAO = new OrderDAOImpl();
-    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
-    RegisterDAO registerDAO = new RegisterDAOImpl();
-    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
-    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
-    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
-    ProductDAO productDAO = new ProductDAOImpl();
-    PaymentDAO paymentDAO = new PaymentDAOImpl();
-    BookingDAO bookingDAO = new BookingDAOImpl();
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Employee);
+    LocationBO locationBO = (LocationBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Location);
+    PaymentBO paymentBO = (PaymentBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Payment);
+    BookingBO bookingBO = (BookingBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Booking);
+
+
     public void initialize() throws ClassNotFoundException {
         setDate();
         getCurrentBookingId();
@@ -198,19 +175,19 @@ public class BookingController {
     }
 
     private void loadAllBooking() throws ClassNotFoundException {
-        ObservableList<Booking> obList = FXCollections.observableArrayList();
+        ObservableList<BookingDTO> obList = FXCollections.observableArrayList();
 
         try {
-            List<Booking> BookList = bookingDAO.getAll();
-            for (Booking booking : BookList) {
-                Booking tm = new Booking(
-                        booking.getBookingId(),
-                        booking.getLocId(),
-                        booking.getEmpId(),
-                        booking.getPaymentId(),
-                        booking.getBookingDate(),
-                        booking.getPlaceDate(),
-                        booking.getBookingDescription()
+            List<BookingDTO> BookList = bookingBO.getAll();
+            for (BookingDTO bookingDTO : BookList) {
+                BookingDTO tm = new BookingDTO(
+                        bookingDTO.getBookingId(),
+                        bookingDTO.getLocId(),
+                        bookingDTO.getEmpId(),
+                        bookingDTO.getPaymentId(),
+                        bookingDTO.getBookingDate(),
+                        bookingDTO.getPlaceDate(),
+                        bookingDTO.getBookingDescription()
                 );
 
                 obList.add(tm);
@@ -218,9 +195,9 @@ public class BookingController {
 
             ColBookTel.setItems(obList);
 
-            ColBookTel.setRowFactory(tv -> new TableRow<Booking>() {   // already expire date colour
+            ColBookTel.setRowFactory(tv -> new TableRow<BookingDTO>() {   // already expire date colour
                 @Override
-                protected void updateItem(Booking item, boolean empty) {
+                protected void updateItem(BookingDTO item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty || item == null) {
                         setStyle("-fx-background-color: white;");
@@ -272,30 +249,20 @@ public class BookingController {
 
     private void getCurrentPayId() throws ClassNotFoundException {
         try {
-            String currentId = paymentDAO.getCurrentId();
+            String currentId = paymentBO.getCurrentId();
 
-            String nextPayId = generateNextPay(currentId);
+            String nextPayId = paymentBO.generateNextPay(currentId);
             lblPaymentID.setText(nextPayId);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    private String generateNextPay(String currentId) {
-        if (currentId != null && currentId.startsWith("P")) {
-            try {
-                int idNum = Integer.parseInt(currentId.substring(1)) + 1;
-                return "P" + String.format("%03d", idNum);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid current payment ID format");
-            }
-        }
-        return "P001";
-    }
+
     private void getEmployeeIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = employeeDAO.getIds();
+            List<String> idList = employeeBO.getIds();
             obList.addAll(idList);
             cmbEmployeeID.setItems(obList);
         } catch (SQLException e) {
@@ -304,10 +271,10 @@ public class BookingController {
 
     }
 
-    private void getLocationIds() throws ClassNotFoundException {
+    public void getLocationIds() throws ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<String> idList = locationDAO.getIds();
+            List<String> idList = locationBO.getIds();
             obList.addAll(idList);
             cmbLocationID.setItems(obList);
         } catch (SQLException e) {
@@ -318,7 +285,7 @@ public class BookingController {
     void cmbEmployeeIDOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = String.valueOf(cmbEmployeeID.getValue());
         try {
-            Employee employee = employeeDAO.searchById(id);
+            Employee employee = employeeBO.searchById(id);
             if (employee != null) {
                 LblEmployeeName.setText(employee.getEmpName());
             } else {
@@ -333,7 +300,7 @@ public class BookingController {
     void cmbLocationIDOnAction(ActionEvent event) throws ClassNotFoundException {
         String id = String.valueOf(cmbLocationID.getValue());
         try {
-            Location location = locationDAO.searchById(id);
+            Location location = locationBO.searchById(id);
             if(location != null) {
                 LblLocationAddress.setText(location.getAddress());
                 LblCustomerName.setText(location.getCustomerId());
@@ -346,9 +313,10 @@ public class BookingController {
             throw new RuntimeException(e);
         }
     }
+
     private void getCurrentBookingId() throws ClassNotFoundException {
         try {
-            String currentId = bookingDAO.getCurrentId();
+            String currentId = bookingBO.getCurrentId();
 
             String nextOrderId = generateNextBookingId(currentId);
             LblBookingID.setText(nextOrderId);
@@ -412,12 +380,12 @@ public class BookingController {
             int Amount = Integer.parseInt(lblPaymentAmount.getText());
             String bookingDescription = txtDesc.getText();
 
-            Booking booking = new Booking(bookingId, empId, LocId, paymentId, bookingDate, currentDate, bookingDescription);
-            Payment payment = new Payment(paymentId, Amount, currentDate);
+            BookingDTO bookingDTO = new BookingDTO(bookingId, empId, LocId, paymentId, bookingDate, currentDate, bookingDescription);
+            PaymentDTO paymentDTO = new PaymentDTO(paymentId, Amount, currentDate);
 
-            boolean isPaySaved = paymentDAO.save(payment);
+            boolean isPaySaved = paymentBO.save(paymentDTO);
             if (isPaySaved) {
-                boolean isBookingSave = bookingDAO.save(booking);
+                boolean isBookingSave = bookingBO.save(bookingDTO);
                 if (isBookingSave) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Booking placed successfully!").show();
                    // btnPrintBillOnAction(null);
@@ -440,8 +408,8 @@ public class BookingController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws ClassNotFoundException {
-        ObservableList<Booking> selectedBooking = ColBookTel.getSelectionModel().getSelectedItems();
-        if (selectedBooking.isEmpty()) {
+        ObservableList<BookingDTO> selectedBookingDTO = ColBookTel.getSelectionModel().getSelectedItems();
+        if (selectedBookingDTO.isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "Please select booking to delete!").show();
             return;
         }
@@ -452,12 +420,12 @@ public class BookingController {
 
         if (confirmationAlert.getResult() == ButtonType.OK) {
             try {
-                for (Booking booking : selectedBooking) {
-                    boolean isDeleted = bookingDAO.delete(booking.getBookingId());
+                for (BookingDTO bookingDTO : selectedBookingDTO) {
+                    boolean isDeleted = bookingBO.delete(bookingDTO.getBookingId());
                     if (isDeleted) {
-                        ColBookTel.getItems().remove(booking);
+                        ColBookTel.getItems().remove(bookingDTO);
                     } else {
-                        new Alert(Alert.AlertType.ERROR, "Failed to delete booking: " + booking.getBookingDescription()).show();
+                        new Alert(Alert.AlertType.ERROR, "Failed to delete booking: " + bookingDTO.getBookingDescription()).show();
                     }
                 }
                 new Alert(Alert.AlertType.CONFIRMATION, "Customer(s) deleted successfully!").show();

@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="orderPane" prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.OrderController">
+<AnchorPane fx:id="orderPane" prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.OrderController">
    <children>
       <AnchorPane layoutX="6.0" layoutY="813.0" prefHeight="87.0" prefWidth="1244.0">
          <stylesheets>
@@ -178,7 +178,7 @@
             <DropShadow />
          </effect>
       </Label>
-      <Button fx:id="btnPrBack" layoutX="12.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnPrBackOnAction" opacity="0.86" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="WHITE">
+      <Button fx:id="btnPrBack" layoutX="12.0" layoutY="7.0" mnemonicParsing="false" onAction="#btnPrBackOnAction" opacity="0.86" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -188,7 +188,7 @@
       </Button>
       <ImageView fitHeight="55.0" fitWidth="67.0" layoutX="246.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Icon/order.png" />
+            <Image url="@../Icon/orderDTO.png" />
          </image>
       </ImageView>
       <Button fx:id="btnPlaceOrder" layoutX="24.0" layoutY="568.0" mnemonicParsing="false" onAction="#btnPlaceOrderOnAction" opacity="0.86" prefHeight="40.0" prefWidth="170.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="PlaceOrder" textFill="WHITE">
@@ -235,7 +235,7 @@
          <effect>
             <DropShadow />
          </effect></Label>
-      <TextField fx:id="txtQty" layoutX="1034.0" layoutY="285.0" onKeyReleased="#QtyK" prefHeight="40.0" prefWidth="67.0" style="-fx-background-color: Transparent; -fx-border-color: White; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
+      <TextField fx:id="txtQty" layoutX="1034.0" layoutY="280.0" onKeyReleased="#QtyK" prefHeight="40.0" prefWidth="67.0" style="-fx-background-color: Transparent; -fx-border-color: White; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill: WHITE;">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

@@ -1,6 +1,5 @@
 package lk.Ijse.Controller;
 
-import javafx.animation.ScaleTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,33 +13,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import lk.Ijse.Animation1.Animation1;
-import lk.Ijse.BO.CustomerBO.CustomerBO;
-import lk.Ijse.BO.CustomerBO.CustomerBOImpl;
-import lk.Ijse.DAO.BookingDAO.BookingDAO;
-import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
-import lk.Ijse.DAO.LocationDAO.LocationDAO;
-import lk.Ijse.DAO.LocationDAO.LocationDAOImpl;
-import lk.Ijse.DAO.OrderDAO.OrderDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAO;
-import lk.Ijse.DAO.OrderDAO.OrderDetailDAOImpl;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAO;
-import lk.Ijse.DAO.PaymentDAO.PaymentDAOImpl;
-import lk.Ijse.DAO.ProductDAO.ProductDAO;
-import lk.Ijse.DAO.ProductDAO.ProductDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAO;
-import lk.Ijse.DAO.ProductShowroomDAO.ProductShowRoomJoinDAOImpl;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAO;
-import lk.Ijse.DAO.ProductShowroomDAO.Product_ShowRoom_DAOImpl;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAO;
-import lk.Ijse.DAO.RegisterDAO.RegisterDAOImpl;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAO;
-import lk.Ijse.Entity.ShowRoom;
-import lk.Ijse.DAO.ShworoomDAO.ShowRoomDAOImpl;
+import lk.Ijse.BO.BOFactory;
+import lk.Ijse.BO.ShowroomBO.ShowRoomBO;
+import lk.Ijse.BO.ShowroomBO.ShowRoomBOImpl;
+import lk.Ijse.dto.ShowRoomDTO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -74,25 +51,19 @@ public class ShowRoomController {
     private TableColumn<?, ?> colShowRoom;
 
     @FXML
-    private TableView<ShowRoom> colSrTel;
+    private TableView<ShowRoomDTO> colSrTel;
 
 
 
     @FXML
     private TextField txtSrLocation;
 
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    BookingDAO bookingDAO = new BookingDAOImpl();
-    CustomerBO customerDAO = new CustomerBOImpl();
-    LocationDAO locationDAO = new LocationDAOImpl();
-    OrderDAO orderDAO = new OrderDAOImpl();
-    OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
-    RegisterDAO registerDAO = new RegisterDAOImpl();
-    ShowRoomDAO showRoomDAO = new ShowRoomDAOImpl();
-    ProductShowRoomJoinDAO productShowRoomJoinDAO = new ProductShowRoomJoinDAOImpl();
-    Product_ShowRoom_DAO productShowRoomDao = new Product_ShowRoom_DAOImpl();
-    PaymentDAO paymentDAO = new PaymentDAOImpl();
-    ProductDAO productDAO = new ProductDAOImpl();
+
+
+ShowRoomBO showRoomBO = (ShowRoomBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.ShowRoom);
+
+
+
     Animation1 animation1 = new Animation1();
 
     @FXML
@@ -111,11 +82,11 @@ public class ShowRoomController {
 
         String id = lblRegisterId.getText();
         try {
-            boolean isDeleted = showRoomDAO.delete(id);
+            boolean isDeleted = showRoomBO.delete(id);
             if (isDeleted) {
-                ShowRoom showRoom = (ShowRoom) colSrTel.getSelectionModel().getSelectedItem();
-                if (showRoom != null) {
-                    colSrTel.getItems().remove(showRoom);
+                ShowRoomDTO showRoomDTO = (ShowRoomDTO) colSrTel.getSelectionModel().getSelectedItem();
+                if (showRoomDTO != null) {
+                    colSrTel.getItems().remove(showRoomDTO);
                     new Alert(Alert.AlertType.CONFIRMATION, "ShowRoom deleted successfully!").show();
                     clearFields();
                 }
@@ -136,13 +107,13 @@ public class ShowRoomController {
         String location = txtSrLocation.getText();
 
 
-        ShowRoom showRoom = new ShowRoom(id,location);
+        ShowRoomDTO showRoomDTO = new ShowRoomDTO(id,location);
 
         try {
-            boolean isSaved = showRoomDAO.save(showRoom);
+            boolean isSaved = showRoomBO.save(showRoomDTO);
             if (isSaved) {
 
-                colSrTel.getItems().add(showRoom);
+                colSrTel.getItems().add(showRoomDTO);
                 new Alert(Alert.AlertType.CONFIRMATION, "ShowRoom saved successfully!").show();
                 clearFields();
                 getCurrentShowRoomID();
@@ -161,14 +132,14 @@ public class ShowRoomController {
         String location = txtSrLocation.getText();
 
 
-        ShowRoom showRoom = new ShowRoom(id,location);
+        ShowRoomDTO showRoomDTO = new ShowRoomDTO(id,location);
         try {
-            boolean isUpdated = showRoomDAO.update(showRoom);
+            boolean isUpdated = showRoomBO.update(showRoomDTO);
             if (isUpdated) {
-                ShowRoom selectedItem = colSrTel.getSelectionModel().getSelectedItem();
+                ShowRoomDTO selectedItem = colSrTel.getSelectionModel().getSelectedItem();
                 if (selectedItem != null) {
                     int selectedIndex = colSrTel.getItems().indexOf(selectedItem);
-                    colSrTel.getItems().set(selectedIndex, showRoom);
+                    colSrTel.getItems().set(selectedIndex, showRoomDTO);
                     new Alert(Alert.AlertType.CONFIRMATION, "Customer updated successfully!").show();
                     clearFields();
                 }
@@ -224,13 +195,13 @@ public class ShowRoomController {
     }
 
     private void loadAllShowRoom() throws ClassNotFoundException {
-        ObservableList<ShowRoom> obList = FXCollections.observableArrayList();
+        ObservableList<ShowRoomDTO> obList = FXCollections.observableArrayList();
         try {
-            List<ShowRoom> showRoomList = showRoomDAO.getAll();
-            for (ShowRoom showRoom : showRoomList) {
-                ShowRoom tm = new ShowRoom(
-                        showRoom.getShowRoomId(),
-                        showRoom.getShowRoomLocation()
+            List<ShowRoomDTO> showRoomDTOList = showRoomBO.getAll();
+            for (ShowRoomDTO showRoomDTO : showRoomDTOList) {
+                ShowRoomDTO tm = new ShowRoomDTO(
+                        showRoomDTO.getShowRoomId(),
+                        showRoomDTO.getShowRoomLocation()
 
                 );
                 obList.add(tm);
@@ -258,7 +229,7 @@ public class ShowRoomController {
 
     private void getCurrentShowRoomID() throws ClassNotFoundException {
         try {
-            String currentId = showRoomDAO.getCurrentId();
+            String currentId = showRoomBO.getCurrentId();
 
             String nextShowRoomID = generateNextShowRoom(currentId);
             lblRegisterId.setText(nextShowRoomID);

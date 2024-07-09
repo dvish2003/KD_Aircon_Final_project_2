@@ -18,16 +18,16 @@ import lk.Ijse.BO.ProductShowroomBO.Product_ShowRoom_BO;
 import lk.Ijse.BO.ProductShowroomBO.Product_ShowRoom_BOImpl;
 import lk.Ijse.BO.RegisterBO.RegisterBO;
 import lk.Ijse.BO.RegisterBO.RegisterBOImpl;
-import lk.Ijse.BO.ShworoomBO.ShowRoomBO;
-import lk.Ijse.BO.ShworoomBO.ShowRoomBOImpl;
+import lk.Ijse.BO.ShowroomBO.ShowRoomBO;
+import lk.Ijse.BO.ShowroomBO.ShowRoomBOImpl;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Entity.PlaceOrder;
+import lk.Ijse.dto.PlaceOrderDTO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class PlaceOrderBO {
-    public static boolean placeOrder(PlaceOrder po) throws SQLException {
+    public static boolean placeOrder(PlaceOrderDTO po) throws SQLException {
 
         EmployeeBO employeeDAO = new EmployeeBOImpl();
         BookingBO bookingDAO = new BookingBOImpl();
@@ -46,9 +46,9 @@ public class PlaceOrderBO {
         connection.setAutoCommit(false);
 
         try {
-            boolean isPayUpdated = paymentBO.save(po.getPayment());
+            boolean isPayUpdated = paymentBO.save(po.getPaymentDTO());
             if (isPayUpdated) {
-            boolean isOrderSaved = orderBO.save(po.getOrder());
+            boolean isOrderSaved = orderBO.save(po.getOrderDTO());
             if (isOrderSaved) {
                 boolean isQtyUpdated = productBO.update1(po.getOdList());
                 if (isQtyUpdated) {

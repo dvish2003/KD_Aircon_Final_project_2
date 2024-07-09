@@ -1,10 +1,9 @@
 package lk.Ijse.DAO.ProductShowroomDAO;
 
 import lk.Ijse.DAO.SqlUtil;
-import lk.Ijse.Db.DbConnection;
 import lk.Ijse.Entity.ProductShowRoomJoin;
+import lk.Ijse.dto.ProductShowRoomJoinDTO;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,17 +26,6 @@ public class ProductShowRoomJoinDAOImpl implements ProductShowRoomJoinDAO {
     }
 
     public  List<ProductShowRoomJoin> getAll() throws SQLException, ClassNotFoundException {
-      /*  String sql = "SELECT \n" +
-                "    Product.Product_id,\n" +
-                "    Product.Product_Description,\n" +
-                "    Product.ShowRoom_QtyOnHand,\n" +
-                "    Product.Product_UnitPrice,\n" +
-                "    Product_ShowRoom.ShowRoom_id\n" +
-                "FROM \n" +
-                "    Product\n" +
-                "JOIN \n" +
-                "    Product_ShowRoom ON Product.Product_id = Product_ShowRoom.Product_id;\n";
-        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);*/
         ResultSet resultSet = SqlUtil.execute("SELECT \n" +
                 "    Product.Product_id,\n" +
                 "    Product.Product_Description,\n" +

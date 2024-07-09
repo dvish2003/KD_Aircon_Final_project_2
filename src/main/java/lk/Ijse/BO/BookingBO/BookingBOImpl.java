@@ -2,7 +2,9 @@ package lk.Ijse.BO.BookingBO;
 
 import lk.Ijse.DAO.BookingDAO.BookingDAO;
 import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
+import lk.Ijse.DAO.DAOFactory;
 import lk.Ijse.Entity.Booking;
+import lk.Ijse.dto.BookingDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,34 +12,34 @@ import java.util.List;
 
 public class BookingBOImpl implements BookingBO {
 
-BookingDAO bookingDAO = new BookingDAOImpl();
+BookingDAO bookingDAO = (BookingDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.Booking);
     @Override
-    public boolean save(Booking booking) throws SQLException, ClassNotFoundException {
+    public boolean save(BookingDTO bookingDTO) throws SQLException, ClassNotFoundException {
         return bookingDAO.save(new Booking(
-                booking.getBookingId(),
-                booking.getEmpId(),
-                booking.getLocId(),
-                booking.getPaymentId(),
-                booking.getBookingDate(),
-                booking.getPlaceDate(),
-                booking.getBookingDescription()));
+                bookingDTO.getBookingId(),
+                bookingDTO.getEmpId(),
+                bookingDTO.getLocId(),
+                bookingDTO.getPaymentId(),
+                bookingDTO.getBookingDate(),
+                bookingDTO.getPlaceDate(),
+                bookingDTO.getBookingDescription()));
     }
 
     @Override
     public Booking searchById(String id) throws SQLException, ClassNotFoundException {
-        return bookingDAO.searchById(id);
+return bookingDAO.searchById(id);
     }
 
     @Override
-    public boolean update(Booking booking) throws SQLException, ClassNotFoundException {
+    public boolean update(BookingDTO bookingDTO) throws SQLException, ClassNotFoundException {
         return bookingDAO.update(new Booking(
-                booking.getBookingId(),
-                booking.getEmpId(),
-                booking.getLocId(),
-                booking.getPaymentId(),
-                booking.getBookingDate(),
-                booking.getPlaceDate(),
-                booking.getBookingDescription()));    }
+                bookingDTO.getBookingId(),
+                bookingDTO.getEmpId(),
+                bookingDTO.getLocId(),
+                bookingDTO.getPaymentId(),
+                bookingDTO.getBookingDate(),
+                bookingDTO.getPlaceDate(),
+                bookingDTO.getBookingDescription()));    }
 
     @Override
     public boolean delete(String id) throws SQLException, ClassNotFoundException {
@@ -45,9 +47,19 @@ BookingDAO bookingDAO = new BookingDAOImpl();
     }
 
     @Override
-    public List<Booking> getAll() throws SQLException, ClassNotFoundException {
-       List<Booking> booking = bookingDAO.getAll();
-        return booking;
+    public List<BookingDTO> getAll() throws SQLException, ClassNotFoundException {
+List<Booking> bookings = bookingDAO.getAll();
+List<BookingDTO> bookingDTOS = new ArrayList<>();
+for (Booking b : bookings) {
+    bookingDTOS.add(new BookingDTO(b.getBookingId(),
+            b.getEmpId(),
+            b.getLocId(),
+            b.getPaymentId(),
+            b.getBookingDate(),
+            b.getPlaceDate(),
+            b.getBookingDescription()));
+}
+return bookingDTOS;
     }
 
     @Override

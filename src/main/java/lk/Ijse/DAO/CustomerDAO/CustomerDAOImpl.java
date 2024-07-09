@@ -2,6 +2,7 @@ package lk.Ijse.DAO.CustomerDAO;
 
 import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Entity.Customer;
+import lk.Ijse.dto.CustomerDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,31 +12,31 @@ import java.util.List;
 public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public  boolean save(Customer customer) throws SQLException, ClassNotFoundException {
-           return SqlUtil.execute("INSERT INTO Customer VALUES(?,?,?,?,?)",customer.getId(),customer.getName(),customer.getAddress(),customer.getContact(),customer.getEmail());
+           return SqlUtil.execute("INSERT INTO Customer VALUES(?,?,?,?,?)", customer.getId(), customer.getName(), customer.getAddress(), customer.getContact(), customer.getEmail());
     }
 
     @Override
-    public  Customer searchById(String Contact) throws SQLException, ClassNotFoundException {
+    public Customer searchById(String id1) throws SQLException, ClassNotFoundException {
 
- ResultSet rs = SqlUtil.execute("SELECT * FROM Customer WHERE Customer_Contact = ?",Contact);
+ ResultSet rs = SqlUtil.execute("SELECT * FROM Customer WHERE Customer_Contact = ?",id1);
  if (rs.next()){
      String cus_id = rs.getString(1);
      String Name = rs.getString(2);
      String Address = rs.getString(3);
-      String contact = rs.getString(4);
+     String contact = rs.getString(4);
      String Email = rs.getString(5);
 
      Customer customer = new Customer(cus_id,Name,Address,contact,Email);
-
+     System.out.println("Customer");
       return customer;
 
  }
-
+        System.out.println("Null");
  return null;
 
     }
     @Override
-    public  Customer searchById1(String id) throws SQLException, ClassNotFoundException {
+    public Customer searchById1(String id) throws SQLException, ClassNotFoundException {
         ResultSet rs = SqlUtil.execute("SELECT * FROM Customer WHERE Customer_id = ?",id);
         if (rs.next()) {
             String cus_id = rs.getString(1);
@@ -64,15 +65,6 @@ public class CustomerDAOImpl implements CustomerDAO {
                 customer.getId());
 
 
-       /* String sql = "UPDATE Customer SET Customer_Name = ?, Customer_Address = ?, Customer_Contact = ?,Customer_Email = ? WHERE Customer_id = ?";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1,customer.getName());
-        pstm.setObject(2,customer.getAddress());
-        pstm.setObject(3,customer.getContact());
-        pstm.setObject(4,customer.getEmail());
-        pstm.setObject(5,customer.getId());*/
-
 
 
     }
@@ -80,10 +72,6 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public  boolean delete(String id) throws SQLException, ClassNotFoundException {
         return SqlUtil.execute("DELETE FROM Customer WHERE Customer_id = ?",id);
-        /*String sql = "DELETE FROM Customer WHERE Customer_id = ?";
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);*/
 
 
     }

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="CustomerPane" prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.CustomerController">
+<AnchorPane fx:id="CustomerPane" prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.CustomerController">
     <children>
       <AnchorPane layoutX="3.0" layoutY="-6.0" prefHeight="68.0" prefWidth="1244.0">
          <stylesheets>
@@ -180,7 +180,7 @@
       <Group layoutX="12.0" layoutY="556.0" />
         <ImageView fitHeight="61.0" fitWidth="71.0" layoutX="305.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../Icon/customer.png" />
+                <Image url="@../Icon/customerDTO.png" />
             </image>
         </ImageView>
       <Group layoutX="151.0" layoutY="556.0" />
@@ -201,7 +201,7 @@
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="btnHome" layoutX="13.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnHomeOnAction" opacity="0.84" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="WHITE">
+      <Button fx:id="btnHome" layoutX="13.0" layoutY="8.0" mnemonicParsing="false" onAction="#btnHomeOnAction" opacity="0.84" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>
@@ -225,7 +225,7 @@
             <DropShadow />
          </effect>
         </Button>
-      <Button fx:id="btnNext" layoutX="1057.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnNextOnAction" opacity="0.84" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Next" textFill="WHITE">
+      <Button fx:id="btnNext" layoutX="1057.0" layoutY="5.0" mnemonicParsing="false" onAction="#btnNextOnAction" opacity="0.84" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Next" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
          </font>

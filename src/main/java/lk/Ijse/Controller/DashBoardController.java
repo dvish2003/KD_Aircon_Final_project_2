@@ -24,19 +24,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lk.Ijse.Animation1.Animation1;
-import lk.Ijse.DAO.BookingDAO.BookingDAO;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAO;
+import lk.Ijse.BO.BOFactory;
+import lk.Ijse.BO.BookingBO.BookingBO;
+import lk.Ijse.BO.EmployeeBO.EmployeeBO;
 import lk.Ijse.Db.DbConnection;
-import lk.Ijse.Entity.Booking;
 import lk.Ijse.Entity.Employee;
+import lk.Ijse.dto.BookingDTO;
 import lk.Ijse.Util.CustomerRegex;
 import lk.Ijse.Util.CustomerTextField;
-import lk.Ijse.DAO.BookingDAO.BookingDAOImpl;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import lk.Ijse.DAO.EmployeeDAO.EmployeeDAOImpl;
+
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -82,7 +82,7 @@ public class DashBoardController {
     @FXML
     private AnchorPane O1;
     @FXML
-    private TableView<Booking> ColBookTel;
+    private TableView<BookingDTO> ColBookTel;
 
     @FXML
     private AnchorPane TitleBar;
@@ -214,10 +214,11 @@ public class DashBoardController {
     private boolean isMenuVisible = true;
 
 
-    BookingDAO bookingDAO = new BookingDAOImpl();
-    EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    Animation1 animation = new Animation1();
 
+    Animation1 animation = new Animation1();
+;
+    BookingBO bookingBO = (BookingBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Booking);
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getBoFactory().getBo(BOFactory.BoType.Employee);
 
     public void initialize() throws ClassNotFoundException {
 
@@ -406,19 +407,19 @@ public class DashBoardController {
     }
 
     private void loadAllBooking() throws ClassNotFoundException {
-        ObservableList<Booking> obList = FXCollections.observableArrayList();
+        ObservableList<BookingDTO> obList = FXCollections.observableArrayList();
 
         try {
-            List<Booking> BookList = bookingDAO.getAll();
-            for (Booking booking : BookList) {
-                Booking tm = new Booking(
-                        booking.getBookingId(),
-                        booking.getLocId(),
-                        booking.getEmpId(),
-                        booking.getPaymentId(),
-                        booking.getBookingDate(),
-                        booking.getPlaceDate(),
-                        booking.getBookingDescription()
+            List<BookingDTO> BookList = bookingBO.getAll();
+            for (BookingDTO bookingDTO : BookList) {
+                BookingDTO tm = new BookingDTO(
+                        bookingDTO.getBookingId(),
+                        bookingDTO.getLocId(),
+                        bookingDTO.getEmpId(),
+                        bookingDTO.getPaymentId(),
+                        bookingDTO.getBookingDate(),
+                        bookingDTO.getPlaceDate(),
+                        bookingDTO.getBookingDescription()
                 );
 
                 obList.add(tm);
@@ -426,9 +427,9 @@ public class DashBoardController {
 
             ColBookTel.setItems(obList);
 
-            ColBookTel.setRowFactory(tv -> new TableRow<Booking>() {   // already expire date colour
+            ColBookTel.setRowFactory(tv -> new TableRow<BookingDTO>() {   // already expire date colour
                 @Override
-                protected void updateItem(Booking item, boolean empty) {
+                protected void updateItem(BookingDTO item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty || item == null) {
                         setStyle("-fx-background-color: white; ");
@@ -614,7 +615,7 @@ public class DashBoardController {
         String EmployeeID = txtSearch.getText();
 
         try {
-            Employee employee = employeeDAO.searchById(EmployeeID);
+            Employee employee = employeeBO.searchById(EmployeeID);
             if (employee != null) {
                 lblEName.setText(employee.getEmpName());
                 lblEContatc.setText(employee.getEmpPhone());
@@ -686,7 +687,7 @@ public class DashBoardController {
 
     @FXML
     void btnLogOutOnAction(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LognForm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/LoginForm.fxml"));
         Parent rootNode = loader.load();
 
         Stage newStage = new Stage();

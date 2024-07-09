@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ShowRoomPane" prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.ShowRoomController">
+<AnchorPane fx:id="ShowRoomPane" prefHeight="906.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.Ijse.Controller.ShowRoomController">
    <children>
       <AnchorPane layoutX="4.0" layoutY="70.0" prefHeight="834.0" prefWidth="437.0">
          <stylesheets>
@@ -63,7 +63,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Button fx:id="btnHome" layoutX="13.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnHomeOnAction" opacity="0.82" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="WHITE">
+            <Button fx:id="btnHome" layoutX="12.0" layoutY="15.0" mnemonicParsing="false" onAction="#btnHomeOnAction" opacity="0.82" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #1e272e;" styleClass="rounded-corner-panes1" stylesheets="@../css/Style1.css" text="Home" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>

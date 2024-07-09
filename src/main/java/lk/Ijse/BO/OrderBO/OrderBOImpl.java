@@ -1,15 +1,15 @@
 package lk.Ijse.BO.OrderBO;
 
+import lk.Ijse.DAO.DAOFactory;
 import lk.Ijse.DAO.OrderDAO.OrderDAO;
 import lk.Ijse.DAO.OrderDAO.OrderDAOImpl;
-import lk.Ijse.DAO.SqlUtil;
 import lk.Ijse.Entity.Order;
+import lk.Ijse.dto.OrderDTO;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrderBOImpl implements OrderBO {
-OrderDAO orderDAO = new OrderDAOImpl();
+OrderDAO orderDAO = (OrderDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.Order);
 
     @Override
     public String getCurrentId() throws SQLException, ClassNotFoundException {
@@ -17,11 +17,11 @@ OrderDAO orderDAO = new OrderDAOImpl();
     }
 
     @Override
-    public boolean save(Order order) throws SQLException, ClassNotFoundException {
+    public boolean save(OrderDTO orderDTO) throws SQLException, ClassNotFoundException {
         return orderDAO.save(new Order(
-                order.getOrderId(),
-                order.getCustomerId(),
-                order.getPayment_Id(),
-                order.getOrderPlaceDate()));
+                orderDTO.getOrderId(),
+                orderDTO.getCustomerId(),
+                orderDTO.getPayment_Id(),
+                orderDTO.getOrderPlaceDate()));
     }
 }
