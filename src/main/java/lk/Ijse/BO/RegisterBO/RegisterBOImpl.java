@@ -28,11 +28,11 @@ return registerDAO.searchById(id);    }
     @Override
     public boolean update(RegisterDTO registerDTO) throws SQLException, ClassNotFoundException {
         return registerDAO.update(new Register(
-
+                registerDTO.getRegisterId(),
                 registerDTO.getRegisterName(),
                 registerDTO.getPost(),
-                registerDTO.getRegisterPassword(),
-                registerDTO.getRegisterId()));
+                registerDTO.getRegisterPassword()
+                ));
     }
 
     @Override
