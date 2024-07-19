@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Product_ShowRoom_BOImpl implements Product_ShowRoom_BO {
 
-Product_ShowRoom_DAOImpl psd = (Product_ShowRoom_DAOImpl) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.Product_ShowRoom);
+    Product_ShowRoom_DAOImpl psd = (Product_ShowRoom_DAOImpl) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOType.Product_ShowRoom);
     @Override
     public boolean save(Product_ShowRoomDTO ps) throws SQLException, ClassNotFoundException {
         return psd.save(new Product_ShowRoom(
@@ -30,4 +30,5 @@ List<Product_ShowRoom> list = psd.getAll();
     return dtos;
     }
 }
+
 
