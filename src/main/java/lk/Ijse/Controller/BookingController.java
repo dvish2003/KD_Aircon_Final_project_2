@@ -359,6 +359,7 @@ public class BookingController {
     void btnBookOnAction(ActionEvent event) throws ClassNotFoundException {
         LocalDate selectedDate = btnPickDate.getValue();
 
+
         if (selectedDate == null) {
             showAlert(Alert.AlertType.ERROR, "Please select a booking date.");
             return;

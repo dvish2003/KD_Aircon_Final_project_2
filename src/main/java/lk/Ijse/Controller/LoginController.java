@@ -111,14 +111,16 @@ public class LoginController implements Initializable {
         Button btn = (Button) event.getSource();
         Stage stage = (Stage) btn.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/DashBoard_from.fxml"));
-        Parent rootNode = loader.load();DashBoardController dashBoardController = loader.getController();
+        Parent rootNode = loader.load();
+        Scene scene = new Scene(rootNode);
+        stage.setScene(scene);
+        DashBoardController dashBoardController = loader.getController();
         dashBoardController.setUserId(userId);
 
         FadeTransition fadeIn = new FadeTransition(Duration.seconds(1), rootNode);
         fadeIn.setFromValue(0.0);
         fadeIn.setToValue(1.0);
         fadeIn.play();
-        Scene scene = new Scene(rootNode);
-        stage.setScene(scene);
+
     }
 }
